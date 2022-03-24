@@ -1,4 +1,4 @@
-package com.cdevents.java.sdk;
+package dev.cdevents;
 
 	public enum CDEventEnums {
 		// PipelineRun events

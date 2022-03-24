@@ -1,9 +1,11 @@
-package com.cdevents.java.sdk;
+package dev.cdevents;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.Test;
 
+import dev.cdevents.CDEventEnums;
+import dev.cdevents.CDEventTypes;
 import io.cloudevents.CloudEvent;
 
 public class CDEventTypesTest {

@@ -1,4 +1,4 @@
-package com.cdevents.java.sdk;
+package dev.cdevents;
 
 import java.net.URI;
 import java.nio.charset.StandardCharsets;
