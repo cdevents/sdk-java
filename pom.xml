@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.cdevents.sdk.java</groupId>
+	<artifactId>cdevents-sdk-java</artifactId>
+	<version>0.0.1</version>
+	<packaging>jar</packaging>
+	<name>cdevents-sdk-java</name>
+	<description>cdevents java sdk</description>
+
+	<properties>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+		<cloudevents.version>2.3.0</cloudevents.version>
+		<junit-jupiter.version>5.8.2</junit-jupiter.version>
+		<assertj-core.version>3.22.0</assertj-core.version>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>io.cloudevents</groupId>
+			<artifactId>cloudevents-http-basic</artifactId>
+			<version>${cloudevents.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>io.cloudevents</groupId>
+			<artifactId>cloudevents-json-jackson</artifactId>
+			<version>${cloudevents.version}</version>
+		</dependency>
+		
+		<!-- Test dependencies -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>${junit-jupiter.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <version>${assertj-core.version}</version>
+            <scope>test</scope>
+        </dependency>
+	</dependencies>
+	<build>
+        <finalName>maven-unit-test</finalName>
+        <plugins>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.22.0</version>
+            </plugin>
+
+        </plugins>
+    </build>
+
+</project>
