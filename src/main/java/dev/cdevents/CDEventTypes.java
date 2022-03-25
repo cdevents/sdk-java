@@ -9,6 +9,8 @@ import io.cloudevents.CloudEvent;
 import io.cloudevents.core.v03.CloudEventBuilder;
 
 public class CDEventTypes {
+	
+	private CDEventTypes() {}
 
 	public static CloudEvent createPipelineRunEvent(String pipelineRunEventType, String pipelineRunId, String pipelineRunName,
 			String pipelineRunStatus, String pipelineRunURL, String pipelineRunErrors, String pipelineRunData) {
