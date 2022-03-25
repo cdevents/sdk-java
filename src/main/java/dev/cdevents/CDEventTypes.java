@@ -21,7 +21,7 @@ public class CDEventTypes {
 				.build();
 		return ceToSend;
 	}
-	
+
 	public static CloudEvent createTaskRunEvent(String taskRunEventType, String taskRunId, String taskRunName,
 			String taskRunPipelineId, String taskRunData) {
 		CloudEvent ceToSend = buildCloudEvent(taskRunEventType, taskRunData)
@@ -31,7 +31,7 @@ public class CDEventTypes {
 				.build();
 		return ceToSend;
 	}
-	
+
 	public static CloudEvent createRepositoryEvent(String repositoryEventType, String repositoryId, String repositoryName,
 			String repositoryURL, String repositoryData) {
 		CloudEvent ceToSend = buildCloudEvent(repositoryEventType, repositoryData)
@@ -41,7 +41,7 @@ public class CDEventTypes {
 				.build();
 		return ceToSend;
 	}
-	
+
 	public static CloudEvent createBuildEvent(String buildEventType, String buildId, String buildName,
 			String buildArtifactId, String buildData) {
 		CloudEvent ceToSend = buildCloudEvent(buildEventType, buildData)
@@ -51,7 +51,7 @@ public class CDEventTypes {
 				.build();
 		return ceToSend;
 	}
-	
+
 	public static CloudEvent createTestEvent(String testEventType, String testId, String testName,
 			String testVersion, String testData) {
 		CloudEvent ceToSend = buildCloudEvent(testEventType, testData)
@@ -61,7 +61,7 @@ public class CDEventTypes {
 				.build();
 		return ceToSend;
 	}
-	
+
 	public static CloudEvent createArtifactEvent(String artifactEventType, String artifactId, String artifactName,
 			String artifactVersion, String artifactData) {
 		CloudEvent ceToSend = buildCloudEvent(artifactEventType, artifactData)
@@ -71,7 +71,7 @@ public class CDEventTypes {
 				.build();
 		return ceToSend;
 	}
-	
+
 	public static CloudEvent createEnvironmentEvent(String envEventType, String envId, String envName,
 			String envRepoUrl, String envData) {
 		CloudEvent ceToSend = buildCloudEvent(envEventType, envData)
@@ -81,7 +81,7 @@ public class CDEventTypes {
 				.build();
 		return ceToSend;
 	}
-	
+
 	public static CloudEvent createServiceEvent(String serviceEventType, String serviceId, String serviceName,
 			String serviceVersion, String serviceData) {
 		CloudEvent ceToSend = buildCloudEvent(serviceEventType, serviceData)
@@ -91,7 +91,7 @@ public class CDEventTypes {
 				.build();
 		return ceToSend;
 	}
-	
+
 	private static CloudEventBuilder buildCloudEvent(String eventType, String eventData) {
 		CloudEventBuilder ceBuilder = new CloudEventBuilder()
 				.withId(UUID.randomUUID().toString())
