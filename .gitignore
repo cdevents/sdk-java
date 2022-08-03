@@ -28,5 +28,8 @@ hs_err_pid*
 .project
 
 # IntelliJ files
-.idea
+.idea/
 *.iml
+
+# Maven output
+target/
