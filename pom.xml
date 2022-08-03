@@ -5,19 +5,66 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>dev.cdevents</groupId>
 	<artifactId>cdevents-sdk-java</artifactId>
-	<version>0.0.1</version>
-	<packaging>jar</packaging>
+	<version>0.0.1-SNAPSHOT</version>
+
 	<name>cdevents-sdk-java</name>
 	<description>cdevents java sdk</description>
+	<url>https://github.com/cdevents</url>
+	<inceptionYear>2022</inceptionYear>
+
+	<organization>
+		<name>Continuous Delivery Foundation</name>
+		<url>https://cd.foundation</url>
+	</organization>
 
 	<properties>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<cloudevents.version>2.3.0</cloudevents.version>
 		<junit-jupiter.version>5.8.2</junit-jupiter.version>
-		<assertj-core.version>3.22.0</assertj-core.version>
-		<jackson.version>2.13.2</jackson.version>
+        <assertj-core.version>3.22.0</assertj-core.version>
+        <jackson.version>2.13.2</jackson.version>
+		<project.github.repository>cdevents/sdk-java</project.github.repository>
+		<nexus.url>https://s01.oss.sonatype.org</nexus.url>
+		<repository.url>git@github.com:${project.github.repository}.git</repository.url>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 	</properties>
+
+	<licenses>
+		<license>
+			<name>Apache-2.0</name>
+			<url>https://spdx.org/licenses/Apache-2.0.html</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+
+	<developers>
+		<developer>
+			<id>afrittoli</id>
+			<name>Andrea Frittoli</name>
+		</developer>
+		<developer>
+			<id>zaza</id>
+			<name>Tomasz Zarna</name>
+		</developer>
+		<developer>
+			<id>rjalander</id>
+			<name>Jalander Ramagiri</name>
+		</developer>
+	</developers>
+
+	<issueManagement>
+		<system>github.com</system>
+		<url>https://github.com/${project.github.repository}/issues</url>
+	</issueManagement>
+
+	<scm>
+		<connection>scm:git:${repository.url}</connection>
+		<developerConnection>scm:git:${repository.url}</developerConnection>
+		<tag>HEAD</tag>
+		<url>${repository.url}</url>
+	</scm>
 
 	<dependencies>
 		<dependency>
@@ -61,16 +108,12 @@
 
 	</dependencies>
 	<build>
-		<finalName>maven-unit-test</finalName>
-		<plugins>
-
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-surefire-plugin</artifactId>
-				<version>2.22.0</version>
-			</plugin>
-
-		</plugins>
-	</build>
-
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.22.0</version>
+            </plugin>
+        </plugins>
+    </build>
 </project>
