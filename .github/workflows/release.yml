@@ -11,6 +11,8 @@ on:
 env:
   JAVA_VERSION: '11'
   JAVA_DISTRO: 'zulu'
+  USER_EMAIL: '41898282+github-actions[bot]@users.noreply.github.com'
+  USER_NAME: 'GitHub Action'
 
 jobs:
   release:
@@ -46,8 +48,8 @@ jobs:
           VERSION=${{ github.event.inputs.version }}
           echo "Updating POMs to version $VERSION"
           ./mvnw -B versions:set versions:commit -DnewVersion=$VERSION
-          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git config --global user.name "GitHub Action"
+          git config --global user.email "${{ USER_EMAIL }}"
+          git config --global user.name "${{ USER_NAME }}"
           git commit -a -m "Releasing version $VERSION"
           git push origin main
 
@@ -57,7 +59,8 @@ jobs:
           MAVEN_CENTRAL_TOKEN: ${{ secrets.SONATYPE_PASSWORD }}
           MAVEN_GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
         run: |
-          export GPG_TTY=$(tty)
+          GPG_TTY=$(tty)
+          export GPG_TTY
           ./mvnw --no-transfer-progress -B --file pom.xml \
             -Drepository.url=https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git \
             -Dmaven.site.skip=true -Drelease=true deploy
