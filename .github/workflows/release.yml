@@ -48,8 +48,8 @@ jobs:
           VERSION=${{ github.event.inputs.version }}
           echo "Updating POMs to version $VERSION"
           ./mvnw -B versions:set versions:commit -DnewVersion=$VERSION
-          git config --global user.email "${{ USER_EMAIL }}"
-          git config --global user.name "${{ USER_NAME }}"
+          git config --global user.email "${{ env.USER_EMAIL }}"
+          git config --global user.name "${{ env.USER_NAME }}"
           git commit -a -m "Releasing version $VERSION"
           git push origin main
 
