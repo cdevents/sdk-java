@@ -231,6 +231,7 @@ public final class CDEventTypes {
                 .withId(UUID.randomUUID().toString())
                 .withSource(URI.create("cdevents-sdk-java"))
                 .withType(eventType)
+                .withDataContentType("application/json; charset=UTF-8")
                 .withData(eventData.getBytes(StandardCharsets.UTF_8))
                 .withTime(OffsetDateTime.now());
         return ceBuilder;
