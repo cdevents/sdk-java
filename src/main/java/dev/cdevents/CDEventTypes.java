@@ -5,6 +5,7 @@ import java.nio.charset.StandardCharsets;
 import java.time.OffsetDateTime;
 import java.util.UUID;
 
+import dev.cdevents.constants.CDEventConstants;
 import io.cloudevents.CloudEvent;
 import io.cloudevents.core.v03.CloudEventBuilder;
 
@@ -14,33 +15,93 @@ public final class CDEventTypes {
     }
 
     /**
-     * Creates a continuous delivery Pipeline run events
+     * Creates continuous delivery Pipeline run finished events
      * using {@link CloudEventBuilder}
      * and returns {@link CloudEvent} object.
      *
-     * @param pipelineRunEventType
-     * @param pipelineRunId
-     * @param pipelineRunName
-     * @param pipelineRunStatus
-     * @param pipelineRunURL
-     * @param pipelineRunErrors
-     * @param pipelineRunData
+     * @param eventType
+     * @param id
+     * @param pipelineName
+     * @param url
+     * @param errors
+     * @param outcome
      * @return the cloudEvent object with continuous delivery
-     * Pipeline run event extensions
+     * Pipeline run finished event extensions
      */
-    public static CloudEvent createPipelineRunEvent(
-            final String pipelineRunEventType,
-            final String pipelineRunId, final String pipelineRunName,
-            final String pipelineRunStatus, final String pipelineRunURL,
-            final String pipelineRunErrors, final String pipelineRunData) {
+
+
+    public static CloudEvent createPipelineRunFinishedEvent(
+            final String eventType,
+            final String id, final URI source, final String pipelineName,
+            final URI url, final CDEventConstants.Outcome outcome,
+            final String errors, final String pipelineRunData) {
         CloudEvent ceToSend =
-                buildCloudEvent(pipelineRunEventType, pipelineRunData)
-                .withExtension("pipelinerunid", pipelineRunId)
-                .withExtension("pipelinerunname", pipelineRunName)
-                .withExtension("pipelinerunstatus", pipelineRunStatus)
-                .withExtension("pipelinerunurl", pipelineRunURL)
-                .withExtension("pipelinerunerrors", pipelineRunErrors)
-                .build();
+                buildCloudEvent(eventType, pipelineRunData)
+                        .withExtension("id", id)
+                        .withExtension("source", source)
+                        .withExtension("pipelinename", pipelineName)
+                        .withExtension("url", url)
+                        .withExtension("outcome", outcome.getOutcome())
+                        .withExtension("errors", errors)
+                        .build();
+        return ceToSend;
+    }
+
+    /**
+     * Creates continuous delivery Pipeline run queued events
+     * using {@link CloudEventBuilder}
+     * and returns {@link CloudEvent} object.
+     *
+     * @param eventType
+     * @param id
+     * @param pipelineName
+     * @param url
+     * @return the cloudEvent object with continuous delivery
+     * Pipeline run queued event extensions
+     */
+
+
+    public static CloudEvent createPipelineRunQueuedEvent(
+            final String eventType,
+            final String id, final URI source,
+            final String pipelineName, final URI url,
+            final String pipelineRunData){
+        CloudEvent ceToSend =
+                buildCloudEvent(eventType, pipelineRunData)
+                        .withExtension("id", id)
+                        .withExtension("source", source)
+                        .withExtension("pipelinename", pipelineName)
+                        .withExtension("url", url)
+                        .build();
+        return ceToSend;
+    }
+
+    /**
+     * Creates continuous delivery Pipeline run started events
+     * using {@link CloudEventBuilder}
+     * and returns {@link CloudEvent} object.
+     *
+     * @param eventType
+     * @param id
+     * @param pipelineName
+     * @param url
+     * @return the cloudEvent object with continuous delivery
+     * Pipeline run started event extensions
+     */
+
+
+    public static CloudEvent createPipelineRunStartedEvent(
+            final String eventType,
+            final String id, final URI source,
+            final String pipelineName, final URI url,
+            final String pipelineRunData){
+        CloudEvent ceToSend =
+                buildCloudEvent(eventType, pipelineRunData)
+                        .withExtension("id", id)
+                        .withExtension("source", source)
+                        .withExtension("pipelinename", pipelineName)
+                        .withExtension("url", url)
+                        .build();
         return ceToSend;
     }
 

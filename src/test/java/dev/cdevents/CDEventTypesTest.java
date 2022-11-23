@@ -18,34 +18,70 @@ package dev.cdevents;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import dev.cdevents.constants.CDEventConstants;
 import org.junit.jupiter.api.Test;
 
 import io.cloudevents.CloudEvent;
 
+import java.net.URI;
+import java.net.URISyntaxException;
+
 public class CDEventTypesTest {
 
     @Test
-    void createPipelineRunEventTest() {
-        CloudEvent cdEvent = CDEventTypes.createPipelineRunEvent(
-                CDEventEnums.PipelineRunStartedEventV1.getEventType(),
-                "id", "name", "status", "url", "noErrors", "data");
+    void createPipelineRunFinishedEventTest() throws URISyntaxException {
+        URI url = new URI("cdevents.dev");
+        CloudEvent cdEvent = CDEventTypes.createPipelineRunFinishedEvent(
+                CDEventConstants.CDEventTypes.PipelineRunFinishedEvent.getEventType(),
+                "id", url, "name", url, CDEventConstants.Outcome.OutcomeSuccess, "errors", "data");
 
         assertThat(cdEvent.getExtensionNames())
-        .containsExactlyInAnyOrder("pipelinerunid", "pipelinerunname",
-                "pipelinerunstatus", "pipelinerunurl", "pipelinerunerrors");
+        .containsExactlyInAnyOrder("id","source","pipelinename","url","outcome","errors");
 
-        assertThat(cdEvent.getExtension("pipelinerunid").equals("id"));
-        assertThat(cdEvent.getExtension("pipelinerunname").equals("name"));
-        assertThat(cdEvent.getExtension("pipelinerunstatus").equals("status"));
-        assertThat(cdEvent.getExtension("pipelinerunurl").equals("url"));
-        assertThat(cdEvent.getExtension("pipelinerunerrors")
-                .equals("noErrors"));
+        assertThat(cdEvent.getExtension("id").equals("id"));
+        assertThat(cdEvent.getExtension("source").equals(url));
+        assertThat(cdEvent.getExtension("pipelinename").equals("name"));
+        assertThat(cdEvent.getExtension("url").equals(url));
+        assertThat(cdEvent.getExtension("outcome").equals(CDEventConstants.Outcome.OutcomeSuccess));
+        assertThat(cdEvent.getExtension("errors").equals("errors"));
+    }
+
+    @Test
+    void createPipelineRunStartedEventTest() throws URISyntaxException {
+        URI url = new URI("cdevents.dev");
+        CloudEvent cdEvent = CDEventTypes.createPipelineRunStartedEvent(
+                CDEventConstants.CDEventTypes.PipelineRunStartedEvent.getEventType(),
+                "id", url, "name",  url, "data");
+
+        assertThat(cdEvent.getExtensionNames())
+                .containsExactlyInAnyOrder("id","source","pipelinename","url");
+
+        assertThat(cdEvent.getExtension("id").equals("id"));
+        assertThat(cdEvent.getExtension("source").equals(url));
+        assertThat(cdEvent.getExtension("pipelinename").equals("name"));
+        assertThat(cdEvent.getExtension("url").equals(url));
+    }
+
+    @Test
+    void createPipelineRunQueuedEventTest() throws URISyntaxException {
+        URI url = new URI("cdevents.dev");
+        CloudEvent cdEvent = CDEventTypes.createPipelineRunQueuedEvent(
+                CDEventConstants.CDEventTypes.PipelineRunQueuedEvent.getEventType(),
+                "id", url, "name",  url, "data");
+
+        assertThat(cdEvent.getExtensionNames())
+                .containsExactlyInAnyOrder("id","source","pipelinename","url");
+
+        assertThat(cdEvent.getExtension("id").equals("id"));
+        assertThat(cdEvent.getExtension("source").equals(url));
+        assertThat(cdEvent.getExtension("pipelinename").equals("name"));
+        assertThat(cdEvent.getExtension("url").equals(url));
     }
 
     @Test
     void createTaskRunEventTest() {
         CloudEvent cdEvent = CDEventTypes.createTaskRunEvent(
-                CDEventEnums.ArtifactCreatedEventV1.getEventType(),
+                CDEventConstants.CDEventTypes.ArtifactCreatedEventV1.getEventType(),
                 "id", "name", "pipelineId", "data");
 
         assertThat(cdEvent.getExtensionNames())
@@ -61,7 +97,7 @@ public class CDEventTypesTest {
     @Test
     void createRepositoryEventTest() {
         CloudEvent cdEvent = CDEventTypes.createRepositoryEvent(
-                CDEventEnums.ArtifactCreatedEventV1.getEventType(),
+                CDEventConstants.CDEventTypes.ArtifactCreatedEventV1.getEventType(),
                 "id", "name", "url", "data");
 
         assertThat(cdEvent.getExtensionNames())
@@ -76,7 +112,7 @@ public class CDEventTypesTest {
     @Test
     void createBuildEventTest() {
         CloudEvent cdEvent = CDEventTypes.createBuildEvent(
-                CDEventEnums.ArtifactCreatedEventV1.getEventType(),
+                CDEventConstants.CDEventTypes.ArtifactCreatedEventV1.getEventType(),
                 "id", "name", "artifactId", "data");
 
         assertThat(cdEvent.getExtensionNames())
@@ -91,7 +127,7 @@ public class CDEventTypesTest {
     @Test
     void createTestEventTest() {
         CloudEvent cdEvent = CDEventTypes.createTestEvent(
-                CDEventEnums.ArtifactCreatedEventV1.getEventType(),
+                CDEventConstants.CDEventTypes.ArtifactCreatedEventV1.getEventType(),
                 "id", "name", "version", "data");
 
         assertThat(cdEvent.getExtensionNames())
@@ -105,7 +141,7 @@ public class CDEventTypesTest {
     @Test
     void createArtifactEventTest() {
         CloudEvent cdEvent = CDEventTypes.createArtifactEvent(
-                CDEventEnums.ArtifactCreatedEventV1.getEventType(),
+                CDEventConstants.CDEventTypes.ArtifactCreatedEventV1.getEventType(),
                 "id", "name", "version", "data");
 
         assertThat(cdEvent.getExtensionNames())
@@ -121,7 +157,7 @@ public class CDEventTypesTest {
     void createEnvironmentEventTest() {
         CloudEvent cdEvent = CDEventTypes
                 .createEnvironmentEvent(
-                CDEventEnums.ArtifactCreatedEventV1.getEventType(),
+                CDEventConstants.CDEventTypes.ArtifactCreatedEventV1.getEventType(),
                 "id", "name", "repoURL", "data");
 
         assertThat(cdEvent.getExtensionNames())
@@ -135,7 +171,7 @@ public class CDEventTypesTest {
     @Test
     void createServiceEventTest() {
         CloudEvent cdEvent = CDEventTypes.createServiceEvent(
-                CDEventEnums.ArtifactCreatedEventV1.getEventType(),
+                CDEventConstants.CDEventTypes.ArtifactCreatedEventV1.getEventType(),
                 "id", "name", "version", "data");
 
         assertThat(cdEvent.getExtensionNames())
