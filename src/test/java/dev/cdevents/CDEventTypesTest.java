@@ -79,55 +79,325 @@ public class CDEventTypesTest {
     }
 
     @Test
-    void createTaskRunEventTest() {
-        CloudEvent cdEvent = CDEventTypes.createTaskRunEvent(
-                CDEventConstants.CDEventTypes.ArtifactCreatedEventV1.getEventType(),
-                "id", "name", "pipelineId", "data");
+    void createTaskRunStartedTest() throws URISyntaxException {
+        URI url = new URI("cdevents.dev");
+        CloudEvent cdEvent = CDEventTypes.createTaskRunStartedEvent(
+                CDEventConstants.CDEventTypes.TaskRunStartedEvent.getEventType(),
+                "id", url, "taskname","pipelinerun", url, "data");
 
         assertThat(cdEvent.getExtensionNames())
-        .containsExactlyInAnyOrder("taskrunid",
-                "taskrunname", "taskrunpipelineid");
+                .containsExactlyInAnyOrder("id", "source","taskname","pipelinerun","url");
 
-        assertThat(cdEvent.getExtension("taskrunid").equals("id"));
-        assertThat(cdEvent.getExtension("taskrunname").equals("name"));
-        assertThat(cdEvent.getExtension("taskrunpipelineid")
-                .equals("pipelineId"));
+        assertThat(cdEvent.getExtension("id").equals("id"));
+        assertThat(cdEvent.getExtension("source").equals(url));
+        assertThat(cdEvent.getExtension("taskname").equals("taskname"));
+        assertThat(cdEvent.getExtension("pipelinerun").equals("pipelinerun"));
+        assertThat(cdEvent.getExtension("url").equals(url));
     }
 
     @Test
-    void createRepositoryEventTest() {
-        CloudEvent cdEvent = CDEventTypes.createRepositoryEvent(
-                CDEventConstants.CDEventTypes.ArtifactCreatedEventV1.getEventType(),
-                "id", "name", "url", "data");
+    void createTaskRunFinishedTest() throws URISyntaxException {
+        URI url = new URI("cdevents.dev");
+        CloudEvent cdEvent = CDEventTypes.createTaskRunFinishedEvent(
+                CDEventConstants.CDEventTypes.TaskRunFinishedEvent.getEventType(),
+                "id", url, "taskname","pipelinerun", url, CDEventConstants.Outcome.OutcomeSuccess, "errors", "data");
 
         assertThat(cdEvent.getExtensionNames())
-        .containsExactlyInAnyOrder("repositoryid",
-                "repositoryname", "repositoryurl");
+                .containsExactlyInAnyOrder("id", "source","taskname","pipelinerun","url","outcome","errors");
 
-        assertThat(cdEvent.getExtension("repositoryid").equals("id"));
-        assertThat(cdEvent.getExtension("repositoryname").equals("name"));
-        assertThat(cdEvent.getExtension("repositoryurl").equals("url"));
+        assertThat(cdEvent.getExtension("id").equals("id"));
+        assertThat(cdEvent.getExtension("source").equals(url));
+        assertThat(cdEvent.getExtension("taskname").equals("taskname"));
+        assertThat(cdEvent.getExtension("pipelinerun").equals("pipelinerun"));
+        assertThat(cdEvent.getExtension("url").equals(url));
+        assertThat(cdEvent.getExtension("outcome").equals(CDEventConstants.Outcome.OutcomeSuccess));
+        assertThat(cdEvent.getExtension("errors").equals("errors"));
     }
 
     @Test
-    void createBuildEventTest() {
-        CloudEvent cdEvent = CDEventTypes.createBuildEvent(
-                CDEventConstants.CDEventTypes.ArtifactCreatedEventV1.getEventType(),
-                "id", "name", "artifactId", "data");
-
+    void createRepositoryCreatedEventTest() throws URISyntaxException {
+        URI url = new URI("cdevents.dev");
+        CloudEvent cdEvent = CDEventTypes.createRepositoryCreatedEvent(
+                CDEventConstants.CDEventTypes.RepositoryCreatedEvent.getEventType(),
+                "id", url,"name","owner",url, url,"data");
         assertThat(cdEvent.getExtensionNames())
-        .containsExactlyInAnyOrder("buildid", "buildname", "buildartifactid");
+                .containsExactlyInAnyOrder("id","source","name","owner","url","view");
 
-        assertThat(cdEvent.getExtension("buildid").equals("id"));
-        assertThat(cdEvent.getExtension("buildname").equals("name"));
-        assertThat(cdEvent.getExtension("buildartifactid")
-                .equals("artifactId"));
+        assertThat(cdEvent.getExtension("id").equals("id"));
+        assertThat(cdEvent.getExtension("source").equals(url));
+        assertThat(cdEvent.getExtension("name").equals("name"));
+        assertThat(cdEvent.getExtension("owner").equals("owner"));
+        assertThat(cdEvent.getExtension("url").equals(url));
+        assertThat(cdEvent.getExtension("view").equals(url));
+    }
+
+    @Test
+    void createRepositoryModifiedEventTest() throws URISyntaxException {
+        URI url = new URI("cdevents.dev");
+        CloudEvent cdEvent = CDEventTypes.createRepositoryModifiedEvent(
+                CDEventConstants.CDEventTypes.RepositoryModifiedEvent.getEventType(),
+                "id", url,"name","owner",url, url,"data");
+        assertThat(cdEvent.getExtensionNames())
+                .containsExactlyInAnyOrder("id","source","name","owner","url","view");
+
+        assertThat(cdEvent.getExtension("id").equals("id"));
+        assertThat(cdEvent.getExtension("source").equals(url));
+        assertThat(cdEvent.getExtension("name").equals("name"));
+        assertThat(cdEvent.getExtension("owner").equals("owner"));
+        assertThat(cdEvent.getExtension("url").equals(url));
+        assertThat(cdEvent.getExtension("view").equals(url));
+    }
+
+    @Test
+    void createRepositoryDeletedEventTest() throws URISyntaxException {
+        URI url = new URI("cdevents.dev");
+        CloudEvent cdEvent = CDEventTypes.createRepositoryDeletedEvent(
+                CDEventConstants.CDEventTypes.RepositoryDeletedEvent.getEventType(),
+                "id", url,"name","owner",url, url,"data");
+        assertThat(cdEvent.getExtensionNames())
+                .containsExactlyInAnyOrder("id","source","name","owner","url","view");
+
+        assertThat(cdEvent.getExtension("id").equals("id"));
+        assertThat(cdEvent.getExtension("source").equals(url));
+        assertThat(cdEvent.getExtension("name").equals("name"));
+        assertThat(cdEvent.getExtension("owner").equals("owner"));
+        assertThat(cdEvent.getExtension("url").equals(url));
+        assertThat(cdEvent.getExtension("view").equals(url));
+    }
+
+    @Test
+    void createBranchCreatedEventTest() throws URISyntaxException {
+        URI url = new URI("cdevents.dev");
+        CloudEvent cdEvent = CDEventTypes.createBranchCreatedEvent(
+                CDEventConstants.CDEventTypes.BranchCreatedEvent.getEventType(),
+                "id",url,"repo","data");
+        assertThat(cdEvent.getExtensionNames())
+                .containsExactlyInAnyOrder("id","source","repository");
+
+        assertThat(cdEvent.getExtension("id").equals("id"));
+        assertThat(cdEvent.getExtension("source").equals(url));
+        assertThat(cdEvent.getExtension("repository").equals("repo"));
+    }
+
+    @Test
+    void createBranchDeletedEventTest() throws URISyntaxException {
+        URI url = new URI("cdevents.dev");
+        CloudEvent cdEvent = CDEventTypes.createBranchDeletedEvent(
+                CDEventConstants.CDEventTypes.BranchDeletedEvent.getEventType(),
+                "id",url,"repo","data");
+        assertThat(cdEvent.getExtensionNames())
+                .containsExactlyInAnyOrder("id","source","repository");
+
+        assertThat(cdEvent.getExtension("id").equals("id"));
+        assertThat(cdEvent.getExtension("source").equals(url));
+        assertThat(cdEvent.getExtension("repository").equals("repo"));
+    }
+
+    @Test
+    void createChangeCreatedEventTest() throws URISyntaxException {
+        URI url = new URI("cdevents.dev");
+        CloudEvent cdEvent = CDEventTypes.createChangeCreatedEvent(
+                CDEventConstants.CDEventTypes.ChangeCreatedEvent.getEventType(),
+                "id",url,"repo","data");
+        assertThat(cdEvent.getExtensionNames())
+                .containsExactlyInAnyOrder("id","source","repository");
+
+        assertThat(cdEvent.getExtension("id").equals("id"));
+        assertThat(cdEvent.getExtension("source").equals(url));
+        assertThat(cdEvent.getExtension("repository").equals("repo"));
+    }
+
+    @Test
+    void createChangeReviewedEventTest() throws URISyntaxException {
+        URI url = new URI("cdevents.dev");
+        CloudEvent cdEvent = CDEventTypes.createChangeReviewedEvent(
+                CDEventConstants.CDEventTypes.ChangeReviewedEvent.getEventType(),
+                "id",url,"repo","data");
+        assertThat(cdEvent.getExtensionNames())
+                .containsExactlyInAnyOrder("id","source","repository");
+
+        assertThat(cdEvent.getExtension("id").equals("id"));
+        assertThat(cdEvent.getExtension("source").equals(url));
+        assertThat(cdEvent.getExtension("repository").equals("repo"));
+    }
+
+    @Test
+    void createChangeMergedEventTest() throws URISyntaxException {
+        URI url = new URI("cdevents.dev");
+        CloudEvent cdEvent = CDEventTypes.createChangeMergedEvent(
+                CDEventConstants.CDEventTypes.ChangeMergedEvent.getEventType(),
+                "id",url,"repo","data");
+        assertThat(cdEvent.getExtensionNames())
+                .containsExactlyInAnyOrder("id","source","repository");
+
+        assertThat(cdEvent.getExtension("id").equals("id"));
+        assertThat(cdEvent.getExtension("source").equals(url));
+        assertThat(cdEvent.getExtension("repository").equals("repo"));
+    }
+
+    @Test
+    void createChangeAbandonedEventTest() throws URISyntaxException {
+        URI url = new URI("cdevents.dev");
+        CloudEvent cdEvent = CDEventTypes.createChangeAbandonedEvent(
+                CDEventConstants.CDEventTypes.ChangeAbandonedEvent.getEventType(),
+                "id",url,"repo","data");
+        assertThat(cdEvent.getExtensionNames())
+                .containsExactlyInAnyOrder("id","source","repository");
+
+        assertThat(cdEvent.getExtension("id").equals("id"));
+        assertThat(cdEvent.getExtension("source").equals(url));
+        assertThat(cdEvent.getExtension("repository").equals("repo"));
+    }
+
+    @Test
+    void createChangeUpdatedEventTest() throws URISyntaxException {
+        URI url = new URI("cdevents.dev");
+        CloudEvent cdEvent = CDEventTypes.createChangeUpdatedEvent(
+                CDEventConstants.CDEventTypes.ChangeUpdatedEvent.getEventType(),
+                "id",url,"repo","data");
+        assertThat(cdEvent.getExtensionNames())
+                .containsExactlyInAnyOrder("id","source","repository");
+
+        assertThat(cdEvent.getExtension("id").equals("id"));
+        assertThat(cdEvent.getExtension("source").equals(url));
+        assertThat(cdEvent.getExtension("repository").equals("repo"));
+    }
+
+    @Test
+    void createBuildQueuedEvent() throws URISyntaxException{
+        URI url = new URI("cdevents.dev");
+        CloudEvent cdEvent = CDEventTypes.createBuildQueuedEvent(
+                CDEventConstants.CDEventTypes.BuildQueuedEvent.getEventType(),
+                "id",url,"data");
+        assertThat(cdEvent.getExtensionNames())
+                .containsExactlyInAnyOrder("id","source");
+        
+        assertThat(cdEvent.getExtension("id").equals("id"));
+        assertThat(cdEvent.getExtension("source").equals(url));
+    }
+
+    @Test
+    void createBuildStartedEvent() throws URISyntaxException{
+        URI url = new URI("cdevents.dev");
+        CloudEvent cdEvent = CDEventTypes.createBuildStartedEvent(
+                CDEventConstants.CDEventTypes.BuildStartedEvent.getEventType(),
+                "id",url,"data");
+        assertThat(cdEvent.getExtensionNames())
+                .containsExactlyInAnyOrder("id","source");
+
+        assertThat(cdEvent.getExtension("id").equals("id"));
+        assertThat(cdEvent.getExtension("source").equals(url));
+    }
+
+    @Test
+    void createBuildFinishedEvent() throws URISyntaxException{
+        URI url = new URI("cdevents.dev");
+        CloudEvent cdEvent = CDEventTypes.createBuildFinishedEvent(
+                CDEventConstants.CDEventTypes.BuildFinishedEvent.getEventType(),
+                "id",url,url,"data");
+        assertThat(cdEvent.getExtensionNames())
+                .containsExactlyInAnyOrder("id","source","artifactid");
+
+        assertThat(cdEvent.getExtension("id").equals("id"));
+        assertThat(cdEvent.getExtension("source").equals(url));
+        assertThat(cdEvent.getExtension("artifactid").equals(url));
+    }
+
+    @Test
+    void createTestCaseQueuedEvent() throws URISyntaxException{
+        URI url = new URI("cdevents.dev");
+        CloudEvent cdEvent = CDEventTypes.createTestCaseQueuedEvent(
+                CDEventConstants.CDEventTypes.TestCaseQueuedEvent.getEventType(),
+                "id",url,"data");
+        assertThat(cdEvent.getExtensionNames())
+                .containsExactlyInAnyOrder("id","source");
+
+        assertThat(cdEvent.getExtension("id").equals("id"));
+        assertThat(cdEvent.getExtension("source").equals(url));
+    }
+
+    @Test
+    void createTestCaseStartedEvent() throws URISyntaxException{
+        URI url = new URI("cdevents.dev");
+        CloudEvent cdEvent = CDEventTypes.createTestCaseStartedEvent(
+                CDEventConstants.CDEventTypes.TestCaseStartedEvent.getEventType(),
+                "id",url,"data");
+        assertThat(cdEvent.getExtensionNames())
+                .containsExactlyInAnyOrder("id","source");
+
+        assertThat(cdEvent.getExtension("id").equals("id"));
+        assertThat(cdEvent.getExtension("source").equals(url));
+    }
+
+    @Test
+    void createTestCaseFinishedEvent() throws URISyntaxException{
+        URI url = new URI("cdevents.dev");
+        CloudEvent cdEvent = CDEventTypes.createTestCaseFinishedEvent(
+                CDEventConstants.CDEventTypes.TestCaseFinishedEvent.getEventType(),
+                "id",url,"data");
+        assertThat(cdEvent.getExtensionNames())
+                .containsExactlyInAnyOrder("id","source");
+
+        assertThat(cdEvent.getExtension("id").equals("id"));
+        assertThat(cdEvent.getExtension("source").equals(url));
+    }
+
+    @Test
+    void createTestSuiteStartedEvent() throws URISyntaxException{
+        URI url = new URI("cdevents.dev");
+        CloudEvent cdEvent = CDEventTypes.createTestSuiteStartedEvent(
+                CDEventConstants.CDEventTypes.TestSuiteStartedEvent.getEventType(),
+                "id",url,"data");
+        assertThat(cdEvent.getExtensionNames())
+                .containsExactlyInAnyOrder("id","source");
+
+        assertThat(cdEvent.getExtension("id").equals("id"));
+        assertThat(cdEvent.getExtension("source").equals(url));
+    }
+
+    @Test
+    void createTestSuiteFinishedEvent() throws URISyntaxException{
+        URI url = new URI("cdevents.dev");
+        CloudEvent cdEvent = CDEventTypes.createTestSuiteFinishedEvent(
+                CDEventConstants.CDEventTypes.TestSuiteFinishedEvent.getEventType(),
+                "id",url,"data");
+        assertThat(cdEvent.getExtensionNames())
+                .containsExactlyInAnyOrder("id","source");
+
+        assertThat(cdEvent.getExtension("id").equals("id"));
+        assertThat(cdEvent.getExtension("source").equals(url));
+    }
+
+    @Test
+    void createArtifactPackagedEvent() throws URISyntaxException{
+        URI url = new URI("cdevents.dev");
+        CloudEvent cdEvent = CDEventTypes.createArtifactPackagedEvent(
+                CDEventConstants.CDEventTypes.ArtifactPackagedEvent.getEventType(),
+                "id",url,"data");
+        assertThat(cdEvent.getExtensionNames())
+                .containsExactlyInAnyOrder("id","source");
+
+        assertThat(cdEvent.getExtension("id").equals("id"));
+        assertThat(cdEvent.getExtension("source").equals(url));
+    }
+    
+    @Test
+    void createArtifactPublishedEvent() throws URISyntaxException{
+        URI url = new URI("cdevents.dev");
+        CloudEvent cdEvent = CDEventTypes.createArtifactPublishedEvent(
+                CDEventConstants.CDEventTypes.ArtifactPublishedEvent.getEventType(),
+                "id",url,"data");
+        assertThat(cdEvent.getExtensionNames())
+                .containsExactlyInAnyOrder("id","source");
+
+        assertThat(cdEvent.getExtension("id").equals("id"));
+        assertThat(cdEvent.getExtension("source").equals(url));
     }
 
     @Test
     void createTestEventTest() {
         CloudEvent cdEvent = CDEventTypes.createTestEvent(
-                CDEventConstants.CDEventTypes.ArtifactCreatedEventV1.getEventType(),
+                CDEventConstants.CDEventTypes.ArtifactCreatedEvent.getEventType(),
                 "id", "name", "version", "data");
 
         assertThat(cdEvent.getExtensionNames())
@@ -138,26 +408,12 @@ public class CDEventTypesTest {
         assertThat(cdEvent.getExtension("testversion").equals("version"));
     }
 
-    @Test
-    void createArtifactEventTest() {
-        CloudEvent cdEvent = CDEventTypes.createArtifactEvent(
-                CDEventConstants.CDEventTypes.ArtifactCreatedEventV1.getEventType(),
-                "id", "name", "version", "data");
-
-        assertThat(cdEvent.getExtensionNames())
-        .containsExactlyInAnyOrder("artifactid",
-                "artifactname", "artifactversion");
-
-        assertThat(cdEvent.getExtension("artifactid").equals("id"));
-        assertThat(cdEvent.getExtension("artifactname").equals("name"));
-        assertThat(cdEvent.getExtension("artifactversion").equals("version"));
-    }
 
     @Test
     void createEnvironmentEventTest() {
         CloudEvent cdEvent = CDEventTypes
                 .createEnvironmentEvent(
-                CDEventConstants.CDEventTypes.ArtifactCreatedEventV1.getEventType(),
+                CDEventConstants.CDEventTypes.ArtifactCreatedEvent.getEventType(),
                 "id", "name", "repoURL", "data");
 
         assertThat(cdEvent.getExtensionNames())
@@ -171,7 +427,7 @@ public class CDEventTypesTest {
     @Test
     void createServiceEventTest() {
         CloudEvent cdEvent = CDEventTypes.createServiceEvent(
-                CDEventConstants.CDEventTypes.ArtifactCreatedEventV1.getEventType(),
+                CDEventConstants.CDEventTypes.ArtifactCreatedEvent.getEventType(),
                 "id", "name", "version", "data");
 
         assertThat(cdEvent.getExtensionNames())

@@ -7,7 +7,9 @@ import java.util.UUID;
 
 import dev.cdevents.constants.CDEventConstants;
 import io.cloudevents.CloudEvent;
+import io.cloudevents.CloudEventData;
 import io.cloudevents.core.v03.CloudEventBuilder;
+//import org.graalvm.compiler.nodes.calc.ObjectEqualsNode;
 
 public final class CDEventTypes {
 
@@ -106,56 +108,609 @@ public final class CDEventTypes {
     }
 
     /**
-     * Creates a continuous delivery Task run events
+     * Creates a continuous delivery Task run started events
      * using {@link CloudEventBuilder}
      * and returns {@link CloudEvent} object.
      *
-     * @param taskRunEventType
-     * @param taskRunId
-     * @param taskRunName
-     * @param taskRunPipelineId
-     * @param taskRunData
+     * @param eventType
+     * @param id
+     * @param source
+     * @param taskName
+     * @param pipelineRun
+     * @param url
      * @return the cloudEvent object with continuous delivery
-     * task run event extensions
+     * task run started event extensions
      */
-    public static CloudEvent createTaskRunEvent(
-            final String taskRunEventType, final String taskRunId,
-            final String taskRunName, final String taskRunPipelineId,
-            final String taskRunData) {
+
+    public static CloudEvent createTaskRunStartedEvent(
+            final String eventType, final String id,
+            final URI source, final String taskName,
+            final String pipelineRun, final URI url,
+            final String taskRunData)
+    {
         CloudEvent ceToSend =
-                buildCloudEvent(taskRunEventType, taskRunData)
-                .withExtension("taskrunid", taskRunId)
-                .withExtension("taskrunname", taskRunName)
-                .withExtension("taskrunpipelineid", taskRunPipelineId)
-                .build();
+                buildCloudEvent(eventType, taskRunData)
+                        .withExtension("id", id)
+                        .withExtension("source", source)
+                        .withExtension("taskname", taskName)
+                        .withExtension("pipelinerun", pipelineRun)
+                        .withExtension("url", url)
+                        .build();
         return ceToSend;
     }
 
     /**
-     * Creates a continuous delivery repository events
+     * Creates a continuous delivery Task run finished events
      * using {@link CloudEventBuilder}
      * and returns {@link CloudEvent} object.
      *
-     * @param repositoryEventType
-     * @param repositoryId
-     * @param repositoryName
-     * @param repositoryURL
-     * @param repositoryData
+     * @param eventType
+     * @param id
+     * @param source
+     * @param taskName
+     * @param pipelineRun
+     * @param url
+     * @param outcome
+     * @param errors
      * @return the cloudEvent object with continuous delivery
-     * repository event extensions
+     * task run finished event extensions
      */
-    public static CloudEvent createRepositoryEvent(
-            final String repositoryEventType, final String repositoryId,
-            final String repositoryName, final String repositoryURL,
-            final String repositoryData) {
+
+
+    public static CloudEvent createTaskRunFinishedEvent(
+            final String eventType, final String id,
+            final URI source, final String taskName,
+            final String pipelineRun, final URI url,
+            final CDEventConstants.Outcome outcome, final String errors,
+            final String taskRunData)
+    {
         CloudEvent ceToSend =
-                buildCloudEvent(repositoryEventType, repositoryData)
-                .withExtension("repositoryid", repositoryId)
-                .withExtension("repositoryname", repositoryName)
-                .withExtension("repositoryurl", repositoryURL)
-                .build();
+                buildCloudEvent(eventType, taskRunData)
+                        .withExtension("id", id)
+                        .withExtension("source", source)
+                        .withExtension("taskname", taskName)
+                        .withExtension("pipelinerun", pipelineRun)
+                        .withExtension("url", url)
+                        .withExtension("outcome", outcome.getOutcome())
+                        .withExtension("errors", errors)
+                        .build();
         return ceToSend;
     }
+
+
+    /**
+     * Creates a continuous delivery repository created event
+     * using {@link CloudEventBuilder}
+     * and returns {@link CloudEvent} object.
+     *
+     * @param eventType
+     * @param id
+     * @param source
+     * @param name
+     * @param owner
+     * @param url
+     * @param view
+     * @param data
+     * @return the cloudEvent object with continuous delivery
+     * repository created event extensions
+     */
+
+    public static CloudEvent createRepositoryCreatedEvent(
+            final String eventType, final String id,
+            final URI source, final String name,
+            final String owner, final URI url,
+            final URI view, final String data) {
+        CloudEvent ceToSend =
+                buildCloudEvent(eventType, data)
+                        .withExtension("id", id)
+                        .withExtension("source",source)
+                        .withExtension("name", name)
+                        .withExtension("owner",owner)
+                        .withExtension("url", url)
+                        .withExtension("view", view)
+                        .build();
+        return ceToSend;
+    }
+
+    /**
+     * Creates a continuous delivery repository modified event
+     * using {@link CloudEventBuilder}
+     * and returns {@link CloudEvent} object.
+     *
+     * @param eventType
+     * @param id
+     * @param source
+     * @param name
+     * @param owner
+     * @param url
+     * @param view
+     * @param data
+     * @return the cloudEvent object with continuous delivery
+     * repository modified event extensions
+     */
+
+    public static CloudEvent createRepositoryModifiedEvent(
+            final String eventType, final String id,
+            final URI source, final String name,
+            final String owner, final URI url,
+            final URI view, final String data) {
+        CloudEvent ceToSend =
+                buildCloudEvent(eventType, data)
+                        .withExtension("id", id)
+                        .withExtension("source",source)
+                        .withExtension("name", name)
+                        .withExtension("owner",owner)
+                        .withExtension("url", url)
+                        .withExtension("view", view)
+                        .build();
+        return ceToSend;
+    }
+
+    /**
+     * Creates a continuous delivery repository deleted event
+     * using {@link CloudEventBuilder}
+     * and returns {@link CloudEvent} object.
+     *
+     * @param eventType
+     * @param id
+     * @param source
+     * @param name
+     * @param owner
+     * @param url
+     * @param view
+     * @param data
+     * @return the cloudEvent object with continuous delivery
+     * repository deleted event extensions
+     */
+
+    public static CloudEvent createRepositoryDeletedEvent(
+            final String eventType, final String id,
+            final URI source, final String name,
+            final String owner, final URI url,
+            final URI view, final String data) {
+        CloudEvent ceToSend =
+                buildCloudEvent(eventType, data)
+                        .withExtension("id", id)
+                        .withExtension("source",source)
+                        .withExtension("name", name)
+                        .withExtension("owner",owner)
+                        .withExtension("url", url)
+                        .withExtension("view", view)
+                        .build();
+        return ceToSend;
+    }
+
+    /**
+     * Creates a continuous delivery branch created event
+     * using {@link CloudEventBuilder}
+     * and returns {@link CloudEvent} object.
+     *
+     * @param eventType
+     * @param id
+     * @param source
+     * @param repository
+     * @param data
+     * @return the cloudEvent object with continuous delivery
+     * branch created event extensions
+     */
+    public static CloudEvent createBranchCreatedEvent(
+            final String eventType, final String id,
+            final URI source, final String repository,
+            final String data){
+        CloudEvent cdToSend =
+                buildCloudEvent(eventType,data)
+                        .withExtension("id",id)
+                        .withExtension("source", source)
+                        .withExtension("repository", repository)
+                        .build();
+        return cdToSend;
+    }
+
+    /**
+     * Creates a continuous delivery branch deleted event
+     * using {@link CloudEventBuilder}
+     * and returns {@link CloudEvent} object.
+     *
+     *
+     * @param eventType
+     * @param id
+     * @param source
+     * @param repository
+     * @param data
+     * @return the cloudEvent object with continuous delivery
+     * branch deleted event extensions
+     */
+
+    public static CloudEvent createBranchDeletedEvent(
+            final String eventType, final String id,
+            final URI source, final String repository,
+            final String data){
+        CloudEvent cdToSend =
+                buildCloudEvent(eventType,data)
+                        .withExtension("id",id)
+                        .withExtension("source", source)
+                        .withExtension("repository", repository)
+                        .build();
+        return cdToSend;
+    }
+
+    /**
+     * Creates a continuous delivery change created event
+     * using {@link CloudEventBuilder}
+     * and returns {@link CloudEvent} object.
+     *
+     * @param eventType
+     * @param id
+     * @param source
+     * @param repository
+     * @param data
+     * @return the cloudEvent object with continuous delivery
+     * change created event extensions
+     */
+
+    public static CloudEvent createChangeCreatedEvent(
+            final String eventType, final String id,
+            final URI source, final String repository,
+            final String data){
+        CloudEvent cdToSend =
+                buildCloudEvent(eventType,data)
+                        .withExtension("id",id)
+                        .withExtension("source",source)
+                        .withExtension("repository",repository)
+                        .build();
+        return cdToSend;
+    }
+
+    /**
+     * Creates a continuous delivery change reviewed event
+     * using {@link CloudEventBuilder}
+     * and returns {@link CloudEvent} object.
+     *
+     * @param eventType
+     * @param id
+     * @param source
+     * @param repository
+     * @param data
+     * @return the cloudEvent object with continuous delivery
+     * change reviewed event extensions
+     */
+
+    public static CloudEvent createChangeReviewedEvent(
+            final String eventType, final String id,
+            final URI source, final String repository,
+            final String data){
+        CloudEvent cdToSend =
+                buildCloudEvent(eventType,data)
+                        .withExtension("id",id)
+                        .withExtension("source",source)
+                        .withExtension("repository",repository)
+                        .build();
+        return cdToSend;
+    }
+
+    /**
+     * Creates a continuous delivery change merged event
+     * using {@link CloudEventBuilder}
+     * and returns {@link CloudEvent} object.
+     *
+     * @param eventType
+     * @param id
+     * @param source
+     * @param repository
+     * @param data
+     * @return the cloudEvent object with continuous delivery
+     * change merged event extensions
+     */
+
+    public static CloudEvent createChangeMergedEvent(
+            final String eventType, final String id,
+            final URI source, final String repository,
+            final String data){
+        CloudEvent cdToSend =
+                buildCloudEvent(eventType,data)
+                        .withExtension("id",id)
+                        .withExtension("source",source)
+                        .withExtension("repository",repository)
+                        .build();
+        return cdToSend;
+    }
+
+    /**
+     * Creates a continuous delivery change abandoned event
+     * using {@link CloudEventBuilder}
+     * and returns {@link CloudEvent} object.
+     *
+     * @param eventType
+     * @param id
+     * @param source
+     * @param repository
+     * @param data
+     * @return the cloudEvent object with continuous delivery
+     * change abandoned event extensions
+     */
+
+    public static CloudEvent createChangeAbandonedEvent(
+            final String eventType, final String id,
+            final URI source, final String repository,
+            final String data){
+        CloudEvent cdToSend =
+                buildCloudEvent(eventType,data)
+                        .withExtension("id",id)
+                        .withExtension("source",source)
+                        .withExtension("repository",repository)
+                        .build();
+        return cdToSend;
+    }
+
+    /**
+     * Creates a continuous delivery change updated event
+     * using {@link CloudEventBuilder}
+     * and returns {@link CloudEvent} object.
+     *
+     * @param eventType
+     * @param id
+     * @param source
+     * @param repository
+     * @param data
+     * @return the cloudEvent object with continuous delivery
+     * change updated event extensions
+     */
+
+    public static CloudEvent createChangeUpdatedEvent(
+            final String eventType, final String id,
+            final URI source, final String repository,
+            final String data){
+        CloudEvent cdToSend =
+                buildCloudEvent(eventType,data)
+                        .withExtension("id",id)
+                        .withExtension("source",source)
+                        .withExtension("repository",repository)
+                        .build();
+        return cdToSend;
+    }
+
+    /**
+     * Creates a continuous delivery build queued event
+     * using {@link CloudEventBuilder}
+     * and returns {@link CloudEvent} object.
+     *
+     * @param eventType
+     * @param id
+     * @param source
+     * @param data
+     * @return the cloudEvent object with continuous delivery
+     * build queued event extensions
+     */
+
+    public static CloudEvent createBuildQueuedEvent(
+            final String eventType, final String id,
+            final URI source, final String data){
+        CloudEvent cdToSend = 
+                buildCloudEvent(eventType,data)
+                        .withExtension("id",id)
+                        .withExtension("source",source)
+                        .build();
+        return cdToSend;
+    }
+
+    /**
+     * Creates a continuous delivery build started event
+     * using {@link CloudEventBuilder}
+     * and returns {@link CloudEvent} object.
+     *
+     * @param eventType
+     * @param id
+     * @param source
+     * @param data
+     * @return the cloudEvent object with continuous delivery
+     * build started event extensions
+     */
+
+    public static CloudEvent createBuildStartedEvent(
+            final String eventType, final String id,
+            final URI source, final String data){
+        CloudEvent cdToSend =
+                buildCloudEvent(eventType,data)
+                        .withExtension("id",id)
+                        .withExtension("source",source)
+                        .build();
+        return cdToSend;
+    }
+
+    /**
+     * Creates a continuous delivery build finished event
+     * using {@link CloudEventBuilder}
+     * and returns {@link CloudEvent} object.
+     *
+     * @param eventType
+     * @param id
+     * @param source
+     * @param data
+     * @return the cloudEvent object with continuous delivery
+     * build finished event extensions
+     */
+
+    public static CloudEvent createBuildFinishedEvent(
+            final String eventType, final String id,
+            final URI source, final URI artifactId,
+            final String data){
+        CloudEvent cdToSend =
+                buildCloudEvent(eventType,data)
+                        .withExtension("id",id)
+                        .withExtension("source",source)
+                        .withExtension("artifactid", artifactId)
+                        .build();
+        return cdToSend;
+    }
+
+    /**
+     * Creates a continuous delivery testcase queued event
+     * using {@link CloudEventBuilder}
+     * and returns {@link CloudEvent} object.
+     *
+     * @param eventType
+     * @param id
+     * @param source
+     * @param data
+     * @return the cloudEvent object with continuous delivery
+     * testcase queued event extensions
+     */
+
+    public static CloudEvent createTestCaseQueuedEvent(
+            final String eventType, final String id,
+            final URI source, final String data){
+        CloudEvent cdToSend =
+                buildCloudEvent(eventType,data)
+                        .withExtension("id",id)
+                        .withExtension("source",source)
+                        .build();
+        return cdToSend;
+    }
+
+    /**
+     * Creates a continuous delivery testcase started event
+     * using {@link CloudEventBuilder}
+     * and returns {@link CloudEvent} object.
+     *
+     * @param eventType
+     * @param id
+     * @param source
+     * @param data
+     * @return the cloudEvent object with continuous delivery
+     * testcase started event extensions
+     */
+
+    public static CloudEvent createTestCaseStartedEvent(
+            final String eventType, final String id,
+            final URI source, final String data){
+        CloudEvent cdToSend =
+                buildCloudEvent(eventType,data)
+                        .withExtension("id",id)
+                        .withExtension("source",source)
+                        .build();
+        return cdToSend;
+    }
+
+    /**
+     * Creates a continuous delivery testcase finished event
+     * using {@link CloudEventBuilder}
+     * and returns {@link CloudEvent} object.
+     *
+     * @param eventType
+     * @param id
+     * @param source
+     * @param data
+     * @return the cloudEvent object with continuous delivery
+     * testcase finished event extensions
+     */
+
+    public static CloudEvent createTestCaseFinishedEvent(
+            final String eventType, final String id,
+            final URI source, final String data){
+        CloudEvent cdToSend =
+                buildCloudEvent(eventType,data)
+                        .withExtension("id",id)
+                        .withExtension("source",source)
+                        .build();
+        return cdToSend;
+    }
+
+    /**
+     * Creates a continuous delivery test suite started event
+     * using {@link CloudEventBuilder}
+     * and returns {@link CloudEvent} object.
+     *
+     * @param eventType
+     * @param id
+     * @param source
+     * @param data
+     * @return the cloudEvent object with continuous delivery
+     * test suite started queued event extensions
+     */
+
+    public static CloudEvent createTestSuiteStartedEvent(
+            final String eventType, final String id,
+            final URI source, final String data){
+        CloudEvent cdToSend =
+                buildCloudEvent(eventType,data)
+                        .withExtension("id",id)
+                        .withExtension("source",source)
+                        .build();
+        return cdToSend;
+    }
+
+    /**
+     * Creates a continuous delivery test suite finished event
+     * using {@link CloudEventBuilder}
+     * and returns {@link CloudEvent} object.
+     *
+     * @param eventType
+     * @param id
+     * @param source
+     * @param data
+     * @return the cloudEvent object with continuous delivery
+     * test suite finished queued event extensions
+     */
+
+    public static CloudEvent createTestSuiteFinishedEvent(
+            final String eventType, final String id,
+            final URI source, final String data){
+        CloudEvent cdToSend =
+                buildCloudEvent(eventType,data)
+                        .withExtension("id",id)
+                        .withExtension("source",source)
+                        .build();
+        return cdToSend;
+    }
+
+    /**
+     * Creates a continuous delivery artifact packaged event
+     * using {@link CloudEventBuilder}
+     * and returns {@link CloudEvent} object.
+     *
+     * @param eventType
+     * @param id
+     * @param source
+     * @param data
+     * @return the cloudEvent object with continuous delivery
+     * artifact packaged queued event extensions
+     */
+
+    public static CloudEvent createArtifactPackagedEvent(
+            final String eventType, final String id,
+            final URI source, final String data){
+        CloudEvent cdToSend =
+                buildCloudEvent(eventType,data)
+                        .withExtension("id",id)
+                        .withExtension("source",source)
+                        .build();
+        return cdToSend;
+    }
+
+    /**
+     * Creates a continuous delivery artifact published event
+     * using {@link CloudEventBuilder}
+     * and returns {@link CloudEvent} object.
+     *
+     * @param eventType
+     * @param id
+     * @param source
+     * @param data
+     * @return the cloudEvent object with continuous delivery
+     * artifact published queued event extensions
+     */
+
+    public static CloudEvent createArtifactPublishedEvent(
+            final String eventType, final String id,
+            final URI source, final String data){
+        CloudEvent cdToSend =
+                buildCloudEvent(eventType,data)
+                        .withExtension("id",id)
+                        .withExtension("source",source)
+                        .build();
+        return cdToSend;
+    }
+    
 
     /**
      * Creates a continuous delivery build events

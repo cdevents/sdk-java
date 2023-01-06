@@ -1,6 +1,9 @@
 package dev.cdevents.constants;
 
 public class CDEventConstants {
+    
+    private static final String version = "0.1.0";
+    
     public enum Outcome {
         OutcomeSuccess("success"),
         OutcomeFailure("failure"),
@@ -20,128 +23,128 @@ public class CDEventConstants {
 
     public enum CDEventTypes {
 
-
+        
         /* PipelineRun events */
         /**
          * Pipeline run started event.
          */
-        PipelineRunStartedEvent("dev.cdevents.pipelinerun.started." + getVersion()),
+        PipelineRunStartedEvent("dev.cdevents.pipelinerun.started." + version),
         /**
          * Pipeline run finished event.
          */
-        PipelineRunFinishedEvent("dev.cdevents.pipelinerun.finished." + getVersion()),
+        PipelineRunFinishedEvent("dev.cdevents.pipelinerun.finished." + version),
         /**
          * Pipeline run queued event.
          */
-        PipelineRunQueuedEvent("dev.cdevents.pipelinerun.queued." + getVersion()),
+        PipelineRunQueuedEvent("dev.cdevents.pipelinerun.queued." + version),
 
         /* TaskRun events */
         /**
          * Task run started event.
          */
-        TaskRunStartedEventV1("cd.taskrun.started.v1"),
+        TaskRunStartedEvent("dev.cdevents.taskrun.started." + version),
         /**
          * Task run finished event.
          */
-        TaskRunFinishedEventV1("cd.taskrun.finished.v1"),
+        TaskRunFinishedEvent("dev.cdevents.taskrun.finished." + version),
 
         /* Repository events */
         /**
          * Repository created event.
          */
-        RepositoryCreatedEventV1("cd.repository.created.v1"),
+        RepositoryCreatedEvent("dev.cdevents.repository.created." + version),
         /**
          * Repository modified event.
          */
-        RepositoryModifiedEventV1("cd.repository.modified.v1"),
+        RepositoryModifiedEvent("dev.cdevents.repository.modified." + version),
         /**
          * Repository deleted event.
          */
-        RepositoryDeletedEventV1("cd.repository.deleted.v1"),
+        RepositoryDeletedEvent("dev.cdevents.repository.deleted." + version),
         /**
          * Repository branch created event.
          */
-        BranchCreatedEventV1("cd.repository.branch.created.v1"),
+        BranchCreatedEvent("dev.cdevents.branch.created." + version),
         /**
          * Repository branch deleted event.
          */
-        BranchDeletedEventV1("cd.repository.branch.deleted.v1"),
+        BranchDeletedEvent("dev.cdevents.branch.deleted." + version),
 
         /* Repository change Events */
         /**
          * Repository change created event.
          */
-        ChangeCreatedEventV1("cd.repository.change.created.v1"),
+        ChangeCreatedEvent("dev.cdevents.change.created." + version),
         /**
          * Repository change updated event.
          */
-        ChangeUpdatedEventV1("cd.repository.change.updated.v1"),
+        ChangeUpdatedEvent("dev.cdevents.change.updated." + version),
         /**
          * Repository change reviewed event.
          */
-        ChangeReviewedEventV1("cd.repository.change.reviewed.v1"),
+        ChangeReviewedEvent("dev.cdevents.change.reviewed." + version),
         /**
          * Repository change merged event.
          */
-        ChangeMergedEventV1("cd.repository.change.merged.v1"),
+        ChangeMergedEvent("dev.cdevents.change.merged." + version),
         /**
          * Repository change abandoned event.
          */
-        ChangeAbandonedEventV1("cd.repository.change.abandoned.v1"),
+        ChangeAbandonedEvent("dev.cdevents.change.abandoned." + version),
 
         /* Build Events */
         /**
          * Build started event.
          */
-        BuildStartedEventV1("cd.build.started.v1"),
+        BuildStartedEvent("dev.cdevents.build.started" + version),
         /**
          * Build queued event.
          */
-        BuildQueuedEventV1("cd.build.queued.v1"),
+        BuildQueuedEvent("dev.cdevents.build.queued" + version),
         /**
          * Build finished event.
          */
-        BuildFinishedEventV1("cd.build.finished.v1"),
+        BuildFinishedEvent("dev.cdevents.build.finished" + version),
 
         /* Test Events */
         /**
          * TestCase started event.
          */
-        TestCaseStartedEventV1("cd.test.case.started.v1"),
+        TestCaseStartedEvent("dev.cdevents.testcase.started" + version),
         /**
          * TestCase queued event.
          */
-        TestCaseQueuedEventV1("cd.test.case.queued.v1"),
+        TestCaseQueuedEvent("dev.cdevents.testcase.queued" + version),
         /**
          * TestCase finished event.
          */
-        TestCaseFinishedEventV1("cd.test.case.finished.v1"),
+        TestCaseFinishedEvent("dev.cdevents.testcase.finished" + version),
         /**
          * TestSuite started event.
          */
-        TestSuiteStartedEventV1("cd.test.suite.started.v1"),
+        TestSuiteStartedEvent("dev.cdevents.testsuite.started" + version),
         /**
          * TestSuite queued event.
          */
-        TestSuiteQueuedEventV1("cd.test.suite.queued.v1"),
+        TestSuiteQueuedEvent("dev.cdevents.testsuite.queued" + version),
         /**
          * TestSuite finished event.
          */
-        TestSuiteFinishedEventV1("cd.test.suite.finished.v1"),
+        TestSuiteFinishedEvent("dev.cdevents.testsuite.finished" + version),
 
         /* Artifact Events */
         /**
          * Artifact packaged event.
          */
-        ArtifactPackagedEventV1("cd.artifact.packaged.v1"),
+        ArtifactPackagedEvent("dev.cdevents.artifact.packaged." + version),
         /**
          * Artifact published event.
          */
-        ArtifactPublishedEventV1("cd.artifact.published.v1"),
+        ArtifactPublishedEvent("dev.cdevents.artifact.packaged." + version),
         /**
          * Artifact created event.
          */
-        ArtifactCreatedEventV1("cd.artifact.created.v1"),
+        ArtifactCreatedEvent("dev.cdevents.artifact.created." + version),
 
         /* Environment Events */
         /**
@@ -175,10 +178,6 @@ public class CDEventConstants {
          */
         ServiceRemovedEventV1("cd.service.removed.v1");
 
-
-        private static String getVersion() {
-            return "0.1.0";
-        }
 
         /**
          * Continuous delivery event type.
