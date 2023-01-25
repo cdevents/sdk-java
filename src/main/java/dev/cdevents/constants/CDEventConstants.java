@@ -150,33 +150,37 @@ public class CDEventConstants {
         /**
          * Environment created event.
          */
-        EnvironmentCreatedEventV1("cd.environment.created.v1"),
+        EnvironmentCreatedEvent("dev.cdevents.environment.created." + version),
         /**
          * Environment modified event.
          */
-        EnvironmentModifiedEventV1("cd.environment.modified.v1"),
+        EnvironmentModifiedEvent("dev.cdevents.environment.modified." + version),
         /**
          * Environment deleted event.
          */
-        EnvironmentDeletedEventV1("cd.environment.deleted.v1"),
+        EnvironmentDeletedEvent("dev.cdevents.environment.deleted." + version),
 
         /* Service Events */
         /**
          * Service deployed event.
          */
-        ServiceDeployedEventV1("cd.service.deployed.v1"),
+        ServiceDeployedEvent("dev.cdevents.service.deployed." + version),
         /**
          * Service upgraded event.
          */
-        ServiceUpgradedEventV1("cd.service.upgraded.v1"),
+        ServiceUpgradedEvent("dev.cdevents.service.upgraded." + version),
         /**
          * Service rolled back event.
          */
-        ServiceRolledbackEventV1("cd.service.rolledback.v1"),
+        ServiceRolledBackEvent("dev.cdevents.service.rolledback." + version),
         /**
          * Service removed event.
          */
-        ServiceRemovedEventV1("cd.service.removed.v1");
+        ServiceRemovedEvent("dev.cdevents.service.removed." + version),
+        /**
+         * Service published event.
+         */
+        ServicePublishedEvent("dev.cdevents.service.published." + version);
 
 
         /**
