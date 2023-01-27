@@ -1,18 +1,26 @@
 package dev.cdevents;
 
 import java.net.URI;
+import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.time.OffsetDateTime;
 import java.util.UUID;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import dev.cdevents.constants.CDEventConstants;
 import dev.cdevents.models.Environment;
 import dev.cdevents.models.PipelineRun;
 import dev.cdevents.models.Repository;
 import io.cloudevents.CloudEvent;
 import io.cloudevents.core.v03.CloudEventBuilder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public final class CDEventTypes {
+
+    private static ObjectMapper objectMapper = new ObjectMapper();
+    private static Logger log = LoggerFactory.getLogger(CDEventTypes.class);
 
     private CDEventTypes() {
     }
@@ -136,13 +144,18 @@ public final class CDEventTypes {
             final PipelineRun pipelineRun, final URI url,
             final String taskRunData) {
         CloudEvent ceToSend =
-                buildCloudEvent(eventType, taskRunData)
-                        .withExtension("id", id)
-                        .withExtension("source", source)
-                        .withExtension("taskname", taskName)
-                        .withExtension("pipelinerun", pipelineRun.toString())
-                        .withExtension("url", url)
-                        .build();
+                null;
+        try {
+            ceToSend = buildCloudEvent(eventType, taskRunData)
+                    .withExtension("id", id)
+                    .withExtension("source", source)
+                    .withExtension("taskname", taskName)
+                    .withExtension("pipelinerun", objectMapper.writeValueAsString(pipelineRun))
+                    .withExtension("url", url)
+                    .build();
+        } catch (JsonProcessingException e) {
+            log.error("Exception occurred when creating TaskRun Started Event {}",e);
+        }
         return ceToSend;
     }
 
@@ -172,15 +185,20 @@ public final class CDEventTypes {
             final CDEventConstants.Outcome outcome, final String errors,
             final String taskRunData) {
         CloudEvent ceToSend =
-                buildCloudEvent(eventType, taskRunData)
-                        .withExtension("id", id)
-                        .withExtension("source", source)
-                        .withExtension("taskname", taskName)
-                        .withExtension("pipelinerun", pipelineRun.toString())
-                        .withExtension("url", url)
-                        .withExtension("outcome", outcome.getOutcome())
-                        .withExtension("errors", errors)
-                        .build();
+                null;
+        try {
+            ceToSend = buildCloudEvent(eventType, taskRunData)
+                    .withExtension("id", id)
+                    .withExtension("source", source)
+                    .withExtension("taskname", taskName)
+                    .withExtension("pipelinerun", objectMapper.writeValueAsString(pipelineRun))
+                    .withExtension("url", url)
+                    .withExtension("outcome", outcome.getOutcome())
+                    .withExtension("errors", errors)
+                    .build();
+        } catch (JsonProcessingException e) {
+            log.error("Exception occurred when creating TaskRun Started Event{}",e);
+        }
         return ceToSend;
     }
 
@@ -305,11 +323,16 @@ public final class CDEventTypes {
             final URI source, final Repository repository,
             final String data) {
         CloudEvent cdToSend =
-                buildCloudEvent(eventType, data)
-                        .withExtension("id", id)
-                        .withExtension("source", source)
-                        .withExtension("repository", repository.toString())
-                        .build();
+                null;
+        try {
+            cdToSend = buildCloudEvent(eventType, data)
+                    .withExtension("id", id)
+                    .withExtension("source", source)
+                    .withExtension("repository", objectMapper.writeValueAsString(repository) )
+                    .build();
+        } catch (JsonProcessingException e) {
+            log.error("Exception occurred when creating TaskRun Started Event{}",e);
+        }
         return cdToSend;
     }
 
@@ -333,11 +356,16 @@ public final class CDEventTypes {
             final URI source, final Repository repository,
             final String data) {
         CloudEvent cdToSend =
-                buildCloudEvent(eventType, data)
-                        .withExtension("id", id)
-                        .withExtension("source", source)
-                        .withExtension("repository", repository.toString())
-                        .build();
+                null;
+        try {
+            cdToSend = buildCloudEvent(eventType, data)
+                    .withExtension("id", id)
+                    .withExtension("source", source)
+                    .withExtension("repository", objectMapper.writeValueAsString(repository))
+                    .build();
+        } catch (JsonProcessingException e) {
+            log.error("Exception occurred when creating TaskRun Started Event{}",e);
+        }
         return cdToSend;
     }
 
@@ -360,11 +388,16 @@ public final class CDEventTypes {
             final URI source, final Repository repository,
             final String data) {
         CloudEvent cdToSend =
-                buildCloudEvent(eventType, data)
-                        .withExtension("id", id)
-                        .withExtension("source", source)
-                        .withExtension("repository", repository.toString())
-                        .build();
+                null;
+        try {
+            cdToSend = buildCloudEvent(eventType, data)
+                    .withExtension("id", id)
+                    .withExtension("source", source)
+                    .withExtension("repository", objectMapper.writeValueAsString(repository))
+                    .build();
+        } catch (JsonProcessingException e) {
+            log.error("Exception occurred when creating TaskRun Started Event{}",e);
+        }
         return cdToSend;
     }
 
@@ -387,11 +420,16 @@ public final class CDEventTypes {
             final URI source, final Repository repository,
             final String data) {
         CloudEvent cdToSend =
-                buildCloudEvent(eventType, data)
-                        .withExtension("id", id)
-                        .withExtension("source", source)
-                        .withExtension("repository", repository.toString())
-                        .build();
+                null;
+        try {
+            cdToSend = buildCloudEvent(eventType, data)
+                    .withExtension("id", id)
+                    .withExtension("source", source)
+                    .withExtension("repository", objectMapper.writeValueAsString(repository))
+                    .build();
+        } catch (JsonProcessingException e) {
+            log.error("Exception occurred when creating TaskRun Started Event{}",e);
+        }
         return cdToSend;
     }
 
@@ -414,11 +452,16 @@ public final class CDEventTypes {
             final URI source, final Repository repository,
             final String data) {
         CloudEvent cdToSend =
-                buildCloudEvent(eventType, data)
-                        .withExtension("id", id)
-                        .withExtension("source", source)
-                        .withExtension("repository", repository.toString())
-                        .build();
+                null;
+        try {
+            cdToSend = buildCloudEvent(eventType, data)
+                    .withExtension("id", id)
+                    .withExtension("source", source)
+                    .withExtension("repository", objectMapper.writeValueAsString(repository))
+                    .build();
+        } catch (JsonProcessingException e) {
+            log.error("Exception occurred when creating TaskRun Started Event{}",e);
+        }
         return cdToSend;
     }
 
@@ -441,11 +484,16 @@ public final class CDEventTypes {
             final URI source, final Repository repository,
             final String data) {
         CloudEvent cdToSend =
-                buildCloudEvent(eventType, data)
-                        .withExtension("id", id)
-                        .withExtension("source", source)
-                        .withExtension("repository", repository.toString())
-                        .build();
+                null;
+        try {
+            cdToSend = buildCloudEvent(eventType, data)
+                    .withExtension("id", id)
+                    .withExtension("source", source)
+                    .withExtension("repository", objectMapper.writeValueAsString(repository))
+                    .build();
+        } catch (JsonProcessingException e) {
+            log.error("Exception occurred when creating TaskRun Started Event{}",e);
+        }
         return cdToSend;
     }
 
@@ -468,11 +516,16 @@ public final class CDEventTypes {
             final URI source, final Repository repository,
             final String data) {
         CloudEvent cdToSend =
-                buildCloudEvent(eventType, data)
-                        .withExtension("id", id)
-                        .withExtension("source", source)
-                        .withExtension("repository", repository.toString())
-                        .build();
+                null;
+        try {
+            cdToSend = buildCloudEvent(eventType, data)
+                    .withExtension("id", id)
+                    .withExtension("source", source)
+                    .withExtension("repository", objectMapper.writeValueAsString(repository))
+                    .build();
+        } catch (JsonProcessingException e) {
+            log.error("Exception occurred when creating TaskRun Started Event{}",e);
+        }
         return cdToSend;
     }
 
@@ -492,7 +545,7 @@ public final class CDEventTypes {
     public static CloudEvent createBuildQueuedEvent(
             final String eventType, final String id,
             final URI source, final String data) {
-        CloudEvent cdToSend = 
+        CloudEvent cdToSend =
                 buildCloudEvent(eventType, data)
                         .withExtension("id", id)
                         .withExtension("source", source)
@@ -739,7 +792,7 @@ public final class CDEventTypes {
             final URI source, final String name,
             final String url, final String data) {
         CloudEvent cdToSend =
-                buildCloudEvent(eventType,data)
+                buildCloudEvent(eventType, data)
                         .withExtension("id", id)
                         .withExtension("source", source)
                         .withExtension("name", name)
@@ -820,14 +873,19 @@ public final class CDEventTypes {
 
     public static CloudEvent createServiceDeployedEvent(
             final String eventType, final String id,
-            final Environment environment, final URI artifactId,
+            final Environment environment, final URL artifactId,
             final String data) {
         CloudEvent cdToSend =
-                buildCloudEvent(eventType, data)
-                        .withExtension("id", id)
-                        .withExtension("environment",  environment.toString())
-                        .withExtension("artifactid", artifactId)
-                        .build();
+                null;
+        try {
+            cdToSend = buildCloudEvent(eventType, data)
+                    .withExtension("id", id)
+                    .withExtension("environment",  objectMapper.writeValueAsString(environment))
+                    .withExtension("artifactid", artifactId.toString())
+                    .build();
+        } catch (JsonProcessingException e) {
+            log.error("Exception occurred when creating TaskRun Started Event{}",e);
+        }
         return cdToSend;
     }
 
@@ -847,14 +905,19 @@ public final class CDEventTypes {
 
     public static CloudEvent createServiceUpgradedEvent(
             final String eventType, final String id,
-            final Environment environment, final URI artifactId,
+            final Environment environment, final URL artifactId,
             final String data) {
         CloudEvent cdToSend =
-                buildCloudEvent(eventType, data)
-                        .withExtension("id", id)
-                        .withExtension("environment", environment.toString())
-                        .withExtension("artifactid", artifactId)
-                        .build();
+                null;
+        try {
+            cdToSend = buildCloudEvent(eventType, data)
+                    .withExtension("id", id)
+                    .withExtension("environment", objectMapper.writeValueAsString(environment))
+                    .withExtension("artifactid", artifactId.toString())
+                    .build();
+        } catch (JsonProcessingException e) {
+            log.error("Exception occurred when creating TaskRun Started Event{}",e);
+        }
         return cdToSend;
     }
 
@@ -874,14 +937,19 @@ public final class CDEventTypes {
 
     public static CloudEvent createServiceRolledBackEvent(
             final String eventType, final String id,
-            final Environment environment, final URI artifactId,
+            final Environment environment, final URL artifactId,
             final String data) {
         CloudEvent cdToSend =
-                buildCloudEvent(eventType, data)
-                        .withExtension("id", id)
-                        .withExtension("environment", environment.toString())
-                        .withExtension("artifactid", artifactId)
-                        .build();
+                null;
+        try {
+            cdToSend = buildCloudEvent(eventType, data)
+                    .withExtension("id", id)
+                    .withExtension("environment", objectMapper.writeValueAsString(environment))
+                    .withExtension("artifactid", artifactId.toString())
+                    .build();
+        } catch (JsonProcessingException e) {
+            log.error("Exception occurred when creating TaskRun Started Event{}",e);
+        }
         return cdToSend;
     }
 
@@ -902,10 +970,15 @@ public final class CDEventTypes {
             final String eventType, final String id,
             final Environment environment, final String data) {
         CloudEvent cdToSend =
-                buildCloudEvent(eventType, data)
-                        .withExtension("id", id)
-                        .withExtension("environment", environment.toString())
-                        .build();
+                null;
+        try {
+            cdToSend = buildCloudEvent(eventType, data)
+                    .withExtension("id", id)
+                    .withExtension("environment", objectMapper.writeValueAsString(environment))
+                    .build();
+        } catch (JsonProcessingException e) {
+            log.error("Exception occurred when creating TaskRun Started Event{}",e);
+        }
         return cdToSend;
     }
 
@@ -926,10 +999,15 @@ public final class CDEventTypes {
             final String eventType, final String id,
             final Environment environment, final String data) {
         CloudEvent cdToSend =
-                buildCloudEvent(eventType, data)
-                        .withExtension("id", id)
-                        .withExtension("environment", environment.toString())
-                        .build();
+                null;
+        try {
+            cdToSend = buildCloudEvent(eventType, data)
+                    .withExtension("id", id)
+                    .withExtension("environment", objectMapper.writeValueAsString(environment))
+                    .build();
+        } catch (JsonProcessingException e) {
+            log.error("Exception occurred when creating TaskRun Started Event{}",e);
+        }
         return cdToSend;
     }
 
