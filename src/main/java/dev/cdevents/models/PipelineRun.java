@@ -31,7 +31,7 @@ public class PipelineRun {
     private String errors;
 
     /**
-     * PipelineRun
+     * PipelineRun.
      */
     public PipelineRun() {
     }

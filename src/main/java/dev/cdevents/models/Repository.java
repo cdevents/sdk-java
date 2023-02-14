@@ -29,7 +29,7 @@ public class Repository {
     private URI viewUrl;
 
     /**
-     * Repository
+     * Repository.
      */
     public Repository() {
     }
