@@ -35,6 +35,10 @@ import java.net.URL;
 
 public class CDEventTypesTest {
 
+
+    /**
+     * Object Mapper for writing Environment, Repository and PipelineRun objects to json string.
+     */
     private static ObjectMapper objectMapper = new ObjectMapper();
 
 
