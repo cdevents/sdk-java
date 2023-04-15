@@ -5,19 +5,77 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>dev.cdevents</groupId>
 	<artifactId>cdevents-sdk-java</artifactId>
-	<version>0.0.1</version>
-	<packaging>jar</packaging>
+	<version>0.0.1-SNAPSHOT</version>
+
 	<name>cdevents-sdk-java</name>
 	<description>cdevents java sdk</description>
+	<url>https://github.com/cdevents</url>
+	<inceptionYear>2022</inceptionYear>
+
+	<organization>
+		<name>Continuous Delivery Foundation</name>
+		<url>https://cd.foundation</url>
+	</organization>
 
 	<properties>
+		<project.identifier>${project.name}</project.identifier>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<cloudevents.version>2.3.0</cloudevents.version>
 		<junit-jupiter.version>5.8.2</junit-jupiter.version>
-		<assertj-core.version>3.22.0</assertj-core.version>
-		<jackson.version>2.13.2</jackson.version>
+        <assertj-core.version>3.22.0</assertj-core.version>
+        <jackson.version>2.13.2</jackson.version>
+		<project.github.repository>cdevents/sdk-java</project.github.repository>
+		<nexus.url>https://s01.oss.sonatype.org</nexus.url>
+		<repository.url>git@github.com:${project.github.repository}.git</repository.url>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<version.clean.plugin>3.1.0</version.clean.plugin>
+		<version.compiler.plugin>3.9.0</version.compiler.plugin>
+		<version.deploy.plugin>3.0.0-M1</version.deploy.plugin>
+		<version.gpg.plugin>1.6</version.gpg.plugin>
+		<version.install.plugin>3.0.0-M1</version.install.plugin>
+		<version.javadoc.plugin>3.2.0</version.javadoc.plugin>
+		<version.jar.plugin>3.2.0</version.jar.plugin>
+		<version.nexus.plugin>1.6.8</version.nexus.plugin>
+		<version.resources.plugin>3.2.0</version.resources.plugin>
+		<version.source.plugin>3.2.1</version.source.plugin>
 	</properties>
+
+	<licenses>
+		<license>
+			<name>Apache-2.0</name>
+			<url>https://spdx.org/licenses/Apache-2.0.html</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+
+	<developers>
+		<developer>
+			<id>afrittoli</id>
+			<name>Andrea Frittoli</name>
+		</developer>
+		<developer>
+			<id>zaza</id>
+			<name>Tomasz Zarna</name>
+		</developer>
+		<developer>
+			<id>rjalander</id>
+			<name>Jalander Ramagiri</name>
+		</developer>
+	</developers>
+
+	<issueManagement>
+		<system>github.com</system>
+		<url>https://github.com/${project.github.repository}/issues</url>
+	</issueManagement>
+
+	<scm>
+		<connection>scm:git:${repository.url}</connection>
+		<developerConnection>scm:git:${repository.url}</developerConnection>
+		<tag>HEAD</tag>
+		<url>${repository.url}</url>
+	</scm>
 
 	<dependencies>
 		<dependency>
@@ -61,16 +119,214 @@
 
 	</dependencies>
 	<build>
-		<finalName>maven-unit-test</finalName>
-		<plugins>
-
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-clean-plugin</artifactId>
+					<version>${version.clean.plugin}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>${version.compiler.plugin}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-deploy-plugin</artifactId>
+					<version>${version.deploy.plugin}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-gpg-plugin</artifactId>
+					<version>${version.gpg.plugin}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-install-plugin</artifactId>
+					<version>${version.install.plugin}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-jar-plugin</artifactId>
+					<version>${version.jar.plugin}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-javadoc-plugin</artifactId>
+					<version>${version.javadoc.plugin}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-resources-plugin</artifactId>
+					<version>${version.resources.plugin}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-source-plugin</artifactId>
+					<version>${version.source.plugin}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.sonatype.plugins</groupId>
+					<artifactId>nexus-staging-maven-plugin</artifactId>
+					<version>${version.nexus.plugin}</version>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.22.0</version>
+            </plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-surefire-plugin</artifactId>
-				<version>2.22.0</version>
+				<artifactId>maven-jar-plugin</artifactId>
+				<configuration>
+					<archive>
+						<manifestEntries>
+							<Build-Jdk>${java.version} (${java.vendor} ${java.vm.version})</Build-Jdk>
+							<Build-OS>${os.name} ${os.arch} ${os.version}</Build-OS>
+						</manifestEntries>
+						<manifest>
+							<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+						</manifest>
+					</archive>
+				</configuration>
 			</plugin>
+        </plugins>
+    </build>
 
-		</plugins>
-	</build>
+	<distributionManagement>
+		<repository>
+			<id>ossrh</id>
+			<url>${nexus.url}/service/local/staging/deploy/maven2/</url>
+		</repository>
+		<snapshotRepository>
+			<id>ossrh</id>
+			<url>${nexus.url}/content/repositories/snapshots</url>
+		</snapshotRepository>
+		<site>
+			<id>kordamp</id>
+			<url>scm:git:ssh://git@github.com/${project.github.repository}.git</url>
+		</site>
+	</distributionManagement>
 
+	<profiles>
+		<profile>
+			<id>publication</id>
+			<activation>
+				<property>
+					<name>release</name>
+				</property>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>com.coderplus.maven.plugins</groupId>
+						<artifactId>copy-rename-maven-plugin</artifactId>
+						<version>1.0.1</version>
+						<executions>
+							<execution>
+								<id>copy-license-file</id>
+								<goals>
+									<goal>copy</goal>
+								</goals>
+								<phase>generate-sources</phase>
+								<configuration>
+									<sourceFile>${session.executionRootDirectory}/LICENSE</sourceFile>
+									<destinationFile>${project.build.outputDirectory}/META-INF/LICENSE-${project.identifier}</destinationFile>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-javadoc-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>attach-javadocs</id>
+								<goals>
+									<goal>jar</goal>
+								</goals>
+								<configuration>
+									<attach>true</attach>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-source-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>attach-sources</id>
+								<goals>
+									<goal>jar</goal>
+								</goals>
+								<configuration>
+									<attach>true</attach>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+
+		<profile>
+			<id>gpg</id>
+			<activation>
+				<property>
+					<name>release</name>
+				</property>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-gpg-plugin</artifactId>
+						<executions>
+							<execution>
+								<goals>
+									<goal>sign</goal>
+								</goals>
+								<phase>verify</phase>
+								<configuration>
+									<gpgArguments>
+										<arg>--pinentry-mode</arg>
+										<arg>loopback</arg>
+									</gpgArguments>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+
+		<profile>
+			<id>remote-deploy</id>
+			<activation>
+				<property>
+					<name>release</name>
+				</property>
+			</activation>
+			<build>
+				<defaultGoal>deploy</defaultGoal>
+				<plugins>
+					<plugin>
+						<groupId>org.sonatype.plugins</groupId>
+						<artifactId>nexus-staging-maven-plugin</artifactId>
+						<extensions>true</extensions>
+						<configuration>
+							<serverId>central</serverId>
+							<nexusUrl>${nexus.url}</nexusUrl>
+							<autoReleaseAfterClose>true</autoReleaseAfterClose>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 </project>
