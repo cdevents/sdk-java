@@ -13,7 +13,7 @@ env:
   JAVA_DISTRO: 'zulu'
   USER_EMAIL: 'cdevents@cd.foundation'
   USER_NAME: 'CDEvents Bot'
-  USER_ID: 'cdevents-bot'
+  USER_ID: 'oauth2'
 
 jobs:
   release:
