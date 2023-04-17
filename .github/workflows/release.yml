@@ -13,7 +13,7 @@ env:
   JAVA_DISTRO: 'zulu'
   USER_EMAIL: 'cdevents@cd.foundation'
   USER_NAME: 'CDEvents Bot'
-  USER_ID: 'oauth2'
+  USER_ID: 'cdevents-bot'
 
 jobs:
   release:
@@ -53,7 +53,6 @@ jobs:
           git config --global user.email "${{ env.USER_EMAIL }}"
           git config --global user.name "${{ env.USER_NAME }}"
           git commit -a -m "Releasing version $VERSION"
-          git remote set-url origin https://${{ env.USER_ID }}:${{ secrets.GH_BOT_TOKEN }}@github.com/${{ github.repository }}.git
           git push
 
       - name: Release
@@ -65,5 +64,5 @@ jobs:
           GPG_TTY=$(tty)
           export GPG_TTY
           ./mvnw --no-transfer-progress -B --file pom.xml \
-            -Drepository.url=https://${{ env.USER_ID }}:${{ secrets.GH_BOT_TOKEN }}@github.com/${{ github.repository }}.git \
+            -Drepository.url=https://${{ env.USER_ID }}:${{ secrets.GH_BOT_TOKEN }}@github.com/${{ github.repository }} \
             -Dmaven.site.skip=true -Drelease=true deploy
