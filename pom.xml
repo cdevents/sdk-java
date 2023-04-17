@@ -5,7 +5,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>dev.cdevents.sdk-java</groupId>
 	<artifactId>cdevents-sdk-java</artifactId>
-	<version>v0.1.0-draft5</version>
+	<version>v0.1.0-draft6</version>
 
 	<name>cdevents-sdk-java</name>
 	<description>cdevents java sdk</description>
