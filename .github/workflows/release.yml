@@ -52,7 +52,7 @@ jobs:
           ./mvnw -B versions:set versions:commit -DnewVersion=$VERSION
           git config --global user.email "${{ env.USER_EMAIL }}"
           git config --global user.name "${{ env.USER_NAME }}"
-          git commit -a -m "Releasing version $VERSION"
+          git commit -a -s -m "Releasing version $VERSION"
           git push
 
       - name: Release
@@ -61,8 +61,6 @@ jobs:
           MAVEN_CENTRAL_TOKEN: ${{ secrets.SONATYPE_PASSWORD }}
           MAVEN_GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
         run: |
-          GPG_TTY=$(tty)
-          export GPG_TTY
           ./mvnw --no-transfer-progress -B --file pom.xml \
             -Drepository.url=https://github.com/${{ github.repository }} \
             -Dmaven.site.skip=true -Drelease=true deploy
