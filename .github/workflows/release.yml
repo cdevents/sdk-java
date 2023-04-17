@@ -64,5 +64,5 @@ jobs:
           GPG_TTY=$(tty)
           export GPG_TTY
           ./mvnw --no-transfer-progress -B --file pom.xml \
-            -Drepository.url=https://${{ env.USER_ID }}:${{ secrets.GH_BOT_TOKEN }}@github.com/${{ github.repository }} \
+            -Drepository.url=https://github.com/${{ github.repository }} \
             -Dmaven.site.skip=true -Drelease=true deploy
