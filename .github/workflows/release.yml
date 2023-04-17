@@ -45,7 +45,7 @@ jobs:
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
 
-      - name: Version
+      - name: Set Version
         run: |
           VERSION=${{ github.event.inputs.version }}
           echo "Updating POMs to version $VERSION"
