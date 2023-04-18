@@ -121,41 +121,41 @@ public class CDEventConstants {
         /**
          * Build started event.
          */
-        BuildStartedEvent("dev.cdevents.build.started" + VERSION),
+        BuildStartedEvent("dev.cdevents.build.started." + VERSION),
         /**
          * Build queued event.
          */
-        BuildQueuedEvent("dev.cdevents.build.queued" + VERSION),
+        BuildQueuedEvent("dev.cdevents.build.queued." + VERSION),
         /**
          * Build finished event.
          */
-        BuildFinishedEvent("dev.cdevents.build.finished" + VERSION),
+        BuildFinishedEvent("dev.cdevents.build.finished." + VERSION),
 
         /* Test Events */
         /**
          * TestCase started event.
          */
-        TestCaseStartedEvent("dev.cdevents.testcase.started" + VERSION),
+        TestCaseStartedEvent("dev.cdevents.testcase.started." + VERSION),
         /**
          * TestCase queued event.
          */
-        TestCaseQueuedEvent("dev.cdevents.testcase.queued" + VERSION),
+        TestCaseQueuedEvent("dev.cdevents.testcase.queued." + VERSION),
         /**
          * TestCase finished event.
          */
-        TestCaseFinishedEvent("dev.cdevents.testcase.finished" + VERSION),
+        TestCaseFinishedEvent("dev.cdevents.testcase.finished." + VERSION),
         /**
          * TestSuite started event.
          */
-        TestSuiteStartedEvent("dev.cdevents.testsuite.started" + VERSION),
+        TestSuiteStartedEvent("dev.cdevents.testsuite.started." + VERSION),
         /**
          * TestSuite queued event.
          */
-        TestSuiteQueuedEvent("dev.cdevents.testsuite.queued" + VERSION),
+        TestSuiteQueuedEvent("dev.cdevents.testsuite.queued." + VERSION),
         /**
          * TestSuite finished event.
          */
-        TestSuiteFinishedEvent("dev.cdevents.testsuite.finished" + VERSION),
+        TestSuiteFinishedEvent("dev.cdevents.testsuite.finished." + VERSION),
 
         /* Artifact Events */
         /**
