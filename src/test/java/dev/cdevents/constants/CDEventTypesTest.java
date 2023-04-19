@@ -12,4 +12,10 @@ public class CDEventTypesTest {
 		assertThat(CDEventTypes.values()).extracting(CDEventTypes::getEventType)
 				.allMatch(type -> type.matches("dev\\.cdevents\\.[a-z]+\\.[a-z]+\\.\\d+\\.\\d+\\.\\d+"));
 	}
+
+	@Test
+	void eventTypeNamesAreUnique() {
+		assertThat(CDEventTypes.values()).extracting(CDEventTypes::getEventType).doesNotHaveDuplicates();
+	}
 }
+

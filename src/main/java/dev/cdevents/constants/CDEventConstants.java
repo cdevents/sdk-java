@@ -165,7 +165,7 @@ public class CDEventConstants {
         /**
          * Artifact published event.
          */
-        ArtifactPublishedEvent("dev.cdevents.artifact.packaged." + VERSION),
+        ArtifactPublishedEvent("dev.cdevents.artifact.published." + VERSION),
         /**
          * Artifact created event.
          */
