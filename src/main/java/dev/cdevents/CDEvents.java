@@ -64,7 +64,6 @@ public class CDEvents {
         String cdEventJson = cdEventToJson(cdEvent);
 
         JsonSchemaFactory factory = JsonSchemaFactory.getInstance(SpecVersion.VersionFlag.V202012);
-        System.out.println(cdEvent.schemaURL());
         JsonSchema jsonSchema = factory.getSchema(URI.create(cdEvent.schemaURL()));
 
         JsonNode jsonNode = objectMapper.convertValue(cdEvent, ObjectNode.class);

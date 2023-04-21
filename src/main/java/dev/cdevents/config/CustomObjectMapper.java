@@ -11,8 +11,6 @@ public class CustomObjectMapper extends ObjectMapper {
         return this
                 .enable(SerializationFeature.WRITE_ENUMS_USING_TO_STRING)
                 .enable(DeserializationFeature.READ_ENUMS_USING_TO_STRING)
-//                .enable(SerializationFeature.WRITE_DATE_TIMESTAMPS_AS_NANOSECONDS)
-//                .enable(DeserializationFeature.READ_DATE_TIMESTAMPS_AS_NANOSECONDS)
                 .configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false)
                 .registerModule(new JavaTimeModule());
     }

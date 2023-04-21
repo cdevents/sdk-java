@@ -51,6 +51,7 @@ public final class CDEventTypes {
      * Pipeline run finished event extensions
      */
 
+
     public static CloudEvent createPipelineRunFinishedEvent(
             final String eventType,
             final String id, final URI source, final String pipelineName,
@@ -1056,7 +1057,6 @@ public final class CDEventTypes {
                 .withType(eventType)
                 .withData(eventData.getBytes(StandardCharsets.UTF_8))
                 .withTime(OffsetDateTime.now());
-
         return ceBuilder;
     }
 }
