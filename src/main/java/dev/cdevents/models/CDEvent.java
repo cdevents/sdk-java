@@ -19,47 +19,71 @@ public abstract class CDEvent {
     private String customDataContentType = "application/json";
 
 
+    /**
+     * @return current CDEvent type
+     */
     public abstract String currentCDEventType();
 
+    /**
+     * @return schema URL for validating the CDEvent structure
+     */
     public abstract String schemaURL();
 
-    public void setSource(URI source){
+    /**
+     * @param source
+     * Sets the {@link Context} source value
+     */
+    public void setSource(URI source) {
         this.getContext().setSource(source);
     }
+
+    /**
+     * @return context
+     */
     public Context getContext() {
         return context;
     }
 
+    /**
+     * @param context
+     */
     public void setContext(Context context) {
         this.context = context;
     }
 
+    /**
+     * @return customData
+     */
     public Object getCustomData() {
         return customData;
     }
 
+    /**
+     * @param customData
+     */
     public void setCustomData(Object customData) {
         this.customData = customData;
     }
 
+    /**
+     * @return customDataContentType
+     */
     public String getCustomDataContentType() {
         return customDataContentType;
     }
 
+    /**
+     * @param customDataContentType
+     */
     public void setCustomDataContentType(String customDataContentType) {
         this.customDataContentType = customDataContentType;
     }
 
-    public void initCDEvent(String cdeventType){
-        setContext(new Context(UUID.randomUUID().toString(),LocalDateTime.now(), cdeventType, CDEventConstants.CDEVENTS_SPEC_VERSION));
-    }
-
-    @Override
-    public String toString() {
-        return "CDEvent{" +
-                "context=" + context +
-                ", customData=" + customData +
-                ", customDataContentType='" + customDataContentType + '\'' +
-                '}';
+    /**
+     * @param cdeventType
+     * Initialize the CDEvent with the context values
+     */
+    public void initCDEvent(String cdeventType) {
+        setContext(new Context(UUID.randomUUID().toString(), LocalDateTime.now(), cdeventType, CDEventConstants.CDEVENTS_SPEC_VERSION));
     }
 }

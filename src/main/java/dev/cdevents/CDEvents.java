@@ -22,18 +22,29 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class CDEvents {
+public final class CDEvents {
+
+    private CDEvents() {
+    }
 
     private static ObjectMapper objectMapper = new CustomObjectMapper().customConfiguration();
     private static Logger log = LoggerFactory.getLogger(CDEvents.class);
 
+    /**
+     * Creates a PipelineRunFinishedCDEvent with the default structure of CDEvent.
+     * @return PipelineRunFinishedCDEvent
+     */
     public static PipelineRunFinishedCDEvent createPipelineRunFinishedEvent() {
         PipelineRunFinishedCDEvent pipelineRunFinishedCDEvent = new PipelineRunFinishedCDEvent();
         return pipelineRunFinishedCDEvent;
     }
 
 
-    public static String cdEventToJson(CDEvent cdEvent){
+    /**
+     * @param cdEvent
+     * @return json string of a cdEvent
+     */
+    public static String cdEventToJson(CDEvent cdEvent) {
         try {
             return objectMapper.writeValueAsString(cdEvent);
         } catch (JsonProcessingException e) {
@@ -42,11 +53,16 @@ public class CDEvents {
     }
 
 
-    public static CloudEvent asCloudEvent(CDEvent cdEvent){
+    /**
+     * Creates a CloudEvent from the cdEvent.
+     * @param cdEvent
+     * @return CloudEvent
+     */
+    public static CloudEvent asCloudEvent(CDEvent cdEvent) {
 
         String cdEventJson = cdEventToJson(cdEvent);
-        if(!validateCDEvent(cdEvent)){
-            throw new RuntimeException("CDEvent validation failed against schema URL - "+cdEvent.schemaURL());
+        if (!validateCDEvent(cdEvent)) {
+            throw new RuntimeException("CDEvent validation failed against schema URL - " + cdEvent.schemaURL());
         }
         CloudEvent ceToSend = new CloudEventBuilder()
                 .withId(UUID.randomUUID().toString())
@@ -60,7 +76,12 @@ public class CDEvents {
         return ceToSend;
     }
 
-    public static boolean validateCDEvent(CDEvent cdEvent){
+    /**
+     * Validates the cdEvent against the Schema URL.
+     * @param cdEvent
+     * @return valid cdEvent
+     */
+    public static boolean validateCDEvent(CDEvent cdEvent) {
         String cdEventJson = cdEventToJson(cdEvent);
 
         JsonSchemaFactory factory = JsonSchemaFactory.getInstance(SpecVersion.VersionFlag.V202012);
@@ -69,11 +90,12 @@ public class CDEvents {
         JsonNode jsonNode = objectMapper.convertValue(cdEvent, ObjectNode.class);
         Set<ValidationMessage> errors = jsonSchema.validate(jsonNode);
 
-        if(!errors.isEmpty()){
+        if (!errors.isEmpty()) {
             log.error("CDEvent validation failed with errors {}", errors);
-            System.out.println("CDEvent validation failed with errors "+errors);
+            System.out.println("CDEvent validation failed with errors " + errors);
             return false;
         }
         return true;
     }
+
 }

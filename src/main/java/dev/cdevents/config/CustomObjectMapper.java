@@ -7,7 +7,10 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 public class CustomObjectMapper extends ObjectMapper {
 
-    public ObjectMapper customConfiguration(){
+    /**
+     * @return customized ObjectMapper
+     */
+    public ObjectMapper customConfiguration() {
         return this
                 .enable(SerializationFeature.WRITE_ENUMS_USING_TO_STRING)
                 .enable(DeserializationFeature.READ_ENUMS_USING_TO_STRING)

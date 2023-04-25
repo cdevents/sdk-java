@@ -12,57 +12,89 @@ public class PipelineRunFinishedCDEvent extends CDEvent {
     @JsonProperty(required = true)
     private PipelineRunFinishedSubject subject;
 
+    /**
+     * Constructor to init CDEvent and set the Subject for {@link PipelineRunFinishedCDEvent}.
+     */
     public PipelineRunFinishedCDEvent() {
         initCDEvent(currentCDEventType());
         setSubject(new PipelineRunFinishedSubject(CDEventConstants.SubjectType.PIPELINERUN));
     }
 
+    /**
+     * @return subject
+     */
     public PipelineRunFinishedSubject getSubject() {
         return subject;
     }
 
+    /**
+     * @param subject
+     */
     public void setSubject(PipelineRunFinishedSubject subject) {
         this.subject = subject;
     }
 
+    /**
+     * @return the current CDEvent type
+     */
     @Override
     public String currentCDEventType() {
         return CDEventConstants.CDEventTypes.PipelineRunFinishedEvent.getEventType();
     }
 
+    /**
+     * @return the pipeline-run-finished-event schema URL
+     */
     @Override
     public String schemaURL() {
         return String.format("https://cdevents.dev/%s/schema/pipeline-run-finished-event", CDEventConstants.CDEVENTS_SPEC_VERSION);
     }
 
-    public void setSubjectId(String subjectId){
+    /**
+     * @param subjectId
+     * sets the subject Id
+     */
+    public void setSubjectId(String subjectId) {
         getSubject().setId(subjectId);
     }
 
-    public void setSubjectSource(URI subjectSource){
+    /**
+     * @param subjectSource
+     * sets the pipeline source
+     */
+    public void setSubjectSource(URI subjectSource) {
         getSubject().setSource(subjectSource);
     }
 
-    public void setSubjectPipelineName(String pipelineName ){
-        getSubject().getContent().setPipelineName(pipelineName );
+    /**
+     * @param pipelineName
+     * sets the pipeline name
+     */
+    public void setSubjectPipelineName(String pipelineName) {
+        getSubject().getContent().setPipelineName(pipelineName);
     }
 
-    public void setSubjectUrl(URI subjectUrl){
+    /**
+     * @param subjectUrl
+     * sets the pipeline URL
+     */
+    public void setSubjectUrl(URI subjectUrl) {
         getSubject().getContent().setUrl(subjectUrl);
     }
 
-    public void setSubjectOutcome(CDEventConstants.Outcome subjectOutcome){
+    /**
+     * @param subjectOutcome
+     * sets the {@link PipelineRunFinishedCDEvent} outcome
+     */
+    public void setSubjectOutcome(CDEventConstants.Outcome subjectOutcome) {
         getSubject().getContent().setOutcome(subjectOutcome);
     }
 
-    public void setSubjectErrors(String subjectErrors){
+    /**
+     * @param subjectErrors
+     * sets the {@link PipelineRunFinishedCDEvent} errors
+     */
+    public void setSubjectErrors(String subjectErrors) {
         getSubject().getContent().setErrors(subjectErrors);
-    }
-
-    @Override
-    public String toString() {
-        return "PipelineRunFinishedCDEvent{" +
-                "subject=" + subject +
-                "} " + super.toString();
     }
 }

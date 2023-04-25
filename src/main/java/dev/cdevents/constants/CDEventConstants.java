@@ -1,7 +1,9 @@
 package dev.cdevents.constants;
 
-public class CDEventConstants {
+public final class CDEventConstants {
 
+    private CDEventConstants() {
+    }
 
     /**
      * CDEvents Version.
@@ -9,18 +11,30 @@ public class CDEventConstants {
     public static final String CDEVENTS_SPEC_VERSION = "0.1.0";
 
     public enum SubjectType {
+        /**
+         * Subject Type pipelineRun.
+         */
         PIPELINERUN("pipelineRun");
 
         private String subjectType;
 
+        /**
+         * @param subjectType
+         */
         SubjectType(String subjectType) {
             this.subjectType = subjectType;
         }
 
+        /**
+         * @return subjectType
+         */
         public String getSubjectType() {
             return subjectType;
         }
 
+        /**
+         * @param subjectType
+         */
         public void setSubjectType(String subjectType) {
             this.subjectType = subjectType;
         }
