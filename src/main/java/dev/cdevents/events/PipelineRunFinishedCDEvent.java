@@ -9,6 +9,7 @@ import java.net.URI;
 
 public class PipelineRunFinishedCDEvent extends CDEvent {
 
+    private static final String CDEVENT_VERSION = "0.1.0";
     @JsonProperty(required = true)
     private PipelineRunFinishedSubject subject;
 
@@ -39,7 +40,7 @@ public class PipelineRunFinishedCDEvent extends CDEvent {
      */
     @Override
     public String currentCDEventType() {
-        return CDEventConstants.CDEventTypes.PipelineRunFinishedEvent.getEventType();
+        return CDEventConstants.CDEventTypes.PipelineRunFinishedEvent.getEventType().concat(CDEVENT_VERSION);
     }
 
     /**
