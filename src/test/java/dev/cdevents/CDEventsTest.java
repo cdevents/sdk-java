@@ -23,9 +23,9 @@ public class CDEventsTest {
         cdEvent.setSubjectErrors("errors to place");
         cdEvent.setSubjectOutcome(CDEventConstants.Outcome.SUCCESS);
 
-        String cdEventJson = CDEvents.cdEventToJson(cdEvent);
+        String cdEventJson = CDEvents.cdEventAsJson(cdEvent);
 
-        CloudEvent ceEvent = CDEvents.asCloudEvent(cdEvent);
+        CloudEvent ceEvent = CDEvents.cdEventAsCloudEvent(cdEvent);
 
         String ceDataJson = new String(ceEvent.getData().toBytes(), StandardCharsets.UTF_8);
 
