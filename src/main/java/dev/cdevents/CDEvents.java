@@ -64,7 +64,7 @@ public final class CDEvents {
     public static CloudEvent cdEventAsCloudEvent(CDEvent cdEvent) {
 
         String cdEventJson = cdEventAsJson(cdEvent);
-        if (cdEventJson.isEmpty()){
+        if (cdEventJson.isEmpty()) {
             log.error("cdEvent json is empty, failed to create CDEvent as Json");
             throw new CDEventsException("Failed to create CDEvent as Json");
         }
