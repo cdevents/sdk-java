@@ -8,6 +8,7 @@ import com.networknt.schema.JsonSchemaFactory;
 import com.networknt.schema.SpecVersion;
 import com.networknt.schema.ValidationMessage;
 import dev.cdevents.config.CustomObjectMapper;
+import dev.cdevents.constants.CDEventConstants;
 import dev.cdevents.events.PipelineRunFinishedCDEvent;
 import dev.cdevents.exception.CDEventsException;
 import dev.cdevents.models.CDEvent;
@@ -30,15 +31,6 @@ public final class CDEvents {
 
     private static ObjectMapper objectMapper = new CustomObjectMapper().customConfiguration();
     private static Logger log = LoggerFactory.getLogger(CDEvents.class);
-
-    /**
-     * Creates a PipelineRunFinishedCDEvent with the default structure of CDEvent.
-     * @return PipelineRunFinishedCDEvent
-     */
-    public static PipelineRunFinishedCDEvent createPipelineRunFinishedEvent() {
-        PipelineRunFinishedCDEvent pipelineRunFinishedCDEvent = new PipelineRunFinishedCDEvent();
-        return pipelineRunFinishedCDEvent;
-    }
 
 
     /**

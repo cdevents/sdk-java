@@ -14,7 +14,7 @@ public class CDEventsTest {
     @Test
     void createPipelineRunFinishedEventAsCloudEvent() {
 
-        PipelineRunFinishedCDEvent cdEvent =  CDEvents.createPipelineRunFinishedEvent();
+        PipelineRunFinishedCDEvent cdEvent =  new PipelineRunFinishedCDEvent();
         cdEvent.setSource(URI.create("http://dev.cdevents"));
         cdEvent.setSubjectId("/dev/pipeline/run/subject");
         cdEvent.setSubjectSource(URI.create("/dev/pipeline/run/subject"));
