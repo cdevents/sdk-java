@@ -3,26 +3,24 @@ package dev.cdevents;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.networknt.schema.JsonSchema;
 import com.networknt.schema.JsonSchemaFactory;
 import com.networknt.schema.SpecVersion;
 import com.networknt.schema.ValidationMessage;
 import dev.cdevents.config.CustomObjectMapper;
-import dev.cdevents.constants.CDEventConstants;
-import dev.cdevents.events.PipelineRunFinishedCDEvent;
 import dev.cdevents.exception.CDEventsException;
 import dev.cdevents.models.CDEvent;
 import io.cloudevents.CloudEvent;
 import io.cloudevents.core.v03.CloudEventBuilder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.net.URI;
 import java.nio.charset.StandardCharsets;
 import java.time.OffsetDateTime;
 import java.util.Set;
 import java.util.UUID;
-import com.fasterxml.jackson.databind.node.ObjectNode;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public final class CDEvents {
 
