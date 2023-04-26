@@ -30,6 +30,11 @@ public abstract class CDEvent {
     public abstract String schemaURL();
 
     /**
+     * @return schema json for validating the CDEvent structure
+     */
+    public abstract String eventSchema();
+
+    /**
      * @param source
      * Sets the {@link Context} source value
      */

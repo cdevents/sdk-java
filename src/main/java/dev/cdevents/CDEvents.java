@@ -16,7 +16,6 @@ import io.cloudevents.core.v03.CloudEventBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.net.URI;
 import java.nio.charset.StandardCharsets;
 import java.time.OffsetDateTime;
 import java.util.Set;
@@ -83,7 +82,7 @@ public final class CDEvents {
         String cdEventJson = cdEventAsJson(cdEvent);
 
         JsonSchemaFactory factory = JsonSchemaFactory.getInstance(SpecVersion.VersionFlag.V202012);
-        JsonSchema jsonSchema = factory.getSchema(URI.create(cdEvent.schemaURL()));
+        JsonSchema jsonSchema = factory.getSchema(cdEvent.eventSchema());
 
         JsonNode jsonNode = objectMapper.convertValue(cdEvent, ObjectNode.class);
         Set<ValidationMessage> errors = jsonSchema.validate(jsonNode);
