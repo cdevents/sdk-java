@@ -35,13 +35,12 @@ public final class CDEvents {
      * @return json string of a cdEvent
      */
     public static String cdEventAsJson(CDEvent cdEvent) {
-        String asJson = "";
         try {
-            asJson = objectMapper.writeValueAsString(cdEvent);
+            return objectMapper.writeValueAsString(cdEvent);
         } catch (JsonProcessingException e) {
             log.error("Error while mapping cdEvent as Json {}", e.getMessage());
+            throw new CDEventsException("Error while mapping cdEvent as Json {}", e);
         }
-        return asJson;
     }
 
 
@@ -53,10 +52,6 @@ public final class CDEvents {
     public static CloudEvent cdEventAsCloudEvent(CDEvent cdEvent) {
 
         String cdEventJson = cdEventAsJson(cdEvent);
-        if (cdEventJson.isEmpty()) {
-            log.error("cdEvent json is empty, failed to create CDEvent as Json");
-            throw new CDEventsException("Failed to create CDEvent as Json");
-        }
         if (!validateCDEvent(cdEvent)) {
             log.error("CDEvent validation failed against schema URL - {}", cdEvent.schemaURL());
             throw new CDEventsException("CDEvent validation failed against schema URL - " + cdEvent.schemaURL());
