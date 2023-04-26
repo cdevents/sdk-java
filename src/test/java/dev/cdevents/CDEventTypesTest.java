@@ -555,5 +555,4 @@ public class CDEventTypesTest {
         assertThat(cdEvent.getExtension("environment")).
                 isEqualTo(objectMapper.writeValueAsString(environment));
     }
-
 }
