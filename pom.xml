@@ -30,9 +30,11 @@
 		<repository.url>git@github.com:${project.github.repository}.git</repository.url>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<project.build.outputTimestamp>${git.commit.author.time}</project.build.outputTimestamp>
 		<version.clean.plugin>3.2.0</version.clean.plugin>
 		<version.compiler.plugin>3.11.0</version.compiler.plugin>
 		<version.deploy.plugin>3.1.1</version.deploy.plugin>
+		<version.git.plugin>5.0.0</version.git.plugin>
 		<version.gpg.plugin>1.6</version.gpg.plugin>
 		<version.install.plugin>3.1.1</version.install.plugin>
 		<version.javadoc.plugin>3..0</version.javadoc.plugin>
@@ -193,13 +195,34 @@
                 <version>3.0.0</version>
             </plugin>
 			<plugin>
+				<groupId>io.github.git-commit-id</groupId>
+				<artifactId>git-commit-id-maven-plugin</artifactId>
+				<version>${version.git.plugin}</version>
+				<executions>
+					<execution>
+						<id>resolve-git-properties</id>
+						<goals>
+							<goal>revision</goal>
+						</goals>
+						<phase>validate</phase>
+						<configuration>
+							<verbose>false</verbose>
+							<failOnNoGitDirectory>false</failOnNoGitDirectory>
+							<generateGitPropertiesFile>true</generateGitPropertiesFile>
+							<generateGitPropertiesFilename>${project.build.directory}/git.properties</generateGitPropertiesFilename>
+							<dateFormat>yyyy-MM-dd'T'HH:mm:ssXXX</dateFormat>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-jar-plugin</artifactId>
 				<configuration>
 					<archive>
 						<manifestEntries>
-							<Build-Jdk>${java.version} (${java.vendor} ${java.vm.version})</Build-Jdk>
-							<Build-OS>${os.name} ${os.arch} ${os.version}</Build-OS>
+							<Build-Timestamp>${git.commit.author.time}</Build-Timestamp>
+							<Build-Revision>${git.commit.id}</Build-Revision>
 						</manifestEntries>
 						<manifest>
 							<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
