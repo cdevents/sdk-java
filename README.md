@@ -6,7 +6,7 @@ The SDK can be used to create CDEvents and render as CloudEvents to send them to
 
 ## Add dependency modules
 
-```
+```xml
 <dependency>
   <groupId>dev.cdevents.sdk-java</groupId>
   <artifactId>cdevents-sdk-java</artifactId>
@@ -24,7 +24,7 @@ The SDK can be used to create CDEvents and render as CloudEvents to send them to
 
 Below is the example of creating a new [PipelineRun-finished](https://cdevents.dev/docs/core/#pipelinerun-finished) event,
 
-```
+```java
 public class CDEventsExample {
 
     public static void main(String args[]){
