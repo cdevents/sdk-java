@@ -1,26 +1,58 @@
 package dev.cdevents.constants;
 
-public class CDEventConstants {
+public final class CDEventConstants {
 
+    private CDEventConstants() {
+    }
 
     /**
      * CDEvents Version.
      */
-    private static final String VERSION = "0.1.0";
+    public static final String CDEVENTS_SPEC_VERSION = "0.1.0";
+
+    public enum SubjectType {
+        /**
+         * Subject Type pipelineRun.
+         */
+        PIPELINERUN("pipelineRun");
+
+        private String subjectType;
+
+        /**
+         * @param subjectType
+         */
+        SubjectType(String subjectType) {
+            this.subjectType = subjectType;
+        }
+
+        /**
+         * @return subjectType
+         */
+        public String getSubjectType() {
+            return subjectType;
+        }
+
+        /**
+         * @param subjectType
+         */
+        public void setSubjectType(String subjectType) {
+            this.subjectType = subjectType;
+        }
+    }
 
     public enum Outcome {
         /**
          * Outcome Success.
          */
-        OutcomeSuccess("success"),
+        SUCCESS("success"),
         /**
          * Outcome Failure.
          */
-        OutcomeFailure("failure"),
+        FAILURE("failure"),
         /**
          * Outcome Error.
          */
-        OutcomeError("error");
+        ERROR("error");
 
         /**
          *  Outcome.
@@ -52,161 +84,159 @@ public class CDEventConstants {
         /**
          * Pipeline run started event.
          */
-        PipelineRunStartedEvent("dev.cdevents.pipelinerun.started." + VERSION),
+        PipelineRunStartedEvent("dev.cdevents.pipelinerun.started."),
         /**
          * Pipeline run finished event.
          */
-        PipelineRunFinishedEvent("dev.cdevents.pipelinerun.finished."
-                + VERSION),
+        PipelineRunFinishedEvent("dev.cdevents.pipelinerun.finished."),
         /**
          * Pipeline run queued event.
          */
-        PipelineRunQueuedEvent("dev.cdevents.pipelinerun.queued." + VERSION),
+        PipelineRunQueuedEvent("dev.cdevents.pipelinerun.queued."),
 
         /* TaskRun events */
         /**
          * Task run started event.
          */
-        TaskRunStartedEvent("dev.cdevents.taskrun.started." + VERSION),
+        TaskRunStartedEvent("dev.cdevents.taskrun.started."),
         /**
          * Task run finished event.
          */
-        TaskRunFinishedEvent("dev.cdevents.taskrun.finished." + VERSION),
+        TaskRunFinishedEvent("dev.cdevents.taskrun.finished."),
 
         /* Repository events */
         /**
          * Repository created event.
          */
-        RepositoryCreatedEvent("dev.cdevents.repository.created." + VERSION),
+        RepositoryCreatedEvent("dev.cdevents.repository.created."),
         /**
          * Repository modified event.
          */
-        RepositoryModifiedEvent("dev.cdevents.repository.modified." + VERSION),
+        RepositoryModifiedEvent("dev.cdevents.repository.modified."),
         /**
          * Repository deleted event.
          */
-        RepositoryDeletedEvent("dev.cdevents.repository.deleted." + VERSION),
+        RepositoryDeletedEvent("dev.cdevents.repository.deleted."),
         /**
          * Repository branch created event.
          */
-        BranchCreatedEvent("dev.cdevents.branch.created." + VERSION),
+        BranchCreatedEvent("dev.cdevents.branch.created."),
         /**
          * Repository branch deleted event.
          */
-        BranchDeletedEvent("dev.cdevents.branch.deleted." + VERSION),
+        BranchDeletedEvent("dev.cdevents.branch.deleted."),
 
         /* Repository change Events */
         /**
          * Repository change created event.
          */
-        ChangeCreatedEvent("dev.cdevents.change.created." + VERSION),
+        ChangeCreatedEvent("dev.cdevents.change.created."),
         /**
          * Repository change updated event.
          */
-        ChangeUpdatedEvent("dev.cdevents.change.updated." + VERSION),
+        ChangeUpdatedEvent("dev.cdevents.change.updated."),
         /**
          * Repository change reviewed event.
          */
-        ChangeReviewedEvent("dev.cdevents.change.reviewed." + VERSION),
+        ChangeReviewedEvent("dev.cdevents.change.reviewed."),
         /**
          * Repository change merged event.
          */
-        ChangeMergedEvent("dev.cdevents.change.merged." + VERSION),
+        ChangeMergedEvent("dev.cdevents.change.merged."),
         /**
          * Repository change abandoned event.
          */
-        ChangeAbandonedEvent("dev.cdevents.change.abandoned." + VERSION),
+        ChangeAbandonedEvent("dev.cdevents.change.abandoned."),
 
         /* Build Events */
         /**
          * Build started event.
          */
-        BuildStartedEvent("dev.cdevents.build.started" + VERSION),
+        BuildStartedEvent("dev.cdevents.build.started."),
         /**
          * Build queued event.
          */
-        BuildQueuedEvent("dev.cdevents.build.queued" + VERSION),
+        BuildQueuedEvent("dev.cdevents.build.queued."),
         /**
          * Build finished event.
          */
-        BuildFinishedEvent("dev.cdevents.build.finished" + VERSION),
+        BuildFinishedEvent("dev.cdevents.build.finished."),
 
         /* Test Events */
         /**
          * TestCase started event.
          */
-        TestCaseStartedEvent("dev.cdevents.testcase.started" + VERSION),
+        TestCaseStartedEvent("dev.cdevents.testcase.started."),
         /**
          * TestCase queued event.
          */
-        TestCaseQueuedEvent("dev.cdevents.testcase.queued" + VERSION),
+        TestCaseQueuedEvent("dev.cdevents.testcase.queued."),
         /**
          * TestCase finished event.
          */
-        TestCaseFinishedEvent("dev.cdevents.testcase.finished" + VERSION),
+        TestCaseFinishedEvent("dev.cdevents.testcase.finished."),
         /**
          * TestSuite started event.
          */
-        TestSuiteStartedEvent("dev.cdevents.testsuite.started" + VERSION),
+        TestSuiteStartedEvent("dev.cdevents.testsuite.started."),
         /**
          * TestSuite queued event.
          */
-        TestSuiteQueuedEvent("dev.cdevents.testsuite.queued" + VERSION),
+        TestSuiteQueuedEvent("dev.cdevents.testsuite.queued."),
         /**
          * TestSuite finished event.
          */
-        TestSuiteFinishedEvent("dev.cdevents.testsuite.finished" + VERSION),
+        TestSuiteFinishedEvent("dev.cdevents.testsuite.finished."),
 
         /* Artifact Events */
         /**
          * Artifact packaged event.
          */
-        ArtifactPackagedEvent("dev.cdevents.artifact.packaged." + VERSION),
+        ArtifactPackagedEvent("dev.cdevents.artifact.packaged."),
         /**
          * Artifact published event.
          */
-        ArtifactPublishedEvent("dev.cdevents.artifact.published." + VERSION),
+        ArtifactPublishedEvent("dev.cdevents.artifact.published."),
         /**
          * Artifact created event.
          */
-        ArtifactCreatedEvent("dev.cdevents.artifact.created." + VERSION),
+        ArtifactCreatedEvent("dev.cdevents.artifact.created."),
 
         /* Environment Events */
         /**
          * Environment created event.
          */
-        EnvironmentCreatedEvent("dev.cdevents.environment.created." + VERSION),
+        EnvironmentCreatedEvent("dev.cdevents.environment.created."),
         /**
          * Environment modified event.
          */
-        EnvironmentModifiedEvent("dev.cdevents.environment.modified."
-                + VERSION),
+        EnvironmentModifiedEvent("dev.cdevents.environment.modified."),
         /**
          * Environment deleted event.
          */
-        EnvironmentDeletedEvent("dev.cdevents.environment.deleted." + VERSION),
+        EnvironmentDeletedEvent("dev.cdevents.environment.deleted."),
 
         /* Service Events */
         /**
          * Service deployed event.
          */
-        ServiceDeployedEvent("dev.cdevents.service.deployed." + VERSION),
+        ServiceDeployedEvent("dev.cdevents.service.deployed."),
         /**
          * Service upgraded event.
          */
-        ServiceUpgradedEvent("dev.cdevents.service.upgraded." + VERSION),
+        ServiceUpgradedEvent("dev.cdevents.service.upgraded."),
         /**
          * Service rolled back event.
          */
-        ServiceRolledBackEvent("dev.cdevents.service.rolledback." + VERSION),
+        ServiceRolledBackEvent("dev.cdevents.service.rolledback."),
         /**
          * Service removed event.
          */
-        ServiceRemovedEvent("dev.cdevents.service.removed." + VERSION),
+        ServiceRemovedEvent("dev.cdevents.service.removed."),
         /**
          * Service published event.
          */
-        ServicePublishedEvent("dev.cdevents.service.published." + VERSION);
+        ServicePublishedEvent("dev.cdevents.service.published.");
 
 
         /**

@@ -47,7 +47,7 @@ public class CDEventTypesTest {
         URI url = new URI("cdevents.dev");
         CloudEvent cdEvent = CDEventTypes.createPipelineRunFinishedEvent(
                 "id", url, "name", url,
-                CDEventConstants.Outcome.OutcomeSuccess, "errors", "data");
+                CDEventConstants.Outcome.SUCCESS, "errors", "data");
 
         assertThat(cdEvent.getExtensionNames())
                 .containsExactlyInAnyOrder("id", "source",
@@ -58,7 +58,7 @@ public class CDEventTypesTest {
         assertThat(cdEvent.getExtension("pipelinename")).isEqualTo("name");
         assertThat(cdEvent.getExtension("url")).isEqualTo(url);
         assertThat(cdEvent.getExtension("outcome")).isEqualTo(
-                CDEventConstants.Outcome.OutcomeSuccess.getOutcome());
+                CDEventConstants.Outcome.SUCCESS.getOutcome());
         assertThat(cdEvent.getExtension("errors")).isEqualTo("errors");
     }
 
@@ -123,7 +123,7 @@ public class CDEventTypesTest {
         CloudEvent cdEvent = CDEventTypes.createTaskRunFinishedEvent(
                 "id", url,
                 "taskname", pipelineRun, url, CDEventConstants.Outcome.
-                        OutcomeSuccess, "errors", "data");
+                        SUCCESS, "errors", "data");
 
         assertThat(cdEvent.getExtensionNames())
                 .containsExactlyInAnyOrder("id", "source", "taskname",
@@ -136,7 +136,7 @@ public class CDEventTypesTest {
                 isEqualTo(objectMapper.writeValueAsString(pipelineRun));
         assertThat(cdEvent.getExtension("url")).isEqualTo(url);
         assertThat(cdEvent.getExtension("outcome")).
-                isEqualTo(CDEventConstants.Outcome.OutcomeSuccess.getOutcome());
+                isEqualTo(CDEventConstants.Outcome.SUCCESS.getOutcome());
         assertThat(cdEvent.getExtension("errors")).isEqualTo("errors");
     }
 
@@ -555,5 +555,4 @@ public class CDEventTypesTest {
         assertThat(cdEvent.getExtension("environment")).
                 isEqualTo(objectMapper.writeValueAsString(environment));
     }
-
 }
