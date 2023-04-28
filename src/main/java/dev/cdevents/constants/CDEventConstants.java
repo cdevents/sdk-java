@@ -11,6 +11,11 @@ public final class CDEventConstants {
     public static final String CDEVENTS_SPEC_VERSION = "0.1.0";
 
     public enum SubjectType {
+
+        /**
+         * Subject Type taskRun.
+         */
+        TASKRUN("taskRun"),
         /**
          * Subject Type pipelineRun.
          */
