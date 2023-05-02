@@ -12,7 +12,7 @@ public class TaskRunStartedSubject extends Subject {
 
 
     /**
-     * @return the PipelineRunQueued subject's Content
+     * @return the TaskRunStarted subject's Content
      */
     public TaskRunStartedSubjectContent getContent() {
         return content;
