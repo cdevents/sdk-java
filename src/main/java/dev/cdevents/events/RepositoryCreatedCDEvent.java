@@ -3,7 +3,6 @@ package dev.cdevents.events;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import dev.cdevents.constants.CDEventConstants;
 import dev.cdevents.models.CDEvent;
-import dev.cdevents.models.PipelineRunFinishedSubject;
 import dev.cdevents.models.RepositorySubject;
 
 import java.net.URI;
