@@ -22,7 +22,7 @@ public class CDEventsTest {
         cdEvent.setSource(URI.create("http://dev.cdevents"));
 
         cdEvent.setSubjectId("/dev/pipeline/run/subject");
-        cdEvent.setSubjectSource(URI.create("http://dev/pipeline/run/subject"));
+        cdEvent.setSubjectSource(URI.create("/dev/pipeline/run/subject"));
         cdEvent.setSubjectPipelineName("Name-pipeline");
         cdEvent.setSubjectUrl(URI.create("http://dev/pipeline/url"));
         cdEvent.setSubjectErrors("errors to place");
@@ -59,7 +59,7 @@ public class CDEventsTest {
         cdEvent.setSource(URI.create("http://dev.cdevents"));
 
         cdEvent.setSubjectId("/dev/pipeline/run/subject");
-        cdEvent.setSubjectSource(URI.create("http://dev/pipeline/run/subject"));
+        cdEvent.setSubjectSource(URI.create("/dev/pipeline/run/subject"));
         cdEvent.setSubjectPipelineName("test-pipeline-queued");
         cdEvent.setSubjectUrl(URI.create("http://dev/pipeline/url"));
 
@@ -94,7 +94,7 @@ public class CDEventsTest {
         cdEvent.setSource(URI.create("http://dev.cdevents"));
 
         cdEvent.setSubjectId("/dev/pipeline/run/subject");
-        cdEvent.setSubjectSource(URI.create("http://dev/pipeline/run/subject"));
+        cdEvent.setSubjectSource(URI.create("/dev/pipeline/run/subject"));
         cdEvent.setSubjectPipelineName("test-pipeline-queued");
         cdEvent.setSubjectUrl(URI.create("http://dev/pipeline/url"));
 
@@ -120,7 +120,7 @@ public class CDEventsTest {
         cdEvent.setSource(URI.create("http://dev.cdevents"));
 
         cdEvent.setSubjectId("/dev/pipeline/run/subject");
-        cdEvent.setSubjectSource(URI.create("http://dev/pipeline/run/subject"));
+        cdEvent.setSubjectSource(URI.create("/dev/pipeline/run/subject"));
         cdEvent.setSubjectPipelineName("test-pipeline-started");
         cdEvent.setSubjectUrl(URI.create("http://dev/pipeline/url"));
 
@@ -157,7 +157,7 @@ public class CDEventsTest {
         cdEvent.setSource(URI.create("http://dev.cdevents"));
 
         cdEvent.setSubjectId("/dev/task/run/subject");
-        cdEvent.setSubjectSource(URI.create("http://dev/task/run/subject"));
+        cdEvent.setSubjectSource(URI.create("/dev/task/run/subject"));
         cdEvent.setSubjectTaskName("test-task-started");
         cdEvent.setSubjectUrl(URI.create("http://dev/task/url"));
         cdEvent.setSubjectPipelineRunId("/dev/pipeline/run/subject");
@@ -194,7 +194,7 @@ public class CDEventsTest {
         cdEvent.setSource(URI.create("http://dev.cdevents"));
 
         cdEvent.setSubjectId("/dev/task/run/subject");
-        cdEvent.setSubjectSource(URI.create("http://dev/task/run/subject"));
+        cdEvent.setSubjectSource(URI.create("/dev/task/run/subject"));
         cdEvent.setSubjectTaskName("test-task-finished");
         cdEvent.setSubjectUrl(URI.create("http://dev/task/url"));
         cdEvent.setSubjectErrors("errors to place");
