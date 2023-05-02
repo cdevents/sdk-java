@@ -4,19 +4,13 @@ Java SDK to produce [CDEvents](https://cdevents.dev).
 
 The SDK can be used to create CDEvents and render as CloudEvents to send them to a specific CloudEvents broker
 
-## Add dependency modules
+## Add dependency module
 
 ```xml
 <dependency>
   <groupId>dev.cdevents</groupId>
   <artifactId>cdevents-sdk-java</artifactId>
   <version>${cdevents.version}</version>
-</dependency>
-
- <dependency>
-    <groupId>io.cloudevents</groupId>
-    <artifactId>cloudevents-core</artifactId>
-    <version>${cloudevents.version}</version>
 </dependency>
 ```
 
