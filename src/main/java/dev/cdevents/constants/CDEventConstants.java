@@ -11,10 +11,26 @@ public final class CDEventConstants {
     public static final String CDEVENTS_SPEC_VERSION = "0.1.0";
 
     public enum SubjectType {
+
+        /**
+         * Subject type repository.
+         */
+        REPOSITORY("repository"),
+
         /**
          * Subject Type pipelineRun.
          */
-        PIPELINERUN("pipelineRun");
+        PIPELINERUN("pipelineRun"),
+
+        /**
+         * Subject type branch.
+         */
+        BRANCH("branch"),
+
+        /**
+         * Subject type change.
+         */
+        CHANGE("change");
 
         private String subjectType;
 
