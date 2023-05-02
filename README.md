@@ -8,9 +8,9 @@ The SDK can be used to create CDEvents and render as CloudEvents to send them to
 
 ```xml
 <dependency>
-  <groupId>dev.cdevents.sdk-java</groupId>
+  <groupId>dev.cdevents</groupId>
   <artifactId>cdevents-sdk-java</artifactId>
-   <version>${cdevents.version}</version>
+  <version>${cdevents.version}</version>
 </dependency>
 
  <dependency>
