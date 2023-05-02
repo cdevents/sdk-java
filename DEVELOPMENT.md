@@ -16,7 +16,7 @@ You must install these tools:
 
 1. [`git`](https://help.github.com/articles/set-up-git/): For source control
 
-1. [`java`](https://www.oracle.com/java/technologies/downloads/): The language this SDK is built in.
+1. [`java`](https://www.oracle.com/java/technologies/downloads/): The language this SDK is built in. Java 9 is a minimum requirement to build the project.
 
 1. [`docker`](https://www.docker.com/): Required If Super-Linter needs to run locally
 
@@ -70,11 +70,11 @@ $ docker run -e RUN_LOCAL=true -e USE_FIND_ALGORITHM=true -v /path/to/local/code
 
 To run unit tests:
 ```shell
-$ ./mvnw clean test
+$ ./mvnw test
 ```
 
 To run all targets, before creating a commit:
 
 ```shell
-./mvnw clean install
+./mvnw verify
 ```
