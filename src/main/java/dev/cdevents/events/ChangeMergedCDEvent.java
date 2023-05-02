@@ -2,8 +2,8 @@ package dev.cdevents.events;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import dev.cdevents.constants.CDEventConstants;
-import dev.cdevents.models.BranchSubject;
 import dev.cdevents.models.CDEvent;
+import dev.cdevents.models.ChangeSubject;
 
 import java.net.URI;
 
@@ -11,27 +11,27 @@ public class ChangeMergedCDEvent extends CDEvent {
 
     private static final String CDEVENT_VERSION = "0.1.0";
     @JsonProperty(required = true)
-    private BranchSubject subject;
+    private ChangeSubject subject;
 
     /**
      * Constructor to init CDEvent and set the Subject for {@link ChangeMergedCDEvent}.
      */
     public ChangeMergedCDEvent() {
         initCDEvent(currentCDEventType());
-        setSubject(new BranchSubject(CDEventConstants.SubjectType.CHANGE));
+        setSubject(new ChangeSubject(CDEventConstants.SubjectType.CHANGE));
     }
 
     /**
      * @return subject
      */
-    public BranchSubject getSubject() {
+    public ChangeSubject getSubject() {
         return subject;
     }
 
     /**
      * @param subject
      */
-    public void setSubject(BranchSubject subject) {
+    public void setSubject(ChangeSubject subject) {
         this.subject = subject;
     }
 

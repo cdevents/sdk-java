@@ -5,36 +5,36 @@ import dev.cdevents.constants.CDEventConstants;
 
 import java.net.URI;
 
-public class BranchSubject extends Subject {
+public class ChangeSubject extends Subject {
 
     @JsonProperty(required = true)
-    private BranchSubjectContent content;
+    private ChangeSubjectContent content;
 
 
     /**
-     * @return the Branch subject's Content
+     * @return the Change subject's Content
      */
-    public BranchSubjectContent getContent() {
+    public ChangeSubjectContent getContent() {
         return content;
     }
 
     /**
      * @param content
      */
-    public void setContent(BranchSubjectContent content) {
+    public void setContent(ChangeSubjectContent content) {
         this.content = content;
     }
 
     /**
      * @param subjectType
      */
-    public BranchSubject(CDEventConstants.SubjectType subjectType) {
+    public ChangeSubject(CDEventConstants.SubjectType subjectType) {
         super(subjectType);
-        setContent(new BranchSubjectContent());
+        setContent(new ChangeSubjectContent());
 
     }
 
-    public class BranchSubjectContent {
+    public class ChangeSubjectContent {
 
        private Repository repository = new Repository();
 
