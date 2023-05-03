@@ -3,62 +3,62 @@ package dev.cdevents.events;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import dev.cdevents.constants.CDEventConstants;
 import dev.cdevents.models.CDEvent;
-import dev.cdevents.models.PipelineRunFinishedSubject;
+import dev.cdevents.models.PipelineRunQueuedSubject;
 
 import java.net.URI;
 
-public class PipelineRunFinishedCDEvent extends CDEvent {
+public class PipelineRunQueuedCDEvent extends CDEvent {
 
     private static final String CDEVENT_VERSION = "0.1.0";
     @JsonProperty(required = true)
-    private PipelineRunFinishedSubject subject;
+    private PipelineRunQueuedSubject subject;
 
     /**
-     * Constructor to init CDEvent and set the Subject for {@link PipelineRunFinishedCDEvent}.
+     * Constructor to init CDEvent and set the Subject for {@link PipelineRunQueuedCDEvent}.
      */
-    public PipelineRunFinishedCDEvent() {
+    public PipelineRunQueuedCDEvent() {
         initCDEvent(currentCDEventType());
-        setSubject(new PipelineRunFinishedSubject(CDEventConstants.SubjectType.PIPELINERUN));
+        setSubject(new PipelineRunQueuedSubject(CDEventConstants.SubjectType.PIPELINERUN));
     }
 
     /**
      * @return subject
      */
-    public PipelineRunFinishedSubject getSubject() {
+    public PipelineRunQueuedSubject getSubject() {
         return subject;
     }
 
     /**
      * @param subject
      */
-    public void setSubject(PipelineRunFinishedSubject subject) {
+    public void setSubject(PipelineRunQueuedSubject subject) {
         this.subject = subject;
     }
 
     /**
-     * @return the current CDEvent type
+     * @return the PipelineRunQueuedEvent type
      */
     @Override
     public String currentCDEventType() {
-        return CDEventConstants.CDEventTypes.PipelineRunFinishedEvent.getEventType().concat(CDEVENT_VERSION);
+        return CDEventConstants.CDEventTypes.PipelineRunQueuedEvent.getEventType().concat(CDEVENT_VERSION);
     }
 
     /**
-     * @return the pipeline-run-finished-event schema URL
+     * @return the pipeline-run-queued-event schema URL
      */
     @Override
     public String schemaURL() {
-        return String.format("https://cdevents.dev/%s/schema/pipeline-run-finished-event", CDEventConstants.CDEVENTS_SPEC_VERSION);
+        return String.format("https://cdevents.dev/%s/schema/pipeline-run-queued-event", CDEventConstants.CDEVENTS_SPEC_VERSION);
     }
 
     /**
-     * @return the pipeline-run-finished-event schema Json
+     * @return the pipeline-run-queued-event schema Json
      */
     @Override
     public String eventSchema() {
         return "{\n" +
                 "  \"$schema\": \"https://json-schema.org/draft/2020-12/schema\",\n" +
-                "  \"$id\": \"https://cdevents.dev/0.1.2/schema/pipeline-run-finished-event\",\n" +
+                "  \"$id\": \"https://cdevents.dev/0.1.2/schema/pipeline-run-queued-event\",\n" +
                 "  \"properties\": {\n" +
                 "    \"context\": {\n" +
                 "      \"properties\": {\n" +
@@ -77,9 +77,9 @@ public class PipelineRunFinishedCDEvent extends CDEvent {
                 "        \"type\": {\n" +
                 "          \"type\": \"string\",\n" +
                 "          \"enum\": [\n" +
-                "            \"dev.cdevents.pipelinerun.finished.0.1.0\"\n" +
+                "            \"dev.cdevents.pipelinerun.queued.0.1.0\"\n" +
                 "          ],\n" +
-                "          \"default\": \"dev.cdevents.pipelinerun.finished.0.1.0\"\n" +
+                "          \"default\": \"dev.cdevents.pipelinerun.queued.0.1.0\"\n" +
                 "        },\n" +
                 "        \"timestamp\": {\n" +
                 "          \"type\": \"string\",\n" +
@@ -115,12 +115,6 @@ public class PipelineRunFinishedCDEvent extends CDEvent {
                 "              \"type\": \"string\"\n" +
                 "            },\n" +
                 "            \"url\": {\n" +
-                "              \"type\": \"string\"\n" +
-                "            },\n" +
-                "            \"outcome\": {\n" +
-                "              \"type\": \"string\"\n" +
-                "            },\n" +
-                "            \"errors\": {\n" +
                 "              \"type\": \"string\"\n" +
                 "            }\n" +
                 "          },\n" +
@@ -190,21 +184,5 @@ public class PipelineRunFinishedCDEvent extends CDEvent {
      */
     public void setSubjectUrl(URI subjectUrl) {
         getSubject().getContent().setUrl(subjectUrl);
-    }
-
-    /**
-     * @param subjectOutcome
-     * sets the {@link PipelineRunFinishedCDEvent} outcome
-     */
-    public void setSubjectOutcome(CDEventConstants.Outcome subjectOutcome) {
-        getSubject().getContent().setOutcome(subjectOutcome);
-    }
-
-    /**
-     * @param subjectErrors
-     * sets the {@link PipelineRunFinishedCDEvent} errors
-     */
-    public void setSubjectErrors(String subjectErrors) {
-        getSubject().getContent().setErrors(subjectErrors);
     }
 }
