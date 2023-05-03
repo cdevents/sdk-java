@@ -8,17 +8,39 @@ public final class CDEventConstants {
     /**
      * CDEvents Version.
      */
-    public static final String CDEVENTS_SPEC_VERSION = "0.1.0";
+    public static final String CDEVENTS_SPEC_VERSION = "0.1.2";
 
     public enum SubjectType {
+
+        /**
+         * Subject type repository.
+         */
+        REPOSITORY("repository"),
+
+        /**
+         * Subject type taskRun.
+         */
+        TASKRUN("taskRun"),
+
         /**
          * Subject Type pipelineRun.
          */
         PIPELINERUN("pipelineRun"),
+
         /**
          * Subject Type Environment.
          */
-        ENVIRONMENT("environment");;
+        ENVIRONMENT("environment"),
+
+        /**
+         * Subject type branch.
+         */
+        BRANCH("branch"),
+
+        /**
+         * Subject type change.
+         */
+        CHANGE("change");
 
         private String subjectType;
 

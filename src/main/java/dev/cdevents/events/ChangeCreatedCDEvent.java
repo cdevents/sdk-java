@@ -3,35 +3,35 @@ package dev.cdevents.events;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import dev.cdevents.constants.CDEventConstants;
 import dev.cdevents.models.CDEvent;
-import dev.cdevents.models.PipelineRunFinishedSubject;
+import dev.cdevents.models.ChangeSubject;
 
 import java.net.URI;
 
-public class PipelineRunFinishedCDEvent extends CDEvent {
+public class ChangeCreatedCDEvent extends CDEvent {
 
-    private static final String CDEVENT_VERSION = "0.1.0";
+    private static final String CDEVENT_VERSION = "0.1.1";
     @JsonProperty(required = true)
-    private PipelineRunFinishedSubject subject;
+    private ChangeSubject subject;
 
     /**
-     * Constructor to init CDEvent and set the Subject for {@link PipelineRunFinishedCDEvent}.
+     * Constructor to init CDEvent and set the Subject for {@link ChangeCreatedCDEvent}.
      */
-    public PipelineRunFinishedCDEvent() {
+    public ChangeCreatedCDEvent() {
         initCDEvent(currentCDEventType());
-        setSubject(new PipelineRunFinishedSubject(CDEventConstants.SubjectType.PIPELINERUN));
+        setSubject(new ChangeSubject(CDEventConstants.SubjectType.CHANGE));
     }
 
     /**
      * @return subject
      */
-    public PipelineRunFinishedSubject getSubject() {
+    public ChangeSubject getSubject() {
         return subject;
     }
 
     /**
      * @param subject
      */
-    public void setSubject(PipelineRunFinishedSubject subject) {
+    public void setSubject(ChangeSubject subject) {
         this.subject = subject;
     }
 
@@ -40,25 +40,25 @@ public class PipelineRunFinishedCDEvent extends CDEvent {
      */
     @Override
     public String currentCDEventType() {
-        return CDEventConstants.CDEventTypes.PipelineRunFinishedEvent.getEventType().concat(CDEVENT_VERSION);
+        return CDEventConstants.CDEventTypes.ChangeCreatedEvent.getEventType().concat(CDEVENT_VERSION);
     }
 
     /**
-     * @return the pipeline-run-finished-event schema URL
+     * @return the change-created-event schema URL
      */
     @Override
     public String schemaURL() {
-        return String.format("https://cdevents.dev/%s/schema/pipeline-run-finished-event", CDEventConstants.CDEVENTS_SPEC_VERSION);
+        return String.format("https://cdevents.dev/%s/schema/change-created-event", CDEventConstants.CDEVENTS_SPEC_VERSION);
     }
 
     /**
-     * @return the pipeline-run-finished-event schema Json
+     * @return the change-created-event schema Json
      */
     @Override
     public String eventSchema() {
         return "{\n" +
                 "  \"$schema\": \"https://json-schema.org/draft/2020-12/schema\",\n" +
-                "  \"$id\": \"https://cdevents.dev/0.1.2/schema/pipeline-run-finished-event\",\n" +
+                "  \"$id\": \"https://cdevents.dev/0.1.2/schema/change-created-event\",\n" +
                 "  \"properties\": {\n" +
                 "    \"context\": {\n" +
                 "      \"properties\": {\n" +
@@ -77,9 +77,9 @@ public class PipelineRunFinishedCDEvent extends CDEvent {
                 "        \"type\": {\n" +
                 "          \"type\": \"string\",\n" +
                 "          \"enum\": [\n" +
-                "            \"dev.cdevents.pipelinerun.finished.0.1.0\"\n" +
+                "            \"dev.cdevents.change.created.0.1.1\"\n" +
                 "          ],\n" +
-                "          \"default\": \"dev.cdevents.pipelinerun.finished.0.1.0\"\n" +
+                "          \"default\": \"dev.cdevents.change.created.0.1.1\"\n" +
                 "        },\n" +
                 "        \"timestamp\": {\n" +
                 "          \"type\": \"string\",\n" +
@@ -111,17 +111,21 @@ public class PipelineRunFinishedCDEvent extends CDEvent {
                 "        },\n" +
                 "        \"content\": {\n" +
                 "          \"properties\": {\n" +
-                "            \"pipelineName\": {\n" +
-                "              \"type\": \"string\"\n" +
-                "            },\n" +
-                "            \"url\": {\n" +
-                "              \"type\": \"string\"\n" +
-                "            },\n" +
-                "            \"outcome\": {\n" +
-                "              \"type\": \"string\"\n" +
-                "            },\n" +
-                "            \"errors\": {\n" +
-                "              \"type\": \"string\"\n" +
+                "            \"repository\": {\n" +
+                "              \"properties\": {\n" +
+                "                \"id\": {\n" +
+                "                  \"type\": \"string\",\n" +
+                "                  \"minLength\": 1\n" +
+                "                },\n" +
+                "                \"source\": {\n" +
+                "                  \"type\": \"string\"\n" +
+                "                }\n" +
+                "              },\n" +
+                "              \"additionalProperties\": false,\n" +
+                "              \"type\": \"object\",\n" +
+                "              \"required\": [\n" +
+                "                \"id\"\n" +
+                "              ]\n" +
                 "            }\n" +
                 "          },\n" +
                 "          \"additionalProperties\": false,\n" +
@@ -170,41 +174,25 @@ public class PipelineRunFinishedCDEvent extends CDEvent {
 
     /**
      * @param subjectSource
-     * sets the pipeline source
+     * sets the change branch source
      */
     public void setSubjectSource(URI subjectSource) {
         getSubject().setSource(subjectSource);
     }
 
     /**
-     * @param pipelineName
-     * sets the pipeline name
+     * @param repositoryId
+     * sets the id of the repository
      */
-    public void setSubjectPipelineName(String pipelineName) {
-        getSubject().getContent().setPipelineName(pipelineName);
+    public void setSubjectRepositoryId(String repositoryId) {
+        getSubject().getContent().getRepository().setId(repositoryId);
     }
 
     /**
-     * @param subjectUrl
-     * sets the pipeline URL
+     * @param repositorySource
+     * sets the source of the repository.
      */
-    public void setSubjectUrl(URI subjectUrl) {
-        getSubject().getContent().setUrl(subjectUrl);
-    }
-
-    /**
-     * @param subjectOutcome
-     * sets the {@link PipelineRunFinishedCDEvent} outcome
-     */
-    public void setSubjectOutcome(CDEventConstants.Outcome subjectOutcome) {
-        getSubject().getContent().setOutcome(subjectOutcome);
-    }
-
-    /**
-     * @param subjectErrors
-     * sets the {@link PipelineRunFinishedCDEvent} errors
-     */
-    public void setSubjectErrors(String subjectErrors) {
-        getSubject().getContent().setErrors(subjectErrors);
+    public void setSubjectRepositorySource(URI repositorySource) {
+        getSubject().getContent().getRepository().setSource(repositorySource);
     }
 }
