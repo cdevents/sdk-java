@@ -28,6 +28,11 @@ public final class CDEventConstants {
         PIPELINERUN("pipelineRun"),
 
         /**
+         * Subject Type Environment.
+         */
+        ENVIRONMENT("environment"),
+
+        /**
          * Subject type branch.
          */
         BRANCH("branch"),
