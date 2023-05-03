@@ -171,7 +171,7 @@ public class BuildFinishedCDEvent extends CDEvent {
      * @param artifactId
      * sets the subjects artifactId
      */
-    public void setSubjectArtifactId(String artifactId ) {
+    public void setSubjectArtifactId(String artifactId) {
         getSubject().getContent().setArtifactId(artifactId);
 
     }

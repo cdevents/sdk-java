@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import dev.cdevents.constants.CDEventConstants;
 import dev.cdevents.models.BuildQueuedSubject;
 import dev.cdevents.models.CDEvent;
-import dev.cdevents.models.PipelineRunFinishedSubject;
 
 import java.net.URI;
 

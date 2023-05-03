@@ -3,8 +3,6 @@ package dev.cdevents.models;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import dev.cdevents.constants.CDEventConstants;
 
-import java.net.URI;
-
 public class BuildQueuedSubject extends Subject {
 
     @JsonProperty(required = true)
