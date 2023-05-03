@@ -58,16 +58,13 @@ public class RepositoryCreatedCDEvent extends CDEvent {
     public String eventSchema() {
         return "{\n" +
                 "  \"$schema\": \"https://json-schema.org/draft/2020-12/schema\",\n" +
-                "  \"$id\": \"https://cdevents.dev/0.1.0/schema/repository-created-event\",\n" +
+                "  \"$id\": \"https://cdevents.dev/0.1.2/schema/repository-created-event\",\n" +
                 "  \"properties\": {\n" +
                 "    \"context\": {\n" +
                 "      \"properties\": {\n" +
                 "        \"version\": {\n" +
                 "          \"type\": \"string\",\n" +
-                "          \"enum\": [\n" +
-                "            \"0.1.0\"\n" +
-                "          ],\n" +
-                "          \"default\": \"0.1.0\"\n" +
+                "          \"minLength\": 1\n" +
                 "        },\n" +
                 "        \"id\": {\n" +
                 "          \"type\": \"string\",\n" +
@@ -79,7 +76,10 @@ public class RepositoryCreatedCDEvent extends CDEvent {
                 "        },\n" +
                 "        \"type\": {\n" +
                 "          \"type\": \"string\",\n" +
-                "          \"minLength\": 1\n" +
+                "          \"enum\": [\n" +
+                "            \"dev.cdevents.repository.created.0.1.0\"\n" +
+                "          ],\n" +
+                "          \"default\": \"dev.cdevents.repository.created.0.1.0\"\n" +
                 "        },\n" +
                 "        \"timestamp\": {\n" +
                 "          \"type\": \"string\",\n" +

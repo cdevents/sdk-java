@@ -9,7 +9,7 @@ import java.net.URI;
 
 public class BranchCreatedCDEvent extends CDEvent {
 
-    private static final String CDEVENT_VERSION = "0.1.0";
+    private static final String CDEVENT_VERSION = "0.1.1";
     @JsonProperty(required = true)
     private BranchSubject subject;
 
@@ -58,16 +58,13 @@ public class BranchCreatedCDEvent extends CDEvent {
     public String eventSchema() {
         return "{\n" +
                 "  \"$schema\": \"https://json-schema.org/draft/2020-12/schema\",\n" +
-                "  \"$id\": \"https://cdevents.dev/0.1.0/schema/branch-created-event\",\n" +
+                "  \"$id\": \"https://cdevents.dev/0.1.2/schema/branch-created-event\",\n" +
                 "  \"properties\": {\n" +
                 "    \"context\": {\n" +
                 "      \"properties\": {\n" +
                 "        \"version\": {\n" +
                 "          \"type\": \"string\",\n" +
-                "          \"enum\": [\n" +
-                "            \"0.1.0\"\n" +
-                "          ],\n" +
-                "          \"default\": \"0.1.0\"\n" +
+                "          \"minLength\": 1\n" +
                 "        },\n" +
                 "        \"id\": {\n" +
                 "          \"type\": \"string\",\n" +
@@ -79,7 +76,10 @@ public class BranchCreatedCDEvent extends CDEvent {
                 "        },\n" +
                 "        \"type\": {\n" +
                 "          \"type\": \"string\",\n" +
-                "          \"minLength\": 1\n" +
+                "          \"enum\": [\n" +
+                "            \"dev.cdevents.branch.created.0.1.1\"\n" +
+                "          ],\n" +
+                "          \"default\": \"dev.cdevents.branch.created.0.1.1\"\n" +
                 "        },\n" +
                 "        \"timestamp\": {\n" +
                 "          \"type\": \"string\",\n" +
@@ -129,10 +129,7 @@ public class BranchCreatedCDEvent extends CDEvent {
                 "            }\n" +
                 "          },\n" +
                 "          \"additionalProperties\": false,\n" +
-                "          \"type\": \"object\",\n" +
-                "          \"required\": [\n" +
-                "            \"repository\"\n" +
-                "          ]\n" +
+                "          \"type\": \"object\"\n" +
                 "        }\n" +
                 "      },\n" +
                 "      \"additionalProperties\": false,\n" +
