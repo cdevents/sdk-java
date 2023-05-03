@@ -3,7 +3,7 @@ package dev.cdevents.models;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import dev.cdevents.constants.CDEventConstants;
 
-public class EnvironmentCreatedSubject extends Subject{
+public class EnvironmentCreatedSubject extends Subject {
 
     @JsonProperty(required = true)
     private  EnvironmentCreatedSubjectContent content;

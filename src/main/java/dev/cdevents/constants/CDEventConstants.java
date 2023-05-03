@@ -16,7 +16,7 @@ public final class CDEventConstants {
          */
         PIPELINERUN("pipelineRun"),
         /**
-         * Subject Type Environment
+         * Subject Type Environment.
          */
         ENVIRONMENT("environment");;
 

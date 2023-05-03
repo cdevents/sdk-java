@@ -7,7 +7,7 @@ import dev.cdevents.models.EnvironmentCreatedSubject;
 
 import java.net.URI;
 
-public class EnvironmentCreatedCDEvent extends CDEvent{
+public class EnvironmentCreatedCDEvent extends CDEvent {
 
     private static final String CDEVENT_VERSION = "0.1.0";
     @JsonProperty(required = true)
@@ -43,11 +43,17 @@ public class EnvironmentCreatedCDEvent extends CDEvent{
         return CDEventConstants.CDEventTypes.EnvironmentCreatedEvent.getEventType().concat(CDEVENT_VERSION);
     }
 
+    /**
+     * @return the environment-created-event schema URL
+     */
     @Override
     public String schemaURL() {
         return String.format("https://cdevents.dev/%s/schema/environment-created-event", CDEventConstants.CDEVENTS_SPEC_VERSION);
     }
 
+    /**
+     * @return the environment-created-event schema Json
+     */
     @Override
     public String eventSchema() {
         return "{\n" +
@@ -160,7 +166,7 @@ public class EnvironmentCreatedCDEvent extends CDEvent{
      * @param subjectSource
      * sets the subject source
      */
-    public void setSubjectSource(URI subjectSource){
+    public void setSubjectSource(URI subjectSource) {
         getSubject().setSource(subjectSource);
     }
 
@@ -168,7 +174,7 @@ public class EnvironmentCreatedCDEvent extends CDEvent{
      * @param subjectName
      * sets the subject name
      */
-    public void setSubjectName(String subjectName){
+    public void setSubjectName(String subjectName) {
         getSubject().getContent().setName(subjectName);
     }
 
