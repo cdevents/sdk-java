@@ -17,6 +17,10 @@ public final class CDEventConstants {
          */
         REPOSITORY("repository"),
 
+         * Subject Type taskRun.
+         */
+        TASKRUN("taskRun"),
+
         /**
          * Subject Type pipelineRun.
          */

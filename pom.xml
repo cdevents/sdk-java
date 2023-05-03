@@ -3,9 +3,9 @@
 		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>dev.cdevents.sdk-java</groupId>
+	<groupId>dev.cdevents</groupId>
 	<artifactId>cdevents-sdk-java</artifactId>
-	<version>v0.1.0-draft6</version>
+	<version>0.1.0-SNAPSHOT</version>
 
 	<name>cdevents-sdk-java</name>
 	<description>cdevents java sdk</description>
@@ -24,21 +24,23 @@
 		<cloudevents.version>2.3.0</cloudevents.version>
 		<junit-jupiter.version>5.8.2</junit-jupiter.version>
         <assertj-core.version>3.22.0</assertj-core.version>
-        <jackson.version>2.13.4.2</jackson.version>
+        <jackson.version>2.15.0</jackson.version>
+        <slf4j.version>2.0.7</slf4j.version>
 		<project.github.repository>cdevents/sdk-java</project.github.repository>
 		<nexus.url>https://s01.oss.sonatype.org</nexus.url>
 		<repository.url>git@github.com:${project.github.repository}.git</repository.url>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<version.clean.plugin>3.1.0</version.clean.plugin>
-		<version.compiler.plugin>3.9.0</version.compiler.plugin>
-		<version.deploy.plugin>3.0.0-M1</version.deploy.plugin>
-		<version.gpg.plugin>1.6</version.gpg.plugin>
-		<version.install.plugin>3.0.0-M1</version.install.plugin>
-		<version.javadoc.plugin>3.2.0</version.javadoc.plugin>
-		<version.jar.plugin>3.2.0</version.jar.plugin>
-		<version.nexus.plugin>1.6.8</version.nexus.plugin>
-		<version.resources.plugin>3.2.0</version.resources.plugin>
+		<project.build.outputTimestamp>${git.commit.author.time}</project.build.outputTimestamp>
+		<version.clean.plugin>3.2.0</version.clean.plugin>
+		<version.compiler.plugin>3.11.0</version.compiler.plugin>
+		<version.deploy.plugin>3.1.1</version.deploy.plugin>
+		<version.git.plugin>5.0.0</version.git.plugin>
+		<version.install.plugin>3.1.1</version.install.plugin>
+		<version.javadoc.plugin>3.5.0</version.javadoc.plugin>
+		<version.jar.plugin>3.3.0</version.jar.plugin>
+		<version.jreleaser.plugin>1.6.0</version.jreleaser.plugin>
+		<version.resources.plugin>3.3.1</version.resources.plugin>
 		<version.source.plugin>3.2.1</version.source.plugin>
 	</properties>
 
@@ -77,11 +79,53 @@
 		<url>${repository.url}</url>
 	</scm>
 
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>com.fasterxml.jackson</groupId>
+				<artifactId>jackson-bom</artifactId>
+				<version>${jackson.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
 	<dependencies>
 		<dependency>
 			<groupId>io.cloudevents</groupId>
 			<artifactId>cloudevents-core</artifactId>
 			<version>${cloudevents.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+		</dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-jsr310</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.networknt</groupId>
+            <artifactId>json-schema-validator</artifactId>
+            <version>1.0.80</version>
+        </dependency>
+
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>${slf4j.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>${slf4j.version}</version>
+			<optional>true</optional>
+			<scope>runtime</scope>
 		</dependency>
 
 		<!-- Test dependencies -->
@@ -98,39 +142,8 @@
 			<version>${assertj-core.version}</version>
 			<scope>test</scope>
 		</dependency>
-
-		<dependency>
-			<groupId>com.fasterxml.jackson.core</groupId>
-			<artifactId>jackson-databind</artifactId>
-			<version>${jackson.version}</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
-			<version>2.0.6</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-log4j12</artifactId>
-			<version>2.0.6</version>
-		</dependency>
-
-		<dependency>
-			<groupId>com.fasterxml.jackson.datatype</groupId>
-			<artifactId>jackson-datatype-jsr310</artifactId>
-			<version>2.14.2</version>
-		</dependency>
-
-		<dependency>
-			<groupId>com.networknt</groupId>
-			<artifactId>json-schema-validator</artifactId>
-			<version>1.0.78</version>
-		</dependency>
-
-
 	</dependencies>
+
 	<build>
 		<pluginManagement>
 			<plugins>
@@ -148,11 +161,6 @@
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-deploy-plugin</artifactId>
 					<version>${version.deploy.plugin}</version>
-				</plugin>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-gpg-plugin</artifactId>
-					<version>${version.gpg.plugin}</version>
 				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
@@ -179,27 +187,43 @@
 					<artifactId>maven-source-plugin</artifactId>
 					<version>${version.source.plugin}</version>
 				</plugin>
-				<plugin>
-					<groupId>org.sonatype.plugins</groupId>
-					<artifactId>nexus-staging-maven-plugin</artifactId>
-					<version>${version.nexus.plugin}</version>
-				</plugin>
 			</plugins>
 		</pluginManagement>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.22.0</version>
+                <version>3.0.0</version>
             </plugin>
+			<plugin>
+				<groupId>io.github.git-commit-id</groupId>
+				<artifactId>git-commit-id-maven-plugin</artifactId>
+				<version>${version.git.plugin}</version>
+				<executions>
+					<execution>
+						<id>resolve-git-properties</id>
+						<goals>
+							<goal>revision</goal>
+						</goals>
+						<phase>validate</phase>
+						<configuration>
+							<verbose>false</verbose>
+							<failOnNoGitDirectory>false</failOnNoGitDirectory>
+							<generateGitPropertiesFile>true</generateGitPropertiesFile>
+							<generateGitPropertiesFilename>${project.build.directory}/git.properties</generateGitPropertiesFilename>
+							<dateFormat>yyyy-MM-dd'T'HH:mm:ssXXX</dateFormat>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-jar-plugin</artifactId>
 				<configuration>
 					<archive>
 						<manifestEntries>
-							<Build-Jdk>${java.version} (${java.vendor} ${java.vm.version})</Build-Jdk>
-							<Build-OS>${os.name} ${os.arch} ${os.version}</Build-OS>
+							<Build-Timestamp>${git.commit.author.time}</Build-Timestamp>
+							<Build-Revision>${git.commit.id}</Build-Revision>
 						</manifestEntries>
 						<manifest>
 							<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
@@ -240,21 +264,6 @@
         </plugins>
     </build>
 
-	<distributionManagement>
-		<repository>
-			<id>ossrh</id>
-			<url>${nexus.url}/service/local/staging/deploy/maven2/</url>
-		</repository>
-		<snapshotRepository>
-			<id>ossrh</id>
-			<url>${nexus.url}/content/repositories/snapshots</url>
-		</snapshotRepository>
-		<site>
-			<id>kordamp</id>
-			<url>scm:git:ssh://git@github.com/${project.github.repository}.git</url>
-		</site>
-	</distributionManagement>
-
 	<profiles>
 		<profile>
 			<id>publication</id>
@@ -263,7 +272,11 @@
 					<name>release</name>
 				</property>
 			</activation>
+			<properties>
+				<altDeploymentRepository>local::file:./target/staging-deploy</altDeploymentRepository>
+			</properties>
 			<build>
+				<defaultGoal>deploy</defaultGoal>
 				<plugins>
 					<plugin>
 						<groupId>com.coderplus.maven.plugins</groupId>
@@ -318,54 +331,61 @@
 		</profile>
 
 		<profile>
-			<id>gpg</id>
+			<id>release</id>
 			<activation>
 				<property>
 					<name>release</name>
 				</property>
 			</activation>
 			<build>
+				<defaultGoal>jreleaser:full-release</defaultGoal>
 				<plugins>
 					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-gpg-plugin</artifactId>
-						<executions>
-							<execution>
-								<goals>
-									<goal>sign</goal>
-								</goals>
-								<phase>verify</phase>
-								<configuration>
-									<gpgArguments>
-										<arg>--pinentry-mode</arg>
-										<arg>loopback</arg>
-									</gpgArguments>
-								</configuration>
-							</execution>
-						</executions>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-
-		<profile>
-			<id>remote-deploy</id>
-			<activation>
-				<property>
-					<name>release</name>
-				</property>
-			</activation>
-			<build>
-				<defaultGoal>deploy</defaultGoal>
-				<plugins>
-					<plugin>
-						<groupId>org.sonatype.plugins</groupId>
-						<artifactId>nexus-staging-maven-plugin</artifactId>
-						<extensions>true</extensions>
+						<groupId>org.jreleaser</groupId>
+						<artifactId>jreleaser-maven-plugin</artifactId>
 						<configuration>
-							<serverId>central</serverId>
-							<nexusUrl>${nexus.url}</nexusUrl>
-							<autoReleaseAfterClose>true</autoReleaseAfterClose>
+							<jreleaser>
+								<release>
+									<github>
+										<issues>
+											<enabled>true</enabled>
+										</issues>
+										<changelog>
+											<skipMergeCommits>true</skipMergeCommits>
+											<formatted>ALWAYS</formatted>
+											<format>- {{commitShortHash}} {{commitTitle}}</format>
+											<contributors>
+												<format>- {{contributorName}}{{#contributorUsernameAsLink}} ({{.}}){{/contributorUsernameAsLink}}</format>
+											</contributors>
+											<hide>
+												<contributors>
+													<contributor>bot</contributor>
+													<contributor>Bot</contributor>
+													<contributor>GitHub</contributor>
+												</contributors>
+											</hide>
+										</changelog>
+									</github>
+								</release>
+								<signing>
+									<active>ALWAYS</active>
+									<armored>true</armored>
+								</signing>
+								<deploy>
+									<maven>
+										<nexus2>
+											<maven-central>
+												<active>ALWAYS</active>
+												<url>https://s01.oss.sonatype.org/service/local</url>
+												<snapshotUrl>https://s01.oss.sonatype.org/content/repositories/snapshots/</snapshotUrl>
+												<closeRepository>true</closeRepository>
+												<releaseRepository>true</releaseRepository>
+												<stagingRepositories>target/staging-deploy</stagingRepositories>
+											</maven-central>
+										</nexus2>
+									</maven>
+								</deploy>
+							</jreleaser>
 						</configuration>
 					</plugin>
 				</plugins>
