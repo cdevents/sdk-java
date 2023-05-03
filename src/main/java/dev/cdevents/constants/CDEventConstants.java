@@ -13,13 +13,29 @@ public final class CDEventConstants {
     public enum SubjectType {
 
         /**
-         * Subject Type taskRun.
+         * Subject type repository.
+         */
+        REPOSITORY("repository"),
+
+        /**
+         * Subject type taskRun.
          */
         TASKRUN("taskRun"),
+
         /**
          * Subject Type pipelineRun.
          */
-        PIPELINERUN("pipelineRun");
+        PIPELINERUN("pipelineRun"),
+
+        /**
+         * Subject type branch.
+         */
+        BRANCH("branch"),
+
+        /**
+         * Subject type change.
+         */
+        CHANGE("change");
 
         private String subjectType;
 
