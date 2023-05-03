@@ -14,7 +14,11 @@ public final class CDEventConstants {
         /**
          * Subject Type pipelineRun.
          */
-        PIPELINERUN("pipelineRun");
+        PIPELINERUN("pipelineRun"),
+        /**
+         * Subject Type Environment
+         */
+        ENVIRONMENT("environment");;
 
         private String subjectType;
 
