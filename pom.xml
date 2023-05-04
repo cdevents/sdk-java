@@ -26,6 +26,8 @@
         <assertj-core.version>3.22.0</assertj-core.version>
         <jackson.version>2.15.0</jackson.version>
         <slf4j.version>2.0.7</slf4j.version>
+		<json.schema.version>1.0.80</json.schema.version>
+		<packageurl.version>1.4.1</packageurl.version>
 		<project.github.repository>cdevents/sdk-java</project.github.repository>
 		<nexus.url>https://s01.oss.sonatype.org</nexus.url>
 		<repository.url>git@github.com:${project.github.repository}.git</repository.url>
@@ -111,7 +113,7 @@
         <dependency>
             <groupId>com.networknt</groupId>
             <artifactId>json-schema-validator</artifactId>
-            <version>1.0.80</version>
+			<version>${json.schema.version}</version>
         </dependency>
 
 		<dependency>
@@ -126,6 +128,12 @@
 			<version>${slf4j.version}</version>
 			<optional>true</optional>
 			<scope>runtime</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>com.github.package-url</groupId>
+			<artifactId>packageurl-java</artifactId>
+			<version>${packageurl.version}</version>
 		</dependency>
 
 		<!-- Test dependencies -->

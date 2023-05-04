@@ -1,6 +1,8 @@
 package dev.cdevents;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.github.packageurl.MalformedPackageURLException;
+import com.github.packageurl.PackageURL;
 import dev.cdevents.constants.CDEventConstants;
 import dev.cdevents.events.*;
 import dev.cdevents.exception.CDEventsException;
@@ -582,14 +584,14 @@ public class CDEventsTest {
     }
 
     @Test
-    void createEnvironmentCreatedEventAsCloudEvent(){
+    void createEnvironmentCreatedEventAsCloudEvent() {
         EnvironmentCreatedCDEvent cdEvent = new EnvironmentCreatedCDEvent();
         cdEvent.setSource(URI.create("http://dev.cdevents"));
 
-        cdEvent.setSubjectId("/dev/pipeline/run/subject");
-        cdEvent.setSubjectSource(URI.create("/dev/pipeline/run/subject"));
+        cdEvent.setSubjectId("/dev/environment/run/subject");
+        cdEvent.setSubjectSource(URI.create("/dev/environment/run/subject"));
         cdEvent.setSubjectName("Name");
-        cdEvent.setSubjectUrl("http://dev/pipeline/url");
+        cdEvent.setSubjectUrl("http://dev/environment/url");
 
         String cdEventJson = CDEvents.cdEventAsJson(cdEvent);
 
@@ -603,8 +605,248 @@ public class CDEventsTest {
     }
 
     @Test
-    void testInvalidEnvironmentCreatedEventWithNoSubject(){
+    void testInvalidEnvironmentCreatedEventWithNoSubject() {
         EnvironmentCreatedCDEvent cdEvent = new EnvironmentCreatedCDEvent();
+        cdEvent.setSource(URI.create("http://dev.cdevents"));
+
+        Exception exception = assertThrows(CDEventsException.class, () -> {
+            CDEvents.cdEventAsCloudEvent(cdEvent);
+        });
+        String expectedError = "CDEvent validation failed against schema URL - " + cdEvent.schemaURL();
+
+        assertThat(exception.getMessage()).isEqualTo(expectedError);
+    }
+
+    @Test
+    void createEnvironmentModifiedEventAsCloudEvent() {
+        EnvironmentModifiedCDEvent cdEvent = new EnvironmentModifiedCDEvent();
+        cdEvent.setSource(URI.create("http://dev.cdevents"));
+
+        cdEvent.setSubjectId("/dev/environment/run/subject");
+        cdEvent.setSubjectSource(URI.create("/dev/environment/run/subject"));
+        cdEvent.setSubjectName("Name");
+        cdEvent.setSubjectUrl("http://dev/environment/url");
+
+        String cdEventJson = CDEvents.cdEventAsJson(cdEvent);
+
+        CloudEvent ceEvent = CDEvents.cdEventAsCloudEvent(cdEvent);
+
+        String ceDataJson = new String(ceEvent.getData().toBytes(), StandardCharsets.UTF_8);
+
+        assertThat(ceEvent.getType()).isEqualTo(cdEvent.getContext().getType());
+        assertThat(ceEvent.getSource()).isEqualTo(cdEvent.getContext().getSource());
+        assertThat(ceDataJson).isEqualTo(cdEventJson);
+    }
+
+    @Test
+    void testInvalidEnvironmentModifiedEventWithNoSubject() {
+        EnvironmentModifiedCDEvent cdEvent = new EnvironmentModifiedCDEvent();
+        cdEvent.setSource(URI.create("http://dev.cdevents"));
+
+        Exception exception = assertThrows(CDEventsException.class, () -> {
+            CDEvents.cdEventAsCloudEvent(cdEvent);
+        });
+        String expectedError = "CDEvent validation failed against schema URL - " + cdEvent.schemaURL();
+
+        assertThat(exception.getMessage()).isEqualTo(expectedError);
+    }
+
+    @Test
+    void createEnvironmentDeletedEventAsCloudEvent() {
+        EnvironmentDeletedCDEvent cdEvent = new EnvironmentDeletedCDEvent();
+        cdEvent.setSource(URI.create("http://dev.cdevents"));
+
+        cdEvent.setSubjectId("/dev/environment/run/subject");
+        cdEvent.setSubjectSource(URI.create("/dev/environment/run/subject"));
+        cdEvent.setSubjectName("Name");
+
+        String cdEventJson = CDEvents.cdEventAsJson(cdEvent);
+
+        CloudEvent ceEvent = CDEvents.cdEventAsCloudEvent(cdEvent);
+
+        String ceDataJson = new String(ceEvent.getData().toBytes(), StandardCharsets.UTF_8);
+
+        assertThat(ceEvent.getType()).isEqualTo(cdEvent.getContext().getType());
+        assertThat(ceEvent.getSource()).isEqualTo(cdEvent.getContext().getSource());
+        assertThat(ceDataJson).isEqualTo(cdEventJson);
+    }
+
+    @Test
+    void testInvalidEnvironmentDeletedEventWithNoSubject() {
+        EnvironmentDeletedCDEvent cdEvent = new EnvironmentDeletedCDEvent();
+        cdEvent.setSource(URI.create("http://dev.cdevents"));
+
+        Exception exception = assertThrows(CDEventsException.class, () -> {
+            CDEvents.cdEventAsCloudEvent(cdEvent);
+        });
+        String expectedError = "CDEvent validation failed against schema URL - " + cdEvent.schemaURL();
+
+        assertThat(exception.getMessage()).isEqualTo(expectedError);
+    }
+
+    @Test
+    void createServiceDeployedEventAsCloudEvent() throws MalformedPackageURLException {
+        ServiceDeployedCDEvent cdEvent = new ServiceDeployedCDEvent();
+        cdEvent.setSource(URI.create("http://dev.cdevents"));
+
+        cdEvent.setSubjectId("/dev/service/run/subject");
+        cdEvent.setSubjectSource(URI.create("dev/service/run/subject"));
+        cdEvent.setSubjectEnvironmentId("dev/environment/run/subject");
+        cdEvent.setSubjectEnvironmentSource(URI.create("dev/environment/run/subject"));
+        cdEvent.setSubjectArtifactId(new PackageURL("pkg:oci/myapp@sha256%3A0b31b1c02ff458ad9b7b81cbdf8f"));
+
+        String cdEventJson = CDEvents.cdEventAsJson(cdEvent);
+
+        CloudEvent ceEvent = CDEvents.cdEventAsCloudEvent(cdEvent);
+
+        String ceDataJson = new String(ceEvent.getData().toBytes(), StandardCharsets.UTF_8);
+
+        assertThat(ceEvent.getType()).isEqualTo(cdEvent.getContext().getType());
+        assertThat(ceEvent.getSource()).isEqualTo(cdEvent.getContext().getSource());
+        assertThat(ceDataJson).isEqualTo(cdEventJson);
+    }
+
+    @Test
+    void testInvalidServiceDeployedEventWithNoSubject() {
+        ServiceDeployedCDEvent cdEvent = new ServiceDeployedCDEvent();
+        cdEvent.setSource(URI.create("http://dev.cdevents"));
+
+        Exception exception = assertThrows(CDEventsException.class, () -> {
+            CDEvents.cdEventAsCloudEvent(cdEvent);
+        });
+        String expectedError = "CDEvent validation failed against schema URL - " + cdEvent.schemaURL();
+
+        assertThat(exception.getMessage()).isEqualTo(expectedError);
+    }
+
+    @Test
+    void createServiceUpgradedEventAsCloudEvent() throws MalformedPackageURLException {
+        ServiceUpgradedCDEvent cdEvent = new ServiceUpgradedCDEvent();
+        cdEvent.setSource(URI.create("http://dev.cdevents"));
+
+        cdEvent.setSubjectId("/dev/service/run/subject");
+        cdEvent.setSubjectSource(URI.create("dev/service/run/subject"));
+        cdEvent.setSubjectEnvironmentId("dev/environment/run/subject");
+        cdEvent.setSubjectEnvironmentSource(URI.create("dev/environment/run/subject"));
+        cdEvent.setSubjectArtifactId(new PackageURL("pkg:oci/myapp@sha256%3A0b31b1c02ff458ad9b7b81cbdf8f"));
+
+        String cdEventJson = CDEvents.cdEventAsJson(cdEvent);
+
+        CloudEvent ceEvent = CDEvents.cdEventAsCloudEvent(cdEvent);
+
+        String ceDataJson = new String(ceEvent.getData().toBytes(), StandardCharsets.UTF_8);
+
+        assertThat(ceEvent.getType()).isEqualTo(cdEvent.getContext().getType());
+        assertThat(ceEvent.getSource()).isEqualTo(cdEvent.getContext().getSource());
+        assertThat(ceDataJson).isEqualTo(cdEventJson);
+    }
+
+    @Test
+    void testInvalidServiceUpgradedEventWithNoSubject() {
+        ServiceUpgradedCDEvent cdEvent = new ServiceUpgradedCDEvent();
+        cdEvent.setSource(URI.create("http://dev.cdevents"));
+
+        Exception exception = assertThrows(CDEventsException.class, () -> {
+            CDEvents.cdEventAsCloudEvent(cdEvent);
+        });
+        String expectedError = "CDEvent validation failed against schema URL - " + cdEvent.schemaURL();
+
+        assertThat(exception.getMessage()).isEqualTo(expectedError);
+    }
+
+    @Test
+    void createServiceRolledBackEventAsCloudEvent() throws MalformedPackageURLException {
+        ServiceRolledBackCDEvent cdEvent = new ServiceRolledBackCDEvent();
+        cdEvent.setSource(URI.create("http://dev.cdevents"));
+
+        cdEvent.setSubjectId("/dev/service/run/subject");
+        cdEvent.setSubjectSource(URI.create("dev/service/run/subject"));
+        cdEvent.setSubjectEnvironmentId("dev/environment/run/subject");
+        cdEvent.setSubjectEnvironmentSource(URI.create("dev/environment/run/subject"));
+        cdEvent.setSubjectArtifactId(new PackageURL("pkg:oci/myapp@sha256%3A0b31b1c02ff458ad9b7b81cbdf8f"));
+
+        String cdEventJson = CDEvents.cdEventAsJson(cdEvent);
+
+        CloudEvent ceEvent = CDEvents.cdEventAsCloudEvent(cdEvent);
+
+        String ceDataJson = new String(ceEvent.getData().toBytes(), StandardCharsets.UTF_8);
+
+        assertThat(ceEvent.getType()).isEqualTo(cdEvent.getContext().getType());
+        assertThat(ceEvent.getSource()).isEqualTo(cdEvent.getContext().getSource());
+        assertThat(ceDataJson).isEqualTo(cdEventJson);
+    }
+
+    @Test
+    void testInvalidServiceRolledBackEventWithNoSubject() {
+        ServiceRolledBackCDEvent cdEvent = new ServiceRolledBackCDEvent();
+        cdEvent.setSource(URI.create("http://dev.cdevents"));
+
+        Exception exception = assertThrows(CDEventsException.class, () -> {
+            CDEvents.cdEventAsCloudEvent(cdEvent);
+        });
+        String expectedError = "CDEvent validation failed against schema URL - " + cdEvent.schemaURL();
+
+        assertThat(exception.getMessage()).isEqualTo(expectedError);
+    }
+
+    @Test
+    void createServiceRemovedEventAsCloudEvent() {
+        ServiceRemovedCDEvent cdEvent = new ServiceRemovedCDEvent();
+        cdEvent.setSource(URI.create("http://dev.cdevents"));
+
+        cdEvent.setSubjectId("/dev/service/run/subject");
+        cdEvent.setSubjectSource(URI.create("dev/service/run/subject"));
+        cdEvent.setSubjectEnvironmentId("dev/environment/run/subject");
+        cdEvent.setSubjectEnvironmentSource(URI.create("dev/environment/run/subject"));
+
+        String cdEventJson = CDEvents.cdEventAsJson(cdEvent);
+
+        CloudEvent ceEvent = CDEvents.cdEventAsCloudEvent(cdEvent);
+
+        String ceDataJson = new String(ceEvent.getData().toBytes(), StandardCharsets.UTF_8);
+
+        assertThat(ceEvent.getType()).isEqualTo(cdEvent.getContext().getType());
+        assertThat(ceEvent.getSource()).isEqualTo(cdEvent.getContext().getSource());
+        assertThat(ceDataJson).isEqualTo(cdEventJson);
+    }
+
+    @Test
+    void testInvalidServiceRemovedEventWithNoSubject() {
+        ServiceRemovedCDEvent cdEvent = new ServiceRemovedCDEvent();
+        cdEvent.setSource(URI.create("http://dev.cdevents"));
+
+        Exception exception = assertThrows(CDEventsException.class, () -> {
+            CDEvents.cdEventAsCloudEvent(cdEvent);
+        });
+        String expectedError = "CDEvent validation failed against schema URL - " + cdEvent.schemaURL();
+
+        assertThat(exception.getMessage()).isEqualTo(expectedError);
+    }
+
+    @Test
+    void createServicePublishedEventAsCloudEvent() {
+        ServicePublishedCDEvent cdEvent = new ServicePublishedCDEvent();
+        cdEvent.setSource(URI.create("http://dev.cdevents"));
+
+        cdEvent.setSubjectId("/dev/service/run/subject");
+        cdEvent.setSubjectSource(URI.create("dev/service/run/subject"));
+        cdEvent.setSubjectEnvironmentId("dev/environment/run/subject");
+        cdEvent.setSubjectEnvironmentSource(URI.create("dev/environment/run/subject"));
+
+        String cdEventJson = CDEvents.cdEventAsJson(cdEvent);
+
+        CloudEvent ceEvent = CDEvents.cdEventAsCloudEvent(cdEvent);
+
+        String ceDataJson = new String(ceEvent.getData().toBytes(), StandardCharsets.UTF_8);
+
+        assertThat(ceEvent.getType()).isEqualTo(cdEvent.getContext().getType());
+        assertThat(ceEvent.getSource()).isEqualTo(cdEvent.getContext().getSource());
+        assertThat(ceDataJson).isEqualTo(cdEventJson);
+    }
+
+    @Test
+    void testInvalidServicePublishedEventWithNoSubject() {
+        ServicePublishedCDEvent cdEvent = new ServicePublishedCDEvent();
         cdEvent.setSource(URI.create("http://dev.cdevents"));
 
         Exception exception = assertThrows(CDEventsException.class, () -> {
