@@ -1,6 +1,7 @@
 package dev.cdevents.events;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.github.packageurl.PackageURL;
 import dev.cdevents.constants.CDEventConstants;
 import dev.cdevents.models.ArtifactPublishedSubject;
 import dev.cdevents.models.CDEvent;
@@ -149,10 +150,10 @@ public class ArtifactPublishedCDEvent extends CDEvent {
 
     /**
      * @param subjectId
-     * sets the subject Id
+     * sets the subject Id in PURL format
      */
-    public void setSubjectId(String subjectId) {
-        getSubject().setId(subjectId);
+    public void setSubjectId(PackageURL subjectId) {
+        getSubject().setId(subjectId.toString());
     }
 
     /**
