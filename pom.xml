@@ -5,7 +5,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>dev.cdevents</groupId>
 	<artifactId>cdevents-sdk-java</artifactId>
-	<version>0.1.0-SNAPSHOT</version>
+	<version>0.1.2-SNAPSHOT</version>
 
 	<name>cdevents-sdk-java</name>
 	<description>cdevents java sdk</description>
@@ -114,6 +114,7 @@
             <groupId>com.networknt</groupId>
             <artifactId>json-schema-validator</artifactId>
 			<version>${json.schema.version}</version>
+
         </dependency>
 
 		<dependency>

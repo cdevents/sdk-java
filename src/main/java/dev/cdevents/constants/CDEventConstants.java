@@ -45,7 +45,27 @@ public final class CDEventConstants {
         /**
          * Subject type change.
          */
-        CHANGE("change");
+        CHANGE("change"),
+
+        /**
+         * Subject type build.
+         */
+        BUILD("build"),
+
+        /**
+         * subject type testCase.
+         */
+        TESTCASE("testCase"),
+
+        /**
+         * subject type testSuite.
+         */
+        TESTSUITE("testSuite"),
+
+        /**
+         * subject type artifact.
+         */
+        ARTIFACT("artifact");
 
         private String subjectType;
 
