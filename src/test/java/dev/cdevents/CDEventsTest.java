@@ -1,6 +1,8 @@
 package dev.cdevents;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.github.packageurl.MalformedPackageURLException;
+import com.github.packageurl.PackageURL;
 import dev.cdevents.constants.CDEventConstants;
 import dev.cdevents.events.*;
 import dev.cdevents.exception.CDEventsException;
@@ -648,14 +650,14 @@ public class CDEventsTest {
     }
 
     @Test
-    void createBuildFinishedAsCloudEvent() {
+    void createBuildFinishedAsCloudEvent() throws MalformedPackageURLException {
 
         BuildFinishedCDEvent cdEvent =  new BuildFinishedCDEvent();
         cdEvent.setSource(URI.create("http://dev.cdevents"));
 
         cdEvent.setSubjectId("test-build");
         cdEvent.setSubjectSource(URI.create("/dev/builds/test-build"));
-        cdEvent.setSubjectArtifactId("pkg:oci/myapp@sha256%3A0b31b1c02ff458ad9b7b81cbdf8f");
+        cdEvent.setSubjectArtifactId(new PackageURL("pkg:oci/myapp@sha256%3A0b31b1c02ff458ad9b7b81cbdf8f"));
 
         String cdEventJson = CDEvents.cdEventAsJson(cdEvent);
 
@@ -846,12 +848,12 @@ public class CDEventsTest {
     }
 
     @Test
-    void createArtifactPackagedEventAsCloudEvent() {
+    void createArtifactPackagedEventAsCloudEvent() throws MalformedPackageURLException {
 
         ArtifactPackagedCDEvent cdEvent =  new ArtifactPackagedCDEvent();
         cdEvent.setSource(URI.create("http://dev.cdevents"));
 
-        cdEvent.setSubjectId("pkg:oci/myapp@sha256%3A0b31b1c02ff458ad9b7b");
+        cdEvent.setSubjectId(new PackageURL("pkg:oci/myapp@sha256%3A0b31b1c02ff458ad9b7b"));
         cdEvent.setSubjectSource(URI.create("/dev/artifact/source"));
 
         cdEvent.setSubjectChangeId("test-feature");
@@ -882,11 +884,11 @@ public class CDEventsTest {
     }
 
     @Test
-    void createArtifactPublishedEventAsCloudEvent() {
+    void createArtifactPublishedEventAsCloudEvent() throws MalformedPackageURLException {
         ArtifactPublishedCDEvent cdEvent = new ArtifactPublishedCDEvent();
         cdEvent.setSource(URI.create("http://dev.cdevents"));
 
-        cdEvent.setSubjectId("pkg:oci/myapp@sha256%3A0b31b1c02ff458ad9b7b");
+        cdEvent.setSubjectId(new PackageURL("pkg:oci/myapp@sha256%3A0b31b1c02ff458ad9b7b"));
         cdEvent.setSubjectSource(URI.create("/dev/artifact/source"));
 
         String cdEventJson = CDEvents.cdEventAsJson(cdEvent);
