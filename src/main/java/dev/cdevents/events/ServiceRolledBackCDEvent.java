@@ -14,6 +14,9 @@ public class ServiceRolledBackCDEvent extends CDEvent {
     @JsonProperty(required = true)
     private ServiceRolledBackSubject subject;
 
+    /**
+     * Constructor to init CDEvent and set the Subject for {@link ServiceRolledBackCDEvent}.
+     */
     public ServiceRolledBackCDEvent() {
         initCDEvent(currentCDEventType());
         setSubject(new ServiceRolledBackSubject(CDEventConstants.SubjectType.SERVICE));
@@ -184,14 +187,6 @@ public class ServiceRolledBackCDEvent extends CDEvent {
      */
     public void setSubjectSource(URI subjectSource) {
         getSubject().setSource(subjectSource);
-    }
-
-    /**
-     * @param subjectType
-     * sets the subject type
-     */
-    public void setSubjectType(CDEventConstants.SubjectType subjectType) {
-        getSubject().setType(subjectType);
     }
 
     /**

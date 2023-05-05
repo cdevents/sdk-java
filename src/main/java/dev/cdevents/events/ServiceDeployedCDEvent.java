@@ -14,6 +14,9 @@ public class ServiceDeployedCDEvent extends CDEvent {
     @JsonProperty(required = true)
     private ServiceDeployedSubject subject;
 
+    /**
+     * Constructor to init CDEvent and set the Subject for {@link ServiceDeployedCDEvent}.
+     */
     public ServiceDeployedCDEvent() {
         initCDEvent(currentCDEventType());
         setSubject(new ServiceDeployedSubject(CDEventConstants.SubjectType.SERVICE));
@@ -184,14 +187,6 @@ public class ServiceDeployedCDEvent extends CDEvent {
      */
     public void setSubjectSource(URI subjectSource) {
         getSubject().setSource(subjectSource);
-    }
-
-    /**
-     * @param subjectType
-     * sets the subject type
-     */
-    public void setSubjectType(CDEventConstants.SubjectType subjectType) {
-        getSubject().setType(subjectType);
     }
 
     /**

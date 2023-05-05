@@ -13,6 +13,9 @@ public class ServiceRemovedCDEvent extends CDEvent {
     @JsonProperty(required = true)
     private ServiceRemovedSubject subject;
 
+    /**
+     * Constructor to init CDEvent and set the Subject for {@link ServiceRemovedCDEvent}.
+     */
     public ServiceRemovedCDEvent() {
         initCDEvent(currentCDEventType());
         setSubject(new ServiceRemovedSubject(CDEventConstants.SubjectType.SERVICE));
@@ -175,14 +178,6 @@ public class ServiceRemovedCDEvent extends CDEvent {
      */
     public void setSubjectSource(URI subjectSource) {
         getSubject().setSource(subjectSource);
-    }
-
-    /**
-     * @param subjectType
-     * sets the subject type
-     */
-    public void setSubjectType(CDEventConstants.SubjectType subjectType) {
-        getSubject().setType(subjectType);
     }
 
     /**

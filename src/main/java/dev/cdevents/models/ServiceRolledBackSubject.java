@@ -1,12 +1,11 @@
 package dev.cdevents.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.github.packageurl.PackageURL;
 import dev.cdevents.constants.CDEventConstants;
 
 import java.net.URI;
 
-public class ServiceRolledBackSubject extends Subject{
+public class ServiceRolledBackSubject extends Subject {
 
     @JsonProperty(required = true)
     private ServiceRolledBackSubjectContent content;
@@ -25,6 +24,9 @@ public class ServiceRolledBackSubject extends Subject{
         this.content = content;
     }
 
+    /**
+     * @param subjectType
+     */
     public ServiceRolledBackSubject(CDEventConstants.SubjectType subjectType) {
         super(subjectType);
         setContent(new ServiceRolledBackSubjectContent());
@@ -37,18 +39,30 @@ public class ServiceRolledBackSubject extends Subject{
         @JsonProperty
         private String artifactId;
 
+        /**
+         * @return environment
+         */
         public Environment getEnvironment() {
             return environment;
         }
 
+        /**
+         * @param environment
+         */
         public void setEnvironment(Environment environment) {
             this.environment = environment;
         }
 
+        /**
+         * @return artifactId
+         */
         public String getArtifactId() {
             return artifactId;
         }
 
+        /**
+         * @param artifactId
+         */
         public void setArtifactId(String artifactId) {
             this.artifactId = artifactId;
         }

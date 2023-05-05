@@ -5,7 +5,7 @@ import dev.cdevents.constants.CDEventConstants;
 
 import java.net.URI;
 
-public class ServiceRemovedSubject extends Subject{
+public class ServiceRemovedSubject extends Subject {
 
     @JsonProperty(required = true)
     private ServiceRemovedSubjectContent content;
@@ -24,6 +24,9 @@ public class ServiceRemovedSubject extends Subject{
         this.content = content;
     }
 
+    /**
+     * @param subjectType
+     */
     public ServiceRemovedSubject(CDEventConstants.SubjectType subjectType) {
         super(subjectType);
         setContent(new ServiceRemovedSubjectContent());
@@ -34,10 +37,16 @@ public class ServiceRemovedSubject extends Subject{
         @JsonProperty
         private Environment environment = new Environment();
 
+        /**
+         * @return environment
+         */
         public Environment getEnvironment() {
             return environment;
         }
 
+        /**
+         * @param environment
+         */
         public void setEnvironment(Environment environment) {
             this.environment = environment;
         }
