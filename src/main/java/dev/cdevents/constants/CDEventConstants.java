@@ -33,6 +33,11 @@ public final class CDEventConstants {
         ENVIRONMENT("environment"),
 
         /**
+         * Subject Type Service.
+         */
+        SERVICE("service"),
+
+        /**
          * Subject type branch.
          */
         BRANCH("branch"),
