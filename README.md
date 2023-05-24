@@ -57,4 +57,5 @@ If you would like to contribute, see our [development](DEVELOPMENT.md) guide.
 ## References
 
 - [CDEvents](https://cdevents.dev)
-- [CDFoundation SIG Events Vocabulary Draft](https://github.com/cdfoundation/sig-events/tree/main/vocabulary-draft)
+- [CDEvents Primer](https://cdevents.dev/docs/primer/)
+- [CDFoundation Specification](https://cdevents.dev/docs/)
