@@ -77,16 +77,35 @@ public class PipelineRunStartedSubject extends Subject {
             this.url = url;
         }
 
+        /**
+         * @param o
+         * @return true or false
+         */
         @Override
         public boolean equals(Object o) {
-            if (this == o) return true;
-            if (!(o instanceof PipelineRunStartedSubjectContent)) return false;
+            if (this == o) {
+                return true;
+            }
+            if (!(o instanceof PipelineRunStartedSubjectContent)) {
+                return false;
+            }
 
             PipelineRunStartedSubjectContent that = (PipelineRunStartedSubjectContent) o;
 
-            if (getPipelineName() != null ? !getPipelineName().equals(that.getPipelineName()) : that.getPipelineName() != null)
+            if (getPipelineName() != null ? !getPipelineName().equals(that.getPipelineName()) : that.getPipelineName() != null) {
                 return false;
+            }
             return getUrl() != null ? getUrl().equals(that.getUrl()) : that.getUrl() == null;
+        }
+
+        /**
+         * @return hash code value
+         */
+        @Override
+        public int hashCode() {
+            int result = getPipelineName() != null ? getPipelineName().hashCode() : 0;
+            result = 31 * result + (getUrl() != null ? getUrl().hashCode() : 0);
+            return result;
         }
     }
 }

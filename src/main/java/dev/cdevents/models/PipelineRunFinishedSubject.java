@@ -111,18 +111,43 @@ public class PipelineRunFinishedSubject extends Subject {
             this.errors = errors;
         }
 
+        /**
+         * @param o
+         * @return true or false
+         */
         @Override
         public boolean equals(Object o) {
-            if (this == o) return true;
-            if (!(o instanceof PipelineRunFinishedSubjectContent)) return false;
+            if (this == o){
+                return true;
+            }
+            if (!(o instanceof PipelineRunFinishedSubjectContent)) {
+                return false;
+            }
 
             PipelineRunFinishedSubjectContent that = (PipelineRunFinishedSubjectContent) o;
 
-            if (getPipelineName() != null ? !getPipelineName().equals(that.getPipelineName()) : that.getPipelineName() != null)
+            if (getPipelineName() != null ? !getPipelineName().equals(that.getPipelineName()) : that.getPipelineName() != null) {
                 return false;
-            if (getUrl() != null ? !getUrl().equals(that.getUrl()) : that.getUrl() != null) return false;
-            if (getOutcome() != that.getOutcome()) return false;
+            }
+            if (getUrl() != null ? !getUrl().equals(that.getUrl()) : that.getUrl() != null) {
+                return false;
+            }
+            if (getOutcome() != that.getOutcome()) {
+                return false;
+            }
             return getErrors() != null ? getErrors().equals(that.getErrors()) : that.getErrors() == null;
+        }
+
+        /**
+         * @return hash code value
+         */
+        @Override
+        public int hashCode() {
+            int result = getPipelineName() != null ? getPipelineName().hashCode() : 0;
+            result = 31 * result + (getUrl() != null ? getUrl().hashCode() : 0);
+            result = 31 * result + (getOutcome() != null ? getOutcome().hashCode() : 0);
+            result = 31 * result + (getErrors() != null ? getErrors().hashCode() : 0);
+            return result;
         }
     }
 }
