@@ -103,8 +103,8 @@ public class Subject {
     @Override
     public int hashCode() {
         int result = getId() != null ? getId().hashCode() : 0;
-        result = 31 * result + (getSource() != null ? getSource().hashCode() : 0);
-        result = 31 * result + (getType() != null ? getType().hashCode() : 0);
+        result = CDEventConstants.HASH_CODE * result + (getSource() != null ? getSource().hashCode() : 0);
+        result = CDEventConstants.HASH_CODE * result + (getType() != null ? getType().hashCode() : 0);
         return result;
     }
 }

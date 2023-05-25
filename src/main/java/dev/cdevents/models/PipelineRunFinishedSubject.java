@@ -117,7 +117,7 @@ public class PipelineRunFinishedSubject extends Subject {
          */
         @Override
         public boolean equals(Object o) {
-            if (this == o){
+            if (this == o) {
                 return true;
             }
             if (!(o instanceof PipelineRunFinishedSubjectContent)) {
@@ -144,9 +144,9 @@ public class PipelineRunFinishedSubject extends Subject {
         @Override
         public int hashCode() {
             int result = getPipelineName() != null ? getPipelineName().hashCode() : 0;
-            result = 31 * result + (getUrl() != null ? getUrl().hashCode() : 0);
-            result = 31 * result + (getOutcome() != null ? getOutcome().hashCode() : 0);
-            result = 31 * result + (getErrors() != null ? getErrors().hashCode() : 0);
+            result = CDEventConstants.HASH_CODE * result + (getUrl() != null ? getUrl().hashCode() : 0);
+            result = CDEventConstants.HASH_CODE * result + (getOutcome() != null ? getOutcome().hashCode() : 0);
+            result = CDEventConstants.HASH_CODE * result + (getErrors() != null ? getErrors().hashCode() : 0);
             return result;
         }
     }

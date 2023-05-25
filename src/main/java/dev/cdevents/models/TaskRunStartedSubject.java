@@ -154,7 +154,7 @@ public class TaskRunStartedSubject extends Subject {
             @Override
             public int hashCode() {
                 int result = getId().hashCode();
-                result = 31 * result + (getSource() != null ? getSource().hashCode() : 0);
+                result = CDEventConstants.HASH_CODE * result + (getSource() != null ? getSource().hashCode() : 0);
                 return result;
             }
         }
@@ -189,8 +189,8 @@ public class TaskRunStartedSubject extends Subject {
         @Override
         public int hashCode() {
             int result = getTaskName() != null ? getTaskName().hashCode() : 0;
-            result = 31 * result + (getUrl() != null ? getUrl().hashCode() : 0);
-            result = 31 * result + getPipelineRun().hashCode();
+            result = CDEventConstants.HASH_CODE * result + (getUrl() != null ? getUrl().hashCode() : 0);
+            result = CDEventConstants.HASH_CODE * result + getPipelineRun().hashCode();
             return result;
         }
     }

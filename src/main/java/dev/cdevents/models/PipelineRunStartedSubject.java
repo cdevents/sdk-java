@@ -104,7 +104,7 @@ public class PipelineRunStartedSubject extends Subject {
         @Override
         public int hashCode() {
             int result = getPipelineName() != null ? getPipelineName().hashCode() : 0;
-            result = 31 * result + (getUrl() != null ? getUrl().hashCode() : 0);
+            result = CDEventConstants.HASH_CODE * result + (getUrl() != null ? getUrl().hashCode() : 0);
             return result;
         }
     }
