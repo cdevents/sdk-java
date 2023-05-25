@@ -26,6 +26,12 @@ public class PipelineRunQueuedSubject extends Subject {
     }
 
     /**
+     *Empty constructor.
+     */
+    public PipelineRunQueuedSubject() {
+    }
+
+    /**
      * @param subjectType
      */
     public PipelineRunQueuedSubject(CDEventConstants.SubjectType subjectType) {
@@ -71,5 +77,16 @@ public class PipelineRunQueuedSubject extends Subject {
             this.url = url;
         }
 
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (!(o instanceof PipelineRunQueuedSubjectContent)) return false;
+
+            PipelineRunQueuedSubjectContent that = (PipelineRunQueuedSubjectContent) o;
+
+            if (getPipelineName() != null ? !getPipelineName().equals(that.getPipelineName()) : that.getPipelineName() != null)
+                return false;
+            return getUrl() != null ? getUrl().equals(that.getUrl()) : that.getUrl() == null;
+        }
     }
 }

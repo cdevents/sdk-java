@@ -1,25 +1,31 @@
 package dev.cdevents;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.packageurl.MalformedPackageURLException;
 import com.github.packageurl.PackageURL;
+import dev.cdevents.config.CustomObjectMapper;
 import dev.cdevents.constants.CDEventConstants;
 import dev.cdevents.events.*;
 import dev.cdevents.exception.CDEventsException;
 import io.cloudevents.CloudEvent;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.URI;
 import java.nio.charset.StandardCharsets;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class CDEventsTest {
 
-    @Test
-    void createPipelineRunFinishedEventAsCloudEvent() {
+    private static ObjectMapper objectMapper = new CustomObjectMapper().customConfiguration();
 
+    @Test
+    void createPipelineRunFinishedEventAsCloudEvent() throws IOException {
         PipelineRunFinishedCDEvent cdEvent =  new PipelineRunFinishedCDEvent();
         cdEvent.setSource(URI.create("http://dev.cdevents"));
 
@@ -43,7 +49,10 @@ public class CDEventsTest {
     }
 
     @Test
-    void createPipelineRunFinishedEventOptionalFieldsUnset() {
+    void createPipelineRunFinishedEventOptionalFieldsUnset() throws IOException {
+
+        InputStream inputStream = getClass().getResourceAsStream("/pipelinerun_finished_optional.json");
+        PipelineRunFinishedCDEvent expectedCDEvent = objectMapper.readValue(inputStream, PipelineRunFinishedCDEvent.class);
 
         PipelineRunFinishedCDEvent cdEvent =  new PipelineRunFinishedCDEvent();
         cdEvent.setSource(URI.create("http://dev.cdevents"));
@@ -53,9 +62,15 @@ public class CDEventsTest {
         String cdEventJson = CDEvents.cdEventAsJson(cdEvent);
 
         CloudEvent ceEvent = CDEvents.cdEventAsCloudEvent(cdEvent);
-
         String ceDataJson = new String(ceEvent.getData().toBytes(), StandardCharsets.UTF_8);
 
+        //assert cdEvent with the expected optional test data
+        assertThat(cdEvent.getContext().getType()).isEqualTo(expectedCDEvent.getContext().getType());
+        assertThat(cdEvent.getContext().getSource()).isEqualTo(expectedCDEvent.getContext().getSource());
+        assertTrue(cdEvent.getSubject().equals(expectedCDEvent.getSubject()));
+        assertTrue(cdEvent.getSubject().getContent().equals(expectedCDEvent.getSubject().getContent()));
+
+        //assert cdEvent with the CloudEvent binding
         assertThat(ceEvent.getType()).isEqualTo(cdEvent.getContext().getType());
         assertThat(ceEvent.getSource()).isEqualTo(cdEvent.getContext().getSource());
         assertThat(ceDataJson).isEqualTo(cdEventJson);
@@ -111,7 +126,9 @@ public class CDEventsTest {
     }
 
     @Test
-    void createPipelineRunQueuedEventWithOptionalFieldsUnset() {
+    void createPipelineRunQueuedEventWithOptionalFieldsUnset() throws IOException {
+        InputStream inputStream = getClass().getResourceAsStream("/pipelinerun_queued_optional.json");
+        PipelineRunQueuedCDEvent expectedCDEvent = objectMapper.readValue(inputStream, PipelineRunQueuedCDEvent.class);
 
         PipelineRunQueuedCDEvent cdEvent =  new PipelineRunQueuedCDEvent();
         cdEvent.setSource(URI.create("http://dev.cdevents"));
@@ -124,6 +141,13 @@ public class CDEventsTest {
 
         String ceDataJson = new String(ceEvent.getData().toBytes(), StandardCharsets.UTF_8);
 
+        //assert cdEvent with the expected optional test data
+        assertThat(cdEvent.getContext().getType()).isEqualTo(expectedCDEvent.getContext().getType());
+        assertThat(cdEvent.getContext().getSource()).isEqualTo(expectedCDEvent.getContext().getSource());
+        assertTrue(cdEvent.getSubject().equals(expectedCDEvent.getSubject()));
+        assertTrue(cdEvent.getSubject().getContent().equals(expectedCDEvent.getSubject().getContent()));
+
+        //assert cdEvent with the CloudEvent binding
         assertThat(ceEvent.getType()).isEqualTo(cdEvent.getContext().getType());
         assertThat(ceEvent.getSource()).isEqualTo(cdEvent.getContext().getSource());
         assertThat(ceDataJson).isEqualTo(cdEventJson);
@@ -191,6 +215,36 @@ public class CDEventsTest {
         assertThat(exception.getMessage()).isEqualTo(expectedError);
     }
 
+    @Test
+    void createPipelineRunStartedEventWithOptionalFieldsUnset() throws IOException {
+
+        InputStream inputStream = getClass().getResourceAsStream("/pipelinerun_started_optional.json");
+        PipelineRunStartedCDEvent expectedCDEvent = objectMapper.readValue(inputStream, PipelineRunStartedCDEvent.class);
+
+        PipelineRunStartedCDEvent cdEvent =  new PipelineRunStartedCDEvent();
+        cdEvent.setSource(URI.create("http://dev.cdevents"));
+
+        cdEvent.setSubjectId("/dev/pipeline/run/subject");
+        cdEvent.setSubjectPipelineName("test-pipeline-started");
+        cdEvent.setSubjectUrl(URI.create("http://dev/pipeline/url"));
+
+        String cdEventJson = CDEvents.cdEventAsJson(cdEvent);
+        CloudEvent ceEvent = CDEvents.cdEventAsCloudEvent(cdEvent);
+        String ceDataJson = new String(ceEvent.getData().toBytes(), StandardCharsets.UTF_8);
+
+        //assert cdEvent with the expected optional test data
+        assertThat(cdEvent.getContext().getType()).isEqualTo(expectedCDEvent.getContext().getType());
+        assertThat(cdEvent.getContext().getSource()).isEqualTo(expectedCDEvent.getContext().getSource());
+        assertTrue(cdEvent.getSubject().equals(expectedCDEvent.getSubject()));
+        assertTrue(cdEvent.getSubject().getContent().equals(expectedCDEvent.getSubject().getContent()));
+
+        //assert cdEvent with the CloudEvent binding
+        assertThat(ceEvent.getType()).isEqualTo(cdEvent.getContext().getType());
+        assertThat(ceEvent.getSource()).isEqualTo(cdEvent.getContext().getSource());
+        assertThat(ceDataJson).isEqualTo(cdEventJson);
+
+    }
+
 
     @Test
     void createTaskRunStartedEventAsCloudEvent() {
@@ -230,7 +284,9 @@ public class CDEventsTest {
     }
 
     @Test
-    void createTaskRunStartedEventWithOptionalFieldsUnset() {
+    void createTaskRunStartedEventWithOptionalFieldsUnset() throws IOException {
+        InputStream inputStream = getClass().getResourceAsStream("/taskrun_started_optional.json");
+        TaskRunStartedCDEvent expectedCDEvent = objectMapper.readValue(inputStream, TaskRunStartedCDEvent.class);
 
         TaskRunStartedCDEvent cdEvent =  new TaskRunStartedCDEvent();
         cdEvent.setSource(URI.create("http://dev.cdevents"));
@@ -239,11 +295,16 @@ public class CDEventsTest {
         cdEvent.setSubjectPipelineRunId("/dev/pipeline/run/subject");
 
         String cdEventJson = CDEvents.cdEventAsJson(cdEvent);
-
         CloudEvent ceEvent = CDEvents.cdEventAsCloudEvent(cdEvent);
-
         String ceDataJson = new String(ceEvent.getData().toBytes(), StandardCharsets.UTF_8);
 
+        //assert cdEvent with the expected optional test data
+        assertThat(cdEvent.getContext().getType()).isEqualTo(expectedCDEvent.getContext().getType());
+        assertThat(cdEvent.getContext().getSource()).isEqualTo(expectedCDEvent.getContext().getSource());
+        assertTrue(cdEvent.getSubject().equals(expectedCDEvent.getSubject()));
+        assertTrue(cdEvent.getSubject().getContent().equals(expectedCDEvent.getSubject().getContent()));
+
+        //assert cdEvent with the CloudEvent binding
         assertThat(ceEvent.getType()).isEqualTo(cdEvent.getContext().getType());
         assertThat(ceEvent.getSource()).isEqualTo(cdEvent.getContext().getSource());
         assertThat(ceDataJson).isEqualTo(cdEventJson);
@@ -270,6 +331,33 @@ public class CDEventsTest {
 
         String ceDataJson = new String(ceEvent.getData().toBytes(), StandardCharsets.UTF_8);
 
+        assertThat(ceEvent.getType()).isEqualTo(cdEvent.getContext().getType());
+        assertThat(ceEvent.getSource()).isEqualTo(cdEvent.getContext().getSource());
+        assertThat(ceDataJson).isEqualTo(cdEventJson);
+    }
+
+    @Test
+    void createTaskRunFinishedEventWithOptionalFieldsUnset() throws IOException {
+        InputStream inputStream = getClass().getResourceAsStream("/taskrun_finished_optional.json");
+        TaskRunFinishedCDEvent expectedCDEvent = objectMapper.readValue(inputStream, TaskRunFinishedCDEvent.class);
+
+        TaskRunFinishedCDEvent cdEvent =  new TaskRunFinishedCDEvent();
+        cdEvent.setSource(URI.create("http://dev.cdevents"));
+
+        cdEvent.setSubjectId("/dev/task/run/subject");
+        cdEvent.setSubjectPipelineRunId("/dev/pipeline/run/subject");
+
+        String cdEventJson = CDEvents.cdEventAsJson(cdEvent);
+        CloudEvent ceEvent = CDEvents.cdEventAsCloudEvent(cdEvent);
+        String ceDataJson = new String(ceEvent.getData().toBytes(), StandardCharsets.UTF_8);
+
+        //assert cdEvent with the expected optional test data
+        assertThat(cdEvent.getContext().getType()).isEqualTo(expectedCDEvent.getContext().getType());
+        assertThat(cdEvent.getContext().getSource()).isEqualTo(expectedCDEvent.getContext().getSource());
+        assertTrue(cdEvent.getSubject().equals(expectedCDEvent.getSubject()));
+        assertTrue(cdEvent.getSubject().getContent().equals(expectedCDEvent.getSubject().getContent()));
+
+        //assert cdEvent with the CloudEvent binding
         assertThat(ceEvent.getType()).isEqualTo(cdEvent.getContext().getType());
         assertThat(ceEvent.getSource()).isEqualTo(cdEvent.getContext().getSource());
         assertThat(ceDataJson).isEqualTo(cdEventJson);

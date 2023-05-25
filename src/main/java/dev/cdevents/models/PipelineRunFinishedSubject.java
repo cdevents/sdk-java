@@ -26,6 +26,11 @@ public class PipelineRunFinishedSubject extends Subject {
     }
 
     /**
+     *Empty constructor.
+     */
+    public PipelineRunFinishedSubject() {
+    }
+    /**
      * @param subjectType
      */
     public PipelineRunFinishedSubject(CDEventConstants.SubjectType subjectType) {
@@ -104,6 +109,20 @@ public class PipelineRunFinishedSubject extends Subject {
          */
         public void setErrors(String errors) {
             this.errors = errors;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (!(o instanceof PipelineRunFinishedSubjectContent)) return false;
+
+            PipelineRunFinishedSubjectContent that = (PipelineRunFinishedSubjectContent) o;
+
+            if (getPipelineName() != null ? !getPipelineName().equals(that.getPipelineName()) : that.getPipelineName() != null)
+                return false;
+            if (getUrl() != null ? !getUrl().equals(that.getUrl()) : that.getUrl() != null) return false;
+            if (getOutcome() != that.getOutcome()) return false;
+            return getErrors() != null ? getErrors().equals(that.getErrors()) : that.getErrors() == null;
         }
     }
 }
