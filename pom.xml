@@ -241,7 +241,7 @@
 			<plugin>
 				<groupId>org.moditect</groupId>
 				<artifactId>moditect-maven-plugin</artifactId>
-				<version>1.0.0.RC3</version>
+				<version>1.0.0.Final</version>
 				<executions>
 					<execution>
 						<id>add-module-infos</id>
@@ -250,8 +250,8 @@
 							<goal>add-module-info</goal>
 						</goals>
 						<configuration>
-							<jvmVersion>9</jvmVersion>
 							<overwriteExistingFiles>true</overwriteExistingFiles>
+							<failOnWarning>false</failOnWarning>
 							<module>
 								<moduleInfo>
 									<name>dev.cdevents</name>
