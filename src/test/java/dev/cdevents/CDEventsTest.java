@@ -1,25 +1,31 @@
 package dev.cdevents;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.packageurl.MalformedPackageURLException;
 import com.github.packageurl.PackageURL;
+import dev.cdevents.config.CustomObjectMapper;
 import dev.cdevents.constants.CDEventConstants;
 import dev.cdevents.events.*;
 import dev.cdevents.exception.CDEventsException;
 import io.cloudevents.CloudEvent;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.URI;
 import java.nio.charset.StandardCharsets;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class CDEventsTest {
 
-    @Test
-    void createPipelineRunFinishedEventAsCloudEvent() {
+    private static ObjectMapper objectMapper = new CustomObjectMapper().customConfiguration();
 
+    @Test
+    void createPipelineRunFinishedEventAsCloudEvent() throws IOException {
         PipelineRunFinishedCDEvent cdEvent =  new PipelineRunFinishedCDEvent();
         cdEvent.setSource(URI.create("http://dev.cdevents"));
 
@@ -39,6 +45,42 @@ public class CDEventsTest {
         assertThat(ceEvent.getType()).isEqualTo(cdEvent.getContext().getType());
         assertThat(ceEvent.getSource()).isEqualTo(cdEvent.getContext().getSource());
         assertThat(ceDataJson).isEqualTo(cdEventJson);
+
+    }
+
+    @Test
+    void createPipelineRunFinishedEventOptionalFieldsUnset() throws IOException {
+        InputStream inputStream = getClass().getResourceAsStream("/pipelinerun_finished_optional.json");
+
+        JsonNode expectedJsonNode = objectMapper.readTree(inputStream);
+        JsonNode expectedContextNode = expectedJsonNode.get("context");
+        JsonNode expectedSubjectNode = expectedJsonNode.get("subject");
+
+        PipelineRunFinishedCDEvent cdEvent =  new PipelineRunFinishedCDEvent();
+        cdEvent.setSource(URI.create(expectedContextNode.get("source").asText()));
+        cdEvent.setSubjectId(expectedSubjectNode.get("id").asText());
+
+        String cdEventJson = CDEvents.cdEventAsJson(cdEvent);
+        JsonNode cdEventJsonNode = objectMapper.readTree(cdEventJson);
+        JsonNode cdEventContextNode = cdEventJsonNode.get("context");
+        JsonNode cdEventSubjectNode = cdEventJsonNode.get("subject");
+
+        //validates CDEvent against schema
+        assertTrue(CDEvents.validateCDEvent(cdEvent));
+
+        //assert context and subject mandatory fields
+        assertThat(cdEventContextNode.get("type").asText()).isEqualTo(expectedContextNode.get("type").asText());
+        assertThat(cdEventContextNode.get("source").asText()).isEqualTo(expectedContextNode.get("source").asText());
+        assertEquals(expectedSubjectNode, cdEventSubjectNode);
+        assertThat(cdEventSubjectNode.get("id").asText()).isEqualTo(expectedSubjectNode.get("id").asText());
+        assertThat(cdEventSubjectNode.get("type").asText()).isEqualTo(expectedSubjectNode.get("type").asText());
+
+        //assert Optional field Subject Source, Content pipelineName, url, outcome, errors are set to null
+        assertThat(cdEventSubjectNode.get("source")).isEqualTo(null);
+        assertThat(expectedSubjectNode.get("content").get("pipelineName")).isEqualTo(null);
+        assertThat(expectedSubjectNode.get("content").get("url")).isEqualTo(null);
+        assertThat(expectedSubjectNode.get("content").get("outcome")).isEqualTo(null);
+        assertThat(expectedSubjectNode.get("content").get("errors")).isEqualTo(null);
 
     }
 
@@ -88,6 +130,41 @@ public class CDEventsTest {
         String expectedError = "CDEvent validation failed against schema URL - " + cdEvent.schemaURL();
 
         assertThat(exception.getMessage()).isEqualTo(expectedError);
+    }
+
+    @Test
+    void createPipelineRunQueuedEventWithOptionalFieldsUnset() throws IOException {
+        InputStream inputStream = getClass().getResourceAsStream("/pipelinerun_queued_optional.json");
+
+        JsonNode expectedJsonNode = objectMapper.readTree(inputStream);
+        JsonNode expectedContextNode = expectedJsonNode.get("context");
+        JsonNode expectedSubjectNode = expectedJsonNode.get("subject");
+
+        PipelineRunQueuedCDEvent cdEvent =  new PipelineRunQueuedCDEvent();
+        cdEvent.setSource(URI.create(expectedContextNode.get("source").asText()));
+        cdEvent.setSubjectId(expectedSubjectNode.get("id").asText());
+
+        String cdEventJson = CDEvents.cdEventAsJson(cdEvent);
+        JsonNode cdEventJsonNode = objectMapper.readTree(cdEventJson);
+        JsonNode cdEventContextNode = cdEventJsonNode.get("context");
+        JsonNode cdEventSubjectNode = cdEventJsonNode.get("subject");
+
+        //validates CDEvent against schema
+        assertTrue(CDEvents.validateCDEvent(cdEvent));
+
+        //assert context and subject mandatory fields
+        assertThat(cdEventContextNode.get("type").asText()).isEqualTo(expectedContextNode.get("type").asText());
+        assertThat(cdEventContextNode.get("source").asText()).isEqualTo(expectedContextNode.get("source").asText());
+        assertEquals(expectedSubjectNode, cdEventSubjectNode);
+        assertThat(cdEventSubjectNode.get("id").asText()).isEqualTo(expectedSubjectNode.get("id").asText());
+        assertThat(cdEventSubjectNode.get("type").asText()).isEqualTo(expectedSubjectNode.get("type").asText());
+
+        //assert Optional field Subject Source, pipelineName, url is set to null
+        assertThat(cdEventSubjectNode.get("source")).isEqualTo(null);
+        assertThat(expectedSubjectNode.get("content").get("pipelineName")).isEqualTo(null);
+        assertThat(expectedSubjectNode.get("content").get("url")).isEqualTo(null);
+
+
     }
 
     @Test
@@ -151,6 +228,44 @@ public class CDEventsTest {
         assertThat(exception.getMessage()).isEqualTo(expectedError);
     }
 
+    @Test
+    void createPipelineRunStartedJsonEventWithOptionalFieldsUnset() throws IOException {
+
+        InputStream inputStream = getClass().getResourceAsStream("/pipelinerun_started_optional.json");
+
+        JsonNode expectedJsonNode = objectMapper.readTree(inputStream);
+        JsonNode expectedContextNode = expectedJsonNode.get("context");
+        JsonNode expectedSubjectNode = expectedJsonNode.get("subject");
+
+        PipelineRunStartedCDEvent cdEvent =  new PipelineRunStartedCDEvent();
+        cdEvent.setSource(URI.create(expectedContextNode.get("source").asText()));
+
+        cdEvent.setSubjectId(expectedSubjectNode.get("id").asText());
+        cdEvent.setSubjectPipelineName(expectedSubjectNode.get("content").get("pipelineName").asText());
+        cdEvent.setSubjectUrl(URI.create(expectedSubjectNode.get("content").get("url").asText()));
+
+        String cdEventJson = CDEvents.cdEventAsJson(cdEvent);
+        JsonNode cdEventJsonNode = objectMapper.readTree(cdEventJson);
+        JsonNode cdEventContextNode = cdEventJsonNode.get("context");
+        JsonNode cdEventSubjectNode = cdEventJsonNode.get("subject");
+
+        //validates CDEvent against schema
+        assertTrue(CDEvents.validateCDEvent(cdEvent));
+
+        //assert context and subject mandatory fields
+        assertThat(cdEventContextNode.get("type").asText()).isEqualTo(expectedContextNode.get("type").asText());
+        assertThat(cdEventContextNode.get("source").asText()).isEqualTo(expectedContextNode.get("source").asText());
+        assertEquals(expectedSubjectNode, cdEventSubjectNode);
+        assertThat(cdEventSubjectNode.get("id").asText()).isEqualTo(expectedSubjectNode.get("id").asText());
+        assertThat(cdEventSubjectNode.get("type").asText()).isEqualTo(expectedSubjectNode.get("type").asText());
+        assertThat(cdEventSubjectNode.get("content").get("pipelineName").asText()).isEqualTo(expectedSubjectNode.get("content").get("pipelineName").asText());
+        assertThat(cdEventSubjectNode.get("content").get("url").asText()).isEqualTo(expectedSubjectNode.get("content").get("url").asText());
+
+        //assert Optional field Subject Source is set to null
+        assertThat(cdEventSubjectNode.get("source")).isEqualTo(null);
+
+    }
+
 
     @Test
     void createTaskRunStartedEventAsCloudEvent() {
@@ -190,6 +305,44 @@ public class CDEventsTest {
     }
 
     @Test
+    void createTaskRunStartedEventJsonWithOptionalFieldsUnset() throws IOException {
+        InputStream inputStream = getClass().getResourceAsStream("/taskrun_started_optional.json");
+
+        JsonNode expectedJsonNode = objectMapper.readTree(inputStream);
+        JsonNode expectedContextNode = expectedJsonNode.get("context");
+        JsonNode expectedSubjectNode = expectedJsonNode.get("subject");
+
+        TaskRunStartedCDEvent cdEvent =  new TaskRunStartedCDEvent();
+        cdEvent.setSource(URI.create(expectedContextNode.get("source").asText()));
+
+        cdEvent.setSubjectId(expectedSubjectNode.get("id").asText());
+        cdEvent.setSubjectPipelineRunId(expectedSubjectNode.get("content").get("pipelineRun").get("id").asText());
+
+        String cdEventJson = CDEvents.cdEventAsJson(cdEvent);
+        JsonNode cdEventJsonNode = objectMapper.readTree(cdEventJson);
+        JsonNode cdEventContextNode = cdEventJsonNode.get("context");
+        JsonNode cdEventSubjectNode = cdEventJsonNode.get("subject");
+
+        //validates CDEvent against schema
+        assertTrue(CDEvents.validateCDEvent(cdEvent));
+
+        //assert context and subject mandatory fields
+        assertThat(cdEventContextNode.get("type").asText()).isEqualTo(expectedContextNode.get("type").asText());
+        assertThat(cdEventContextNode.get("source").asText()).isEqualTo(expectedContextNode.get("source").asText());
+        assertEquals(expectedSubjectNode, cdEventSubjectNode);
+        assertThat(cdEventSubjectNode.get("id").asText()).isEqualTo(expectedSubjectNode.get("id").asText());
+        assertThat(cdEventSubjectNode.get("type").asText()).isEqualTo(expectedSubjectNode.get("type").asText());
+        assertThat(cdEventSubjectNode.get("content").get("pipelineRun").get("id").asText()).isEqualTo(expectedSubjectNode.get("content").get("pipelineRun").get("id").asText());
+
+        //assert Optional fields Subject Source, Content taskName, URL and pipelineRun Source are set to null
+        assertThat(cdEventSubjectNode.get("source")).isEqualTo(null);
+        assertThat(cdEventSubjectNode.get("content").get("taskName")).isEqualTo(null);
+        assertThat(cdEventSubjectNode.get("content").get("url")).isEqualTo(null);
+        assertThat(cdEventSubjectNode.get("content").get("pipelineRun").get("source")).isEqualTo(null);
+
+    }
+
+    @Test
     void createTaskRunFinishedEventAsCloudEvent() {
 
         TaskRunFinishedCDEvent cdEvent =  new TaskRunFinishedCDEvent();
@@ -213,6 +366,45 @@ public class CDEventsTest {
         assertThat(ceEvent.getType()).isEqualTo(cdEvent.getContext().getType());
         assertThat(ceEvent.getSource()).isEqualTo(cdEvent.getContext().getSource());
         assertThat(ceDataJson).isEqualTo(cdEventJson);
+    }
+
+    @Test
+    void createTaskRunFinishedEventJsonWithOptionalFieldsUnset() throws IOException {
+
+        InputStream inputStream = getClass().getResourceAsStream("/taskrun_finished_optional.json");
+
+        JsonNode expectedJsonNode = objectMapper.readTree(inputStream);
+        JsonNode expectedContextNode = expectedJsonNode.get("context");
+        JsonNode expectedSubjectNode = expectedJsonNode.get("subject");
+
+        TaskRunFinishedCDEvent cdEvent =  new TaskRunFinishedCDEvent();
+        cdEvent.setSource(URI.create(expectedContextNode.get("source").asText()));
+        cdEvent.setSubjectId(expectedSubjectNode.get("id").asText());
+        cdEvent.setSubjectPipelineRunId(expectedSubjectNode.get("content").get("pipelineRun").get("id").asText());
+
+        String cdEventJson = CDEvents.cdEventAsJson(cdEvent);
+        JsonNode cdEventJsonNode = objectMapper.readTree(cdEventJson);
+        JsonNode cdEventContextNode = cdEventJsonNode.get("context");
+        JsonNode cdEventSubjectNode = cdEventJsonNode.get("subject");
+
+        //validates CDEvent against schema
+        assertTrue(CDEvents.validateCDEvent(cdEvent));
+
+        //assert context and subject mandatory fields
+        assertThat(cdEventContextNode.get("type").asText()).isEqualTo(expectedContextNode.get("type").asText());
+        assertThat(cdEventContextNode.get("source").asText()).isEqualTo(expectedContextNode.get("source").asText());
+        assertEquals(expectedSubjectNode, cdEventSubjectNode);
+        assertThat(cdEventSubjectNode.get("id").asText()).isEqualTo(expectedSubjectNode.get("id").asText());
+        assertThat(cdEventSubjectNode.get("type").asText()).isEqualTo(expectedSubjectNode.get("type").asText());
+        assertThat(cdEventSubjectNode.get("content").get("pipelineRun").get("id").asText()).isEqualTo(expectedSubjectNode.get("content").get("pipelineRun").get("id").asText());
+
+        //assert Optional fields Subject Source, Content taskName, URL, outcome, errors and pipelineRun Source are set to null
+        assertThat(cdEventSubjectNode.get("source")).isEqualTo(null);
+        assertThat(cdEventSubjectNode.get("content").get("taskName")).isEqualTo(null);
+        assertThat(cdEventSubjectNode.get("content").get("url")).isEqualTo(null);
+        assertThat(cdEventSubjectNode.get("content").get("outcome")).isEqualTo(null);
+        assertThat(cdEventSubjectNode.get("content").get("errors")).isEqualTo(null);
+        assertThat(cdEventSubjectNode.get("content").get("pipelineRun").get("source")).isEqualTo(null);
     }
 
     @Test

@@ -74,8 +74,6 @@ public final class CDEvents {
      * @return valid cdEvent
      */
     public static boolean validateCDEvent(CDEvent cdEvent) {
-        String cdEventJson = cdEventAsJson(cdEvent);
-
         JsonSchemaFactory factory = JsonSchemaFactory.getInstance(SpecVersion.VersionFlag.V202012);
         JsonSchema jsonSchema = factory.getSchema(cdEvent.eventSchema());
 
