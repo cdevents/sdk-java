@@ -65,6 +65,9 @@ public class CDEventsTest {
         JsonNode cdEventContextNode = cdEventJsonNode.get("context");
         JsonNode cdEventSubjectNode = cdEventJsonNode.get("subject");
 
+        //validates CDEvent against schema
+        assertTrue(CDEvents.validateCDEvent(cdEvent));
+
         //assert context and subject mandatory fields
         assertThat(cdEventContextNode.get("type").asText()).isEqualTo(expectedContextNode.get("type").asText());
         assertThat(cdEventContextNode.get("source").asText()).isEqualTo(expectedContextNode.get("source").asText());
@@ -145,6 +148,9 @@ public class CDEventsTest {
         JsonNode cdEventJsonNode = objectMapper.readTree(cdEventJson);
         JsonNode cdEventContextNode = cdEventJsonNode.get("context");
         JsonNode cdEventSubjectNode = cdEventJsonNode.get("subject");
+
+        //validates CDEvent against schema
+        assertTrue(CDEvents.validateCDEvent(cdEvent));
 
         //assert context and subject mandatory fields
         assertThat(cdEventContextNode.get("type").asText()).isEqualTo(expectedContextNode.get("type").asText());
@@ -243,6 +249,9 @@ public class CDEventsTest {
         JsonNode cdEventContextNode = cdEventJsonNode.get("context");
         JsonNode cdEventSubjectNode = cdEventJsonNode.get("subject");
 
+        //validates CDEvent against schema
+        assertTrue(CDEvents.validateCDEvent(cdEvent));
+
         //assert context and subject mandatory fields
         assertThat(cdEventContextNode.get("type").asText()).isEqualTo(expectedContextNode.get("type").asText());
         assertThat(cdEventContextNode.get("source").asText()).isEqualTo(expectedContextNode.get("source").asText());
@@ -314,6 +323,9 @@ public class CDEventsTest {
         JsonNode cdEventContextNode = cdEventJsonNode.get("context");
         JsonNode cdEventSubjectNode = cdEventJsonNode.get("subject");
 
+        //validates CDEvent against schema
+        assertTrue(CDEvents.validateCDEvent(cdEvent));
+
         //assert context and subject mandatory fields
         assertThat(cdEventContextNode.get("type").asText()).isEqualTo(expectedContextNode.get("type").asText());
         assertThat(cdEventContextNode.get("source").asText()).isEqualTo(expectedContextNode.get("source").asText());
@@ -374,6 +386,9 @@ public class CDEventsTest {
         JsonNode cdEventJsonNode = objectMapper.readTree(cdEventJson);
         JsonNode cdEventContextNode = cdEventJsonNode.get("context");
         JsonNode cdEventSubjectNode = cdEventJsonNode.get("subject");
+
+        //validates CDEvent against schema
+        assertTrue(CDEvents.validateCDEvent(cdEvent));
 
         //assert context and subject mandatory fields
         assertThat(cdEventContextNode.get("type").asText()).isEqualTo(expectedContextNode.get("type").asText());

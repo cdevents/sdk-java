@@ -36,10 +36,6 @@ public final class CDEvents {
      */
     public static String cdEventAsJson(CDEvent cdEvent) {
         try {
-            if (!validateCDEvent(cdEvent)) {
-                log.error("CDEvent validation failed against schema URL - {}", cdEvent.schemaURL());
-                throw new CDEventsException("CDEvent validation failed against schema URL - " + cdEvent.schemaURL());
-            }
             return objectMapper.writeValueAsString(cdEvent);
         } catch (JsonProcessingException e) {
             log.error("Error while mapping cdEvent as Json {}", e.getMessage());
@@ -54,6 +50,10 @@ public final class CDEvents {
      * @return CloudEvent
      */
     public static CloudEvent cdEventAsCloudEvent(CDEvent cdEvent) {
+        if (!validateCDEvent(cdEvent)) {
+            log.error("CDEvent validation failed against schema URL - {}", cdEvent.schemaURL());
+            throw new CDEventsException("CDEvent validation failed against schema URL - " + cdEvent.schemaURL());
+        }
         String cdEventJson = cdEventAsJson(cdEvent);
         log.info("CDEvent with type {} as json - {}", cdEvent.getContext().getType(), cdEventJson);
         CloudEvent ceToSend = new CloudEventBuilder()
