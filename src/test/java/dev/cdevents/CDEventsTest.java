@@ -10,7 +10,6 @@ import dev.cdevents.constants.CDEventConstants;
 import dev.cdevents.events.*;
 import dev.cdevents.exception.CDEventsException;
 import io.cloudevents.CloudEvent;
-import org.json.JSONException;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -358,7 +357,7 @@ public class CDEventsTest {
     }
 
     @Test
-    void createTaskRunFinishedEventJsonWithOptionalFieldsUnset() throws IOException, JSONException {
+    void createTaskRunFinishedEventJsonWithOptionalFieldsUnset() throws IOException {
 
         InputStream inputStream = getClass().getResourceAsStream("/taskrun_finished_optional.json");
 
