@@ -10,12 +10,6 @@ public final class CDEventConstants {
      */
     public static final String CDEVENTS_SPEC_VERSION = "0.1.2";
 
-
-    /**
-     * Hash code multiplier.
-     */
-    public static final int HASH_CODE = 31;
-
     public enum SubjectType {
 
         /**

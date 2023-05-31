@@ -26,12 +26,6 @@ public class TaskRunFinishedSubject extends Subject {
     }
 
     /**
-     * Empty constructor.
-     */
-    public TaskRunFinishedSubject() {
-    }
-
-    /**
      * @param subjectType
      */
     public TaskRunFinishedSubject(CDEventConstants.SubjectType subjectType) {
@@ -161,80 +155,6 @@ public class TaskRunFinishedSubject extends Subject {
             public void setSource(URI source) {
                 this.source = source;
             }
-
-            /**
-             * @param o
-             * @return true or false
-             */
-            @Override
-            public boolean equals(Object o) {
-                if (this == o) {
-                    return true;
-                }
-                if (!(o instanceof PipelineRun)) {
-                    return false;
-                }
-
-                PipelineRun that = (PipelineRun) o;
-
-                if (!getId().equals(that.getId())) {
-                    return false;
-                }
-                return getSource() != null ? getSource().equals(that.getSource()) : that.getSource() == null;
-            }
-
-            /**
-             * @return hash code value
-             */
-            @Override
-            public int hashCode() {
-                int result = getId().hashCode();
-                result = CDEventConstants.HASH_CODE * result + (getSource() != null ? getSource().hashCode() : 0);
-                return result;
-            }
-        }
-
-        /**
-         * @param o
-         * @return true or false
-         */
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) {
-                return true;
-            }
-            if (!(o instanceof TaskRunFinishedSubjectContent)) {
-                return false;
-            }
-
-            TaskRunFinishedSubjectContent that = (TaskRunFinishedSubjectContent) o;
-
-            if (getTaskName() != null ? !getTaskName().equals(that.getTaskName()) : that.getTaskName() != null) {
-                return false;
-            }
-            if (getUrl() != null ? !getUrl().equals(that.getUrl()) : that.getUrl() != null) {
-                return false;
-            }
-            if (getOutcome() != that.getOutcome()) {
-                return false;
-            }
-            if (getErrors() != null ? !getErrors().equals(that.getErrors()) : that.getErrors() != null) {
-                return false;
-            }
-            return getPipelineRun().equals(that.getPipelineRun());
-        }
-
-        /**
-         * @return hash code value
-         */
-        @Override
-        public int hashCode() {
-            int result = getTaskName() != null ? getTaskName().hashCode() : 0;
-            result = CDEventConstants.HASH_CODE * result + (getUrl() != null ? getUrl().hashCode() : 0);
-            result = CDEventConstants.HASH_CODE * result + (getOutcome() != null ? getOutcome().hashCode() : 0);
-            result = CDEventConstants.HASH_CODE * result + (getErrors() != null ? getErrors().hashCode() : 0);
-            result = CDEventConstants.HASH_CODE * result + getPipelineRun().hashCode();
-            return result;
         }
     }
 }

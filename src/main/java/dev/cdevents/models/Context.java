@@ -24,12 +24,6 @@ public class Context {
     private LocalDateTime timestamp;
 
     /**
-     * Empty constructor.
-     */
-    public Context() {
-    }
-
-    /**
      * @param id
      * @param timestamp
      * @param type

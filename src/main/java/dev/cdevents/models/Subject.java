@@ -25,12 +25,6 @@ public class Subject {
     }
 
     /**
-     * Empty constructor.
-     */
-    public Subject() {
-    }
-
-    /**
      * @return Subject id
      */
     public String getId() {
@@ -71,40 +65,5 @@ public class Subject {
      */
     public void setType(CDEventConstants.SubjectType type) {
         this.type = type;
-    }
-
-    /**
-     * @param o
-     * @return true or false
-     */
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (!(o instanceof Subject)) {
-            return false;
-        }
-
-        Subject subject = (Subject) o;
-
-        if (!getId().equals(subject.getId())) {
-            return false;
-        }
-        if (getSource() != null ? !getSource().equals(subject.getSource()) : subject.getSource() != null) {
-            return false;
-        }
-        return getType() == subject.getType();
-    }
-
-    /**
-     * @return hash code value
-     */
-    @Override
-    public int hashCode() {
-        int result = getId() != null ? getId().hashCode() : 0;
-        result = CDEventConstants.HASH_CODE * result + (getSource() != null ? getSource().hashCode() : 0);
-        result = CDEventConstants.HASH_CODE * result + (getType() != null ? getType().hashCode() : 0);
-        return result;
     }
 }
