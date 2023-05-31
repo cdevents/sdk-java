@@ -70,5 +70,6 @@ public class PipelineRunQueuedSubject extends Subject {
         public void setUrl(URI url) {
             this.url = url;
         }
+
     }
 }

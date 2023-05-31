@@ -70,5 +70,6 @@ public class PipelineRunStartedSubject extends Subject {
         public void setUrl(URI url) {
             this.url = url;
         }
+
     }
 }
