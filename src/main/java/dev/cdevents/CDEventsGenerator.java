@@ -33,25 +33,28 @@ public class CDEventsGenerator {
 
                 //Generate a class file for each Json schema file using a mustache template
                 for (File file : files) {
-                    SchemaData schemaData = buildCDEventSchemaData(file);
-
-                    String classFileName = StringUtils.join(new String[]{schemaData.getCapitalizedSubject(), schemaData.getCapitalizedPredicate(), "CDEvent", ".java"});
-                    File classFile = new File("src/main/java/dev/cdevents/events/generated", classFileName);
-                    try {
-                        FileWriter fileWriter = new FileWriter(classFile);
-                        BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-                        mustache.execute(bufferedWriter, schemaData).flush();
-                        fileWriter.close();
-                    } catch (IOException e) {
-                        throw new CDEventsException("Exception occurred while generating class file from Json schema ", e);
-                    }
-                    System.out.println("Rendered event-template has been written to file - "+classFile.getAbsolutePath());
+                    SchemaData schemaData = buildCDEventDataFromJsonSchema(file);
+                    generateClassFileFromSchemaData(mustache, schemaData);
                 }
             }
         }
     }
 
-    private static SchemaData buildCDEventSchemaData(File file) {
+    private static void generateClassFileFromSchemaData(Mustache mustache, SchemaData schemaData) {
+        String classFileName = StringUtils.join(new String[]{schemaData.getCapitalizedSubject(), schemaData.getCapitalizedPredicate(), "CDEvent", ".java"});
+        File classFile = new File("src/main/java/dev/cdevents/events/generated", classFileName);
+        try {
+            FileWriter fileWriter = new FileWriter(classFile);
+            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+            mustache.execute(bufferedWriter, schemaData).flush();
+            fileWriter.close();
+        } catch (IOException e) {
+            throw new CDEventsException("Exception occurred while generating class file from Json schema ", e);
+        }
+        System.out.println("Rendered event-template has been written to file - "+classFile.getAbsolutePath());
+    }
+
+    private static SchemaData buildCDEventDataFromJsonSchema(File file) {
         SchemaData schemaData = new SchemaData();
 
         System.out.println("Processing event JsonSchema file: " + file.getAbsolutePath());
