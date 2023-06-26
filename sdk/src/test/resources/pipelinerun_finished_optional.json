@@ -1,0 +1,18 @@
+{
+  "context": {
+    "id": "123456789",
+    "type": "dev.cdevents.pipelinerun.finished.0.1.0",
+    "source": "http://dev.cdevents",
+    "version": "0.1.2",
+    "timestamp": "2023-05-24T11:17:06Z"
+  },
+  "customData": {
+  },
+  "customDataContentType": "application/json",
+  "subject": {
+    "id": "/dev/pipeline/run/subject",
+    "type": "pipelineRun",
+    "content": {
+    }
+  }
+}
