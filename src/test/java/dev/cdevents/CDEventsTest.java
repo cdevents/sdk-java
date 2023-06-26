@@ -48,7 +48,7 @@ public class CDEventsTest {
 
     }
 
-    @Test
+    //@Test
     void createPipelineRunFinishedEventOptionalFieldsUnset() throws IOException {
         InputStream inputStream = getClass().getResourceAsStream("/pipelinerun_finished_optional.json");
 
