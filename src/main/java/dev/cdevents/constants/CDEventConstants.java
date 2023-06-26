@@ -6,6 +6,15 @@ public final class CDEventConstants {
     }
 
     /**
+     * Event JsonSchema files location.
+     */
+    public static final String SCHEMA_FOLDER = "src/main/resources/schema";
+    /**
+     * Mustache generic event template file
+     */
+    public static final String EVENT_TEMPLATE_MUSTACHE = "template/event-template.mustache";
+
+    /**
      * CDEvents Version.
      */
     public static final String CDEVENTS_SPEC_VERSION = "0.1.2";
