@@ -28,6 +28,11 @@ public final class CDEventsGenerator {
     private static ObjectMapper objectMapper = new ObjectMapper();
     private static Logger log = LoggerFactory.getLogger(CDEventsGenerator.class);
 
+    private static final int SUBJECT_INDEX = 2;
+    private static final int PREDICATE_INDEX = 3;
+    private static final int VERSION_INDEX = 4;
+    private static final int SUBSTRING_PIPELINE_INDEX = 8;
+
     /**
      * Main method to generate CDEvents from Json schema files.
      * @param args
@@ -76,14 +81,14 @@ public final class CDEventsGenerator {
             String eventType = contextNode.get("type").get("enum").get(0).asText();
             log.info("eventType: {}", eventType);
             String[] type = eventType.split("\\.");
-            String subject = type[2];
-            String predicate = type[3];
+            String subject = type[SUBJECT_INDEX];
+            String predicate = type[PREDICATE_INDEX];
             String capitalizedSubject = StringUtils.capitalize(subject);
             if (subject.equals("pipelinerun")) {
-                capitalizedSubject = capitalizedSubject.substring(0, 8) + StringUtils.capitalize(subject.substring(8));
+                capitalizedSubject = capitalizedSubject.substring(0, SUBSTRING_PIPELINE_INDEX) + StringUtils.capitalize(subject.substring(SUBSTRING_PIPELINE_INDEX));
             }
             String capitalizedPredicate = StringUtils.capitalize(predicate);
-            String version = type[4];
+            String version = type[VERSION_INDEX];
 
             //set the Schema JsonNode required values to schemaData
             schemaData.setSubject(subject);
