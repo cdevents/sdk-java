@@ -109,7 +109,8 @@ public class CDEventsGenerator {
                 schemaData.setCapitalizedObjectName(capitalizedContentField);
                 JsonNode contentObjectNode = contentNode.get("properties");
                 Iterator<String> contentObjectProps = contentObjectNode.fieldNames();
-                for (Iterator<String> objectProps = contentObjectProps; objectProps.hasNext(); ) {
+                while (contentObjectProps.hasNext()) {
+                    String contentObjField = contentObjectProps.next();
                     String contentObjField = objectProps.next();
                     String capitalizedContentObjField = StringUtils.capitalize(contentObjField);
                     contentObjectFields.add(new SchemaData.ContentObjectField(contentObjField, capitalizedContentObjField, contentField, capitalizedContentField, "String"));
