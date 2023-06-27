@@ -15,6 +15,7 @@ jobs:
       - name: Lint Code Base
         uses: github/super-linter/slim@v4
         env:
+          FILTER_REGEX_EXCLUDE: .*src/main/java/dev/cdevents/models/generated/.*
           FILTER_REGEX_INCLUDE: .*src/main/.*
           VALIDATE_ALL_CODEBASE: false
           DEFAULT_BRANCH: main
