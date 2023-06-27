@@ -17,8 +17,6 @@ import io.cloudevents.core.v03.CloudEventBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
@@ -48,6 +46,10 @@ public final class CDEvents {
         }
     }
 
+    /**
+     * @param cdEvent
+     * @return json string of a cdEvent
+     */
     public static String cdEventAsJson(CDEventGen cdEvent) {
         try {
             return objectMapper.writeValueAsString(cdEvent);
@@ -82,6 +84,11 @@ public final class CDEvents {
         return ceToSend;
     }
 
+    /**
+     * Creates a CloudEvent from the cdEvent.
+     * @param cdEvent
+     * @return CloudEvent
+     */
     public static CloudEvent cdEventAsCloudEvent(CDEventGen cdEvent) {
         if (!validateCDEvent(cdEvent)) {
             log.error("CDEvent validation failed against schema URL - {}", cdEvent.schemaURL());
@@ -122,11 +129,14 @@ public final class CDEvents {
         return true;
     }
 
+    /**
+     * Validates the cdEvent against the Schema URL.
+     * @param cdEvent
+     * @return valid cdEvent
+     */
     public static boolean validateCDEvent(CDEventGen cdEvent) {
         JsonSchemaFactory factory = JsonSchemaFactory.getInstance(SpecVersion.VersionFlag.V202012);
         JsonSchema jsonSchema = factory.getSchema(cdEvent.eventSchema());
-//        InputStream is = new ByteArrayInputStream(cdEvent.eventSchema().getBytes(StandardCharsets.UTF_8));
-//        JsonSchema jsonSchema = factory.getSchema(is);
 
         JsonNode jsonNode = objectMapper.convertValue(cdEvent, ObjectNode.class);
         Set<ValidationMessage> errors = jsonSchema.validate(jsonNode);

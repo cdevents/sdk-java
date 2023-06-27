@@ -9,6 +9,8 @@ import dev.cdevents.constants.CDEventConstants;
 import dev.cdevents.exception.CDEventsException;
 import dev.cdevents.models.SchemaData;
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -20,8 +22,17 @@ import java.util.List;
 import java.util.Map;
 
 public class CDEventsGenerator {
-    private static ObjectMapper objectMapper = new ObjectMapper();
 
+    public CDEventsGenerator() {
+    }
+
+    private static ObjectMapper objectMapper = new ObjectMapper();
+    private static Logger log = LoggerFactory.getLogger(CDEventsGenerator.class);
+
+    /**
+     * Main method to generate CDEvents from Json schema files.
+     * @param args
+     */
     public static void main(String[] args) {
         File folder = new File(CDEventConstants.SCHEMA_FOLDER);
         if (folder.isDirectory()) {
@@ -49,27 +60,28 @@ public class CDEventsGenerator {
             mustache.execute(bufferedWriter, schemaData).flush();
             fileWriter.close();
         } catch (IOException e) {
+            log.error("Exception occurred while generating class file from Json schema {}", e.getMessage());
             throw new CDEventsException("Exception occurred while generating class file from Json schema ", e);
         }
-        System.out.println("Rendered event-template has been written to file - "+classFile.getAbsolutePath());
+        log.info("Rendered event-template has been written to file - {}", classFile.getAbsolutePath());
     }
 
     private static SchemaData buildCDEventDataFromJsonSchema(File file) {
         SchemaData schemaData = new SchemaData();
 
-        System.out.println("Processing event JsonSchema file: " + file.getAbsolutePath());
+        log.info("Processing event JsonSchema file: {}", file.getAbsolutePath());
         try {
             JsonNode rootNode = objectMapper.readTree(file);
             JsonNode contextNode = rootNode.get("properties").get("context").get("properties");
 
             String eventType = contextNode.get("type").get("enum").get(0).asText();
-            System.out.println("eventType: " + eventType);
+            log.info("eventType: {}", eventType);
             String[] type = eventType.split("\\.");
             String subject = type[2];
             String predicate = type[3];
             String capitalizedSubject = StringUtils.capitalize(subject);
             if(subject.equals("pipelinerun")){
-                capitalizedSubject = subject.substring(0, 1).toUpperCase() + subject.substring(1, 8) + subject.substring(8, 9).toUpperCase() + subject.substring(9);
+                capitalizedSubject = capitalizedSubject.substring(0, 8) + StringUtils.capitalize(subject.substring(8));
             }
             String capitalizedPredicate = StringUtils.capitalize(predicate);
             String version = type[4];
@@ -87,6 +99,7 @@ public class CDEventsGenerator {
             JsonNode subjectContentNode = subjectNode.get("content").get("properties");
             updateSubjectContentProperties(schemaData, subjectContentNode);
         } catch (IOException e) {
+            log.error("Exception occurred while building schema data from Json schema {}", e.getMessage());
             throw new CDEventsException("Exception occurred while building schema data from Json schema ", e);
         }
         return schemaData;
@@ -98,22 +111,21 @@ public class CDEventsGenerator {
         List<SchemaData.ContentObjectField> contentObjectFields = new ArrayList<>();
 	    while (contentProps.hasNext()) {
             Map.Entry<String, JsonNode> contentMap = contentProps.next();
-            Map.Entry<String, JsonNode> contentMap = entryProps.next();
             String contentField = contentMap.getKey();
             String capitalizedContentField = StringUtils.capitalize(contentField);
             JsonNode contentNode = contentMap.getValue();
-            if(!contentNode.get("type").asText().equals("object")){
+            if (!contentNode.get("type").asText().equals("object")) {
                 contentFields.add(new SchemaData.ContentField(contentField, capitalizedContentField, "String"));
-            }else{
+            } else {
                 schemaData.setObjectName(contentField);
                 schemaData.setCapitalizedObjectName(capitalizedContentField);
                 JsonNode contentObjectNode = contentNode.get("properties");
                 Iterator<String> contentObjectProps = contentObjectNode.fieldNames();
                 while (contentObjectProps.hasNext()) {
                     String contentObjField = contentObjectProps.next();
-                    String contentObjField = objectProps.next();
                     String capitalizedContentObjField = StringUtils.capitalize(contentObjField);
-                    contentObjectFields.add(new SchemaData.ContentObjectField(contentObjField, capitalizedContentObjField, contentField, capitalizedContentField, "String"));
+                    contentObjectFields.add(new SchemaData.ContentObjectField(contentObjField,
+                            capitalizedContentObjField, contentField, capitalizedContentField, "String"));
                 }
             }
         }
@@ -122,9 +134,9 @@ public class CDEventsGenerator {
     }
 
     private static String getFieldsDataType(String fieldName) {
-        if (fieldName.equalsIgnoreCase("url")){
+        if (fieldName.equalsIgnoreCase("url")) {
             return "URI";
-        }else{
+        } else {
             return "String";
         }
     }
