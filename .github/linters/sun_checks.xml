@@ -175,6 +175,7 @@
     <module name="InnerAssignment"/>
     <module name="MagicNumber">
     	<property name="constantWaiverParentToken" value="ASSIGN,ARRAY_INIT,METHOD_CALL"/>
+	<property name="ignoreFieldDeclaration" value="true"/>
     </module>
     <module name="MissingSwitchDefault"/>
     <module name="MultipleVariableDeclarations"/>

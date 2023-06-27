@@ -85,7 +85,8 @@ public final class CDEventsGenerator {
             String predicate = type[PREDICATE_INDEX];
             String capitalizedSubject = StringUtils.capitalize(subject);
             if (subject.equals("pipelinerun")) {
-                capitalizedSubject = capitalizedSubject.substring(0, SUBSTRING_PIPELINE_INDEX) + StringUtils.capitalize(subject.substring(SUBSTRING_PIPELINE_INDEX));
+                capitalizedSubject = capitalizedSubject.substring(0, SUBSTRING_PIPELINE_INDEX)
+                        + StringUtils.capitalize(subject.substring(SUBSTRING_PIPELINE_INDEX));
             }
             String capitalizedPredicate = StringUtils.capitalize(predicate);
             String version = type[VERSION_INDEX];
