@@ -34,7 +34,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 
-public class PipelineRunFinishedCDEvent extends PipelineRunFinishedEvent implements CDEventGen{
+public class PipelineRunFinishedCDEvent extends PipelineRunFinishedEvent implements CDEventGen {
 
 
     /**
@@ -47,7 +47,7 @@ public class PipelineRunFinishedCDEvent extends PipelineRunFinishedEvent impleme
 
 
     /**
-    * Initialize the CDEvent with the context values
+    * Initialize the CDEvent with the context values.
     */
 
     @Override
@@ -63,6 +63,10 @@ public class PipelineRunFinishedCDEvent extends PipelineRunFinishedEvent impleme
         getSubject().setContent(new Content());
         getSubject().setType(CDEventConstants.SubjectType.PIPELINERUN.getSubjectType());
     }
+
+    /**
+    * @return the event source
+    */
 
     @Override
     public String eventSource() {
@@ -98,7 +102,7 @@ public class PipelineRunFinishedCDEvent extends PipelineRunFinishedEvent impleme
     @Override
     public String eventSchema() {
         try {
-            return Files.readString(Paths.get(CDEventConstants.SCHEMA_FOLDER+"/pipeline-run-finished-event.json"));
+            return Files.readString(Paths.get(CDEventConstants.SCHEMA_FOLDER + "/pipeline-run-finished-event.json"));
         } catch (IOException e) {
             throw new CDEventsException("Exception while reading Event JsonSchema file ", e);
         }

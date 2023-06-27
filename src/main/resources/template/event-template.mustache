@@ -34,7 +34,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 
-public class {{capitalizedSubject}}{{capitalizedPredicate}}CDEvent extends {{capitalizedSubject}}{{capitalizedPredicate}}Event implements CDEventGen{
+public class {{capitalizedSubject}}{{capitalizedPredicate}}CDEvent extends {{capitalizedSubject}}{{capitalizedPredicate}}Event implements CDEventGen {
 
 
     /**
@@ -47,7 +47,7 @@ public class {{capitalizedSubject}}{{capitalizedPredicate}}CDEvent extends {{cap
 
 
     /**
-    * Initialize the CDEvent with the context values
+    * Initialize the CDEvent with the context values.
     */
 
     @Override
@@ -66,6 +66,10 @@ public class {{capitalizedSubject}}{{capitalizedPredicate}}CDEvent extends {{cap
         {{/getCapitalizedObjectName}}
         getSubject().setType(CDEventConstants.SubjectType.{{upperCaseSubject}}.getSubjectType());
     }
+
+    /**
+    * @return the event source
+    */
 
     @Override
     public String eventSource() {
@@ -101,7 +105,7 @@ public class {{capitalizedSubject}}{{capitalizedPredicate}}CDEvent extends {{cap
     @Override
     public String eventSchema() {
         try {
-            return Files.readString(Paths.get(CDEventConstants.SCHEMA_FOLDER+"/{{schemaFileName}}"));
+            return Files.readString(Paths.get(CDEventConstants.SCHEMA_FOLDER + "/{{schemaFileName}}"));
         } catch (IOException e) {
             throw new CDEventsException("Exception while reading Event JsonSchema file ", e);
         }

@@ -23,7 +23,7 @@ import java.util.Map;
 
 public class CDEventsGenerator {
 
-    public CDEventsGenerator() {
+    private CDEventsGenerator() {
     }
 
     private static ObjectMapper objectMapper = new ObjectMapper();
@@ -80,7 +80,7 @@ public class CDEventsGenerator {
             String subject = type[2];
             String predicate = type[3];
             String capitalizedSubject = StringUtils.capitalize(subject);
-            if(subject.equals("pipelinerun")){
+            if (subject.equals("pipelinerun")) {
                 capitalizedSubject = capitalizedSubject.substring(0, 8) + StringUtils.capitalize(subject.substring(8));
             }
             String capitalizedPredicate = StringUtils.capitalize(predicate);
@@ -109,7 +109,7 @@ public class CDEventsGenerator {
         Iterator<Map.Entry<String, JsonNode>> contentProps = subjectContentNode.fields();
         List<SchemaData.ContentField> contentFields = new ArrayList<>();
         List<SchemaData.ContentObjectField> contentObjectFields = new ArrayList<>();
-	    while (contentProps.hasNext()) {
+        while (contentProps.hasNext()) {
             Map.Entry<String, JsonNode> contentMap = contentProps.next();
             String contentField = contentMap.getKey();
             String capitalizedContentField = StringUtils.capitalize(contentField);

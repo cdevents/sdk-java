@@ -1,29 +1,30 @@
 package dev.cdevents.models;
 
-import java.io.IOException;
-
 public interface CDEventGen {
 
     /**
      * @return current CDEvent type
      */
-    public String currentCDEventType();
+    String currentCDEventType();
 
     /**
      * @return schema URL for validating the CDEvent structure
      */
-    public String schemaURL();
+    String schemaURL();
 
     /**
      * @return schema json for validating the CDEvent structure
      */
-    public String eventSchema();
+    String eventSchema();
 
     /**
-     * Initialize the CDEvent with the context values
+     * Initialize the CDEvent with the context values.
      */
-    public void initCDEvent();
+    void initCDEvent();
 
-    public String eventSource();
+    /**
+     * @return source of the event
+     */
+    String eventSource();
 
 }

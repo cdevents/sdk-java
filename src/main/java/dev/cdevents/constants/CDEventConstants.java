@@ -10,7 +10,7 @@ public final class CDEventConstants {
      */
     public static final String SCHEMA_FOLDER = "src/main/resources/schema";
     /**
-     * Mustache generic event template file
+     * Mustache generic event template file.
      */
     public static final String EVENT_TEMPLATE_MUSTACHE = "template/event-template.mustache";
 
