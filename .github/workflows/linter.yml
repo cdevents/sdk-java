@@ -20,4 +20,4 @@ jobs:
           DEFAULT_BRANCH: main
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           # mvnw is provided as is from the Maven Wrapper project. Can't change it
-          FILTER_REGEX_EXCLUDE: .*mvnw,.*src/main/java/dev/cdevents/models/generated/.*
+          FILTER_REGEX_EXCLUDE: [.*mvnw, .*src/main/java/dev/cdevents/models/generated/.*]
