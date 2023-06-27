@@ -96,7 +96,8 @@ public class CDEventsGenerator {
         Iterator<Map.Entry<String, JsonNode>> contentProps = subjectContentNode.fields();
         List<SchemaData.ContentField> contentFields = new ArrayList<>();
         List<SchemaData.ContentObjectField> contentObjectFields = new ArrayList<>();
-        for (Iterator<Map.Entry<String, JsonNode>> entryProps = contentProps; entryProps.hasNext(); ) {
+	    while (contentProps.hasNext()) {
+            Map.Entry<String, JsonNode> contentMap = contentProps.next();
             Map.Entry<String, JsonNode> contentMap = entryProps.next();
             String contentField = contentMap.getKey();
             String capitalizedContentField = StringUtils.capitalize(contentField);
