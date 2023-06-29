@@ -7,7 +7,6 @@ import com.github.mustachejava.Mustache;
 import com.github.mustachejava.MustacheFactory;
 import dev.cdevents.constants.CDEventConstants;
 import dev.cdevents.exception.CDEventsException;
-import dev.cdevents.models.SchemaData;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,6 +32,8 @@ public final class CDEventsGenerator {
     private static final int VERSION_INDEX = 4;
     private static final int SUBSTRING_PIPELINE_INDEX = 8;
 
+    private static final String TARGET_PACKAGE = "src/main/java/dev/cdevents/events";
+
     /**
      * Main method to generate CDEvents from Json schema files.
      * @param args
@@ -49,15 +50,15 @@ public final class CDEventsGenerator {
                 //Generate a class file for each Json schema file using a mustache template
                 for (File file : files) {
                     SchemaData schemaData = buildCDEventDataFromJsonSchema(file);
-                    generateClassFileFromSchemaData(mustache, schemaData);
+                    generateClassFileFromSchemaData(mustache, schemaData, TARGET_PACKAGE);
                 }
             }
         }
     }
 
-    private static void generateClassFileFromSchemaData(Mustache mustache, SchemaData schemaData) {
+    private static void generateClassFileFromSchemaData(Mustache mustache, SchemaData schemaData, String targetPackage) {
         String classFileName = StringUtils.join(new String[]{schemaData.getCapitalizedSubject(), schemaData.getCapitalizedPredicate(), "CDEvent", ".java"});
-        File classFile = new File("src/main/java/dev/cdevents/events/generated", classFileName);
+        File classFile = new File(targetPackage, classFileName);
         try {
             FileWriter fileWriter = new FileWriter(classFile);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);

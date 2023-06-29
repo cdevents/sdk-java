@@ -300,7 +300,7 @@
 						<!--<configuration>
 							<sourceDirectory>${project.basedir}/src/main/resources/schema</sourceDirectory>
 							<outputDirectory>${basedir}/src/main/java</outputDirectory>
-							<targetPackage>dev.cdevents.models.generated</targetPackage>
+							<targetPackage>dev.cdevents.models</targetPackage>
 							<includeHashcodeAndEquals>false</includeHashcodeAndEquals>
 							<includeToString>false</includeToString>
 						</configuration>-->
@@ -309,7 +309,7 @@
 								<sourcePath>${project.basedir}/src/main/resources/schema/artifact-packaged-event.json</sourcePath>
 							</sourcePaths>
 							<outputDirectory>${basedir}/src/main/java</outputDirectory>
-							<targetPackage>dev.cdevents.models.generated.artifact.packaged</targetPackage>
+							<targetPackage>dev.cdevents.models.artifact.packaged</targetPackage>
 							<includeHashcodeAndEquals>false</includeHashcodeAndEquals>
 							<includeToString>false</includeToString>
 						</configuration>
@@ -325,7 +325,7 @@
 								<sourcePath>${project.basedir}/src/main/resources/schema/artifact-published-event.json</sourcePath>
 							</sourcePaths>
 							<outputDirectory>${basedir}/src/main/java</outputDirectory>
-							<targetPackage>dev.cdevents.models.generated.artifact.published</targetPackage>
+							<targetPackage>dev.cdevents.models.artifact.published</targetPackage>
 							<includeHashcodeAndEquals>false</includeHashcodeAndEquals>
 							<includeToString>false</includeToString>
 						</configuration>
@@ -341,7 +341,7 @@
 								<sourcePath>${project.basedir}/src/main/resources/schema/pipeline-run-finished-event.json</sourcePath>
 							</sourcePaths>
 							<outputDirectory>${basedir}/src/main/java</outputDirectory>
-							<targetPackage>dev.cdevents.models.generated.pipelinerun.finished</targetPackage>
+							<targetPackage>dev.cdevents.models.pipelinerun.finished</targetPackage>
 							<includeHashcodeAndEquals>false</includeHashcodeAndEquals>
 							<includeToString>false</includeToString>
 						</configuration>

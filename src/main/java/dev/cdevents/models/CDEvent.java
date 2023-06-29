@@ -1,94 +1,30 @@
 package dev.cdevents.models;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import dev.cdevents.constants.CDEventConstants;
-
-import java.net.URI;
-import java.time.LocalDateTime;
-import java.util.UUID;
-
-public abstract class CDEvent {
-
-    @JsonProperty(required = true)
-    private Context context;
-
-    @JsonProperty
-    private Object customData = new Object();
-
-    @JsonProperty
-    private String customDataContentType = "application/json";
-
+public interface CDEvent {
 
     /**
      * @return current CDEvent type
      */
-    public abstract String currentCDEventType();
+    String currentCDEventType();
 
     /**
      * @return schema URL for validating the CDEvent structure
      */
-    public abstract String schemaURL();
+    String schemaURL();
 
     /**
      * @return schema json for validating the CDEvent structure
      */
-    public abstract String eventSchema();
+    String eventSchema();
 
     /**
-     * @param source
-     * Sets the {@link Context} source value
+     * Initialize the CDEvent with the context values.
      */
-    public void setSource(URI source) {
-        this.getContext().setSource(source);
-    }
+    void initCDEvent();
 
     /**
-     * @return context
+     * @return source of the event
      */
-    public Context getContext() {
-        return context;
-    }
+    String eventSource();
 
-    /**
-     * @param context
-     */
-    public void setContext(Context context) {
-        this.context = context;
-    }
-
-    /**
-     * @return customData
-     */
-    public Object getCustomData() {
-        return customData;
-    }
-
-    /**
-     * @param customData
-     */
-    public void setCustomData(Object customData) {
-        this.customData = customData;
-    }
-
-    /**
-     * @return customDataContentType
-     */
-    public String getCustomDataContentType() {
-        return customDataContentType;
-    }
-
-    /**
-     * @param customDataContentType
-     */
-    public void setCustomDataContentType(String customDataContentType) {
-        this.customDataContentType = customDataContentType;
-    }
-
-    /**
-     * @param cdeventType
-     * Initialize the CDEvent with the context values
-     */
-    public void initCDEvent(String cdeventType) {
-        setContext(new Context(UUID.randomUUID().toString(), LocalDateTime.now(), cdeventType, CDEventConstants.CDEVENTS_SPEC_VERSION));
-    }
 }
