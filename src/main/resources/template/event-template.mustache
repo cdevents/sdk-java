@@ -18,13 +18,13 @@ limitations under the License.
 SPDX-License-Identifier: Apache-2.0
 */
 
-package dev.cdevents.events.generated;
+package dev.cdevents.events;
 
 
 import dev.cdevents.constants.CDEventConstants;
 import dev.cdevents.exception.CDEventsException;
-import dev.cdevents.models.CDEventGen;
-import dev.cdevents.models.generated.{{subject}}.{{predicate}}.*;
+import dev.cdevents.models.CDEvent;
+import dev.cdevents.models.{{subject}}.{{predicate}}.*;
 
 import java.net.URI;
 import java.util.Date;
@@ -34,7 +34,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 
-public class {{capitalizedSubject}}{{capitalizedPredicate}}CDEvent extends {{capitalizedSubject}}{{capitalizedPredicate}}Event implements CDEventGen {
+public class {{capitalizedSubject}}{{capitalizedPredicate}}CDEvent extends {{capitalizedSubject}}{{capitalizedPredicate}}Event implements CDEvent {
 
 
     /**
