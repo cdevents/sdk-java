@@ -11,7 +11,7 @@
   "customDataContentType": "application/json",
   "subject": {
     "id": "/dev/task/run/subject",
-    "type": "TASKRUN",
+    "type": "taskRun",
     "content": {
       "pipelineRun": {
         "id": "/dev/pipeline/run/subject"

@@ -52,7 +52,11 @@ public final class CDEventsGenerator {
                     SchemaData schemaData = buildCDEventDataFromJsonSchema(file);
                     generateClassFileFromSchemaData(mustache, schemaData, TARGET_PACKAGE);
                 }
+            }else {
+                log.error("No schema files found in the specified directory {}", folder.getAbsolutePath());
             }
+        } else {
+            log.error("No schema directory found in the specified directory {}", folder.getAbsolutePath());
         }
     }
 
@@ -78,6 +82,7 @@ public final class CDEventsGenerator {
         try {
             JsonNode rootNode = objectMapper.readTree(file);
             JsonNode contextNode = rootNode.get("properties").get("context").get("properties");
+            String schemaURL = rootNode.get("$id").asText();
 
             String eventType = contextNode.get("type").get("enum").get(0).asText();
             log.info("eventType: {}", eventType);
@@ -85,14 +90,11 @@ public final class CDEventsGenerator {
             String subject = type[SUBJECT_INDEX];
             String predicate = type[PREDICATE_INDEX];
             String capitalizedSubject = StringUtils.capitalize(subject);
-            if (subject.equals("pipelinerun")) {
-                capitalizedSubject = capitalizedSubject.substring(0, SUBSTRING_PIPELINE_INDEX)
-                        + StringUtils.capitalize(subject.substring(SUBSTRING_PIPELINE_INDEX));
-            }
             String capitalizedPredicate = StringUtils.capitalize(predicate);
             String version = type[VERSION_INDEX];
 
             //set the Schema JsonNode required values to schemaData
+            schemaData.setSchemaURL(schemaURL);
             schemaData.setSubject(subject);
             schemaData.setPredicate(predicate);
             schemaData.setCapitalizedSubject(capitalizedSubject);

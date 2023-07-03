@@ -8,7 +8,8 @@ public final class CDEventConstants {
     /**
      * Event JsonSchema files location.
      */
-    public static final String SCHEMA_FOLDER = "src/main/resources/schema";
+    public static final String SCHEMA_FOLDER = "spec/schemas";
+
     /**
      * Mustache generic event template file.
      */

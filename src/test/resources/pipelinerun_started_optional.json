@@ -11,7 +11,7 @@
   "customDataContentType": "application/json",
   "subject": {
     "id": "/dev/pipeline/run/subject",
-    "type": "PIPELINERUN",
+    "type": "pipelineRun",
     "content": {
       "pipelineName": "test-pipeline-started",
       "url": "http://dev/pipeline/url"

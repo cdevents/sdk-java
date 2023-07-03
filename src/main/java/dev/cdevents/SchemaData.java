@@ -17,6 +17,8 @@ public class SchemaData {
     private String upperCaseSubject;
     private String schemaFileName;
 
+    private String schemaURL;
+
     private List<ContentField> contentFields;
 
     private List<ContentObjectField> contentObjectFields;
@@ -151,6 +153,20 @@ public class SchemaData {
      */
     public void setSchemaFileName(String schemaFileName) {
         this.schemaFileName = schemaFileName;
+    }
+
+    /**
+     * @return schemaURL
+     */
+    public String getSchemaURL() {
+        return schemaURL;
+    }
+
+    /**
+     * @param schemaURL
+     */
+    public void setSchemaURL(String schemaURL) {
+        this.schemaURL = schemaURL;
     }
 
     /**

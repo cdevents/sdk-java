@@ -34,7 +34,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 
-public class ArtifactPublishedCDEvent extends ArtifactPublishedEvent implements CDEvent {
+public class ArtifactPublishedCDEvent extends Artifactpublished implements CDEvent {
 
 
     /**
@@ -85,24 +85,23 @@ public class ArtifactPublishedCDEvent extends ArtifactPublishedEvent implements 
 
 
     /**
-    * @return the artifact-published-event.json schema URL
+    * @return the artifactpublished.json schema URL
     */
 
     @Override
     public String schemaURL() {
-        String eventSchemaName = "artifact-published-event.json".substring(0, "artifact-published-event.json".lastIndexOf(".json"));
-        return String.format("https://cdevents.dev/%s/schema/%s", CDEventConstants.CDEVENTS_SPEC_VERSION, eventSchemaName);
+        return "https://cdevents.dev/0.1.2/schema/artifact-published-event";
     }
 
 
     /**
-    * @return the artifact-published-event.json schema Json
+    * @return the artifactpublished.json schema Json
     */
 
     @Override
     public String eventSchema() {
         try {
-            return Files.readString(Paths.get(CDEventConstants.SCHEMA_FOLDER + "/artifact-published-event.json"));
+            return Files.readString(Paths.get(CDEventConstants.SCHEMA_FOLDER + "/artifactpublished.json"));
         } catch (IOException e) {
             throw new CDEventsException("Exception while reading Event JsonSchema file ", e);
         }
