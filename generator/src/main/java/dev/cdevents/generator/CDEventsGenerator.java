@@ -47,7 +47,7 @@ public final class CDEventsGenerator {
      *             [1] - base directory for the cdevents-java-sdk module
      */
     public static void main(String[] args) {
-        if (args == null || args.length<2) {
+        if (args == null || args.length < 2) {
             throw new IllegalArgumentException("Insufficient arguments passed to CDEventsGenerator");
         }
         String generatorBaseDir = args[0];
