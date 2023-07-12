@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>dev.cdevents</groupId>
+        <artifactId>cdevents-sdk-java-parent</artifactId>
+        <version>0.1.2-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>cdevents-sdk-java-generator</artifactId>
+
+    <name>cdevents-sdk-java-generator</name>
+    <description>Source code generator for CDEvents Java SDK</description>
+    <url>https://github.com/cdevents</url>
+
+    <properties>
+        <maven.javadoc.skip>true</maven.javadoc.skip>
+        <maven.source.skip>true</maven.source.skip>
+        <maven.deploy.skip>true</maven.deploy.skip>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
+        <sdk.project.dir>${project.basedir}/../sdk</sdk.project.dir>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-jsr310</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${slf4j.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.12.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.spullara.mustache.java</groupId>
+            <artifactId>compiler</artifactId>
+            <version>0.9.6</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>${slf4j.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+
+        <!-- Test dependencies -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>${junit-jupiter.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <version>${assertj-core.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.jsonschema2pojo</groupId>
+                <artifactId>jsonschema2pojo-maven-plugin</artifactId>
+                <version>1.2.1</version>
+                <configuration>
+                    <outputDirectory>${sdk.project.dir}/src/main/java</outputDirectory>
+                    <includeHashcodeAndEquals>false</includeHashcodeAndEquals>
+                    <includeToString>false</includeToString>
+                    <addCompileSourceRoot>false</addCompileSourceRoot>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>generate-artifact-packaged-from-schema</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <sourcePaths>
+                                <sourcePath>${sdk.project.dir}/src/main/resources/schema/artifact-packaged-event.json
+                                </sourcePath>
+                            </sourcePaths>
+                            <targetPackage>dev.cdevents.models.artifact.packaged</targetPackage>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>generate-artifact-published-from-schema</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <sourcePaths>
+                                <sourcePath>${sdk.project.dir}/src/main/resources/schema/artifact-published-event.json
+                                </sourcePath>
+                            </sourcePaths>
+                            <targetPackage>dev.cdevents.models.artifact.published</targetPackage>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>generate-pipeline-run-finished-from-schema</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <sourcePaths>
+                                <sourcePath>
+                                    ${sdk.project.dir}/src/main/resources/schema/pipeline-run-finished-event.json
+                                </sourcePath>
+                            </sourcePaths>
+                            <targetPackage>dev.cdevents.models.pipelinerun.finished</targetPackage>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>3.1.0</version>
+                <executions>
+                    <execution>
+                        <id>run-CDEventsGenerator-main-class</id>
+                        <phase>process-classes</phase>
+                        <goals>
+                            <goal>java</goal>
+                        </goals>
+                        <configuration>
+                            <mainClass>dev.cdevents.generator.CDEventsGenerator</mainClass>
+                            <arguments>
+                                <argument>${project.basedir}</argument>
+                                <argument>${sdk.project.dir}</argument>
+                            </arguments>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>
