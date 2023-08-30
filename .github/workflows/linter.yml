@@ -15,9 +15,9 @@ jobs:
       - name: Lint Code Base
         uses: github/super-linter/slim@v4
         env:
-          FILTER_REGEX_INCLUDE: .*src/main/.*
+          FILTER_REGEX_INCLUDE: .*sdk/src/main/.*|.*generator/src/main/.*
           VALIDATE_ALL_CODEBASE: false
           DEFAULT_BRANCH: main
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           # mvnw is provided as is from the Maven Wrapper project. Can't change it
-          FILTER_REGEX_EXCLUDE: .*mvnw|.*src/main/java/dev/cdevents/models/.*
+          FILTER_REGEX_EXCLUDE: .*mvnw|.*sdk/src/main/java/dev/cdevents/models/.*

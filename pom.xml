@@ -4,11 +4,12 @@
 		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>dev.cdevents</groupId>
-	<artifactId>cdevents-sdk-java</artifactId>
-	<version>0.1.2-SNAPSHOT</version>
+	<artifactId>cdevents-sdk-java-parent</artifactId>
+	<version>0.1.3-SNAPSHOT</version>
+  <packaging>pom</packaging>
 
-	<name>cdevents-sdk-java</name>
-	<description>cdevents java sdk</description>
+	<name>cdevents-sdk-java-parent</name>
+	<description>CDEvents Java SDK</description>
 	<url>https://github.com/cdevents</url>
 	<inceptionYear>2022</inceptionYear>
 
@@ -23,9 +24,9 @@
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<cloudevents.version>2.3.0</cloudevents.version>
 		<junit-jupiter.version>5.8.2</junit-jupiter.version>
-        <assertj-core.version>3.22.0</assertj-core.version>
-        <jackson.version>2.15.0</jackson.version>
-        <slf4j.version>2.0.7</slf4j.version>
+		<assertj-core.version>3.22.0</assertj-core.version>
+		<jackson.version>2.15.0</jackson.version>
+		<slf4j.version>2.0.7</slf4j.version>
 		<json.schema.version>1.0.80</json.schema.version>
 		<packageurl.version>1.4.1</packageurl.version>
 		<project.github.repository>cdevents/sdk-java</project.github.repository>
@@ -33,7 +34,7 @@
 		<repository.url>git@github.com:${project.github.repository}.git</repository.url>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<project.build.outputTimestamp>${git.commit.author.time}</project.build.outputTimestamp>
+		<project.build.outputTimestamp>2023-07-24T13:46:50Z</project.build.outputTimestamp>
 		<version.clean.plugin>3.2.0</version.clean.plugin>
 		<version.compiler.plugin>3.11.0</version.compiler.plugin>
 		<version.deploy.plugin>3.1.1</version.deploy.plugin>
@@ -41,9 +42,10 @@
 		<version.install.plugin>3.1.1</version.install.plugin>
 		<version.javadoc.plugin>3.5.0</version.javadoc.plugin>
 		<version.jar.plugin>3.3.0</version.jar.plugin>
-		<version.jreleaser.plugin>1.6.0</version.jreleaser.plugin>
+		<version.jreleaser.plugin>1.7.0</version.jreleaser.plugin>
 		<version.resources.plugin>3.3.1</version.resources.plugin>
 		<version.source.plugin>3.2.1</version.source.plugin>
+		<version.sourcefire.plugin>3.0.0</version.sourcefire.plugin>
 	</properties>
 
 	<licenses>
@@ -81,6 +83,11 @@
 		<url>${repository.url}</url>
 	</scm>
 
+	<modules>
+		<module>generator</module>
+		<module>sdk</module>
+	</modules>
+
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
@@ -92,83 +99,6 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
-
-	<dependencies>
-		<dependency>
-			<groupId>io.cloudevents</groupId>
-			<artifactId>cloudevents-core</artifactId>
-			<version>${cloudevents.version}</version>
-		</dependency>
-
-		<dependency>
-			<groupId>com.fasterxml.jackson.core</groupId>
-			<artifactId>jackson-databind</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>commons-lang</groupId>
-			<artifactId>commons-lang</artifactId>
-			<version>2.4</version>
-		</dependency>
-
-		<dependency>
-			<groupId>javax.annotation</groupId>
-			<artifactId>javax.annotation-api</artifactId>
-			<version>1.3.2</version>
-		</dependency>
-
-        <dependency>
-            <groupId>com.fasterxml.jackson.datatype</groupId>
-            <artifactId>jackson-datatype-jsr310</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.networknt</groupId>
-            <artifactId>json-schema-validator</artifactId>
-			<version>${json.schema.version}</version>
-        </dependency>
-
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
-			<version>${slf4j.version}</version>
-		</dependency>
-
-		<dependency>
-			<groupId>com.github.package-url</groupId>
-			<artifactId>packageurl-java</artifactId>
-			<version>${packageurl.version}</version>
-		</dependency>
-
-		<dependency>
-			<groupId>com.github.spullara.mustache.java</groupId>
-			<artifactId>compiler</artifactId>
-			<version>0.9.6</version>
-		</dependency>
-
-		<!-- Test dependencies -->
-		<dependency>
-			<groupId>org.junit.jupiter</groupId>
-			<artifactId>junit-jupiter</artifactId>
-			<version>${junit-jupiter.version}</version>
-			<scope>test</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>org.assertj</groupId>
-			<artifactId>assertj-core</artifactId>
-			<version>${assertj-core.version}</version>
-			<scope>test</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-simple</artifactId>
-			<version>${slf4j.version}</version>
-			<scope>test</scope>
-		</dependency>
-	</dependencies>
-
 	<build>
 		<pluginManagement>
 			<plugins>
@@ -196,6 +126,17 @@
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-jar-plugin</artifactId>
 					<version>${version.jar.plugin}</version>
+					<configuration>
+						<archive>
+							<manifestEntries>
+								<Build-Timestamp>${git.commit.author.time}</Build-Timestamp>
+								<Build-Revision>${git.commit.id}</Build-Revision>
+							</manifestEntries>
+							<manifest>
+								<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+							</manifest>
+						</archive>
+					</configuration>
 				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
@@ -212,650 +153,48 @@
 					<artifactId>maven-source-plugin</artifactId>
 					<version>${version.source.plugin}</version>
 				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-surefire-plugin</artifactId>
+					<version>${version.sourcefire.plugin}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.jreleaser</groupId>
+					<artifactId>jreleaser-maven-plugin</artifactId>
+					<version>${version.jreleaser.plugin}</version>
+				</plugin>
+				<plugin>
+					<groupId>io.github.git-commit-id</groupId>
+					<artifactId>git-commit-id-maven-plugin</artifactId>
+					<version>${version.git.plugin}</version>
+					<executions>
+						<execution>
+							<id>resolve-git-properties</id>
+							<goals>
+								<goal>revision</goal>
+							</goals>
+							<phase>validate</phase>
+							<configuration>
+								<verbose>false</verbose>
+								<failOnNoGitDirectory>false</failOnNoGitDirectory>
+								<generateGitPropertiesFile>true</generateGitPropertiesFile>
+								<generateGitPropertiesFilename>${project.build.directory}/git.properties
+								</generateGitPropertiesFilename>
+								<dateFormat>yyyy-MM-dd'T'HH:mm:ssXXX</dateFormat>
+							</configuration>
+						</execution>
+					</executions>
+				</plugin>
 			</plugins>
 		</pluginManagement>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>3.0.0</version>
-            </plugin>
+		<plugins>
 			<plugin>
 				<groupId>io.github.git-commit-id</groupId>
 				<artifactId>git-commit-id-maven-plugin</artifactId>
 				<version>${version.git.plugin}</version>
-				<executions>
-					<execution>
-						<id>resolve-git-properties</id>
-						<goals>
-							<goal>revision</goal>
-						</goals>
-						<phase>validate</phase>
-						<configuration>
-							<verbose>false</verbose>
-							<failOnNoGitDirectory>false</failOnNoGitDirectory>
-							<generateGitPropertiesFile>true</generateGitPropertiesFile>
-							<generateGitPropertiesFilename>${project.build.directory}/git.properties</generateGitPropertiesFilename>
-							<dateFormat>yyyy-MM-dd'T'HH:mm:ssXXX</dateFormat>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-jar-plugin</artifactId>
-				<configuration>
-					<archive>
-						<manifestEntries>
-							<Build-Timestamp>${git.commit.author.time}</Build-Timestamp>
-							<Build-Revision>${git.commit.id}</Build-Revision>
-						</manifestEntries>
-						<manifest>
-							<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
-						</manifest>
-					</archive>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.moditect</groupId>
-				<artifactId>moditect-maven-plugin</artifactId>
-				<version>1.0.0.Final</version>
-				<executions>
-					<execution>
-						<id>add-module-infos</id>
-						<phase>package</phase>
-						<goals>
-							<goal>add-module-info</goal>
-						</goals>
-						<configuration>
-							<overwriteExistingFiles>true</overwriteExistingFiles>
-							<failOnWarning>false</failOnWarning>
-							<module>
-								<moduleInfo>
-									<name>dev.cdevents</name>
-									<!-- export everything -->
-									<exports>*;</exports>
-									<!-- declare services consumed by the artifact -->
-									<addServiceUses>true</addServiceUses>
-								</moduleInfo>
-							</module>
-							<jdepsExtraArgs>
-								<arg>--multi-release=9</arg>
-							</jdepsExtraArgs>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.jsonschema2pojo</groupId>
-				<artifactId>jsonschema2pojo-maven-plugin</artifactId>
-				<version>1.2.1</version>
-				<executions>
-					<execution>
-						<id>generate-artifact-packaged-from-schema</id>
-						<phase>generate-sources</phase>
-						<goals>
-							<goal>generate</goal>
-						</goals>
-						<!--<configuration>
-							<sourceDirectory>${project.basedir}/src/main/resources/schema</sourceDirectory>
-							<outputDirectory>${basedir}/src/main/java</outputDirectory>
-							<targetPackage>dev.cdevents.models</targetPackage>
-							<includeHashcodeAndEquals>false</includeHashcodeAndEquals>
-							<includeToString>false</includeToString>
-						</configuration>-->
-						<configuration>
-							<sourcePaths>
-								<sourcePath>${project.basedir}/spec/schemas/artifactpackaged.json</sourcePath>
-							</sourcePaths>
-							<outputDirectory>${basedir}/src/main/java</outputDirectory>
-							<targetPackage>dev.cdevents.models.artifact.packaged</targetPackage>
-							<includeHashcodeAndEquals>false</includeHashcodeAndEquals>
-							<includeToString>false</includeToString>
-						</configuration>
-					</execution>
-					<execution>
-						<id>generate-artifact-published-from-schema</id>
-						<phase>generate-sources</phase>
-						<goals>
-							<goal>generate</goal>
-						</goals>
-						<configuration>
-							<sourcePaths>
-								<sourcePath>${project.basedir}/spec/schemas/artifactpublished.json</sourcePath>
-							</sourcePaths>
-							<outputDirectory>${basedir}/src/main/java</outputDirectory>
-							<targetPackage>dev.cdevents.models.artifact.published</targetPackage>
-							<includeHashcodeAndEquals>false</includeHashcodeAndEquals>
-							<includeToString>false</includeToString>
-						</configuration>
-					</execution>
-					<execution>
-						<id>generate-branch-created-from-schema</id>
-						<phase>generate-sources</phase>
-						<goals>
-							<goal>generate</goal>
-						</goals>
-						<configuration>
-							<sourcePaths>
-								<sourcePath>${project.basedir}/spec/schemas/branchcreated.json</sourcePath>
-							</sourcePaths>
-							<outputDirectory>${basedir}/src/main/java</outputDirectory>
-							<targetPackage>dev.cdevents.models.branch.created</targetPackage>
-							<includeHashcodeAndEquals>false</includeHashcodeAndEquals>
-							<includeToString>false</includeToString>
-						</configuration>
-					</execution>
-					<execution>
-						<id>generate-branch-deleted-from-schema</id>
-						<phase>generate-sources</phase>
-						<goals>
-							<goal>generate</goal>
-						</goals>
-						<configuration>
-							<sourcePaths>
-								<sourcePath>${project.basedir}/spec/schemas/branchdeleted.json</sourcePath>
-							</sourcePaths>
-							<outputDirectory>${basedir}/src/main/java</outputDirectory>
-							<targetPackage>dev.cdevents.models.branch.deleted</targetPackage>
-							<includeHashcodeAndEquals>false</includeHashcodeAndEquals>
-							<includeToString>false</includeToString>
-						</configuration>
-					</execution>
-					<execution>
-						<id>generate-build-finished-from-schema</id>
-						<phase>generate-sources</phase>
-						<goals>
-							<goal>generate</goal>
-						</goals>
-						<configuration>
-							<sourcePaths>
-								<sourcePath>${project.basedir}/spec/schemas/buildfinished.json</sourcePath>
-							</sourcePaths>
-							<outputDirectory>${basedir}/src/main/java</outputDirectory>
-							<targetPackage>dev.cdevents.models.build.finished</targetPackage>
-							<includeHashcodeAndEquals>false</includeHashcodeAndEquals>
-							<includeToString>false</includeToString>
-						</configuration>
-					</execution>
-					<execution>
-						<id>generate-build-queued-from-schema</id>
-						<phase>generate-sources</phase>
-						<goals>
-							<goal>generate</goal>
-						</goals>
-						<configuration>
-							<sourcePaths>
-								<sourcePath>${project.basedir}/spec/schemas/buildqueued.json</sourcePath>
-							</sourcePaths>
-							<outputDirectory>${basedir}/src/main/java</outputDirectory>
-							<targetPackage>dev.cdevents.models.build.queued</targetPackage>
-							<includeHashcodeAndEquals>false</includeHashcodeAndEquals>
-							<includeToString>false</includeToString>
-						</configuration>
-					</execution>
-					<execution>
-						<id>generate-build-started-from-schema</id>
-						<phase>generate-sources</phase>
-						<goals>
-							<goal>generate</goal>
-						</goals>
-						<configuration>
-							<sourcePaths>
-								<sourcePath>${project.basedir}/spec/schemas/buildstarted.json</sourcePath>
-							</sourcePaths>
-							<outputDirectory>${basedir}/src/main/java</outputDirectory>
-							<targetPackage>dev.cdevents.models.build.started</targetPackage>
-							<includeHashcodeAndEquals>false</includeHashcodeAndEquals>
-							<includeToString>false</includeToString>
-						</configuration>
-					</execution>
-					<execution>
-						<id>generate-change-abandoned-from-schema</id>
-						<phase>generate-sources</phase>
-						<goals>
-							<goal>generate</goal>
-						</goals>
-						<configuration>
-							<sourcePaths>
-								<sourcePath>${project.basedir}/spec/schemas/changeabandoned.json</sourcePath>
-							</sourcePaths>
-							<outputDirectory>${basedir}/src/main/java</outputDirectory>
-							<targetPackage>dev.cdevents.models.change.abandoned</targetPackage>
-							<includeHashcodeAndEquals>false</includeHashcodeAndEquals>
-							<includeToString>false</includeToString>
-						</configuration>
-					</execution>
-					<execution>
-						<id>generate-change-created-from-schema</id>
-						<phase>generate-sources</phase>
-						<goals>
-							<goal>generate</goal>
-						</goals>
-						<configuration>
-							<sourcePaths>
-								<sourcePath>${project.basedir}/spec/schemas/changecreated.json</sourcePath>
-							</sourcePaths>
-							<outputDirectory>${basedir}/src/main/java</outputDirectory>
-							<targetPackage>dev.cdevents.models.change.created</targetPackage>
-							<includeHashcodeAndEquals>false</includeHashcodeAndEquals>
-							<includeToString>false</includeToString>
-						</configuration>
-					</execution>
-					<execution>
-						<id>generate-change-merged-from-schema</id>
-						<phase>generate-sources</phase>
-						<goals>
-							<goal>generate</goal>
-						</goals>
-						<configuration>
-							<sourcePaths>
-								<sourcePath>${project.basedir}/spec/schemas/changemerged.json</sourcePath>
-							</sourcePaths>
-							<outputDirectory>${basedir}/src/main/java</outputDirectory>
-							<targetPackage>dev.cdevents.models.change.merged</targetPackage>
-							<includeHashcodeAndEquals>false</includeHashcodeAndEquals>
-							<includeToString>false</includeToString>
-						</configuration>
-					</execution>
-					<execution>
-						<id>generate-change-reviewed-from-schema</id>
-						<phase>generate-sources</phase>
-						<goals>
-							<goal>generate</goal>
-						</goals>
-						<configuration>
-							<sourcePaths>
-								<sourcePath>${project.basedir}/spec/schemas/changereviewed.json</sourcePath>
-							</sourcePaths>
-							<outputDirectory>${basedir}/src/main/java</outputDirectory>
-							<targetPackage>dev.cdevents.models.change.reviewed</targetPackage>
-							<includeHashcodeAndEquals>false</includeHashcodeAndEquals>
-							<includeToString>false</includeToString>
-						</configuration>
-					</execution>
-					<execution>
-						<id>generate-change-updated-from-schema</id>
-						<phase>generate-sources</phase>
-						<goals>
-							<goal>generate</goal>
-						</goals>
-						<configuration>
-							<sourcePaths>
-								<sourcePath>${project.basedir}/spec/schemas/changeupdated.json</sourcePath>
-							</sourcePaths>
-							<outputDirectory>${basedir}/src/main/java</outputDirectory>
-							<targetPackage>dev.cdevents.models.change.updated</targetPackage>
-							<includeHashcodeAndEquals>false</includeHashcodeAndEquals>
-							<includeToString>false</includeToString>
-						</configuration>
-					</execution>
-					<execution>
-						<id>generate-environment-created-from-schema</id>
-						<phase>generate-sources</phase>
-						<goals>
-							<goal>generate</goal>
-						</goals>
-						<configuration>
-							<sourcePaths>
-								<sourcePath>${project.basedir}/spec/schemas/environmentcreated.json</sourcePath>
-							</sourcePaths>
-							<outputDirectory>${basedir}/src/main/java</outputDirectory>
-							<targetPackage>dev.cdevents.models.environment.created</targetPackage>
-							<includeHashcodeAndEquals>false</includeHashcodeAndEquals>
-							<includeToString>false</includeToString>
-						</configuration>
-					</execution>
-					<execution>
-						<id>generate-environment-deleted-from-schema</id>
-						<phase>generate-sources</phase>
-						<goals>
-							<goal>generate</goal>
-						</goals>
-						<configuration>
-							<sourcePaths>
-								<sourcePath>${project.basedir}/spec/schemas/environmentdeleted.json</sourcePath>
-							</sourcePaths>
-							<outputDirectory>${basedir}/src/main/java</outputDirectory>
-							<targetPackage>dev.cdevents.models.environment.deleted</targetPackage>
-							<includeHashcodeAndEquals>false</includeHashcodeAndEquals>
-							<includeToString>false</includeToString>
-						</configuration>
-					</execution>
-					<execution>
-						<id>generate-environment-modified-from-schema</id>
-						<phase>generate-sources</phase>
-						<goals>
-							<goal>generate</goal>
-						</goals>
-						<configuration>
-							<sourcePaths>
-								<sourcePath>${project.basedir}/spec/schemas/environmentmodified.json</sourcePath>
-							</sourcePaths>
-							<outputDirectory>${basedir}/src/main/java</outputDirectory>
-							<targetPackage>dev.cdevents.models.environment.modified</targetPackage>
-							<includeHashcodeAndEquals>false</includeHashcodeAndEquals>
-							<includeToString>false</includeToString>
-						</configuration>
-					</execution>
-					<execution>
-						<id>generate-pipelinerun-finished-from-schema</id>
-						<phase>generate-sources</phase>
-						<goals>
-							<goal>generate</goal>
-						</goals>
-						<configuration>
-							<sourcePaths>
-								<sourcePath>${project.basedir}/spec/schemas/pipelinerunfinished.json</sourcePath>
-							</sourcePaths>
-							<outputDirectory>${basedir}/src/main/java</outputDirectory>
-							<targetPackage>dev.cdevents.models.pipelinerun.finished</targetPackage>
-							<includeHashcodeAndEquals>false</includeHashcodeAndEquals>
-							<includeToString>false</includeToString>
-						</configuration>
-					</execution>
-					<execution>
-						<id>generate-pipelinerun-queued-from-schema</id>
-						<phase>generate-sources</phase>
-						<goals>
-							<goal>generate</goal>
-						</goals>
-						<configuration>
-							<sourcePaths>
-								<sourcePath>${project.basedir}/spec/schemas/pipelinerunqueued.json</sourcePath>
-							</sourcePaths>
-							<outputDirectory>${basedir}/src/main/java</outputDirectory>
-							<targetPackage>dev.cdevents.models.pipelinerun.queued</targetPackage>
-							<includeHashcodeAndEquals>false</includeHashcodeAndEquals>
-							<includeToString>false</includeToString>
-						</configuration>
-					</execution>
-					<execution>
-						<id>generate-pipelinerun-started-from-schema</id>
-						<phase>generate-sources</phase>
-						<goals>
-							<goal>generate</goal>
-						</goals>
-						<configuration>
-							<sourcePaths>
-								<sourcePath>${project.basedir}/spec/schemas/pipelinerunstarted.json</sourcePath>
-							</sourcePaths>
-							<outputDirectory>${basedir}/src/main/java</outputDirectory>
-							<targetPackage>dev.cdevents.models.pipelinerun.started</targetPackage>
-							<includeHashcodeAndEquals>false</includeHashcodeAndEquals>
-							<includeToString>false</includeToString>
-						</configuration>
-					</execution>
-					<execution>
-						<id>generate-repository-created-from-schema</id>
-						<phase>generate-sources</phase>
-						<goals>
-							<goal>generate</goal>
-						</goals>
-						<configuration>
-							<sourcePaths>
-								<sourcePath>${project.basedir}/spec/schemas/repositorycreated.json</sourcePath>
-							</sourcePaths>
-							<outputDirectory>${basedir}/src/main/java</outputDirectory>
-							<targetPackage>dev.cdevents.models.repository.created</targetPackage>
-							<includeHashcodeAndEquals>false</includeHashcodeAndEquals>
-							<includeToString>false</includeToString>
-						</configuration>
-					</execution>
-					<execution>
-						<id>generate-repository-deleted-from-schema</id>
-						<phase>generate-sources</phase>
-						<goals>
-							<goal>generate</goal>
-						</goals>
-						<configuration>
-							<sourcePaths>
-								<sourcePath>${project.basedir}/spec/schemas/repositorydeleted.json</sourcePath>
-							</sourcePaths>
-							<outputDirectory>${basedir}/src/main/java</outputDirectory>
-							<targetPackage>dev.cdevents.models.repository.deleted</targetPackage>
-							<includeHashcodeAndEquals>false</includeHashcodeAndEquals>
-							<includeToString>false</includeToString>
-						</configuration>
-					</execution>
-					<execution>
-						<id>generate-repository-modified-from-schema</id>
-						<phase>generate-sources</phase>
-						<goals>
-							<goal>generate</goal>
-						</goals>
-						<configuration>
-							<sourcePaths>
-								<sourcePath>${project.basedir}/spec/schemas/repositorymodified.json</sourcePath>
-							</sourcePaths>
-							<outputDirectory>${basedir}/src/main/java</outputDirectory>
-							<targetPackage>dev.cdevents.models.repository.modified</targetPackage>
-							<includeHashcodeAndEquals>false</includeHashcodeAndEquals>
-							<includeToString>false</includeToString>
-						</configuration>
-					</execution>
-					<execution>
-						<id>generate-service-deployed-from-schema</id>
-						<phase>generate-sources</phase>
-						<goals>
-							<goal>generate</goal>
-						</goals>
-						<configuration>
-							<sourcePaths>
-								<sourcePath>${project.basedir}/spec/schemas/servicedeployed.json</sourcePath>
-							</sourcePaths>
-							<outputDirectory>${basedir}/src/main/java</outputDirectory>
-							<targetPackage>dev.cdevents.models.service.deployed</targetPackage>
-							<includeHashcodeAndEquals>false</includeHashcodeAndEquals>
-							<includeToString>false</includeToString>
-						</configuration>
-					</execution>
-					<execution>
-						<id>generate-service-published-from-schema</id>
-						<phase>generate-sources</phase>
-						<goals>
-							<goal>generate</goal>
-						</goals>
-						<configuration>
-							<sourcePaths>
-								<sourcePath>${project.basedir}/spec/schemas/servicepublished.json</sourcePath>
-							</sourcePaths>
-							<outputDirectory>${basedir}/src/main/java</outputDirectory>
-							<targetPackage>dev.cdevents.models.service.published</targetPackage>
-							<includeHashcodeAndEquals>false</includeHashcodeAndEquals>
-							<includeToString>false</includeToString>
-						</configuration>
-					</execution>
-					<execution>
-						<id>generate-service-removed-from-schema</id>
-						<phase>generate-sources</phase>
-						<goals>
-							<goal>generate</goal>
-						</goals>
-						<configuration>
-							<sourcePaths>
-								<sourcePath>${project.basedir}/spec/schemas/serviceremoved.json</sourcePath>
-							</sourcePaths>
-							<outputDirectory>${basedir}/src/main/java</outputDirectory>
-							<targetPackage>dev.cdevents.models.service.removed</targetPackage>
-							<includeHashcodeAndEquals>false</includeHashcodeAndEquals>
-							<includeToString>false</includeToString>
-						</configuration>
-					</execution>
-					<execution>
-						<id>generate-service-rolledback-from-schema</id>
-						<phase>generate-sources</phase>
-						<goals>
-							<goal>generate</goal>
-						</goals>
-						<configuration>
-							<sourcePaths>
-								<sourcePath>${project.basedir}/spec/schemas/servicerolledback.json</sourcePath>
-							</sourcePaths>
-							<outputDirectory>${basedir}/src/main/java</outputDirectory>
-							<targetPackage>dev.cdevents.models.service.rolledback</targetPackage>
-							<includeHashcodeAndEquals>false</includeHashcodeAndEquals>
-							<includeToString>false</includeToString>
-						</configuration>
-					</execution>
-					<execution>
-						<id>generate-service-upgraded-from-schema</id>
-						<phase>generate-sources</phase>
-						<goals>
-							<goal>generate</goal>
-						</goals>
-						<configuration>
-							<sourcePaths>
-								<sourcePath>${project.basedir}/spec/schemas/serviceupgraded.json</sourcePath>
-							</sourcePaths>
-							<outputDirectory>${basedir}/src/main/java</outputDirectory>
-							<targetPackage>dev.cdevents.models.service.upgraded</targetPackage>
-							<includeHashcodeAndEquals>false</includeHashcodeAndEquals>
-							<includeToString>false</includeToString>
-						</configuration>
-					</execution>
-					<execution>
-						<id>generate-taskrun-finished-from-schema</id>
-						<phase>generate-sources</phase>
-						<goals>
-							<goal>generate</goal>
-						</goals>
-						<configuration>
-							<sourcePaths>
-								<sourcePath>${project.basedir}/spec/schemas/taskrunfinished.json</sourcePath>
-							</sourcePaths>
-							<outputDirectory>${basedir}/src/main/java</outputDirectory>
-							<targetPackage>dev.cdevents.models.taskrun.finished</targetPackage>
-							<includeHashcodeAndEquals>false</includeHashcodeAndEquals>
-							<includeToString>false</includeToString>
-						</configuration>
-					</execution>
-					<execution>
-						<id>generate-taskrun-started-from-schema</id>
-						<phase>generate-sources</phase>
-						<goals>
-							<goal>generate</goal>
-						</goals>
-						<configuration>
-							<sourcePaths>
-								<sourcePath>${project.basedir}/spec/schemas/taskrunstarted.json</sourcePath>
-							</sourcePaths>
-							<outputDirectory>${basedir}/src/main/java</outputDirectory>
-							<targetPackage>dev.cdevents.models.taskrun.started</targetPackage>
-							<includeHashcodeAndEquals>false</includeHashcodeAndEquals>
-							<includeToString>false</includeToString>
-						</configuration>
-					</execution>
-					<execution>
-						<id>generate-testcase-finished-from-schema</id>
-						<phase>generate-sources</phase>
-						<goals>
-							<goal>generate</goal>
-						</goals>
-						<configuration>
-							<sourcePaths>
-								<sourcePath>${project.basedir}/spec/schemas/testcasefinished.json</sourcePath>
-							</sourcePaths>
-							<outputDirectory>${basedir}/src/main/java</outputDirectory>
-							<targetPackage>dev.cdevents.models.testcase.finished</targetPackage>
-							<includeHashcodeAndEquals>false</includeHashcodeAndEquals>
-							<includeToString>false</includeToString>
-						</configuration>
-					</execution>
-					<execution>
-						<id>generate-testcase-queued-from-schema</id>
-						<phase>generate-sources</phase>
-						<goals>
-							<goal>generate</goal>
-						</goals>
-						<configuration>
-							<sourcePaths>
-								<sourcePath>${project.basedir}/spec/schemas/testcasequeued.json</sourcePath>
-							</sourcePaths>
-							<outputDirectory>${basedir}/src/main/java</outputDirectory>
-							<targetPackage>dev.cdevents.models.testcase.queued</targetPackage>
-							<includeHashcodeAndEquals>false</includeHashcodeAndEquals>
-							<includeToString>false</includeToString>
-						</configuration>
-					</execution>
-					<execution>
-						<id>generate-testcase-started-from-schema</id>
-						<phase>generate-sources</phase>
-						<goals>
-							<goal>generate</goal>
-						</goals>
-						<configuration>
-							<sourcePaths>
-								<sourcePath>${project.basedir}/spec/schemas/testcasestarted.json</sourcePath>
-							</sourcePaths>
-							<outputDirectory>${basedir}/src/main/java</outputDirectory>
-							<targetPackage>dev.cdevents.models.testcase.started</targetPackage>
-							<includeHashcodeAndEquals>false</includeHashcodeAndEquals>
-							<includeToString>false</includeToString>
-						</configuration>
-					</execution>
-					<execution>
-						<id>generate-testsuite-finished-from-schema</id>
-						<phase>generate-sources</phase>
-						<goals>
-							<goal>generate</goal>
-						</goals>
-						<configuration>
-							<sourcePaths>
-								<sourcePath>${project.basedir}/spec/schemas/testsuitefinished.json</sourcePath>
-							</sourcePaths>
-							<outputDirectory>${basedir}/src/main/java</outputDirectory>
-							<targetPackage>dev.cdevents.models.testsuite.finished</targetPackage>
-							<includeHashcodeAndEquals>false</includeHashcodeAndEquals>
-							<includeToString>false</includeToString>
-						</configuration>
-					</execution>
-					<execution>
-						<id>generate-testsuite-started-from-schema</id>
-						<phase>generate-sources</phase>
-						<goals>
-							<goal>generate</goal>
-						</goals>
-						<configuration>
-							<sourcePaths>
-								<sourcePath>${project.basedir}/spec/schemas/testsuitestarted.json</sourcePath>
-							</sourcePaths>
-							<outputDirectory>${basedir}/src/main/java</outputDirectory>
-							<targetPackage>dev.cdevents.models.testsuite.started</targetPackage>
-							<includeHashcodeAndEquals>false</includeHashcodeAndEquals>
-							<includeToString>false</includeToString>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<configuration>
-					<source>11</source>
-					<target>11</target>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>exec-maven-plugin</artifactId>
-				<version>3.1.0</version>
-				<executions>
-					<execution>
-						<id>run-CDEventsGenerator-main-class</id>
-						<phase>compile</phase>
-						<goals>
-							<goal>java</goal>
-						</goals>
-						<configuration>
-							<mainClass>dev.cdevents.CDEventsGenerator</mainClass>
-						</configuration>
-					</execution>
-				</executions>
 			</plugin>
 		</plugins>
-    </build>
-
+	</build>
 	<profiles>
 		<profile>
 			<id>publication</id>
@@ -883,7 +222,9 @@
 								<phase>generate-sources</phase>
 								<configuration>
 									<sourceFile>${session.executionRootDirectory}/LICENSE</sourceFile>
-									<destinationFile>${project.build.outputDirectory}/META-INF/LICENSE-${project.identifier}</destinationFile>
+									<destinationFile>
+										${project.build.outputDirectory}/META-INF/LICENSE-${project.identifier}
+									</destinationFile>
 								</configuration>
 							</execution>
 						</executions>
@@ -935,6 +276,7 @@
 					<plugin>
 						<groupId>org.jreleaser</groupId>
 						<artifactId>jreleaser-maven-plugin</artifactId>
+						<inherited>false</inherited>
 						<configuration>
 							<jreleaser>
 								<release>
@@ -947,7 +289,9 @@
 											<formatted>ALWAYS</formatted>
 											<format>- {{commitShortHash}} {{commitTitle}}</format>
 											<contributors>
-												<format>- {{contributorName}}{{#contributorUsernameAsLink}} ({{.}}){{/contributorUsernameAsLink}}</format>
+												<format>- {{contributorName}}{{#contributorUsernameAsLink}}
+													({{.}}){{/contributorUsernameAsLink}}
+												</format>
 											</contributors>
 											<hide>
 												<contributors>
@@ -969,7 +313,9 @@
 											<maven-central>
 												<active>ALWAYS</active>
 												<url>https://s01.oss.sonatype.org/service/local</url>
-												<snapshotUrl>https://s01.oss.sonatype.org/content/repositories/snapshots/</snapshotUrl>
+												<snapshotUrl>
+													https://s01.oss.sonatype.org/content/repositories/snapshots/
+												</snapshotUrl>
 												<closeRepository>true</closeRepository>
 												<releaseRepository>true</releaseRepository>
 												<stagingRepositories>target/staging-deploy</stagingRepositories>
