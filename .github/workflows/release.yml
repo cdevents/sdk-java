@@ -50,7 +50,7 @@ jobs:
 
       - name: Release
         run: |
-          ./mvnw -ntp -B --file pom.xml -Prelease
+          ./mvnw -ntp -B --file pom.xml -Prelease -pl :cdevents-sdk-java-parent
         env:
           JRELEASER_GITHUB_TOKEN: ${{ secrets.GH_BOT_TOKEN }}
           JRELEASER_GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
