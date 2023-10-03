@@ -55,7 +55,6 @@ public final class CDEventsGenerator {
         String parentBaseDir = args[2];
         String targetPackageDir = sdkBaseDir + File.separator + "src/main/java/dev/cdevents/events";
         File folder = new File(parentBaseDir + File.separator + "spec" + File.separator + "schemas");
-        System.out.println(folder.toPath().toAbsolutePath());
         if (folder.isDirectory()) {
             File[] files = folder.listFiles((dir, name) -> name.toLowerCase().endsWith(".json"));
             if (files != null) {
@@ -107,10 +106,6 @@ public final class CDEventsGenerator {
             String subject = type[SUBJECT_INDEX];
             String predicate = type[PREDICATE_INDEX];
             String capitalizedSubject = StringUtils.capitalize(subject);
-//            if (subject.equals("pipelinerun")) {
-//                capitalizedSubject = capitalizedSubject.substring(0, SUBSTRING_PIPELINE_INDEX)
-//                        + StringUtils.capitalize(subject.substring(SUBSTRING_PIPELINE_INDEX));
-//            }
             String capitalizedPredicate = StringUtils.capitalize(predicate);
             String version = type[VERSION_INDEX];
 
