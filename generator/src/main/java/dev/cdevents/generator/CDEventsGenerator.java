@@ -68,7 +68,7 @@ public final class CDEventsGenerator {
                     SchemaData schemaData = buildCDEventDataFromJsonSchema(file);
                     generateClassFileFromSchemaData(mustache, schemaData, targetPackageDir);
                 }
-            }else {
+            } else {
                 log.error("No schema files found in the specified directory {}", folder.getAbsolutePath());
             }
         } else {
