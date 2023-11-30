@@ -34,7 +34,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 
-public class {{capitalizedSubject}}{{capitalizedPredicate}}CDEvent extends {{capitalizedSubject}}{{capitalizedPredicate}}Event implements CDEvent {
+public class {{capitalizedSubject}}{{capitalizedPredicate}}CDEvent extends {{capitalizedSubject}}{{predicate}} implements CDEvent {
 
 
     /**
@@ -93,8 +93,7 @@ public class {{capitalizedSubject}}{{capitalizedPredicate}}CDEvent extends {{cap
 
     @Override
     public String schemaURL() {
-        String eventSchemaName = "{{schemaFileName}}".substring(0, "{{schemaFileName}}".lastIndexOf(".json"));
-        return String.format("https://cdevents.dev/%s/schema/%s", CDEventConstants.CDEVENTS_SPEC_VERSION, eventSchemaName);
+        return "{{schemaURL}}";
     }
 
 
