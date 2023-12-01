@@ -61,7 +61,7 @@ public class BuildFinishedCDEvent extends Buildfinished implements CDEvent {
         context.setTimestamp(new Date());
         context.setVersion(CDEventConstants.CDEVENTS_SPEC_VERSION);
         getSubject().setContent(new Content());
-        getSubject().setType(CDEventConstants.SubjectType.BUILD.getSubjectType());
+        getSubject().setType(Subject.Type.BUILD);
     }
 
     /**
@@ -90,7 +90,7 @@ public class BuildFinishedCDEvent extends Buildfinished implements CDEvent {
 
     @Override
     public String schemaURL() {
-        return "https://cdevents.dev/0.1.2/schema/build-finished-event";
+        return "https://cdevents.dev/0.3.0/schema/build-finished-event";
     }
 
 
@@ -137,6 +137,7 @@ public class BuildFinishedCDEvent extends Buildfinished implements CDEvent {
         getSubject().setSource(subjectSource.toString());
     }
 
+    //getContentFields starts
 
     /**
     * @param artifactId
@@ -145,6 +146,8 @@ public class BuildFinishedCDEvent extends Buildfinished implements CDEvent {
         getSubject().getContent().setArtifactId(artifactId);
     }
 
+
+    //getContentObjectFields starts
 
 
 }

@@ -62,7 +62,7 @@ public class TaskrunFinishedCDEvent extends Taskrunfinished implements CDEvent {
         context.setVersion(CDEventConstants.CDEVENTS_SPEC_VERSION);
         getSubject().setContent(new Content());
         getSubject().getContent().setPipelineRun(new PipelineRun());
-        getSubject().setType(CDEventConstants.SubjectType.TASKRUN.getSubjectType());
+        getSubject().setType(Subject.Type.TASK_RUN);
     }
 
     /**
@@ -91,7 +91,7 @@ public class TaskrunFinishedCDEvent extends Taskrunfinished implements CDEvent {
 
     @Override
     public String schemaURL() {
-        return "https://cdevents.dev/0.1.2/schema/task-run-finished-event";
+        return "https://cdevents.dev/0.3.0/schema/task-run-finished-event";
     }
 
 
@@ -138,6 +138,7 @@ public class TaskrunFinishedCDEvent extends Taskrunfinished implements CDEvent {
         getSubject().setSource(subjectSource.toString());
     }
 
+    //getContentFields starts
 
     /**
     * @param taskName
@@ -167,6 +168,8 @@ public class TaskrunFinishedCDEvent extends Taskrunfinished implements CDEvent {
         getSubject().getContent().setErrors(errors);
     }
 
+
+    //getContentObjectFields starts
 
     /**
     * @param id

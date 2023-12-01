@@ -18,7 +18,7 @@ public final class CDEventConstants {
     /**
      * CDEvents Version.
      */
-    public static final String CDEVENTS_SPEC_VERSION = "0.1.2";
+    public static final String CDEVENTS_SPEC_VERSION = "0.3.0";
 
     public enum SubjectType {
 

@@ -62,7 +62,7 @@ public class TaskrunStartedCDEvent extends Taskrunstarted implements CDEvent {
         context.setVersion(CDEventConstants.CDEVENTS_SPEC_VERSION);
         getSubject().setContent(new Content());
         getSubject().getContent().setPipelineRun(new PipelineRun());
-        getSubject().setType(CDEventConstants.SubjectType.TASKRUN.getSubjectType());
+        getSubject().setType(Subject.Type.TASK_RUN);
     }
 
     /**
@@ -91,7 +91,7 @@ public class TaskrunStartedCDEvent extends Taskrunstarted implements CDEvent {
 
     @Override
     public String schemaURL() {
-        return "https://cdevents.dev/0.1.2/schema/task-run-started-event";
+        return "https://cdevents.dev/0.3.0/schema/task-run-started-event";
     }
 
 
@@ -138,6 +138,7 @@ public class TaskrunStartedCDEvent extends Taskrunstarted implements CDEvent {
         getSubject().setSource(subjectSource.toString());
     }
 
+    //getContentFields starts
 
     /**
     * @param taskName
@@ -153,6 +154,8 @@ public class TaskrunStartedCDEvent extends Taskrunstarted implements CDEvent {
         getSubject().getContent().setUrl(url);
     }
 
+
+    //getContentObjectFields starts
 
     /**
     * @param id

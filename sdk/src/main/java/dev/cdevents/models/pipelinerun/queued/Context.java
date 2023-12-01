@@ -49,7 +49,7 @@ public class Context {
      * 
      */
     @JsonProperty("type")
-    private Context.Type type = Context.Type.fromValue("dev.cdevents.pipelinerun.queued.0.1.0");
+    private Context.Type type = Context.Type.fromValue("dev.cdevents.pipelinerun.queued.0.1.1");
     /**
      * 
      * (Required)
@@ -161,7 +161,7 @@ public class Context {
     @Generated("jsonschema2pojo")
     public enum Type {
 
-        DEV_CDEVENTS_PIPELINERUN_QUEUED_0_1_0("dev.cdevents.pipelinerun.queued.0.1.0");
+        DEV_CDEVENTS_PIPELINERUN_QUEUED_0_1_1("dev.cdevents.pipelinerun.queued.0.1.1");
         private final String value;
         private final static Map<String, Context.Type> CONSTANTS = new HashMap<String, Context.Type>();
 

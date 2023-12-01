@@ -98,10 +98,12 @@ public final class CDEventsGenerator {
         try {
             JsonNode rootNode = objectMapper.readTree(file);
             JsonNode contextNode = rootNode.get("properties").get("context").get("properties");
+            JsonNode subjectNode = rootNode.get("properties").get("subject").get("properties");
             String schemaURL = rootNode.get("$id").asText();
 
+            String subjectType = subjectNode.get("type").get("enum").get(0).asText();
             String eventType = contextNode.get("type").get("enum").get(0).asText();
-            log.info("eventType: {}", eventType);
+            log.info("eventType: {} subjectType: {}", eventType, subjectType);
             String[] type = eventType.split("\\.");
             String subject = type[SUBJECT_INDEX];
             String predicate = type[PREDICATE_INDEX];
@@ -109,6 +111,7 @@ public final class CDEventsGenerator {
             String capitalizedPredicate = StringUtils.capitalize(predicate);
             String version = type[VERSION_INDEX];
 
+            String upperCaseSubject = getUpperCaseSubjectType(subjectType);
             //set the Schema JsonNode required values to schemaData
             schemaData.setSchemaURL(schemaURL);
             schemaData.setSubject(subject);
@@ -116,10 +119,9 @@ public final class CDEventsGenerator {
             schemaData.setCapitalizedSubject(capitalizedSubject);
             schemaData.setCapitalizedPredicate(capitalizedPredicate);
             schemaData.setSchemaFileName(file.getName());
-            schemaData.setUpperCaseSubject(subject.toUpperCase());
+            schemaData.setUpperCaseSubject(upperCaseSubject);
             schemaData.setVersion(version);
 
-            JsonNode subjectNode = rootNode.get("properties").get("subject").get("properties");
             JsonNode subjectContentNode = subjectNode.get("content").get("properties");
             updateSubjectContentProperties(schemaData, subjectContentNode);
         } catch (IOException e) {
@@ -127,6 +129,18 @@ public final class CDEventsGenerator {
             throw new IllegalStateException("Exception occurred while building schema data from Json schema ", e);
         }
         return schemaData;
+    }
+
+    private static String getUpperCaseSubjectType(String subjectType) {
+        StringBuilder sb = new StringBuilder();
+        subjectType.chars().forEachOrdered(c-> {
+            char currentChar = (char) c;
+            if (Character.isUpperCase(currentChar)) {
+                sb.append('_');
+            }
+            sb.append(currentChar);
+        });
+        return sb.toString().toUpperCase();
     }
 
     private static void updateSubjectContentProperties(SchemaData schemaData, JsonNode subjectContentNode) {
@@ -138,18 +152,36 @@ public final class CDEventsGenerator {
             String contentField = contentMap.getKey();
             String capitalizedContentField = StringUtils.capitalize(contentField);
             JsonNode contentNode = contentMap.getValue();
+            String dataType = "";
             if (!contentNode.get("type").asText().equals("object")) {
-                contentFields.add(new SchemaData.ContentField(contentField, capitalizedContentField, "String"));
+                if(contentNode.get("format") != null && contentNode.get("format").asText().equalsIgnoreCase("uri")) {
+                    dataType = "URI";
+                } else if (contentNode.get("enum") != null) {
+                    dataType = "Content."+ capitalizedContentField;
+                } else {
+                  dataType = "String";
+                }
+                contentFields.add(new SchemaData.ContentField(contentField, capitalizedContentField, dataType));
             } else {
                 schemaData.setObjectName(contentField);
                 schemaData.setCapitalizedObjectName(capitalizedContentField);
                 JsonNode contentObjectNode = contentNode.get("properties");
                 Iterator<String> contentObjectProps = contentObjectNode.fieldNames();
                 while (contentObjectProps.hasNext()) {
+
                     String contentObjField = contentObjectProps.next();
                     String capitalizedContentObjField = StringUtils.capitalize(contentObjField);
+                    JsonNode fieldNode = contentObjectNode.get(contentObjField);
+                    if(fieldNode.get("format") != null && fieldNode.get("format").asText().equalsIgnoreCase("uri")) {
+                        dataType = "URI";
+                    } else if (fieldNode.get("enum") != null) {
+                        dataType = capitalizedContentField + "." +capitalizedContentObjField;
+                    } else {
+                        dataType = "String";
+                    }
+
                     contentObjectFields.add(new SchemaData.ContentObjectField(contentObjField,
-                            capitalizedContentObjField, contentField, capitalizedContentField, "String"));
+                            capitalizedContentObjField, contentField, capitalizedContentField, dataType));
                 }
             }
         }

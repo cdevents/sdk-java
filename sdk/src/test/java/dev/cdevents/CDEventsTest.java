@@ -4,7 +4,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.packageurl.MalformedPackageURLException;
-import com.github.packageurl.PackageURL;
 import dev.cdevents.config.CustomObjectMapper;
 import dev.cdevents.constants.CDEventConstants;
 import dev.cdevents.events.*;
@@ -878,7 +877,7 @@ public class CDEventsTest {
     @Test
     void createTestCaseQueuedEventAsCloudEvent() {
 
-        TestcaseQueuedCDEvent cdEvent =  new TestcaseQueuedCDEvent();
+        TestcaserunQueuedCDEvent cdEvent =  new TestcaserunQueuedCDEvent();
         cdEvent.setSource(URI.create("http://dev.cdevents"));
 
         cdEvent.setSubjectId("test-case-1");
@@ -897,7 +896,7 @@ public class CDEventsTest {
 
     @Test
     void testInvalidTestCaseQueuedEventWithNoSubject() {
-        TestcaseQueuedCDEvent cdEvent =  new TestcaseQueuedCDEvent();
+        TestcaserunQueuedCDEvent cdEvent =  new TestcaserunQueuedCDEvent();
         cdEvent.setSource(URI.create("http://dev.cdevents"));
 
         Exception exception = assertThrows(CDEventsException.class, () -> {
@@ -910,7 +909,7 @@ public class CDEventsTest {
     @Test
     void createTestCaseStartedEventAsCloudEvent() {
 
-        TestcaseStartedCDEvent cdEvent =  new TestcaseStartedCDEvent();
+        TestcaserunStartedCDEvent cdEvent =  new TestcaserunStartedCDEvent();
         cdEvent.setSource(URI.create("http://dev.cdevents"));
 
         cdEvent.setSubjectId("test-case-1");
@@ -929,7 +928,7 @@ public class CDEventsTest {
 
     @Test
     void testInvalidTestCaseStartedEventWithNoSubject() {
-        TestcaseStartedCDEvent cdEvent =  new TestcaseStartedCDEvent();
+        TestcaserunStartedCDEvent cdEvent =  new TestcaserunStartedCDEvent();
         cdEvent.setSource(URI.create("http://dev.cdevents"));
 
         Exception exception = assertThrows(CDEventsException.class, () -> {
@@ -943,7 +942,7 @@ public class CDEventsTest {
     @Test
     void createTestCaseFinishedEventAsCloudEvent() {
 
-        TestcaseFinishedCDEvent cdEvent =  new TestcaseFinishedCDEvent();
+        TestcaserunFinishedCDEvent cdEvent =  new TestcaserunFinishedCDEvent();
         cdEvent.setSource(URI.create("http://dev.cdevents"));
 
         cdEvent.setSubjectId("test-case-1");
@@ -962,7 +961,7 @@ public class CDEventsTest {
 
     @Test
     void testInvalidTestCaseFinishedEventWithNoSubject() {
-        TestcaseFinishedCDEvent cdEvent =  new TestcaseFinishedCDEvent();
+        TestcaserunFinishedCDEvent cdEvent =  new TestcaserunFinishedCDEvent();
         cdEvent.setSource(URI.create("http://dev.cdevents"));
 
         Exception exception = assertThrows(CDEventsException.class, () -> {
@@ -976,7 +975,7 @@ public class CDEventsTest {
     @Test
     void createTestSuiteStartedEventAsCloudEvent() {
 
-        TestsuiteStartedCDEvent cdEvent =  new TestsuiteStartedCDEvent();
+        TestsuiterunStartedCDEvent cdEvent =  new TestsuiterunStartedCDEvent();
         cdEvent.setSource(URI.create("http://dev.cdevents"));
 
         cdEvent.setSubjectId("test-suite-1");
@@ -995,7 +994,7 @@ public class CDEventsTest {
 
     @Test
     void testInvalidTestSuiteStartedEventWithNoSubject() {
-        TestsuiteStartedCDEvent cdEvent =  new TestsuiteStartedCDEvent();
+        TestsuiterunStartedCDEvent cdEvent =  new TestsuiterunStartedCDEvent();
         cdEvent.setSource(URI.create("http://dev.cdevents"));
 
         Exception exception = assertThrows(CDEventsException.class, () -> {
@@ -1009,7 +1008,7 @@ public class CDEventsTest {
     @Test
     void createTestSuiteFinishedEventAsCloudEvent() {
 
-        TestsuiteFinishedCDEvent cdEvent =  new TestsuiteFinishedCDEvent();
+        TestsuiterunFinishedCDEvent cdEvent =  new TestsuiterunFinishedCDEvent();
         cdEvent.setSource(URI.create("http://dev.cdevents"));
 
         cdEvent.setSubjectId("test-suite-1");
@@ -1028,7 +1027,7 @@ public class CDEventsTest {
 
     @Test
     void testInvalidTestSuiteFinishedEventWithNoSubject() {
-        TestsuiteFinishedCDEvent cdEvent =  new TestsuiteFinishedCDEvent();
+        TestsuiterunFinishedCDEvent cdEvent =  new TestsuiterunFinishedCDEvent();
         cdEvent.setSource(URI.create("http://dev.cdevents"));
 
         Exception exception = assertThrows(CDEventsException.class, () -> {

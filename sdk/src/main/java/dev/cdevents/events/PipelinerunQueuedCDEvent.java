@@ -61,7 +61,7 @@ public class PipelinerunQueuedCDEvent extends Pipelinerunqueued implements CDEve
         context.setTimestamp(new Date());
         context.setVersion(CDEventConstants.CDEVENTS_SPEC_VERSION);
         getSubject().setContent(new Content());
-        getSubject().setType(CDEventConstants.SubjectType.PIPELINERUN.getSubjectType());
+        getSubject().setType(Subject.Type.PIPELINE_RUN);
     }
 
     /**
@@ -90,7 +90,7 @@ public class PipelinerunQueuedCDEvent extends Pipelinerunqueued implements CDEve
 
     @Override
     public String schemaURL() {
-        return "https://cdevents.dev/0.1.2/schema/pipeline-run-queued-event";
+        return "https://cdevents.dev/0.3.0/schema/pipeline-run-queued-event";
     }
 
 
@@ -137,6 +137,7 @@ public class PipelinerunQueuedCDEvent extends Pipelinerunqueued implements CDEve
         getSubject().setSource(subjectSource.toString());
     }
 
+    //getContentFields starts
 
     /**
     * @param pipelineName
@@ -152,6 +153,8 @@ public class PipelinerunQueuedCDEvent extends Pipelinerunqueued implements CDEve
         getSubject().getContent().setUrl(url);
     }
 
+
+    //getContentObjectFields starts
 
 
 }
