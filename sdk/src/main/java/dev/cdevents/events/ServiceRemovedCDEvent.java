@@ -62,7 +62,7 @@ public class ServiceRemovedCDEvent extends Serviceremoved implements CDEvent {
         context.setVersion(CDEventConstants.CDEVENTS_SPEC_VERSION);
         getSubject().setContent(new Content());
         getSubject().getContent().setEnvironment(new Environment());
-        getSubject().setType(CDEventConstants.SubjectType.SERVICE.getSubjectType());
+        getSubject().setType(Subject.Type.SERVICE);
     }
 
     /**
@@ -91,7 +91,7 @@ public class ServiceRemovedCDEvent extends Serviceremoved implements CDEvent {
 
     @Override
     public String schemaURL() {
-        return "https://cdevents.dev/0.1.2/schema/service-removed-event";
+        return "https://cdevents.dev/0.3.0/schema/service-removed-event";
     }
 
 
@@ -138,7 +138,10 @@ public class ServiceRemovedCDEvent extends Serviceremoved implements CDEvent {
         getSubject().setSource(subjectSource.toString());
     }
 
+    //getContentFields starts
 
+
+    //getContentObjectFields starts
 
     /**
     * @param id

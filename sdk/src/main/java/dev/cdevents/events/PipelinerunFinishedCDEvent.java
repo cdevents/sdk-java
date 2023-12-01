@@ -61,7 +61,7 @@ public class PipelinerunFinishedCDEvent extends Pipelinerunfinished implements C
         context.setTimestamp(new Date());
         context.setVersion(CDEventConstants.CDEVENTS_SPEC_VERSION);
         getSubject().setContent(new Content());
-        getSubject().setType(CDEventConstants.SubjectType.PIPELINERUN.getSubjectType());
+        getSubject().setType(Subject.Type.PIPELINE_RUN);
     }
 
     /**
@@ -90,7 +90,7 @@ public class PipelinerunFinishedCDEvent extends Pipelinerunfinished implements C
 
     @Override
     public String schemaURL() {
-        return "https://cdevents.dev/0.1.2/schema/pipeline-run-finished-event";
+        return "https://cdevents.dev/0.3.0/schema/pipeline-run-finished-event";
     }
 
 
@@ -137,6 +137,7 @@ public class PipelinerunFinishedCDEvent extends Pipelinerunfinished implements C
         getSubject().setSource(subjectSource.toString());
     }
 
+    //getContentFields starts
 
     /**
     * @param pipelineName
@@ -166,6 +167,8 @@ public class PipelinerunFinishedCDEvent extends Pipelinerunfinished implements C
         getSubject().getContent().setErrors(errors);
     }
 
+
+    //getContentObjectFields starts
 
 
 }

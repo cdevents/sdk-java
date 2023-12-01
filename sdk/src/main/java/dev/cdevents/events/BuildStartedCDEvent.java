@@ -61,7 +61,7 @@ public class BuildStartedCDEvent extends Buildstarted implements CDEvent {
         context.setTimestamp(new Date());
         context.setVersion(CDEventConstants.CDEVENTS_SPEC_VERSION);
         getSubject().setContent(new Content());
-        getSubject().setType(CDEventConstants.SubjectType.BUILD.getSubjectType());
+        getSubject().setType(Subject.Type.BUILD);
     }
 
     /**
@@ -90,7 +90,7 @@ public class BuildStartedCDEvent extends Buildstarted implements CDEvent {
 
     @Override
     public String schemaURL() {
-        return "https://cdevents.dev/0.1.2/schema/build-started-event";
+        return "https://cdevents.dev/0.3.0/schema/build-started-event";
     }
 
 
@@ -137,7 +137,10 @@ public class BuildStartedCDEvent extends Buildstarted implements CDEvent {
         getSubject().setSource(subjectSource.toString());
     }
 
+    //getContentFields starts
 
+
+    //getContentObjectFields starts
 
 
 }

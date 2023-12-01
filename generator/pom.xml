@@ -110,6 +110,22 @@
                         </configuration>
                     </execution>
                     <execution>
+                        <id>generate-artifact-signed-from-schema</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <sourcePaths>
+                                <sourcePath>${parent.project.dir}/spec/schemas/artifactsigned.json</sourcePath>
+                            </sourcePaths>
+                            <outputDirectory>${sdk.project.dir}/src/main/java</outputDirectory>
+                            <targetPackage>dev.cdevents.models.artifact.signed</targetPackage>
+                            <includeHashcodeAndEquals>false</includeHashcodeAndEquals>
+                            <includeToString>false</includeToString>
+                        </configuration>
+                    </execution>
+                    <execution>
                         <id>generate-branch-created-from-schema</id>
                         <phase>generate-sources</phase>
                         <goals>
@@ -313,6 +329,54 @@
                             </sourcePaths>
                             <outputDirectory>${sdk.project.dir}/src/main/java</outputDirectory>
                             <targetPackage>dev.cdevents.models.environment.modified</targetPackage>
+                            <includeHashcodeAndEquals>false</includeHashcodeAndEquals>
+                            <includeToString>false</includeToString>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>generate-incident-detected-from-schema</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <sourcePaths>
+                                <sourcePath>${parent.project.dir}/spec/schemas/incidentdetected.json</sourcePath>
+                            </sourcePaths>
+                            <outputDirectory>${sdk.project.dir}/src/main/java</outputDirectory>
+                            <targetPackage>dev.cdevents.models.incident.detected</targetPackage>
+                            <includeHashcodeAndEquals>false</includeHashcodeAndEquals>
+                            <includeToString>false</includeToString>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>generate-incident-reported-from-schema</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <sourcePaths>
+                                <sourcePath>${parent.project.dir}/spec/schemas/incidentreported.json</sourcePath>
+                            </sourcePaths>
+                            <outputDirectory>${sdk.project.dir}/src/main/java</outputDirectory>
+                            <targetPackage>dev.cdevents.models.incident.reported</targetPackage>
+                            <includeHashcodeAndEquals>false</includeHashcodeAndEquals>
+                            <includeToString>false</includeToString>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>generate-incident-resolved-from-schema</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <sourcePaths>
+                                <sourcePath>${parent.project.dir}/spec/schemas/incidentresolved.json</sourcePath>
+                            </sourcePaths>
+                            <outputDirectory>${sdk.project.dir}/src/main/java</outputDirectory>
+                            <targetPackage>dev.cdevents.models.incident.resolved</targetPackage>
                             <includeHashcodeAndEquals>false</includeHashcodeAndEquals>
                             <includeToString>false</includeToString>
                         </configuration>
@@ -526,81 +590,113 @@
                         </configuration>
                     </execution>
                     <execution>
-                        <id>generate-testcase-finished-from-schema</id>
+                        <id>generate-testcaserun-finished-from-schema</id>
                         <phase>generate-sources</phase>
                         <goals>
                             <goal>generate</goal>
                         </goals>
                         <configuration>
                             <sourcePaths>
-                                <sourcePath>${parent.project.dir}/spec/schemas/testcasefinished.json</sourcePath>
+                                <sourcePath>${parent.project.dir}/spec/schemas/testcaserunfinished.json</sourcePath>
                             </sourcePaths>
                             <outputDirectory>${sdk.project.dir}/src/main/java</outputDirectory>
-                            <targetPackage>dev.cdevents.models.testcase.finished</targetPackage>
+                            <targetPackage>dev.cdevents.models.testcaserun.finished</targetPackage>
                             <includeHashcodeAndEquals>false</includeHashcodeAndEquals>
                             <includeToString>false</includeToString>
                         </configuration>
                     </execution>
                     <execution>
-                        <id>generate-testcase-queued-from-schema</id>
+                        <id>generate-testcaserun-queued-from-schema</id>
                         <phase>generate-sources</phase>
                         <goals>
                             <goal>generate</goal>
                         </goals>
                         <configuration>
                             <sourcePaths>
-                                <sourcePath>${parent.project.dir}/spec/schemas/testcasequeued.json</sourcePath>
+                                <sourcePath>${parent.project.dir}/spec/schemas/testcaserunqueued.json</sourcePath>
                             </sourcePaths>
                             <outputDirectory>${sdk.project.dir}/src/main/java</outputDirectory>
-                            <targetPackage>dev.cdevents.models.testcase.queued</targetPackage>
+                            <targetPackage>dev.cdevents.models.testcaserun.queued</targetPackage>
                             <includeHashcodeAndEquals>false</includeHashcodeAndEquals>
                             <includeToString>false</includeToString>
                         </configuration>
                     </execution>
                     <execution>
-                        <id>generate-testcase-started-from-schema</id>
+                        <id>generate-testcaserun-started-from-schema</id>
                         <phase>generate-sources</phase>
                         <goals>
                             <goal>generate</goal>
                         </goals>
                         <configuration>
                             <sourcePaths>
-                                <sourcePath>${parent.project.dir}/spec/schemas/testcasestarted.json</sourcePath>
+                                <sourcePath>${parent.project.dir}/spec/schemas/testcaserunstarted.json</sourcePath>
                             </sourcePaths>
                             <outputDirectory>${sdk.project.dir}/src/main/java</outputDirectory>
-                            <targetPackage>dev.cdevents.models.testcase.started</targetPackage>
+                            <targetPackage>dev.cdevents.models.testcaserun.started</targetPackage>
                             <includeHashcodeAndEquals>false</includeHashcodeAndEquals>
                             <includeToString>false</includeToString>
                         </configuration>
                     </execution>
                     <execution>
-                        <id>generate-testsuite-finished-from-schema</id>
+                        <id>generate-testoutput-published-from-schema</id>
                         <phase>generate-sources</phase>
                         <goals>
                             <goal>generate</goal>
                         </goals>
                         <configuration>
                             <sourcePaths>
-                                <sourcePath>${parent.project.dir}/spec/schemas/testsuitefinished.json</sourcePath>
+                                <sourcePath>${parent.project.dir}/spec/schemas/testoutputpublished.json</sourcePath>
                             </sourcePaths>
                             <outputDirectory>${sdk.project.dir}/src/main/java</outputDirectory>
-                            <targetPackage>dev.cdevents.models.testsuite.finished</targetPackage>
+                            <targetPackage>dev.cdevents.models.testoutput.published</targetPackage>
                             <includeHashcodeAndEquals>false</includeHashcodeAndEquals>
                             <includeToString>false</includeToString>
                         </configuration>
                     </execution>
                     <execution>
-                        <id>generate-testsuite-started-from-schema</id>
+                        <id>generate-testsuiterun-finished-from-schema</id>
                         <phase>generate-sources</phase>
                         <goals>
                             <goal>generate</goal>
                         </goals>
                         <configuration>
                             <sourcePaths>
-                                <sourcePath>${parent.project.dir}/spec/schemas/testsuitestarted.json</sourcePath>
+                                <sourcePath>${parent.project.dir}/spec/schemas/testsuiterunfinished.json</sourcePath>
                             </sourcePaths>
                             <outputDirectory>${sdk.project.dir}/src/main/java</outputDirectory>
-                            <targetPackage>dev.cdevents.models.testsuite.started</targetPackage>
+                            <targetPackage>dev.cdevents.models.testsuiterun.finished</targetPackage>
+                            <includeHashcodeAndEquals>false</includeHashcodeAndEquals>
+                            <includeToString>false</includeToString>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>generate-testsuiterun-queued-from-schema</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <sourcePaths>
+                                <sourcePath>${parent.project.dir}/spec/schemas/testsuiterunqueued.json</sourcePath>
+                            </sourcePaths>
+                            <outputDirectory>${sdk.project.dir}/src/main/java</outputDirectory>
+                            <targetPackage>dev.cdevents.models.testsuiterun.queued</targetPackage>
+                            <includeHashcodeAndEquals>false</includeHashcodeAndEquals>
+                            <includeToString>false</includeToString>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>generate-testsuiterun-started-from-schema</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <sourcePaths>
+                                <sourcePath>${parent.project.dir}/spec/schemas/testsuiterunstarted.json</sourcePath>
+                            </sourcePaths>
+                            <outputDirectory>${sdk.project.dir}/src/main/java</outputDirectory>
+                            <targetPackage>dev.cdevents.models.testsuiterun.started</targetPackage>
                             <includeHashcodeAndEquals>false</includeHashcodeAndEquals>
                             <includeToString>false</includeToString>
                         </configuration>

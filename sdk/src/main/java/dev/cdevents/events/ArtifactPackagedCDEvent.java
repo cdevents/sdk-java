@@ -62,7 +62,7 @@ public class ArtifactPackagedCDEvent extends Artifactpackaged implements CDEvent
         context.setVersion(CDEventConstants.CDEVENTS_SPEC_VERSION);
         getSubject().setContent(new Content());
         getSubject().getContent().setChange(new Change());
-        getSubject().setType(CDEventConstants.SubjectType.ARTIFACT.getSubjectType());
+        getSubject().setType(Subject.Type.ARTIFACT);
     }
 
     /**
@@ -91,7 +91,7 @@ public class ArtifactPackagedCDEvent extends Artifactpackaged implements CDEvent
 
     @Override
     public String schemaURL() {
-        return "https://cdevents.dev/0.1.2/schema/artifact-packaged-event";
+        return "https://cdevents.dev/0.3.0/schema/artifact-packaged-event";
     }
 
 
@@ -138,7 +138,10 @@ public class ArtifactPackagedCDEvent extends Artifactpackaged implements CDEvent
         getSubject().setSource(subjectSource.toString());
     }
 
+    //getContentFields starts
 
+
+    //getContentObjectFields starts
 
     /**
     * @param id

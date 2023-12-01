@@ -62,7 +62,7 @@ public class ServiceUpgradedCDEvent extends Serviceupgraded implements CDEvent {
         context.setVersion(CDEventConstants.CDEVENTS_SPEC_VERSION);
         getSubject().setContent(new Content());
         getSubject().getContent().setEnvironment(new Environment());
-        getSubject().setType(CDEventConstants.SubjectType.SERVICE.getSubjectType());
+        getSubject().setType(Subject.Type.SERVICE);
     }
 
     /**
@@ -91,7 +91,7 @@ public class ServiceUpgradedCDEvent extends Serviceupgraded implements CDEvent {
 
     @Override
     public String schemaURL() {
-        return "https://cdevents.dev/0.1.2/schema/service-upgraded-event";
+        return "https://cdevents.dev/0.3.0/schema/service-upgraded-event";
     }
 
 
@@ -138,6 +138,7 @@ public class ServiceUpgradedCDEvent extends Serviceupgraded implements CDEvent {
         getSubject().setSource(subjectSource.toString());
     }
 
+    //getContentFields starts
 
     /**
     * @param artifactId
@@ -146,6 +147,8 @@ public class ServiceUpgradedCDEvent extends Serviceupgraded implements CDEvent {
         getSubject().getContent().setArtifactId(artifactId);
     }
 
+
+    //getContentObjectFields starts
 
     /**
     * @param id

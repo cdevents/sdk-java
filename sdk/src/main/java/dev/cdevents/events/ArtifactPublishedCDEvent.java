@@ -61,7 +61,7 @@ public class ArtifactPublishedCDEvent extends Artifactpublished implements CDEve
         context.setTimestamp(new Date());
         context.setVersion(CDEventConstants.CDEVENTS_SPEC_VERSION);
         getSubject().setContent(new Content());
-        getSubject().setType(CDEventConstants.SubjectType.ARTIFACT.getSubjectType());
+        getSubject().setType(Subject.Type.ARTIFACT);
     }
 
     /**
@@ -90,7 +90,7 @@ public class ArtifactPublishedCDEvent extends Artifactpublished implements CDEve
 
     @Override
     public String schemaURL() {
-        return "https://cdevents.dev/0.1.2/schema/artifact-published-event";
+        return "https://cdevents.dev/0.3.0/schema/artifact-published-event";
     }
 
 
@@ -137,7 +137,10 @@ public class ArtifactPublishedCDEvent extends Artifactpublished implements CDEve
         getSubject().setSource(subjectSource.toString());
     }
 
+    //getContentFields starts
 
+
+    //getContentObjectFields starts
 
 
 }

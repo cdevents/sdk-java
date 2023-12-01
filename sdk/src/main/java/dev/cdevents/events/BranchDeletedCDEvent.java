@@ -62,7 +62,7 @@ public class BranchDeletedCDEvent extends Branchdeleted implements CDEvent {
         context.setVersion(CDEventConstants.CDEVENTS_SPEC_VERSION);
         getSubject().setContent(new Content());
         getSubject().getContent().setRepository(new Repository());
-        getSubject().setType(CDEventConstants.SubjectType.BRANCH.getSubjectType());
+        getSubject().setType(Subject.Type.BRANCH);
     }
 
     /**
@@ -91,7 +91,7 @@ public class BranchDeletedCDEvent extends Branchdeleted implements CDEvent {
 
     @Override
     public String schemaURL() {
-        return "https://cdevents.dev/0.1.2/schema/branch-deleted-event";
+        return "https://cdevents.dev/0.3.0/schema/branch-deleted-event";
     }
 
 
@@ -138,7 +138,10 @@ public class BranchDeletedCDEvent extends Branchdeleted implements CDEvent {
         getSubject().setSource(subjectSource.toString());
     }
 
+    //getContentFields starts
 
+
+    //getContentObjectFields starts
 
     /**
     * @param id

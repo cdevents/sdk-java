@@ -61,7 +61,7 @@ public class RepositoryDeletedCDEvent extends Repositorydeleted implements CDEve
         context.setTimestamp(new Date());
         context.setVersion(CDEventConstants.CDEVENTS_SPEC_VERSION);
         getSubject().setContent(new Content());
-        getSubject().setType(CDEventConstants.SubjectType.REPOSITORY.getSubjectType());
+        getSubject().setType(Subject.Type.REPOSITORY);
     }
 
     /**
@@ -90,7 +90,7 @@ public class RepositoryDeletedCDEvent extends Repositorydeleted implements CDEve
 
     @Override
     public String schemaURL() {
-        return "https://cdevents.dev/0.1.2/schema/repository-deleted-event";
+        return "https://cdevents.dev/0.3.0/schema/repository-deleted-event";
     }
 
 
@@ -137,6 +137,7 @@ public class RepositoryDeletedCDEvent extends Repositorydeleted implements CDEve
         getSubject().setSource(subjectSource.toString());
     }
 
+    //getContentFields starts
 
     /**
     * @param name
@@ -166,6 +167,8 @@ public class RepositoryDeletedCDEvent extends Repositorydeleted implements CDEve
         getSubject().getContent().setViewUrl(viewUrl);
     }
 
+
+    //getContentObjectFields starts
 
 
 }

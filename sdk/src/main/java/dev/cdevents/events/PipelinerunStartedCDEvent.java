@@ -61,7 +61,7 @@ public class PipelinerunStartedCDEvent extends Pipelinerunstarted implements CDE
         context.setTimestamp(new Date());
         context.setVersion(CDEventConstants.CDEVENTS_SPEC_VERSION);
         getSubject().setContent(new Content());
-        getSubject().setType(CDEventConstants.SubjectType.PIPELINERUN.getSubjectType());
+        getSubject().setType(Subject.Type.PIPELINE_RUN);
     }
 
     /**
@@ -90,7 +90,7 @@ public class PipelinerunStartedCDEvent extends Pipelinerunstarted implements CDE
 
     @Override
     public String schemaURL() {
-        return "https://cdevents.dev/0.1.2/schema/pipeline-run-started-event";
+        return "https://cdevents.dev/0.3.0/schema/pipeline-run-started-event";
     }
 
 
@@ -137,6 +137,7 @@ public class PipelinerunStartedCDEvent extends Pipelinerunstarted implements CDE
         getSubject().setSource(subjectSource.toString());
     }
 
+    //getContentFields starts
 
     /**
     * @param pipelineName
@@ -152,6 +153,8 @@ public class PipelinerunStartedCDEvent extends Pipelinerunstarted implements CDE
         getSubject().getContent().setUrl(url);
     }
 
+
+    //getContentObjectFields starts
 
 
 }

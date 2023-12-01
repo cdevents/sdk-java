@@ -1,10 +1,14 @@
 
 package dev.cdevents.models.build.finished;
 
+import java.util.HashMap;
+import java.util.Map;
 import javax.annotation.processing.Generated;
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.JsonValue;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
@@ -31,7 +35,7 @@ public class Subject {
      * 
      */
     @JsonProperty("type")
-    private String type;
+    private Subject.Type type = Subject.Type.fromValue("build");
     /**
      * 
      * (Required)
@@ -76,7 +80,7 @@ public class Subject {
      * 
      */
     @JsonProperty("type")
-    public String getType() {
+    public Subject.Type getType() {
         return type;
     }
 
@@ -86,7 +90,7 @@ public class Subject {
      * 
      */
     @JsonProperty("type")
-    public void setType(String type) {
+    public void setType(Subject.Type type) {
         this.type = type;
     }
 
@@ -108,6 +112,45 @@ public class Subject {
     @JsonProperty("content")
     public void setContent(Content content) {
         this.content = content;
+    }
+
+    @Generated("jsonschema2pojo")
+    public enum Type {
+
+        BUILD("build");
+        private final String value;
+        private final static Map<String, Subject.Type> CONSTANTS = new HashMap<String, Subject.Type>();
+
+        static {
+            for (Subject.Type c: values()) {
+                CONSTANTS.put(c.value, c);
+            }
+        }
+
+        Type(String value) {
+            this.value = value;
+        }
+
+        @Override
+        public String toString() {
+            return this.value;
+        }
+
+        @JsonValue
+        public String value() {
+            return this.value;
+        }
+
+        @JsonCreator
+        public static Subject.Type fromValue(String value) {
+            Subject.Type constant = CONSTANTS.get(value);
+            if (constant == null) {
+                throw new IllegalArgumentException(value);
+            } else {
+                return constant;
+            }
+        }
+
     }
 
 }

@@ -61,7 +61,7 @@ public class EnvironmentModifiedCDEvent extends Environmentmodified implements C
         context.setTimestamp(new Date());
         context.setVersion(CDEventConstants.CDEVENTS_SPEC_VERSION);
         getSubject().setContent(new Content());
-        getSubject().setType(CDEventConstants.SubjectType.ENVIRONMENT.getSubjectType());
+        getSubject().setType(Subject.Type.ENVIRONMENT);
     }
 
     /**
@@ -90,7 +90,7 @@ public class EnvironmentModifiedCDEvent extends Environmentmodified implements C
 
     @Override
     public String schemaURL() {
-        return "https://cdevents.dev/0.1.2/schema/environment-modified-event";
+        return "https://cdevents.dev/0.3.0/schema/environment-modified-event";
     }
 
 
@@ -137,6 +137,7 @@ public class EnvironmentModifiedCDEvent extends Environmentmodified implements C
         getSubject().setSource(subjectSource.toString());
     }
 
+    //getContentFields starts
 
     /**
     * @param name
@@ -152,6 +153,8 @@ public class EnvironmentModifiedCDEvent extends Environmentmodified implements C
         getSubject().getContent().setUrl(url);
     }
 
+
+    //getContentObjectFields starts
 
 
 }

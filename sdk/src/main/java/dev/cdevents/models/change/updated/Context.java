@@ -49,7 +49,7 @@ public class Context {
      * 
      */
     @JsonProperty("type")
-    private Context.Type type = Context.Type.fromValue("dev.cdevents.change.updated.0.1.1");
+    private Context.Type type = Context.Type.fromValue("dev.cdevents.change.updated.0.1.2");
     /**
      * 
      * (Required)
@@ -161,7 +161,7 @@ public class Context {
     @Generated("jsonschema2pojo")
     public enum Type {
 
-        DEV_CDEVENTS_CHANGE_UPDATED_0_1_1("dev.cdevents.change.updated.0.1.1");
+        DEV_CDEVENTS_CHANGE_UPDATED_0_1_2("dev.cdevents.change.updated.0.1.2");
         private final String value;
         private final static Map<String, Context.Type> CONSTANTS = new HashMap<String, Context.Type>();
 

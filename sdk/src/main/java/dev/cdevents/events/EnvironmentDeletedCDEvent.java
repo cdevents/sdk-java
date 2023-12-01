@@ -61,7 +61,7 @@ public class EnvironmentDeletedCDEvent extends Environmentdeleted implements CDE
         context.setTimestamp(new Date());
         context.setVersion(CDEventConstants.CDEVENTS_SPEC_VERSION);
         getSubject().setContent(new Content());
-        getSubject().setType(CDEventConstants.SubjectType.ENVIRONMENT.getSubjectType());
+        getSubject().setType(Subject.Type.ENVIRONMENT);
     }
 
     /**
@@ -90,7 +90,7 @@ public class EnvironmentDeletedCDEvent extends Environmentdeleted implements CDE
 
     @Override
     public String schemaURL() {
-        return "https://cdevents.dev/0.1.2/schema/environment-deleted-event";
+        return "https://cdevents.dev/0.3.0/schema/environment-deleted-event";
     }
 
 
@@ -137,6 +137,7 @@ public class EnvironmentDeletedCDEvent extends Environmentdeleted implements CDE
         getSubject().setSource(subjectSource.toString());
     }
 
+    //getContentFields starts
 
     /**
     * @param name
@@ -145,6 +146,8 @@ public class EnvironmentDeletedCDEvent extends Environmentdeleted implements CDE
         getSubject().getContent().setName(name);
     }
 
+
+    //getContentObjectFields starts
 
 
 }

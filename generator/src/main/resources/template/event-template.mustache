@@ -64,7 +64,7 @@ public class {{capitalizedSubject}}{{capitalizedPredicate}}CDEvent extends {{cap
         {{#getCapitalizedObjectName}}
         getSubject().getContent().set{{capitalizedObjectName}}(new {{capitalizedObjectName}}());
         {{/getCapitalizedObjectName}}
-        getSubject().setType(CDEventConstants.SubjectType.{{upperCaseSubject}}.getSubjectType());
+        getSubject().setType(Subject.Type.{{upperCaseSubject}});
     }
 
     /**
@@ -140,6 +140,7 @@ public class {{capitalizedSubject}}{{capitalizedPredicate}}CDEvent extends {{cap
         getSubject().setSource(subjectSource.toString());
     }
 
+    //getContentFields starts
 
     {{#getContentFields}}
     /**
@@ -150,6 +151,8 @@ public class {{capitalizedSubject}}{{capitalizedPredicate}}CDEvent extends {{cap
     }
 
     {{/getContentFields}}
+
+    //getContentObjectFields starts
 
     {{#getContentObjectFields}}
     /**
