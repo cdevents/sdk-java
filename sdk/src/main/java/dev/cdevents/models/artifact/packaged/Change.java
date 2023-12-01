@@ -8,16 +8,16 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
-    "id",
-    "source"
+        "id",
+        "source"
 })
 @Generated("jsonschema2pojo")
 public class Change {
 
     /**
-     * 
+     *
      * (Required)
-     * 
+     *
      */
     @JsonProperty("id")
     private String id;
@@ -25,9 +25,9 @@ public class Change {
     private String source;
 
     /**
-     * 
+     *
      * (Required)
-     * 
+     *
      */
     @JsonProperty("id")
     public String getId() {
@@ -35,9 +35,9 @@ public class Change {
     }
 
     /**
-     * 
+     *
      * (Required)
-     * 
+     *
      */
     @JsonProperty("id")
     public void setId(String id) {
@@ -52,6 +52,26 @@ public class Change {
     @JsonProperty("source")
     public void setSource(String source) {
         this.source = source;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = 1;
+        result = ((result* 31)+((this.id == null)? 0 :this.id.hashCode()));
+        result = ((result* 31)+((this.source == null)? 0 :this.source.hashCode()));
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+        if ((other instanceof Change) == false) {
+            return false;
+        }
+        Change rhs = ((Change) other);
+        return (((this.id == rhs.id)||((this.id!= null)&&this.id.equals(rhs.id)))&&((this.source == rhs.source)||((this.source!= null)&&this.source.equals(rhs.source))));
     }
 
 }
