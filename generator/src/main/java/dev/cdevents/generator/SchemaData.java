@@ -166,10 +166,16 @@ public class SchemaData {
         this.contentObjectFields = contentObjectFields;
     }
 
+    /**
+     * @return list of contentObjects
+     */
     public List<ContentObject> getContentObjects() {
         return contentObjects;
     }
 
+    /**
+     * @param contentObjects
+     */
     public void setContentObjects(List<ContentObject> contentObjects) {
         this.contentObjects = contentObjects;
     }
@@ -329,14 +335,23 @@ public class SchemaData {
     public static class ContentObject {
         private String capitalizedObjectName;
 
+        /**
+         * @return capitalizedObjectName
+         */
         public String getCapitalizedObjectName() {
             return capitalizedObjectName;
         }
 
+        /**
+         * @param capitalizedObjectName
+         */
         public void setCapitalizedObjectName(String capitalizedObjectName) {
             this.capitalizedObjectName = capitalizedObjectName;
         }
 
+        /**
+         * @param capitalizedObjectName
+         */
         public ContentObject(String capitalizedObjectName) {
             this.capitalizedObjectName = capitalizedObjectName;
         }

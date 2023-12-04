@@ -198,17 +198,17 @@ public final class CDEventConstants {
 
         /* Incident Events */
         /**
-         * Incident detected event
+         * Incident detected event.
          */
         IncidentDetectedEvent("dev.cdevents.incident.detected."),
 
         /**
-         * Incident reported event
+         * Incident reported event.
          */
         IncidentReportedEvent("dev.cdevents.incident.reported."),
 
         /**
-         * Incident resolved event
+         * Incident resolved event.
          */
         IncidentResolvedEvent("dev.cdevents.incident.resolved."),
 

@@ -133,7 +133,7 @@ public final class CDEventsGenerator {
 
     private static String getUpperCaseSubjectType(String subjectType) {
         StringBuilder sb = new StringBuilder();
-        subjectType.chars().forEachOrdered(c-> {
+        subjectType.chars().forEachOrdered(c -> {
             char currentChar = (char) c;
             if (Character.isUpperCase(currentChar)) {
                 sb.append('_');
@@ -155,10 +155,10 @@ public final class CDEventsGenerator {
             JsonNode contentNode = contentMap.getValue();
             String dataType = "";
             if (!contentNode.get("type").asText().equals("object")) {
-                if(contentNode.get("format") != null && contentNode.get("format").asText().equalsIgnoreCase("uri")) {
+                if (contentNode.get("format") != null && contentNode.get("format").asText().equalsIgnoreCase("uri")) {
                     dataType = "URI";
                 } else if (contentNode.get("enum") != null) {
-                    dataType = "Content."+ capitalizedContentField;
+                    dataType = "Content." + capitalizedContentField;
                 } else {
                   dataType = "String";
                 }
@@ -172,10 +172,10 @@ public final class CDEventsGenerator {
                     String contentObjField = contentObjectProps.next();
                     String capitalizedContentObjField = StringUtils.capitalize(contentObjField);
                     JsonNode fieldNode = contentObjectNode.get(contentObjField);
-                    if(fieldNode.get("format") != null && fieldNode.get("format").asText().equalsIgnoreCase("uri")) {
+                    if (fieldNode.get("format") != null && fieldNode.get("format").asText().equalsIgnoreCase("uri")) {
                         dataType = "URI";
                     } else if (fieldNode.get("enum") != null) {
-                        dataType = capitalizedContentField + "." +capitalizedContentObjField;
+                        dataType = capitalizedContentField + "." + capitalizedContentObjField;
                     } else {
                         dataType = "String";
                     }
