@@ -61,6 +61,8 @@ public class TestcaserunFinishedCDEvent extends Testcaserunfinished implements C
         context.setTimestamp(new Date());
         context.setVersion(CDEventConstants.CDEVENTS_SPEC_VERSION);
         getSubject().setContent(new Content());
+        getSubject().getContent().setEnvironment(new Environment());
+        getSubject().getContent().setTestSuiteRun(new TestSuiteRun());
         getSubject().getContent().setTestCase(new TestCase());
         getSubject().setType(Subject.Type.TEST_CASE_RUN);
     }

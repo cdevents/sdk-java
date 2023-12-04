@@ -11,95 +11,9 @@ public final class CDEventConstants {
     public static final String SCHEMA_FOLDER = "../spec/schemas";
 
     /**
-     * Mustache generic event template file.
-     */
-    public static final String EVENT_TEMPLATE_MUSTACHE = "template/event-template.mustache";
-
-    /**
      * CDEvents Version.
      */
     public static final String CDEVENTS_SPEC_VERSION = "0.3.0";
-
-    public enum SubjectType {
-
-        /**
-         * Subject type repository.
-         */
-        REPOSITORY("repository"),
-
-        /**
-         * Subject type taskRun.
-         */
-        TASKRUN("taskRun"),
-
-        /**
-         * Subject Type pipelineRun.
-         */
-        PIPELINERUN("pipelineRun"),
-
-        /**
-         * Subject Type Environment.
-         */
-        ENVIRONMENT("environment"),
-
-        /**
-         * Subject Type Service.
-         */
-        SERVICE("service"),
-
-        /**
-         * Subject type branch.
-         */
-        BRANCH("branch"),
-
-        /**
-         * Subject type change.
-         */
-        CHANGE("change"),
-
-        /**
-         * Subject type build.
-         */
-        BUILD("build"),
-
-        /**
-         * subject type testCase.
-         */
-        TESTCASE("testCase"),
-
-        /**
-         * subject type testSuite.
-         */
-        TESTSUITE("testSuite"),
-
-        /**
-         * subject type artifact.
-         */
-        ARTIFACT("artifact");
-
-        private String subjectType;
-
-        /**
-         * @param subjectType
-         */
-        SubjectType(String subjectType) {
-            this.subjectType = subjectType;
-        }
-
-        /**
-         * @return subjectType
-         */
-        public String getSubjectType() {
-            return subjectType;
-        }
-
-        /**
-         * @param subjectType
-         */
-        public void setSubjectType(String subjectType) {
-            this.subjectType = subjectType;
-        }
-    }
 
     public enum Outcome {
         /**
@@ -225,29 +139,34 @@ public final class CDEventConstants {
 
         /* Test Events */
         /**
-         * TestCase started event.
+         * TestCaseRun started event.
          */
-        TestCaseStartedEvent("dev.cdevents.testcase.started."),
+        TestCaseRunStartedEvent("dev.cdevents.testcaserun.started."),
         /**
-         * TestCase queued event.
+         * TestCaseRun queued event.
          */
-        TestCaseQueuedEvent("dev.cdevents.testcase.queued."),
+        TestCaseRunQueuedEvent("dev.cdevents.testcaserun.queued."),
         /**
-         * TestCase finished event.
+         * TestCaseRun finished event.
          */
-        TestCaseFinishedEvent("dev.cdevents.testcase.finished."),
+        TestCaseRunFinishedEvent("dev.cdevents.testcaserun.finished."),
         /**
-         * TestSuite started event.
+         * TestSuiteRun started event.
          */
-        TestSuiteStartedEvent("dev.cdevents.testsuite.started."),
+        TestSuiteRunStartedEvent("dev.cdevents.testsuiterun.started."),
         /**
-         * TestSuite queued event.
+         * TestSuiteRun queued event.
          */
-        TestSuiteQueuedEvent("dev.cdevents.testsuite.queued."),
+        TestSuiteRunQueuedEvent("dev.cdevents.testsuiterun.queued."),
         /**
-         * TestSuite finished event.
+         * TestSuiteRun finished event.
          */
-        TestSuiteFinishedEvent("dev.cdevents.testsuite.finished."),
+        TestSuiteRunFinishedEvent("dev.cdevents.testsuiterun.finished."),
+
+        /**
+         * TestOutput published event.
+         */
+        TestOutputPublishedEvent("dev.cdevents.testoutput.published."),
 
         /* Artifact Events */
         /**
@@ -259,9 +178,9 @@ public final class CDEventConstants {
          */
         ArtifactPublishedEvent("dev.cdevents.artifact.published."),
         /**
-         * Artifact created event.
+         * Artifact signed event.
          */
-        ArtifactCreatedEvent("dev.cdevents.artifact.created."),
+        ArtifactSignedEvent("dev.cdevents.artifact.signed."),
 
         /* Environment Events */
         /**
@@ -276,6 +195,23 @@ public final class CDEventConstants {
          * Environment deleted event.
          */
         EnvironmentDeletedEvent("dev.cdevents.environment.deleted."),
+
+        /* Incident Events */
+        /**
+         * Incident detected event
+         */
+        IncidentDetectedEvent("dev.cdevents.incident.detected."),
+
+        /**
+         * Incident reported event
+         */
+        IncidentReportedEvent("dev.cdevents.incident.reported."),
+
+        /**
+         * Incident resolved event
+         */
+        IncidentResolvedEvent("dev.cdevents.incident.resolved."),
+
 
         /* Service Events */
         /**

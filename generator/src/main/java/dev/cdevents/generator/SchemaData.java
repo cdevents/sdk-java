@@ -10,9 +10,6 @@ public class SchemaData {
     private String capitalizedSubject;
 
     private String capitalizedPredicate;
-
-    private String objectName;
-    private String capitalizedObjectName;
     private String version;
     private String upperCaseSubject;
     private String schemaFileName;
@@ -20,8 +17,8 @@ public class SchemaData {
     private String schemaURL;
 
     private List<ContentField> contentFields;
-
     private List<ContentObjectField> contentObjectFields;
+    private List<ContentObject> contentObjects;
 
     /**
      * Default constructor.
@@ -84,35 +81,6 @@ public class SchemaData {
     public void setCapitalizedPredicate(String capitalizedPredicate) {
         this.capitalizedPredicate = capitalizedPredicate;
     }
-
-    /**
-     * @return the objectName of an event
-     */
-    public String getObjectName() {
-        return objectName;
-    }
-
-    /**
-     * @param objectName
-     */
-    public void setObjectName(String objectName) {
-        this.objectName = objectName;
-    }
-
-    /**
-     * @return the Capitalized Object name of an event
-     */
-    public String getCapitalizedObjectName() {
-        return capitalizedObjectName;
-    }
-
-    /**
-     * @param capitalizedObjectName
-     */
-    public void setCapitalizedObjectName(String capitalizedObjectName) {
-        this.capitalizedObjectName = capitalizedObjectName;
-    }
-
     /**
      * @return the version of an event
      */
@@ -190,11 +158,20 @@ public class SchemaData {
         return contentObjectFields;
     }
 
+
     /**
      * @param contentObjectFields
      */
     public void setContentObjectFields(List<ContentObjectField> contentObjectFields) {
         this.contentObjectFields = contentObjectFields;
+    }
+
+    public List<ContentObject> getContentObjects() {
+        return contentObjects;
+    }
+
+    public void setContentObjects(List<ContentObject> contentObjects) {
+        this.contentObjects = contentObjects;
     }
 
     public static class ContentField {
@@ -346,6 +323,22 @@ public class SchemaData {
             this.objectName = objectName;
             this.capitalizedObjectName = capitalizedObjectName;
             this.dataType = dataType;
+        }
+    }
+
+    public static class ContentObject {
+        private String capitalizedObjectName;
+
+        public String getCapitalizedObjectName() {
+            return capitalizedObjectName;
+        }
+
+        public void setCapitalizedObjectName(String capitalizedObjectName) {
+            this.capitalizedObjectName = capitalizedObjectName;
+        }
+
+        public ContentObject(String capitalizedObjectName) {
+            this.capitalizedObjectName = capitalizedObjectName;
         }
     }
 }

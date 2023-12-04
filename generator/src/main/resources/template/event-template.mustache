@@ -61,9 +61,9 @@ public class {{capitalizedSubject}}{{capitalizedPredicate}}CDEvent extends {{cap
         context.setTimestamp(new Date());
         context.setVersion(CDEventConstants.CDEVENTS_SPEC_VERSION);
         getSubject().setContent(new Content());
-        {{#getCapitalizedObjectName}}
+        {{#getContentObjects}}
         getSubject().getContent().set{{capitalizedObjectName}}(new {{capitalizedObjectName}}());
-        {{/getCapitalizedObjectName}}
+        {{/getContentObjects}}
         getSubject().setType(Subject.Type.{{upperCaseSubject}});
     }
 

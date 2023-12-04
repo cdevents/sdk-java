@@ -61,6 +61,7 @@ public class IncidentDetectedCDEvent extends Incidentdetected implements CDEvent
         context.setTimestamp(new Date());
         context.setVersion(CDEventConstants.CDEVENTS_SPEC_VERSION);
         getSubject().setContent(new Content());
+        getSubject().getContent().setEnvironment(new Environment());
         getSubject().getContent().setService(new Service());
         getSubject().setType(Subject.Type.INCIDENT);
     }

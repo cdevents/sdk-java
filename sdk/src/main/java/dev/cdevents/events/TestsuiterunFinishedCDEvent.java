@@ -61,6 +61,7 @@ public class TestsuiterunFinishedCDEvent extends Testsuiterunfinished implements
         context.setTimestamp(new Date());
         context.setVersion(CDEventConstants.CDEVENTS_SPEC_VERSION);
         getSubject().setContent(new Content());
+        getSubject().getContent().setEnvironment(new Environment());
         getSubject().getContent().setTestSuite(new TestSuite());
         getSubject().setType(Subject.Type.TEST_SUITE_RUN);
     }
