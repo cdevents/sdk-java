@@ -147,6 +147,7 @@ public final class CDEventsGenerator {
         Iterator<Map.Entry<String, JsonNode>> contentProps = subjectContentNode.fields();
         List<SchemaData.ContentField> contentFields = new ArrayList<>();
         List<SchemaData.ContentObjectField> contentObjectFields = new ArrayList<>();
+        List<SchemaData.ContentObject> contentObjects = new ArrayList<>();
         while (contentProps.hasNext()) {
             Map.Entry<String, JsonNode> contentMap = contentProps.next();
             String contentField = contentMap.getKey();
@@ -163,8 +164,7 @@ public final class CDEventsGenerator {
                 }
                 contentFields.add(new SchemaData.ContentField(contentField, capitalizedContentField, dataType));
             } else {
-                schemaData.setObjectName(contentField);
-                schemaData.setCapitalizedObjectName(capitalizedContentField);
+                contentObjects.add(new SchemaData.ContentObject(capitalizedContentField));
                 JsonNode contentObjectNode = contentNode.get("properties");
                 Iterator<String> contentObjectProps = contentObjectNode.fieldNames();
                 while (contentObjectProps.hasNext()) {
@@ -186,6 +186,7 @@ public final class CDEventsGenerator {
             }
         }
         schemaData.setContentFields(contentFields);
+        schemaData.setContentObjects(contentObjects);
         schemaData.setContentObjectFields(contentObjectFields);
     }
 

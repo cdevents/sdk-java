@@ -1,7 +1,7 @@
 {
   "context": {
     "id": "49e16403-c5b5-4e2a-9540-160787459a21",
-    "type": "dev.cdevents.taskrun.finished.0.1.0",
+    "type": "dev.cdevents.taskrun.finished.0.1.1",
     "source": "http://dev.cdevents",
     "version": "0.1.2",
     "timestamp": "2023-05-24T19:20:57Z"

@@ -61,6 +61,8 @@ public class TestsuiterunQueuedCDEvent extends Testsuiterunqueued implements CDE
         context.setTimestamp(new Date());
         context.setVersion(CDEventConstants.CDEVENTS_SPEC_VERSION);
         getSubject().setContent(new Content());
+        getSubject().getContent().setTrigger(new Trigger());
+        getSubject().getContent().setEnvironment(new Environment());
         getSubject().getContent().setTestSuite(new TestSuite());
         getSubject().setType(Subject.Type.TEST_SUITE_RUN);
     }

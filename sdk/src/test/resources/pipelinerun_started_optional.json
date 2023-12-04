@@ -1,7 +1,7 @@
 {
   "context": {
     "id": "cbde772c-17ad-490d-aea0-41fb060d1483",
-    "type": "dev.cdevents.pipelinerun.started.0.1.0",
+    "type": "dev.cdevents.pipelinerun.started.0.1.1",
     "source": "http://dev.cdevents",
     "version": "0.1.2",
     "timestamp": "2023-05-24T18:48:12Z"
