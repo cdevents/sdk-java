@@ -30,7 +30,6 @@ public final class CDEventsGenerator {
     private static final int VERSION_INDEX = 4;
     private static final int SUBSTRING_PIPELINE_INDEX = 8;
 
-    private static final String TARGET_PACKAGE = "src/main/java/dev/cdevents/events";
 
     /**
      * Event JsonSchema files location.

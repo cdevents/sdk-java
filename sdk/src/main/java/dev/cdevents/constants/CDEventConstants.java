@@ -1,5 +1,7 @@
 package dev.cdevents.constants;
 
+import java.io.File;
+
 public final class CDEventConstants {
 
     private CDEventConstants() {
@@ -8,7 +10,7 @@ public final class CDEventConstants {
     /**
      * Event JsonSchema files location.
      */
-    public static final String SCHEMA_FOLDER = "../spec/schemas";
+    public static final String SCHEMA_FOLDER = ".." + File.separator + "spec" + File.separator + "schemas";
 
     /**
      * CDEvents Version.
