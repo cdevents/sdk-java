@@ -80,4 +80,26 @@ public class Content {
         this.testCase = testCase;
     }
 
+    @Override
+    public int hashCode() {
+        int result = 1;
+        result = ((result* 31)+((this.environment == null)? 0 :this.environment.hashCode()));
+        result = ((result* 31)+((this.trigger == null)? 0 :this.trigger.hashCode()));
+        result = ((result* 31)+((this.testSuiteRun == null)? 0 :this.testSuiteRun.hashCode()));
+        result = ((result* 31)+((this.testCase == null)? 0 :this.testCase.hashCode()));
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+        if ((other instanceof Content) == false) {
+            return false;
+        }
+        Content rhs = ((Content) other);
+        return (((((this.environment == rhs.environment)||((this.environment!= null)&&this.environment.equals(rhs.environment)))&&((this.trigger == rhs.trigger)||((this.trigger!= null)&&this.trigger.equals(rhs.trigger))))&&((this.testSuiteRun == rhs.testSuiteRun)||((this.testSuiteRun!= null)&&this.testSuiteRun.equals(rhs.testSuiteRun))))&&((this.testCase == rhs.testCase)||((this.testCase!= null)&&this.testCase.equals(rhs.testCase))));
+    }
+
 }

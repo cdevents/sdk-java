@@ -80,4 +80,26 @@ public class Content {
         this.artifactId = artifactId;
     }
 
+    @Override
+    public int hashCode() {
+        int result = 1;
+        result = ((result* 31)+((this.description == null)? 0 :this.description.hashCode()));
+        result = ((result* 31)+((this.environment == null)? 0 :this.environment.hashCode()));
+        result = ((result* 31)+((this.artifactId == null)? 0 :this.artifactId.hashCode()));
+        result = ((result* 31)+((this.service == null)? 0 :this.service.hashCode()));
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+        if ((other instanceof Content) == false) {
+            return false;
+        }
+        Content rhs = ((Content) other);
+        return (((((this.description == rhs.description)||((this.description!= null)&&this.description.equals(rhs.description)))&&((this.environment == rhs.environment)||((this.environment!= null)&&this.environment.equals(rhs.environment))))&&((this.artifactId == rhs.artifactId)||((this.artifactId!= null)&&this.artifactId.equals(rhs.artifactId))))&&((this.service == rhs.service)||((this.service!= null)&&this.service.equals(rhs.service))));
+    }
+
 }

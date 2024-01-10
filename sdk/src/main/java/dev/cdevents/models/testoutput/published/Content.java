@@ -100,6 +100,28 @@ public class Content {
         this.testCaseRun = testCaseRun;
     }
 
+    @Override
+    public int hashCode() {
+        int result = 1;
+        result = ((result* 31)+((this.format == null)? 0 :this.format.hashCode()));
+        result = ((result* 31)+((this.outputType == null)? 0 :this.outputType.hashCode()));
+        result = ((result* 31)+((this.uri == null)? 0 :this.uri.hashCode()));
+        result = ((result* 31)+((this.testCaseRun == null)? 0 :this.testCaseRun.hashCode()));
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+        if ((other instanceof Content) == false) {
+            return false;
+        }
+        Content rhs = ((Content) other);
+        return (((((this.format == rhs.format)||((this.format!= null)&&this.format.equals(rhs.format)))&&((this.outputType == rhs.outputType)||((this.outputType!= null)&&this.outputType.equals(rhs.outputType))))&&((this.uri == rhs.uri)||((this.uri!= null)&&this.uri.equals(rhs.uri))))&&((this.testCaseRun == rhs.testCaseRun)||((this.testCaseRun!= null)&&this.testCaseRun.equals(rhs.testCaseRun))));
+    }
+
     @Generated("jsonschema2pojo")
     public enum OutputType {
 

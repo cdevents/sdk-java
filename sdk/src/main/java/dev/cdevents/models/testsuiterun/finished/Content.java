@@ -112,6 +112,29 @@ public class Content {
         this.reason = reason;
     }
 
+    @Override
+    public int hashCode() {
+        int result = 1;
+        result = ((result* 31)+((this.severity == null)? 0 :this.severity.hashCode()));
+        result = ((result* 31)+((this.reason == null)? 0 :this.reason.hashCode()));
+        result = ((result* 31)+((this.environment == null)? 0 :this.environment.hashCode()));
+        result = ((result* 31)+((this.testSuite == null)? 0 :this.testSuite.hashCode()));
+        result = ((result* 31)+((this.outcome == null)? 0 :this.outcome.hashCode()));
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+        if ((other instanceof Content) == false) {
+            return false;
+        }
+        Content rhs = ((Content) other);
+        return ((((((this.severity == rhs.severity)||((this.severity!= null)&&this.severity.equals(rhs.severity)))&&((this.reason == rhs.reason)||((this.reason!= null)&&this.reason.equals(rhs.reason))))&&((this.environment == rhs.environment)||((this.environment!= null)&&this.environment.equals(rhs.environment))))&&((this.testSuite == rhs.testSuite)||((this.testSuite!= null)&&this.testSuite.equals(rhs.testSuite))))&&((this.outcome == rhs.outcome)||((this.outcome!= null)&&this.outcome.equals(rhs.outcome))));
+    }
+
     @Generated("jsonschema2pojo")
     public enum Outcome {
 

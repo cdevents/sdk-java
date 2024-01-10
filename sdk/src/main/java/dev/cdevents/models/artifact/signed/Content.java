@@ -41,4 +41,23 @@ public class Content {
         this.signature = signature;
     }
 
+    @Override
+    public int hashCode() {
+        int result = 1;
+        result = ((result* 31)+((this.signature == null)? 0 :this.signature.hashCode()));
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+        if ((other instanceof Content) == false) {
+            return false;
+        }
+        Content rhs = ((Content) other);
+        return ((this.signature == rhs.signature)||((this.signature!= null)&&this.signature.equals(rhs.signature)));
+    }
+
 }

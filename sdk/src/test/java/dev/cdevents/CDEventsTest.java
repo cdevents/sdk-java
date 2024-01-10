@@ -8,7 +8,6 @@ import dev.cdevents.config.CustomObjectMapper;
 import dev.cdevents.constants.CDEventConstants;
 import dev.cdevents.events.*;
 import dev.cdevents.exception.CDEventsException;
-import dev.cdevents.models.incident.detected.Incidentdetected;
 import dev.cdevents.models.testcaserun.finished.Content;
 import io.cloudevents.CloudEvent;
 import org.junit.jupiter.api.Test;
@@ -1603,6 +1602,47 @@ public class CDEventsTest {
             CDEvents.cdEventAsCloudEvent(cdEvent);
         });
         String expectedError = "CDEvent validation failed against schema URL - " + cdEvent.schemaURL();
+
+        assertThat(exception.getMessage()).isEqualTo(expectedError);
+    }
+
+    @Test
+    void testInvalidArtifactPackagedEventJson() throws IOException {
+        InputStream inputStream = getClass().getResourceAsStream("/artifact_packaged_with_no_content.json");
+        JsonNode expectedNode = objectMapper.readTree(inputStream);
+        String expectedJson = objectMapper.writeValueAsString(expectedNode);
+
+        Exception exception = assertThrows(CDEventsException.class, () -> {
+            CDEvents.cdEventFromJson(expectedJson);
+        });
+        String expectedError = "CDEvent Json validation failed against schema";
+
+        assertThat(exception.getMessage()).isEqualTo(expectedError);
+    }
+
+    @Test
+    void testInvalidArtifactPublishedEventJson() throws IOException {
+        InputStream inputStream = getClass().getResourceAsStream("/artifact_published_with_no_context.json");
+        JsonNode expectedNode = objectMapper.readTree(inputStream);
+        String expectedJson = objectMapper.writeValueAsString(expectedNode);
+
+        Exception exception = assertThrows(CDEventsException.class, () -> {
+            CDEvents.cdEventFromJson(expectedJson);
+        });
+        String expectedError = "Unable to find context and type in CDEvent Json";
+
+        assertThat(exception.getMessage()).isEqualTo(expectedError);
+    }
+    @Test
+    void testInvalidArtifactSignedEventJson() throws IOException {
+        InputStream inputStream = getClass().getResourceAsStream("/artifact_signed_with_invalid_type.json");
+        JsonNode expectedNode = objectMapper.readTree(inputStream);
+        String expectedJson = objectMapper.writeValueAsString(expectedNode);
+
+        Exception exception = assertThrows(CDEventsException.class, () -> {
+            CDEvents.cdEventFromJson(expectedJson);
+        });
+        String expectedError = "Invalid CDEvent type found from cdEventJson";
 
         assertThat(exception.getMessage()).isEqualTo(expectedError);
     }

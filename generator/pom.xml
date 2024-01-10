@@ -72,7 +72,7 @@
                 <version>1.2.1</version>
                 <configuration>
                     <outputDirectory>${sdk.project.dir}/src/main/java</outputDirectory>
-                    <includeHashcodeAndEquals>false</includeHashcodeAndEquals>
+                    <includeHashcodeAndEquals>true</includeHashcodeAndEquals>
                     <includeToString>false</includeToString>
                     <addCompileSourceRoot>false</addCompileSourceRoot>
                 </configuration>
@@ -89,7 +89,7 @@
                             </sourcePaths>
                             <outputDirectory>${sdk.project.dir}/src/main/java</outputDirectory>
                             <targetPackage>dev.cdevents.models.artifact.packaged</targetPackage>
-                            <includeHashcodeAndEquals>false</includeHashcodeAndEquals>
+                            <includeHashcodeAndEquals>true</includeHashcodeAndEquals>
                             <includeToString>false</includeToString>
                         </configuration>
                     </execution>
@@ -105,7 +105,7 @@
                             </sourcePaths>
                             <outputDirectory>${sdk.project.dir}/src/main/java</outputDirectory>
                             <targetPackage>dev.cdevents.models.artifact.published</targetPackage>
-                            <includeHashcodeAndEquals>false</includeHashcodeAndEquals>
+                            <includeHashcodeAndEquals>true</includeHashcodeAndEquals>
                             <includeToString>false</includeToString>
                         </configuration>
                     </execution>
@@ -121,7 +121,7 @@
                             </sourcePaths>
                             <outputDirectory>${sdk.project.dir}/src/main/java</outputDirectory>
                             <targetPackage>dev.cdevents.models.artifact.signed</targetPackage>
-                            <includeHashcodeAndEquals>false</includeHashcodeAndEquals>
+                            <includeHashcodeAndEquals>true</includeHashcodeAndEquals>
                             <includeToString>false</includeToString>
                         </configuration>
                     </execution>
@@ -137,7 +137,7 @@
                             </sourcePaths>
                             <outputDirectory>${sdk.project.dir}/src/main/java</outputDirectory>
                             <targetPackage>dev.cdevents.models.branch.created</targetPackage>
-                            <includeHashcodeAndEquals>false</includeHashcodeAndEquals>
+                            <includeHashcodeAndEquals>true</includeHashcodeAndEquals>
                             <includeToString>false</includeToString>
                         </configuration>
                     </execution>
@@ -153,7 +153,7 @@
                             </sourcePaths>
                             <outputDirectory>${sdk.project.dir}/src/main/java</outputDirectory>
                             <targetPackage>dev.cdevents.models.branch.deleted</targetPackage>
-                            <includeHashcodeAndEquals>false</includeHashcodeAndEquals>
+                            <includeHashcodeAndEquals>true</includeHashcodeAndEquals>
                             <includeToString>false</includeToString>
                         </configuration>
                     </execution>
@@ -169,7 +169,7 @@
                             </sourcePaths>
                             <outputDirectory>${sdk.project.dir}/src/main/java</outputDirectory>
                             <targetPackage>dev.cdevents.models.build.finished</targetPackage>
-                            <includeHashcodeAndEquals>false</includeHashcodeAndEquals>
+                            <includeHashcodeAndEquals>true</includeHashcodeAndEquals>
                             <includeToString>false</includeToString>
                         </configuration>
                     </execution>
@@ -185,7 +185,7 @@
                             </sourcePaths>
                             <outputDirectory>${sdk.project.dir}/src/main/java</outputDirectory>
                             <targetPackage>dev.cdevents.models.build.queued</targetPackage>
-                            <includeHashcodeAndEquals>false</includeHashcodeAndEquals>
+                            <includeHashcodeAndEquals>true</includeHashcodeAndEquals>
                             <includeToString>false</includeToString>
                         </configuration>
                     </execution>
@@ -201,7 +201,7 @@
                             </sourcePaths>
                             <outputDirectory>${sdk.project.dir}/src/main/java</outputDirectory>
                             <targetPackage>dev.cdevents.models.build.started</targetPackage>
-                            <includeHashcodeAndEquals>false</includeHashcodeAndEquals>
+                            <includeHashcodeAndEquals>true</includeHashcodeAndEquals>
                             <includeToString>false</includeToString>
                         </configuration>
                     </execution>
@@ -217,7 +217,7 @@
                             </sourcePaths>
                             <outputDirectory>${sdk.project.dir}/src/main/java</outputDirectory>
                             <targetPackage>dev.cdevents.models.change.abandoned</targetPackage>
-                            <includeHashcodeAndEquals>false</includeHashcodeAndEquals>
+                            <includeHashcodeAndEquals>true</includeHashcodeAndEquals>
                             <includeToString>false</includeToString>
                         </configuration>
                     </execution>
@@ -233,7 +233,7 @@
                             </sourcePaths>
                             <outputDirectory>${sdk.project.dir}/src/main/java</outputDirectory>
                             <targetPackage>dev.cdevents.models.change.created</targetPackage>
-                            <includeHashcodeAndEquals>false</includeHashcodeAndEquals>
+                            <includeHashcodeAndEquals>true</includeHashcodeAndEquals>
                             <includeToString>false</includeToString>
                         </configuration>
                     </execution>
@@ -249,7 +249,7 @@
                             </sourcePaths>
                             <outputDirectory>${sdk.project.dir}/src/main/java</outputDirectory>
                             <targetPackage>dev.cdevents.models.change.merged</targetPackage>
-                            <includeHashcodeAndEquals>false</includeHashcodeAndEquals>
+                            <includeHashcodeAndEquals>true</includeHashcodeAndEquals>
                             <includeToString>false</includeToString>
                         </configuration>
                     </execution>
@@ -265,7 +265,7 @@
                             </sourcePaths>
                             <outputDirectory>${sdk.project.dir}/src/main/java</outputDirectory>
                             <targetPackage>dev.cdevents.models.change.reviewed</targetPackage>
-                            <includeHashcodeAndEquals>false</includeHashcodeAndEquals>
+                            <includeHashcodeAndEquals>true</includeHashcodeAndEquals>
                             <includeToString>false</includeToString>
                         </configuration>
                     </execution>
@@ -281,7 +281,7 @@
                             </sourcePaths>
                             <outputDirectory>${sdk.project.dir}/src/main/java</outputDirectory>
                             <targetPackage>dev.cdevents.models.change.updated</targetPackage>
-                            <includeHashcodeAndEquals>false</includeHashcodeAndEquals>
+                            <includeHashcodeAndEquals>true</includeHashcodeAndEquals>
                             <includeToString>false</includeToString>
                         </configuration>
                     </execution>
@@ -297,7 +297,7 @@
                             </sourcePaths>
                             <outputDirectory>${sdk.project.dir}/src/main/java</outputDirectory>
                             <targetPackage>dev.cdevents.models.environment.created</targetPackage>
-                            <includeHashcodeAndEquals>false</includeHashcodeAndEquals>
+                            <includeHashcodeAndEquals>true</includeHashcodeAndEquals>
                             <includeToString>false</includeToString>
                         </configuration>
                     </execution>
@@ -313,7 +313,7 @@
                             </sourcePaths>
                             <outputDirectory>${sdk.project.dir}/src/main/java</outputDirectory>
                             <targetPackage>dev.cdevents.models.environment.deleted</targetPackage>
-                            <includeHashcodeAndEquals>false</includeHashcodeAndEquals>
+                            <includeHashcodeAndEquals>true</includeHashcodeAndEquals>
                             <includeToString>false</includeToString>
                         </configuration>
                     </execution>
@@ -329,7 +329,7 @@
                             </sourcePaths>
                             <outputDirectory>${sdk.project.dir}/src/main/java</outputDirectory>
                             <targetPackage>dev.cdevents.models.environment.modified</targetPackage>
-                            <includeHashcodeAndEquals>false</includeHashcodeAndEquals>
+                            <includeHashcodeAndEquals>true</includeHashcodeAndEquals>
                             <includeToString>false</includeToString>
                         </configuration>
                     </execution>
@@ -345,7 +345,7 @@
                             </sourcePaths>
                             <outputDirectory>${sdk.project.dir}/src/main/java</outputDirectory>
                             <targetPackage>dev.cdevents.models.incident.detected</targetPackage>
-                            <includeHashcodeAndEquals>false</includeHashcodeAndEquals>
+                            <includeHashcodeAndEquals>true</includeHashcodeAndEquals>
                             <includeToString>false</includeToString>
                         </configuration>
                     </execution>
@@ -361,7 +361,7 @@
                             </sourcePaths>
                             <outputDirectory>${sdk.project.dir}/src/main/java</outputDirectory>
                             <targetPackage>dev.cdevents.models.incident.reported</targetPackage>
-                            <includeHashcodeAndEquals>false</includeHashcodeAndEquals>
+                            <includeHashcodeAndEquals>true</includeHashcodeAndEquals>
                             <includeToString>false</includeToString>
                         </configuration>
                     </execution>
@@ -377,7 +377,7 @@
                             </sourcePaths>
                             <outputDirectory>${sdk.project.dir}/src/main/java</outputDirectory>
                             <targetPackage>dev.cdevents.models.incident.resolved</targetPackage>
-                            <includeHashcodeAndEquals>false</includeHashcodeAndEquals>
+                            <includeHashcodeAndEquals>true</includeHashcodeAndEquals>
                             <includeToString>false</includeToString>
                         </configuration>
                     </execution>
@@ -393,7 +393,7 @@
                             </sourcePaths>
                             <outputDirectory>${sdk.project.dir}/src/main/java</outputDirectory>
                             <targetPackage>dev.cdevents.models.pipelinerun.finished</targetPackage>
-                            <includeHashcodeAndEquals>false</includeHashcodeAndEquals>
+                            <includeHashcodeAndEquals>true</includeHashcodeAndEquals>
                             <includeToString>false</includeToString>
                         </configuration>
                     </execution>
@@ -409,7 +409,7 @@
                             </sourcePaths>
                             <outputDirectory>${sdk.project.dir}/src/main/java</outputDirectory>
                             <targetPackage>dev.cdevents.models.pipelinerun.queued</targetPackage>
-                            <includeHashcodeAndEquals>false</includeHashcodeAndEquals>
+                            <includeHashcodeAndEquals>true</includeHashcodeAndEquals>
                             <includeToString>false</includeToString>
                         </configuration>
                     </execution>
@@ -425,7 +425,7 @@
                             </sourcePaths>
                             <outputDirectory>${sdk.project.dir}/src/main/java</outputDirectory>
                             <targetPackage>dev.cdevents.models.pipelinerun.started</targetPackage>
-                            <includeHashcodeAndEquals>false</includeHashcodeAndEquals>
+                            <includeHashcodeAndEquals>true</includeHashcodeAndEquals>
                             <includeToString>false</includeToString>
                         </configuration>
                     </execution>
@@ -441,7 +441,7 @@
                             </sourcePaths>
                             <outputDirectory>${sdk.project.dir}/src/main/java</outputDirectory>
                             <targetPackage>dev.cdevents.models.repository.created</targetPackage>
-                            <includeHashcodeAndEquals>false</includeHashcodeAndEquals>
+                            <includeHashcodeAndEquals>true</includeHashcodeAndEquals>
                             <includeToString>false</includeToString>
                         </configuration>
                     </execution>
@@ -457,7 +457,7 @@
                             </sourcePaths>
                             <outputDirectory>${sdk.project.dir}/src/main/java</outputDirectory>
                             <targetPackage>dev.cdevents.models.repository.deleted</targetPackage>
-                            <includeHashcodeAndEquals>false</includeHashcodeAndEquals>
+                            <includeHashcodeAndEquals>true</includeHashcodeAndEquals>
                             <includeToString>false</includeToString>
                         </configuration>
                     </execution>
@@ -473,7 +473,7 @@
                             </sourcePaths>
                             <outputDirectory>${sdk.project.dir}/src/main/java</outputDirectory>
                             <targetPackage>dev.cdevents.models.repository.modified</targetPackage>
-                            <includeHashcodeAndEquals>false</includeHashcodeAndEquals>
+                            <includeHashcodeAndEquals>true</includeHashcodeAndEquals>
                             <includeToString>false</includeToString>
                         </configuration>
                     </execution>
@@ -489,7 +489,7 @@
                             </sourcePaths>
                             <outputDirectory>${sdk.project.dir}/src/main/java</outputDirectory>
                             <targetPackage>dev.cdevents.models.service.deployed</targetPackage>
-                            <includeHashcodeAndEquals>false</includeHashcodeAndEquals>
+                            <includeHashcodeAndEquals>true</includeHashcodeAndEquals>
                             <includeToString>false</includeToString>
                         </configuration>
                     </execution>
@@ -505,7 +505,7 @@
                             </sourcePaths>
                             <outputDirectory>${sdk.project.dir}/src/main/java</outputDirectory>
                             <targetPackage>dev.cdevents.models.service.published</targetPackage>
-                            <includeHashcodeAndEquals>false</includeHashcodeAndEquals>
+                            <includeHashcodeAndEquals>true</includeHashcodeAndEquals>
                             <includeToString>false</includeToString>
                         </configuration>
                     </execution>
@@ -521,7 +521,7 @@
                             </sourcePaths>
                             <outputDirectory>${sdk.project.dir}/src/main/java</outputDirectory>
                             <targetPackage>dev.cdevents.models.service.removed</targetPackage>
-                            <includeHashcodeAndEquals>false</includeHashcodeAndEquals>
+                            <includeHashcodeAndEquals>true</includeHashcodeAndEquals>
                             <includeToString>false</includeToString>
                         </configuration>
                     </execution>
@@ -537,7 +537,7 @@
                             </sourcePaths>
                             <outputDirectory>${sdk.project.dir}/src/main/java</outputDirectory>
                             <targetPackage>dev.cdevents.models.service.rolledback</targetPackage>
-                            <includeHashcodeAndEquals>false</includeHashcodeAndEquals>
+                            <includeHashcodeAndEquals>true</includeHashcodeAndEquals>
                             <includeToString>false</includeToString>
                         </configuration>
                     </execution>
@@ -553,7 +553,7 @@
                             </sourcePaths>
                             <outputDirectory>${sdk.project.dir}/src/main/java</outputDirectory>
                             <targetPackage>dev.cdevents.models.service.upgraded</targetPackage>
-                            <includeHashcodeAndEquals>false</includeHashcodeAndEquals>
+                            <includeHashcodeAndEquals>true</includeHashcodeAndEquals>
                             <includeToString>false</includeToString>
                         </configuration>
                     </execution>
@@ -569,7 +569,7 @@
                             </sourcePaths>
                             <outputDirectory>${sdk.project.dir}/src/main/java</outputDirectory>
                             <targetPackage>dev.cdevents.models.taskrun.finished</targetPackage>
-                            <includeHashcodeAndEquals>false</includeHashcodeAndEquals>
+                            <includeHashcodeAndEquals>true</includeHashcodeAndEquals>
                             <includeToString>false</includeToString>
                         </configuration>
                     </execution>
@@ -585,7 +585,7 @@
                             </sourcePaths>
                             <outputDirectory>${sdk.project.dir}/src/main/java</outputDirectory>
                             <targetPackage>dev.cdevents.models.taskrun.started</targetPackage>
-                            <includeHashcodeAndEquals>false</includeHashcodeAndEquals>
+                            <includeHashcodeAndEquals>true</includeHashcodeAndEquals>
                             <includeToString>false</includeToString>
                         </configuration>
                     </execution>
@@ -601,7 +601,7 @@
                             </sourcePaths>
                             <outputDirectory>${sdk.project.dir}/src/main/java</outputDirectory>
                             <targetPackage>dev.cdevents.models.testcaserun.finished</targetPackage>
-                            <includeHashcodeAndEquals>false</includeHashcodeAndEquals>
+                            <includeHashcodeAndEquals>true</includeHashcodeAndEquals>
                             <includeToString>false</includeToString>
                         </configuration>
                     </execution>
@@ -617,7 +617,7 @@
                             </sourcePaths>
                             <outputDirectory>${sdk.project.dir}/src/main/java</outputDirectory>
                             <targetPackage>dev.cdevents.models.testcaserun.queued</targetPackage>
-                            <includeHashcodeAndEquals>false</includeHashcodeAndEquals>
+                            <includeHashcodeAndEquals>true</includeHashcodeAndEquals>
                             <includeToString>false</includeToString>
                         </configuration>
                     </execution>
@@ -633,7 +633,7 @@
                             </sourcePaths>
                             <outputDirectory>${sdk.project.dir}/src/main/java</outputDirectory>
                             <targetPackage>dev.cdevents.models.testcaserun.started</targetPackage>
-                            <includeHashcodeAndEquals>false</includeHashcodeAndEquals>
+                            <includeHashcodeAndEquals>true</includeHashcodeAndEquals>
                             <includeToString>false</includeToString>
                         </configuration>
                     </execution>
@@ -649,7 +649,7 @@
                             </sourcePaths>
                             <outputDirectory>${sdk.project.dir}/src/main/java</outputDirectory>
                             <targetPackage>dev.cdevents.models.testoutput.published</targetPackage>
-                            <includeHashcodeAndEquals>false</includeHashcodeAndEquals>
+                            <includeHashcodeAndEquals>true</includeHashcodeAndEquals>
                             <includeToString>false</includeToString>
                         </configuration>
                     </execution>
@@ -665,7 +665,7 @@
                             </sourcePaths>
                             <outputDirectory>${sdk.project.dir}/src/main/java</outputDirectory>
                             <targetPackage>dev.cdevents.models.testsuiterun.finished</targetPackage>
-                            <includeHashcodeAndEquals>false</includeHashcodeAndEquals>
+                            <includeHashcodeAndEquals>true</includeHashcodeAndEquals>
                             <includeToString>false</includeToString>
                         </configuration>
                     </execution>
@@ -681,7 +681,7 @@
                             </sourcePaths>
                             <outputDirectory>${sdk.project.dir}/src/main/java</outputDirectory>
                             <targetPackage>dev.cdevents.models.testsuiterun.queued</targetPackage>
-                            <includeHashcodeAndEquals>false</includeHashcodeAndEquals>
+                            <includeHashcodeAndEquals>true</includeHashcodeAndEquals>
                             <includeToString>false</includeToString>
                         </configuration>
                     </execution>
@@ -697,7 +697,7 @@
                             </sourcePaths>
                             <outputDirectory>${sdk.project.dir}/src/main/java</outputDirectory>
                             <targetPackage>dev.cdevents.models.testsuiterun.started</targetPackage>
-                            <includeHashcodeAndEquals>false</includeHashcodeAndEquals>
+                            <includeHashcodeAndEquals>true</includeHashcodeAndEquals>
                             <includeToString>false</includeToString>
                         </configuration>
                     </execution>

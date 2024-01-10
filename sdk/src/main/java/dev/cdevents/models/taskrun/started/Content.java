@@ -52,4 +52,25 @@ public class Content {
         this.pipelineRun = pipelineRun;
     }
 
+    @Override
+    public int hashCode() {
+        int result = 1;
+        result = ((result* 31)+((this.taskName == null)? 0 :this.taskName.hashCode()));
+        result = ((result* 31)+((this.url == null)? 0 :this.url.hashCode()));
+        result = ((result* 31)+((this.pipelineRun == null)? 0 :this.pipelineRun.hashCode()));
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+        if ((other instanceof Content) == false) {
+            return false;
+        }
+        Content rhs = ((Content) other);
+        return ((((this.taskName == rhs.taskName)||((this.taskName!= null)&&this.taskName.equals(rhs.taskName)))&&((this.url == rhs.url)||((this.url!= null)&&this.url.equals(rhs.url))))&&((this.pipelineRun == rhs.pipelineRun)||((this.pipelineRun!= null)&&this.pipelineRun.equals(rhs.pipelineRun))));
+    }
+
 }

@@ -41,4 +41,23 @@ public class Content {
         this.change = change;
     }
 
+    @Override
+    public int hashCode() {
+        int result = 1;
+        result = ((result* 31)+((this.change == null)? 0 :this.change.hashCode()));
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+        if ((other instanceof Content) == false) {
+            return false;
+        }
+        Content rhs = ((Content) other);
+        return ((this.change == rhs.change)||((this.change!= null)&&this.change.equals(rhs.change)));
+    }
+
 }

@@ -39,4 +39,24 @@ public class Content {
         this.url = url;
     }
 
+    @Override
+    public int hashCode() {
+        int result = 1;
+        result = ((result* 31)+((this.name == null)? 0 :this.name.hashCode()));
+        result = ((result* 31)+((this.url == null)? 0 :this.url.hashCode()));
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+        if ((other instanceof Content) == false) {
+            return false;
+        }
+        Content rhs = ((Content) other);
+        return (((this.name == rhs.name)||((this.name!= null)&&this.name.equals(rhs.name)))&&((this.url == rhs.url)||((this.url!= null)&&this.url.equals(rhs.url))));
+    }
+
 }

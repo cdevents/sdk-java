@@ -65,4 +65,26 @@ public class Content {
         this.viewUrl = viewUrl;
     }
 
+    @Override
+    public int hashCode() {
+        int result = 1;
+        result = ((result* 31)+((this.name == null)? 0 :this.name.hashCode()));
+        result = ((result* 31)+((this.owner == null)? 0 :this.owner.hashCode()));
+        result = ((result* 31)+((this.viewUrl == null)? 0 :this.viewUrl.hashCode()));
+        result = ((result* 31)+((this.url == null)? 0 :this.url.hashCode()));
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+        if ((other instanceof Content) == false) {
+            return false;
+        }
+        Content rhs = ((Content) other);
+        return (((((this.name == rhs.name)||((this.name!= null)&&this.name.equals(rhs.name)))&&((this.owner == rhs.owner)||((this.owner!= null)&&this.owner.equals(rhs.owner))))&&((this.viewUrl == rhs.viewUrl)||((this.viewUrl!= null)&&this.viewUrl.equals(rhs.viewUrl))))&&((this.url == rhs.url)||((this.url!= null)&&this.url.equals(rhs.url))));
+    }
+
 }
