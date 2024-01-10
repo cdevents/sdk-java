@@ -65,4 +65,26 @@ public class Content {
         this.errors = errors;
     }
 
+    @Override
+    public int hashCode() {
+        int result = 1;
+        result = ((result* 31)+((this.pipelineName == null)? 0 :this.pipelineName.hashCode()));
+        result = ((result* 31)+((this.url == null)? 0 :this.url.hashCode()));
+        result = ((result* 31)+((this.outcome == null)? 0 :this.outcome.hashCode()));
+        result = ((result* 31)+((this.errors == null)? 0 :this.errors.hashCode()));
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+        if ((other instanceof Content) == false) {
+            return false;
+        }
+        Content rhs = ((Content) other);
+        return (((((this.pipelineName == rhs.pipelineName)||((this.pipelineName!= null)&&this.pipelineName.equals(rhs.pipelineName)))&&((this.url == rhs.url)||((this.url!= null)&&this.url.equals(rhs.url))))&&((this.outcome == rhs.outcome)||((this.outcome!= null)&&this.outcome.equals(rhs.outcome))))&&((this.errors == rhs.errors)||((this.errors!= null)&&this.errors.equals(rhs.errors))));
+    }
+
 }

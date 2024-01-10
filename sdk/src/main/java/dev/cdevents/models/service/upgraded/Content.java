@@ -69,4 +69,24 @@ public class Content {
         this.artifactId = artifactId;
     }
 
+    @Override
+    public int hashCode() {
+        int result = 1;
+        result = ((result* 31)+((this.environment == null)? 0 :this.environment.hashCode()));
+        result = ((result* 31)+((this.artifactId == null)? 0 :this.artifactId.hashCode()));
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+        if ((other instanceof Content) == false) {
+            return false;
+        }
+        Content rhs = ((Content) other);
+        return (((this.environment == rhs.environment)||((this.environment!= null)&&this.environment.equals(rhs.environment)))&&((this.artifactId == rhs.artifactId)||((this.artifactId!= null)&&this.artifactId.equals(rhs.artifactId))));
+    }
+
 }

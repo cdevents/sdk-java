@@ -9,6 +9,7 @@ import com.networknt.schema.JsonSchemaFactory;
 import com.networknt.schema.SpecVersion;
 import com.networknt.schema.ValidationMessage;
 import dev.cdevents.config.CustomObjectMapper;
+import dev.cdevents.constants.CDEventConstants;
 import dev.cdevents.exception.CDEventsException;
 import dev.cdevents.models.CDEvent;
 import io.cloudevents.CloudEvent;
@@ -20,6 +21,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
 import java.time.OffsetDateTime;
+import java.util.Arrays;
 import java.util.Set;
 import java.util.UUID;
 
@@ -77,11 +79,7 @@ public final class CDEvents {
      * @return valid cdEvent
      */
     public static boolean validateCDEvent(CDEvent cdEvent) {
-        JsonSchemaFactory factory = JsonSchemaFactory.getInstance(SpecVersion.VersionFlag.V202012);
-        JsonSchema jsonSchema = factory.getSchema(cdEvent.eventSchema());
-
-        JsonNode jsonNode = objectMapper.convertValue(cdEvent, ObjectNode.class);
-        Set<ValidationMessage> errors = jsonSchema.validate(jsonNode);
+        Set<ValidationMessage> errors = getJsonSchemaValidationMessages(cdEvent);
 
         if (!errors.isEmpty()) {
             log.error("CDEvent validation failed with errors {}", errors);
@@ -90,4 +88,91 @@ public final class CDEvents {
         return true;
     }
 
+    /**
+     * Creates cdEvent from cdEventJson string and validates against schema.
+     * @param cdEventJson
+     * @return CDEvent, needs type casting to specific CDEvent class
+     */
+    public static CDEvent cdEventFromJson(String cdEventJson) {
+        if (!validateCDEventJson(cdEventJson)) {
+            throw new CDEventsException("CDEvent Json validation failed against schema");
+        }
+        String eventType = getUnVersionedEventTypeFromJson(cdEventJson);
+        CDEventConstants.CDEventTypes cdEventType = getCDEventTypeEnum(eventType);
+        try {
+            CDEvent cdEvent = (CDEvent) new ObjectMapper().readValue(cdEventJson, cdEventType.getEventClass());
+            return cdEvent;
+        } catch (JsonProcessingException e) {
+            log.error("Exception occurred while creating CDEvent from json {}", cdEventJson);
+            throw new CDEventsException("Exception occurred while creating CDEvent from json ", e);
+        }
+    }
+
+    /**
+     * Validates the cdEventJson against the Schema URL.
+     * @param cdEventJson
+     * @return true, If cdEventJson is valid
+     */
+    public static boolean validateCDEventJson(String cdEventJson) {
+        String eventType = getUnVersionedEventTypeFromJson(cdEventJson);
+        CDEventConstants.CDEventTypes cdEventType = getCDEventTypeEnum(eventType);
+        try {
+            CDEvent cdEvent = (CDEvent) new ObjectMapper().readValue(cdEventJson, cdEventType.getEventClass());
+            Set<ValidationMessage> errors = getJsonSchemaValidationMessages(cdEvent);
+
+            if (!errors.isEmpty()) {
+                log.error("CDEvent Json validation failed against schema URL {}", cdEvent.schemaURL());
+                log.error("CDEvent Json validation failed with errors {}", errors);
+                return false;
+            }
+        } catch (JsonProcessingException e) {
+            throw new CDEventsException("Exception occurred while validating CDEvent json with schema file ", e);
+        }
+        return true;
+    }
+
+    private static Set<ValidationMessage> getJsonSchemaValidationMessages(CDEvent cdEvent) {
+        JsonSchemaFactory factory = JsonSchemaFactory.getInstance(SpecVersion.VersionFlag.V202012);
+        JsonSchema jsonSchema = factory.getSchema(cdEvent.eventSchema());
+
+        JsonNode jsonNode = objectMapper.convertValue(cdEvent, ObjectNode.class);
+        Set<ValidationMessage> errors = jsonSchema.validate(jsonNode);
+        return errors;
+    }
+
+    private static CDEventConstants.CDEventTypes getCDEventTypeEnum(String eventType) {
+        return Arrays.stream(CDEventConstants.CDEventTypes.values())
+                .filter(type -> eventType.equals(type.getEventType()))
+                .findFirst()
+                .orElseThrow(
+                () -> {
+                    log.error("Invalid CDEvent type found {} from cdEventJson", eventType);
+                    return new CDEventsException("Invalid CDEvent type found from cdEventJson");
+                }
+        );
+    }
+
+    private static String getUnVersionedEventTypeFromJson(String cdEventJson) {
+        String unVersionedEventType = "";
+        try {
+            JsonNode rootNode = objectMapper.readTree(cdEventJson);
+            if (rootNode.get("context") != null && rootNode.get("context").get("type") != null) {
+                String versionedEventType = rootNode.get("context").get("type").asText();
+                if (versionedEventType.startsWith(CDEventConstants.EVENT_PREFIX)) {
+                    String[] type = versionedEventType.split("\\.");
+                    String subject = type[CDEventConstants.EVENT_SUBJECT_INDEX];
+                    String predicate = type[CDEventConstants.EVENT_PREDICATE_INDEX];
+                    unVersionedEventType = CDEventConstants.EVENT_PREFIX + subject + "." + predicate + ".";
+                } else {
+                    throw new CDEventsException("Invalid CDEvent type found in CDEvent Json " + versionedEventType);
+                }
+            } else {
+                throw new CDEventsException("Unable to find context and type in CDEvent Json");
+            }
+            return unVersionedEventType;
+        } catch (JsonProcessingException e) {
+            throw new CDEventsException("Exception occurred while reading CDEvent Json for eventType ", e);
+        }
+
+    }
 }

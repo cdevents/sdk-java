@@ -95,4 +95,26 @@ public class Buildqueued {
         this.customDataContentType = customDataContentType;
     }
 
+    @Override
+    public int hashCode() {
+        int result = 1;
+        result = ((result* 31)+((this.context == null)? 0 :this.context.hashCode()));
+        result = ((result* 31)+((this.customData == null)? 0 :this.customData.hashCode()));
+        result = ((result* 31)+((this.customDataContentType == null)? 0 :this.customDataContentType.hashCode()));
+        result = ((result* 31)+((this.subject == null)? 0 :this.subject.hashCode()));
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+        if ((other instanceof Buildqueued) == false) {
+            return false;
+        }
+        Buildqueued rhs = ((Buildqueued) other);
+        return (((((this.context == rhs.context)||((this.context!= null)&&this.context.equals(rhs.context)))&&((this.customData == rhs.customData)||((this.customData!= null)&&this.customData.equals(rhs.customData))))&&((this.customDataContentType == rhs.customDataContentType)||((this.customDataContentType!= null)&&this.customDataContentType.equals(rhs.customDataContentType))))&&((this.subject == rhs.subject)||((this.subject!= null)&&this.subject.equals(rhs.subject))));
+    }
+
 }

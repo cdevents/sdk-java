@@ -26,4 +26,23 @@ public class Content {
         this.repository = repository;
     }
 
+    @Override
+    public int hashCode() {
+        int result = 1;
+        result = ((result* 31)+((this.repository == null)? 0 :this.repository.hashCode()));
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+        if ((other instanceof Content) == false) {
+            return false;
+        }
+        Content rhs = ((Content) other);
+        return ((this.repository == rhs.repository)||((this.repository!= null)&&this.repository.equals(rhs.repository)));
+    }
+
 }
