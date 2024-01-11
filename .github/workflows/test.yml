@@ -28,3 +28,12 @@ jobs:
 
       - name: Build
         run: ./mvnw -ntp -B --file pom.xml verify
+
+      - name: Generate Surefire test reports
+        run: ./mvnw surefire-report:report
+
+      - name: Access Surefire test report
+        uses: actions/upload-artifact@v4
+        with:
+          name: surefire-reports
+          path: ./sdk/target/site/
