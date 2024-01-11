@@ -8,25 +8,25 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
-        "context",
-        "subject",
-        "customData",
-        "customDataContentType"
+    "context",
+    "subject",
+    "customData",
+    "customDataContentType"
 })
 @Generated("jsonschema2pojo")
 public class Testcaserunqueued {
 
     /**
-     *
+     * 
      * (Required)
-     *
+     * 
      */
     @JsonProperty("context")
     private Context context;
     /**
-     *
+     * 
      * (Required)
-     *
+     * 
      */
     @JsonProperty("subject")
     private Subject subject;
@@ -36,9 +36,9 @@ public class Testcaserunqueued {
     private String customDataContentType;
 
     /**
-     *
+     * 
      * (Required)
-     *
+     * 
      */
     @JsonProperty("context")
     public Context getContext() {
@@ -46,9 +46,9 @@ public class Testcaserunqueued {
     }
 
     /**
-     *
+     * 
      * (Required)
-     *
+     * 
      */
     @JsonProperty("context")
     public void setContext(Context context) {
@@ -56,9 +56,9 @@ public class Testcaserunqueued {
     }
 
     /**
-     *
+     * 
      * (Required)
-     *
+     * 
      */
     @JsonProperty("subject")
     public Subject getSubject() {
@@ -66,9 +66,9 @@ public class Testcaserunqueued {
     }
 
     /**
-     *
+     * 
      * (Required)
-     *
+     * 
      */
     @JsonProperty("subject")
     public void setSubject(Subject subject) {

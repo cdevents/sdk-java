@@ -8,16 +8,16 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
-        "id",
-        "source"
+    "id",
+    "source"
 })
 @Generated("jsonschema2pojo")
 public class Environment {
 
     /**
-     *
+     * 
      * (Required)
-     *
+     * 
      */
     @JsonProperty("id")
     private String id;
@@ -25,9 +25,9 @@ public class Environment {
     private String source;
 
     /**
-     *
+     * 
      * (Required)
-     *
+     * 
      */
     @JsonProperty("id")
     public String getId() {
@@ -35,9 +35,9 @@ public class Environment {
     }
 
     /**
-     *
+     * 
      * (Required)
-     *
+     * 
      */
     @JsonProperty("id")
     public void setId(String id) {
