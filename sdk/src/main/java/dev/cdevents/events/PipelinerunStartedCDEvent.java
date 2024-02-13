@@ -22,16 +22,12 @@ package dev.cdevents.events;
 
 
 import dev.cdevents.constants.CDEventConstants;
-import dev.cdevents.exception.CDEventsException;
 import dev.cdevents.models.CDEvent;
 import dev.cdevents.models.pipelinerun.started.*;
 
 import java.net.URI;
 import java.util.Date;
 import java.util.UUID;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 
 
 public class PipelinerunStartedCDEvent extends Pipelinerunstarted implements CDEvent {
@@ -100,11 +96,7 @@ public class PipelinerunStartedCDEvent extends Pipelinerunstarted implements CDE
 
     @Override
     public String eventSchema() {
-        try {
-            return Files.readString(Paths.get(CDEventConstants.SCHEMA_FOLDER + "/pipelinerunstarted.json"));
-        } catch (IOException e) {
-            throw new CDEventsException("Exception while reading Event JsonSchema file ", e);
-        }
+        return dev.cdevents.spec.schemas.SchemaLoader.loadSchema("pipelinerunstarted.json");
     }
 
 

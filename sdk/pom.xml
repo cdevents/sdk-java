@@ -99,7 +99,7 @@
                             <goal>copy-resources</goal>
                         </goals>
                         <configuration>
-                            <outputDirectory>${project.build.directory}/schemas/spec/schemas</outputDirectory>
+                            <outputDirectory>${project.build.directory}/schemas/dev/cdevents/spec/schemas</outputDirectory>
                             <resources>
                                 <resource>
                                     <directory>../spec/schemas</directory>
