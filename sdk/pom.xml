@@ -45,6 +45,20 @@
             <version>${json.schema.version}</version>
         </dependency>
 
+        <!-- explicitly listed to bump version -->
+        <dependency>
+            <groupId>com.ethlo.time</groupId>
+            <artifactId>itu</artifactId>
+            <version>1.10.1</version>
+        </dependency>
+
+        <!-- explicitly listed to bump version -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>${commons-lang3.version}</version>
+        </dependency>
+
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
