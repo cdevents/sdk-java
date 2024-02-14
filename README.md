@@ -25,21 +25,21 @@ public class CDEventsExample {
         /*when creating new object of any CDEvent type, the event will be initialized with
         context.id, context.type, context.version, context.timestamp
         and subject.type */
-        PipelineRunFinishedCDEvent pipelineRunFinishedCDEvent = new PipelineRunFinishedCDEvent();
+        PipelinerunFinishedCDEvent pipelinerunFinishedCDEvent =  new PipelinerunFinishedCDEvent();
 
         /* set the required context fields to the pipelineRunFinishedCDEvent */
-        pipelineRunFinishedCDEvent.setSource(URI.create("http://dev.cdevents"));
+        pipelinerunFinishedCDEvent.setSource(URI.create("http://dev.cdevents"));
 
         /* set the required subject fields to the pipelineRunFinishedCDEvent */
-        pipelineRunFinishedCDEvent.setSubjectId("/dev/pipeline/run/1");
-        pipelineRunFinishedCDEvent.setSubjectSource(URI.create("http://dev.pipeline.run/source"));
-        pipelineRunFinishedCDEvent.setSubjectUrl(URI.create("http://dev.pipeline.run/url"));
-        pipelineRunFinishedCDEvent.setSubjectOutcome(CDEventConstants.Outcome.SUCCESS);
-        pipelineRunFinishedCDEvent.setSubjectPipelineName("testPipeline");
-        pipelineRunFinishedCDEvent.setSubjectErrors("pipelineErrors");
+        pipelinerunFinishedCDEvent.setSubjectId("/dev/pipeline/run/1");
+        pipelinerunFinishedCDEvent.setSubjectSource(URI.create("http://dev.pipeline.run/source"));
+        pipelinerunFinishedCDEvent.setSubjectUrl("http://dev.pipeline.run/url");
+        pipelinerunFinishedCDEvent.setSubjectOutcome(CDEventConstants.Outcome.SUCCESS.getOutcome());
+        pipelinerunFinishedCDEvent.setSubjectPipelineName("testPipeline");
+        pipelinerunFinishedCDEvent.setSubjectErrors("pipelineErrors");
 
         /* Create a CloudEvent from a pipelineRunFinishedCDEvent */
-        CloudEvent ceEvent = CDEvents.cdEventAsCloudEvent(pipelineRunFinishedCDEvent);
+        CloudEvent ceEvent = CDEvents.cdEventAsCloudEvent(pipelinerunFinishedCDEvent);
 
         /* This CDEvent can be sent as CloudEvent using HTTP Protocol Binding,
             Refer : https://cloudevents.github.io/sdk-java/http-basic.html
