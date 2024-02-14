@@ -61,7 +61,6 @@
             <version>${slf4j.version}</version>
             <scope>runtime</scope>
         </dependency>
-
     </dependencies>
 
     <build>
@@ -75,6 +74,8 @@
                     <includeHashcodeAndEquals>true</includeHashcodeAndEquals>
                     <includeToString>false</includeToString>
                     <addCompileSourceRoot>false</addCompileSourceRoot>
+                    <targetVersion>8</targetVersion>
+                    <includeGeneratedAnnotation>true</includeGeneratedAnnotation>
                 </configuration>
                 <executions>
                     <execution>
@@ -87,10 +88,7 @@
                             <sourcePaths>
                                 <sourcePath>${parent.project.dir}/spec/schemas/artifactpackaged.json</sourcePath>
                             </sourcePaths>
-                            <outputDirectory>${sdk.project.dir}/src/main/java</outputDirectory>
                             <targetPackage>dev.cdevents.models.artifact.packaged</targetPackage>
-                            <includeHashcodeAndEquals>true</includeHashcodeAndEquals>
-                            <includeToString>false</includeToString>
                         </configuration>
                     </execution>
                     <execution>
@@ -103,10 +101,8 @@
                             <sourcePaths>
                                 <sourcePath>${parent.project.dir}/spec/schemas/artifactpublished.json</sourcePath>
                             </sourcePaths>
-                            <outputDirectory>${sdk.project.dir}/src/main/java</outputDirectory>
                             <targetPackage>dev.cdevents.models.artifact.published</targetPackage>
                             <includeHashcodeAndEquals>true</includeHashcodeAndEquals>
-                            <includeToString>false</includeToString>
                         </configuration>
                     </execution>
                     <execution>
@@ -119,10 +115,7 @@
                             <sourcePaths>
                                 <sourcePath>${parent.project.dir}/spec/schemas/artifactsigned.json</sourcePath>
                             </sourcePaths>
-                            <outputDirectory>${sdk.project.dir}/src/main/java</outputDirectory>
                             <targetPackage>dev.cdevents.models.artifact.signed</targetPackage>
-                            <includeHashcodeAndEquals>true</includeHashcodeAndEquals>
-                            <includeToString>false</includeToString>
                         </configuration>
                     </execution>
                     <execution>
@@ -135,10 +128,7 @@
                             <sourcePaths>
                                 <sourcePath>${parent.project.dir}/spec/schemas/branchcreated.json</sourcePath>
                             </sourcePaths>
-                            <outputDirectory>${sdk.project.dir}/src/main/java</outputDirectory>
                             <targetPackage>dev.cdevents.models.branch.created</targetPackage>
-                            <includeHashcodeAndEquals>true</includeHashcodeAndEquals>
-                            <includeToString>false</includeToString>
                         </configuration>
                     </execution>
                     <execution>
@@ -151,10 +141,7 @@
                             <sourcePaths>
                                 <sourcePath>${parent.project.dir}/spec/schemas/branchdeleted.json</sourcePath>
                             </sourcePaths>
-                            <outputDirectory>${sdk.project.dir}/src/main/java</outputDirectory>
                             <targetPackage>dev.cdevents.models.branch.deleted</targetPackage>
-                            <includeHashcodeAndEquals>true</includeHashcodeAndEquals>
-                            <includeToString>false</includeToString>
                         </configuration>
                     </execution>
                     <execution>
@@ -167,10 +154,7 @@
                             <sourcePaths>
                                 <sourcePath>${parent.project.dir}/spec/schemas/buildfinished.json</sourcePath>
                             </sourcePaths>
-                            <outputDirectory>${sdk.project.dir}/src/main/java</outputDirectory>
                             <targetPackage>dev.cdevents.models.build.finished</targetPackage>
-                            <includeHashcodeAndEquals>true</includeHashcodeAndEquals>
-                            <includeToString>false</includeToString>
                         </configuration>
                     </execution>
                     <execution>
@@ -183,10 +167,7 @@
                             <sourcePaths>
                                 <sourcePath>${parent.project.dir}/spec/schemas/buildqueued.json</sourcePath>
                             </sourcePaths>
-                            <outputDirectory>${sdk.project.dir}/src/main/java</outputDirectory>
                             <targetPackage>dev.cdevents.models.build.queued</targetPackage>
-                            <includeHashcodeAndEquals>true</includeHashcodeAndEquals>
-                            <includeToString>false</includeToString>
                         </configuration>
                     </execution>
                     <execution>
@@ -199,10 +180,7 @@
                             <sourcePaths>
                                 <sourcePath>${parent.project.dir}/spec/schemas/buildstarted.json</sourcePath>
                             </sourcePaths>
-                            <outputDirectory>${sdk.project.dir}/src/main/java</outputDirectory>
                             <targetPackage>dev.cdevents.models.build.started</targetPackage>
-                            <includeHashcodeAndEquals>true</includeHashcodeAndEquals>
-                            <includeToString>false</includeToString>
                         </configuration>
                     </execution>
                     <execution>
@@ -215,10 +193,7 @@
                             <sourcePaths>
                                 <sourcePath>${parent.project.dir}/spec/schemas/changeabandoned.json</sourcePath>
                             </sourcePaths>
-                            <outputDirectory>${sdk.project.dir}/src/main/java</outputDirectory>
                             <targetPackage>dev.cdevents.models.change.abandoned</targetPackage>
-                            <includeHashcodeAndEquals>true</includeHashcodeAndEquals>
-                            <includeToString>false</includeToString>
                         </configuration>
                     </execution>
                     <execution>
@@ -231,10 +206,7 @@
                             <sourcePaths>
                                 <sourcePath>${parent.project.dir}/spec/schemas/changecreated.json</sourcePath>
                             </sourcePaths>
-                            <outputDirectory>${sdk.project.dir}/src/main/java</outputDirectory>
                             <targetPackage>dev.cdevents.models.change.created</targetPackage>
-                            <includeHashcodeAndEquals>true</includeHashcodeAndEquals>
-                            <includeToString>false</includeToString>
                         </configuration>
                     </execution>
                     <execution>
@@ -247,10 +219,7 @@
                             <sourcePaths>
                                 <sourcePath>${parent.project.dir}/spec/schemas/changemerged.json</sourcePath>
                             </sourcePaths>
-                            <outputDirectory>${sdk.project.dir}/src/main/java</outputDirectory>
                             <targetPackage>dev.cdevents.models.change.merged</targetPackage>
-                            <includeHashcodeAndEquals>true</includeHashcodeAndEquals>
-                            <includeToString>false</includeToString>
                         </configuration>
                     </execution>
                     <execution>
@@ -263,10 +232,7 @@
                             <sourcePaths>
                                 <sourcePath>${parent.project.dir}/spec/schemas/changereviewed.json</sourcePath>
                             </sourcePaths>
-                            <outputDirectory>${sdk.project.dir}/src/main/java</outputDirectory>
                             <targetPackage>dev.cdevents.models.change.reviewed</targetPackage>
-                            <includeHashcodeAndEquals>true</includeHashcodeAndEquals>
-                            <includeToString>false</includeToString>
                         </configuration>
                     </execution>
                     <execution>
@@ -279,10 +245,7 @@
                             <sourcePaths>
                                 <sourcePath>${parent.project.dir}/spec/schemas/changeupdated.json</sourcePath>
                             </sourcePaths>
-                            <outputDirectory>${sdk.project.dir}/src/main/java</outputDirectory>
                             <targetPackage>dev.cdevents.models.change.updated</targetPackage>
-                            <includeHashcodeAndEquals>true</includeHashcodeAndEquals>
-                            <includeToString>false</includeToString>
                         </configuration>
                     </execution>
                     <execution>
@@ -295,10 +258,7 @@
                             <sourcePaths>
                                 <sourcePath>${parent.project.dir}/spec/schemas/environmentcreated.json</sourcePath>
                             </sourcePaths>
-                            <outputDirectory>${sdk.project.dir}/src/main/java</outputDirectory>
                             <targetPackage>dev.cdevents.models.environment.created</targetPackage>
-                            <includeHashcodeAndEquals>true</includeHashcodeAndEquals>
-                            <includeToString>false</includeToString>
                         </configuration>
                     </execution>
                     <execution>
@@ -311,10 +271,7 @@
                             <sourcePaths>
                                 <sourcePath>${parent.project.dir}/spec/schemas/environmentdeleted.json</sourcePath>
                             </sourcePaths>
-                            <outputDirectory>${sdk.project.dir}/src/main/java</outputDirectory>
                             <targetPackage>dev.cdevents.models.environment.deleted</targetPackage>
-                            <includeHashcodeAndEquals>true</includeHashcodeAndEquals>
-                            <includeToString>false</includeToString>
                         </configuration>
                     </execution>
                     <execution>
@@ -327,10 +284,7 @@
                             <sourcePaths>
                                 <sourcePath>${parent.project.dir}/spec/schemas/environmentmodified.json</sourcePath>
                             </sourcePaths>
-                            <outputDirectory>${sdk.project.dir}/src/main/java</outputDirectory>
                             <targetPackage>dev.cdevents.models.environment.modified</targetPackage>
-                            <includeHashcodeAndEquals>true</includeHashcodeAndEquals>
-                            <includeToString>false</includeToString>
                         </configuration>
                     </execution>
                     <execution>
@@ -343,10 +297,7 @@
                             <sourcePaths>
                                 <sourcePath>${parent.project.dir}/spec/schemas/incidentdetected.json</sourcePath>
                             </sourcePaths>
-                            <outputDirectory>${sdk.project.dir}/src/main/java</outputDirectory>
                             <targetPackage>dev.cdevents.models.incident.detected</targetPackage>
-                            <includeHashcodeAndEquals>true</includeHashcodeAndEquals>
-                            <includeToString>false</includeToString>
                         </configuration>
                     </execution>
                     <execution>
@@ -359,10 +310,7 @@
                             <sourcePaths>
                                 <sourcePath>${parent.project.dir}/spec/schemas/incidentreported.json</sourcePath>
                             </sourcePaths>
-                            <outputDirectory>${sdk.project.dir}/src/main/java</outputDirectory>
                             <targetPackage>dev.cdevents.models.incident.reported</targetPackage>
-                            <includeHashcodeAndEquals>true</includeHashcodeAndEquals>
-                            <includeToString>false</includeToString>
                         </configuration>
                     </execution>
                     <execution>
@@ -375,10 +323,7 @@
                             <sourcePaths>
                                 <sourcePath>${parent.project.dir}/spec/schemas/incidentresolved.json</sourcePath>
                             </sourcePaths>
-                            <outputDirectory>${sdk.project.dir}/src/main/java</outputDirectory>
                             <targetPackage>dev.cdevents.models.incident.resolved</targetPackage>
-                            <includeHashcodeAndEquals>true</includeHashcodeAndEquals>
-                            <includeToString>false</includeToString>
                         </configuration>
                     </execution>
                     <execution>
@@ -391,10 +336,7 @@
                             <sourcePaths>
                                 <sourcePath>${parent.project.dir}/spec/schemas/pipelinerunfinished.json</sourcePath>
                             </sourcePaths>
-                            <outputDirectory>${sdk.project.dir}/src/main/java</outputDirectory>
                             <targetPackage>dev.cdevents.models.pipelinerun.finished</targetPackage>
-                            <includeHashcodeAndEquals>true</includeHashcodeAndEquals>
-                            <includeToString>false</includeToString>
                         </configuration>
                     </execution>
                     <execution>
@@ -407,10 +349,7 @@
                             <sourcePaths>
                                 <sourcePath>${parent.project.dir}/spec/schemas/pipelinerunqueued.json</sourcePath>
                             </sourcePaths>
-                            <outputDirectory>${sdk.project.dir}/src/main/java</outputDirectory>
                             <targetPackage>dev.cdevents.models.pipelinerun.queued</targetPackage>
-                            <includeHashcodeAndEquals>true</includeHashcodeAndEquals>
-                            <includeToString>false</includeToString>
                         </configuration>
                     </execution>
                     <execution>
@@ -423,10 +362,7 @@
                             <sourcePaths>
                                 <sourcePath>${parent.project.dir}/spec/schemas/pipelinerunstarted.json</sourcePath>
                             </sourcePaths>
-                            <outputDirectory>${sdk.project.dir}/src/main/java</outputDirectory>
                             <targetPackage>dev.cdevents.models.pipelinerun.started</targetPackage>
-                            <includeHashcodeAndEquals>true</includeHashcodeAndEquals>
-                            <includeToString>false</includeToString>
                         </configuration>
                     </execution>
                     <execution>
@@ -439,10 +375,7 @@
                             <sourcePaths>
                                 <sourcePath>${parent.project.dir}/spec/schemas/repositorycreated.json</sourcePath>
                             </sourcePaths>
-                            <outputDirectory>${sdk.project.dir}/src/main/java</outputDirectory>
                             <targetPackage>dev.cdevents.models.repository.created</targetPackage>
-                            <includeHashcodeAndEquals>true</includeHashcodeAndEquals>
-                            <includeToString>false</includeToString>
                         </configuration>
                     </execution>
                     <execution>
@@ -455,10 +388,7 @@
                             <sourcePaths>
                                 <sourcePath>${parent.project.dir}/spec/schemas/repositorydeleted.json</sourcePath>
                             </sourcePaths>
-                            <outputDirectory>${sdk.project.dir}/src/main/java</outputDirectory>
                             <targetPackage>dev.cdevents.models.repository.deleted</targetPackage>
-                            <includeHashcodeAndEquals>true</includeHashcodeAndEquals>
-                            <includeToString>false</includeToString>
                         </configuration>
                     </execution>
                     <execution>
@@ -471,10 +401,7 @@
                             <sourcePaths>
                                 <sourcePath>${parent.project.dir}/spec/schemas/repositorymodified.json</sourcePath>
                             </sourcePaths>
-                            <outputDirectory>${sdk.project.dir}/src/main/java</outputDirectory>
                             <targetPackage>dev.cdevents.models.repository.modified</targetPackage>
-                            <includeHashcodeAndEquals>true</includeHashcodeAndEquals>
-                            <includeToString>false</includeToString>
                         </configuration>
                     </execution>
                     <execution>
@@ -487,10 +414,7 @@
                             <sourcePaths>
                                 <sourcePath>${parent.project.dir}/spec/schemas/servicedeployed.json</sourcePath>
                             </sourcePaths>
-                            <outputDirectory>${sdk.project.dir}/src/main/java</outputDirectory>
                             <targetPackage>dev.cdevents.models.service.deployed</targetPackage>
-                            <includeHashcodeAndEquals>true</includeHashcodeAndEquals>
-                            <includeToString>false</includeToString>
                         </configuration>
                     </execution>
                     <execution>
@@ -503,10 +427,7 @@
                             <sourcePaths>
                                 <sourcePath>${parent.project.dir}/spec/schemas/servicepublished.json</sourcePath>
                             </sourcePaths>
-                            <outputDirectory>${sdk.project.dir}/src/main/java</outputDirectory>
                             <targetPackage>dev.cdevents.models.service.published</targetPackage>
-                            <includeHashcodeAndEquals>true</includeHashcodeAndEquals>
-                            <includeToString>false</includeToString>
                         </configuration>
                     </execution>
                     <execution>
@@ -519,10 +440,7 @@
                             <sourcePaths>
                                 <sourcePath>${parent.project.dir}/spec/schemas/serviceremoved.json</sourcePath>
                             </sourcePaths>
-                            <outputDirectory>${sdk.project.dir}/src/main/java</outputDirectory>
                             <targetPackage>dev.cdevents.models.service.removed</targetPackage>
-                            <includeHashcodeAndEquals>true</includeHashcodeAndEquals>
-                            <includeToString>false</includeToString>
                         </configuration>
                     </execution>
                     <execution>
@@ -535,10 +453,7 @@
                             <sourcePaths>
                                 <sourcePath>${parent.project.dir}/spec/schemas/servicerolledback.json</sourcePath>
                             </sourcePaths>
-                            <outputDirectory>${sdk.project.dir}/src/main/java</outputDirectory>
                             <targetPackage>dev.cdevents.models.service.rolledback</targetPackage>
-                            <includeHashcodeAndEquals>true</includeHashcodeAndEquals>
-                            <includeToString>false</includeToString>
                         </configuration>
                     </execution>
                     <execution>
@@ -551,10 +466,7 @@
                             <sourcePaths>
                                 <sourcePath>${parent.project.dir}/spec/schemas/serviceupgraded.json</sourcePath>
                             </sourcePaths>
-                            <outputDirectory>${sdk.project.dir}/src/main/java</outputDirectory>
                             <targetPackage>dev.cdevents.models.service.upgraded</targetPackage>
-                            <includeHashcodeAndEquals>true</includeHashcodeAndEquals>
-                            <includeToString>false</includeToString>
                         </configuration>
                     </execution>
                     <execution>
@@ -567,10 +479,7 @@
                             <sourcePaths>
                                 <sourcePath>${parent.project.dir}/spec/schemas/taskrunfinished.json</sourcePath>
                             </sourcePaths>
-                            <outputDirectory>${sdk.project.dir}/src/main/java</outputDirectory>
                             <targetPackage>dev.cdevents.models.taskrun.finished</targetPackage>
-                            <includeHashcodeAndEquals>true</includeHashcodeAndEquals>
-                            <includeToString>false</includeToString>
                         </configuration>
                     </execution>
                     <execution>
@@ -583,10 +492,7 @@
                             <sourcePaths>
                                 <sourcePath>${parent.project.dir}/spec/schemas/taskrunstarted.json</sourcePath>
                             </sourcePaths>
-                            <outputDirectory>${sdk.project.dir}/src/main/java</outputDirectory>
                             <targetPackage>dev.cdevents.models.taskrun.started</targetPackage>
-                            <includeHashcodeAndEquals>true</includeHashcodeAndEquals>
-                            <includeToString>false</includeToString>
                         </configuration>
                     </execution>
                     <execution>
@@ -599,10 +505,7 @@
                             <sourcePaths>
                                 <sourcePath>${parent.project.dir}/spec/schemas/testcaserunfinished.json</sourcePath>
                             </sourcePaths>
-                            <outputDirectory>${sdk.project.dir}/src/main/java</outputDirectory>
                             <targetPackage>dev.cdevents.models.testcaserun.finished</targetPackage>
-                            <includeHashcodeAndEquals>true</includeHashcodeAndEquals>
-                            <includeToString>false</includeToString>
                         </configuration>
                     </execution>
                     <execution>
@@ -615,10 +518,7 @@
                             <sourcePaths>
                                 <sourcePath>${parent.project.dir}/spec/schemas/testcaserunqueued.json</sourcePath>
                             </sourcePaths>
-                            <outputDirectory>${sdk.project.dir}/src/main/java</outputDirectory>
                             <targetPackage>dev.cdevents.models.testcaserun.queued</targetPackage>
-                            <includeHashcodeAndEquals>true</includeHashcodeAndEquals>
-                            <includeToString>false</includeToString>
                         </configuration>
                     </execution>
                     <execution>
@@ -631,10 +531,7 @@
                             <sourcePaths>
                                 <sourcePath>${parent.project.dir}/spec/schemas/testcaserunstarted.json</sourcePath>
                             </sourcePaths>
-                            <outputDirectory>${sdk.project.dir}/src/main/java</outputDirectory>
                             <targetPackage>dev.cdevents.models.testcaserun.started</targetPackage>
-                            <includeHashcodeAndEquals>true</includeHashcodeAndEquals>
-                            <includeToString>false</includeToString>
                         </configuration>
                     </execution>
                     <execution>
@@ -647,10 +544,7 @@
                             <sourcePaths>
                                 <sourcePath>${parent.project.dir}/spec/schemas/testoutputpublished.json</sourcePath>
                             </sourcePaths>
-                            <outputDirectory>${sdk.project.dir}/src/main/java</outputDirectory>
                             <targetPackage>dev.cdevents.models.testoutput.published</targetPackage>
-                            <includeHashcodeAndEquals>true</includeHashcodeAndEquals>
-                            <includeToString>false</includeToString>
                         </configuration>
                     </execution>
                     <execution>
@@ -663,10 +557,7 @@
                             <sourcePaths>
                                 <sourcePath>${parent.project.dir}/spec/schemas/testsuiterunfinished.json</sourcePath>
                             </sourcePaths>
-                            <outputDirectory>${sdk.project.dir}/src/main/java</outputDirectory>
                             <targetPackage>dev.cdevents.models.testsuiterun.finished</targetPackage>
-                            <includeHashcodeAndEquals>true</includeHashcodeAndEquals>
-                            <includeToString>false</includeToString>
                         </configuration>
                     </execution>
                     <execution>
@@ -679,10 +570,7 @@
                             <sourcePaths>
                                 <sourcePath>${parent.project.dir}/spec/schemas/testsuiterunqueued.json</sourcePath>
                             </sourcePaths>
-                            <outputDirectory>${sdk.project.dir}/src/main/java</outputDirectory>
                             <targetPackage>dev.cdevents.models.testsuiterun.queued</targetPackage>
-                            <includeHashcodeAndEquals>true</includeHashcodeAndEquals>
-                            <includeToString>false</includeToString>
                         </configuration>
                     </execution>
                     <execution>
@@ -695,10 +583,7 @@
                             <sourcePaths>
                                 <sourcePath>${parent.project.dir}/spec/schemas/testsuiterunstarted.json</sourcePath>
                             </sourcePaths>
-                            <outputDirectory>${sdk.project.dir}/src/main/java</outputDirectory>
                             <targetPackage>dev.cdevents.models.testsuiterun.started</targetPackage>
-                            <includeHashcodeAndEquals>true</includeHashcodeAndEquals>
-                            <includeToString>false</includeToString>
                         </configuration>
                     </execution>
                 </executions>

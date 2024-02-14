@@ -123,6 +123,7 @@
                         <configuration>
                             <overwriteExistingFiles>true</overwriteExistingFiles>
                             <failOnWarning>false</failOnWarning>
+                            <jvmVersion>9</jvmVersion>
                             <module>
                                 <moduleInfo>
                                     <name>dev.cdevents</name>

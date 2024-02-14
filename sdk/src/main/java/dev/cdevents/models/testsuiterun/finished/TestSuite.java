@@ -2,7 +2,7 @@
 package dev.cdevents.models.testsuiterun.finished;
 
 import java.net.URI;
-import javax.annotation.processing.Generated;
+import javax.annotation.Generated;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;

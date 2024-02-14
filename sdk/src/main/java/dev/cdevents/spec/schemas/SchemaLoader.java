@@ -9,6 +9,7 @@ import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * The purpose of this class is to serve as a resource anchor for loading event schemas.
@@ -37,7 +38,9 @@ public final class SchemaLoader {
             }
 
             // load from filesystem next
-            return Files.readString(Paths.get(CDEventConstants.SCHEMA_FOLDER + "/" + schema));
+            try (Stream<String> lines = Files.lines(Paths.get(CDEventConstants.SCHEMA_FOLDER + "/" + schema))) {
+                return lines.collect(Collectors.joining("\n"));
+            }
         } catch (Exception e) {
             throw new CDEventsException("Exception while reading Event JsonSchema file ", e);
         }

@@ -4,7 +4,7 @@ package dev.cdevents.models.branch.deleted;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import javax.annotation.processing.Generated;
+import javax.annotation.Generated;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
