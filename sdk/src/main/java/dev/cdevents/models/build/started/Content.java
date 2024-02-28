@@ -1,7 +1,7 @@
 
 package dev.cdevents.models.build.started;
 
-import javax.annotation.processing.Generated;
+import javax.annotation.Generated;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
