@@ -72,6 +72,7 @@ jobs:
       - name: Bump to snapshot
         run: |
           ./mvnw -ntp -B versions:set versions:commit -DnextSnapshot=true
+          sed -i -e "s@project.build.outputTimestamp>.*</project.build.outputTimestamp@project.build.outputTimestamp>\${git.commit.author.time}</project.build.outputTimestamp@g" pom.xml
           git config --global user.email "${{ env.USER_EMAIL }}"
           git config --global user.name "${{ env.USER_NAME }}"
           git commit -a -s -m "Bump version to next snapshot"
