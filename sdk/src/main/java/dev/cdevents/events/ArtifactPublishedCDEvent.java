@@ -28,6 +28,7 @@ import dev.cdevents.models.artifact.published.*;
 import java.net.URI;
 import java.util.Date;
 import java.util.UUID;
+import java.util.List;
 
 
 public class ArtifactPublishedCDEvent extends Artifactpublished implements CDEvent {
@@ -57,6 +58,7 @@ public class ArtifactPublishedCDEvent extends Artifactpublished implements CDEve
         context.setTimestamp(new Date());
         context.setVersion(CDEventConstants.CDEVENTS_SPEC_VERSION);
         getSubject().setContent(new Content());
+        getSubject().getContent().setSbom(new Sbom());
         getSubject().setType(Subject.Type.ARTIFACT);
     }
 
@@ -86,17 +88,26 @@ public class ArtifactPublishedCDEvent extends Artifactpublished implements CDEve
 
     @Override
     public String schemaURL() {
-        return "https://cdevents.dev/0.3.0/schema/artifact-published-event";
+        return "https://cdevents.dev/0.4.1/schema/artifact-published-event";
+    }
+
+    /**
+    * @return the base URI of the schema
+    */
+
+    @Override
+    public String baseURI() {
+        return "https://cdevents.dev/0.4.1/schema/";
     }
 
 
     /**
-    * @return the artifactpublished.json schema Json
+    * @return the CDEvent's schema file name
     */
 
     @Override
-    public String eventSchema() {
-        return dev.cdevents.spec.schemas.SchemaLoader.loadSchema("artifactpublished.json");
+    public String schemaFileName() {
+        return "artifactpublished.json";
     }
 
 
@@ -109,6 +120,23 @@ public class ArtifactPublishedCDEvent extends Artifactpublished implements CDEve
         getContext().setSource(source.toString());
     }
 
+    /**
+     * @param chainId
+     * Sets the {@link Context} chainId value
+     */
+
+    public void setChainId(URI chainId) {
+        getContext().setChainId(chainId.toString());
+    }
+
+    /**
+     * @param schemaUri
+     * Sets the {@link Context} custom schemaUri value
+     */
+
+    public void setCustomSchemaUri(URI schemaUri) {
+        getContext().setSchemaUri(schemaUri);
+    }
 
     /**
     * @param subjectId
@@ -131,8 +159,21 @@ public class ArtifactPublishedCDEvent extends Artifactpublished implements CDEve
 
     //getContentFields starts
 
+    /**
+    * @param user
+    */
+    public void setSubjectUser(String user) {
+        getSubject().getContent().setUser(user);
+    }
+
 
     //getContentObjectFields starts
 
+    /**
+    * @param uri
+    */
+    public void setSubjectSbomUri(String uri) {
+        getSubject().getContent().getSbom().setUri(uri);
+    }
 
 }

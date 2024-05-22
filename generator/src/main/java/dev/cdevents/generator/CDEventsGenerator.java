@@ -113,6 +113,7 @@ public final class CDEventsGenerator {
             String upperCaseSubject = getUpperCaseSubjectType(subjectType);
             //set the Schema JsonNode required values to schemaData
             schemaData.setSchemaURL(schemaURL);
+            schemaData.setBaseURI(schemaURL.substring(0, schemaURL.lastIndexOf("/") + 1));
             schemaData.setSubject(subject);
             schemaData.setPredicate(predicate);
             schemaData.setCapitalizedSubject(capitalizedSubject);
@@ -153,13 +154,27 @@ public final class CDEventsGenerator {
             String capitalizedContentField = StringUtils.capitalize(contentField);
             JsonNode contentNode = contentMap.getValue();
             String dataType = "";
-            if (!contentNode.get("type").asText().equals("object")) {
+            if (contentNode.get("type") != null && !contentNode.get("type").asText().equals("object")) {
                 if (contentNode.get("format") != null && contentNode.get("format").asText().equalsIgnoreCase("uri")) {
                     dataType = "URI";
                 } else if (contentNode.get("enum") != null) {
                     dataType = "Content." + capitalizedContentField;
+                } else if (contentNode.get("type").asText().equals("array")) {
+                    JsonNode itemsNode = contentNode.get("items");
+                    dataType = itemsNode.get("type").asText();
+                    if(dataType.equals("string")){
+                        dataType = "List<String>";
+                    }
                 } else {
                   dataType = "String";
+                }
+                contentFields.add(new SchemaData.ContentField(contentField, capitalizedContentField, dataType));
+            } else if (contentNode.get("anyOf") != null) {
+                JsonNode contentAnyOfNode = contentNode.get("anyOf").elements().next();
+                if (contentAnyOfNode.get("format") != null && contentAnyOfNode.get("format").asText().equalsIgnoreCase("uri")) {
+                    dataType = "URI";
+                } else {
+                    dataType = "String";
                 }
                 contentFields.add(new SchemaData.ContentField(contentField, capitalizedContentField, dataType));
             } else {

@@ -13,9 +13,14 @@ public interface CDEvent {
     String schemaURL();
 
     /**
-     * @return schema json for validating the CDEvent structure
+     * @return base URI of CDEvent's schema
      */
-    String eventSchema();
+    String baseURI();
+
+    /**
+     * @return spec schema file name
+     */
+    String schemaFileName();
 
     /**
      * Initialize the CDEvent with the context values.

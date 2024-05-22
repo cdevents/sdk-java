@@ -8,7 +8,8 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
-    "change"
+    "change",
+    "sbom"
 })
 @Generated("jsonschema2pojo")
 public class Content {
@@ -20,6 +21,8 @@ public class Content {
      */
     @JsonProperty("change")
     private Change change;
+    @JsonProperty("sbom")
+    private Sbom sbom;
 
     /**
      * 
@@ -41,9 +44,20 @@ public class Content {
         this.change = change;
     }
 
+    @JsonProperty("sbom")
+    public Sbom getSbom() {
+        return sbom;
+    }
+
+    @JsonProperty("sbom")
+    public void setSbom(Sbom sbom) {
+        this.sbom = sbom;
+    }
+
     @Override
     public int hashCode() {
         int result = 1;
+        result = ((result* 31)+((this.sbom == null)? 0 :this.sbom.hashCode()));
         result = ((result* 31)+((this.change == null)? 0 :this.change.hashCode()));
         return result;
     }
@@ -57,7 +71,7 @@ public class Content {
             return false;
         }
         Content rhs = ((Content) other);
-        return ((this.change == rhs.change)||((this.change!= null)&&this.change.equals(rhs.change)));
+        return (((this.sbom == rhs.sbom)||((this.sbom!= null)&&this.sbom.equals(rhs.sbom)))&&((this.change == rhs.change)||((this.change!= null)&&this.change.equals(rhs.change))));
     }
 
 }

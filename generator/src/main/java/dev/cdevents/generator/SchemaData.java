@@ -16,6 +16,8 @@ public class SchemaData {
 
     private String schemaURL;
 
+    private String baseURI;
+
     private List<ContentField> contentFields;
     private List<ContentObjectField> contentObjectFields;
     private List<ContentObject> contentObjects;
@@ -135,6 +137,22 @@ public class SchemaData {
      */
     public void setSchemaURL(String schemaURL) {
         this.schemaURL = schemaURL;
+    }
+
+    /**
+     *
+     * @return baseURI
+     */
+    public String getBaseURI() {
+        return baseURI;
+    }
+
+    /**
+     *
+     * @param baseURI
+     */
+    public void setBaseURI(String baseURI) {
+        this.baseURI = baseURI;
     }
 
     /**

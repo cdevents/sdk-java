@@ -28,6 +28,7 @@ import dev.cdevents.models.taskrun.finished.*;
 import java.net.URI;
 import java.util.Date;
 import java.util.UUID;
+import java.util.List;
 
 
 public class TaskrunFinishedCDEvent extends Taskrunfinished implements CDEvent {
@@ -87,17 +88,26 @@ public class TaskrunFinishedCDEvent extends Taskrunfinished implements CDEvent {
 
     @Override
     public String schemaURL() {
-        return "https://cdevents.dev/0.3.0/schema/task-run-finished-event";
+        return "https://cdevents.dev/0.4.1/schema/task-run-finished-event";
+    }
+
+    /**
+    * @return the base URI of the schema
+    */
+
+    @Override
+    public String baseURI() {
+        return "https://cdevents.dev/0.4.1/schema/";
     }
 
 
     /**
-    * @return the taskrunfinished.json schema Json
+    * @return the CDEvent's schema file name
     */
 
     @Override
-    public String eventSchema() {
-        return dev.cdevents.spec.schemas.SchemaLoader.loadSchema("taskrunfinished.json");
+    public String schemaFileName() {
+        return "taskrunfinished.json";
     }
 
 
@@ -110,6 +120,23 @@ public class TaskrunFinishedCDEvent extends Taskrunfinished implements CDEvent {
         getContext().setSource(source.toString());
     }
 
+    /**
+     * @param chainId
+     * Sets the {@link Context} chainId value
+     */
+
+    public void setChainId(URI chainId) {
+        getContext().setChainId(chainId.toString());
+    }
+
+    /**
+     * @param schemaUri
+     * Sets the {@link Context} custom schemaUri value
+     */
+
+    public void setCustomSchemaUri(URI schemaUri) {
+        getContext().setSchemaUri(schemaUri);
+    }
 
     /**
     * @param subjectId

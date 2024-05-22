@@ -28,6 +28,7 @@ import dev.cdevents.models.pipelinerun.queued.*;
 import java.net.URI;
 import java.util.Date;
 import java.util.UUID;
+import java.util.List;
 
 
 public class PipelinerunQueuedCDEvent extends Pipelinerunqueued implements CDEvent {
@@ -86,17 +87,26 @@ public class PipelinerunQueuedCDEvent extends Pipelinerunqueued implements CDEve
 
     @Override
     public String schemaURL() {
-        return "https://cdevents.dev/0.3.0/schema/pipeline-run-queued-event";
+        return "https://cdevents.dev/0.4.1/schema/pipeline-run-queued-event";
+    }
+
+    /**
+    * @return the base URI of the schema
+    */
+
+    @Override
+    public String baseURI() {
+        return "https://cdevents.dev/0.4.1/schema/";
     }
 
 
     /**
-    * @return the pipelinerunqueued.json schema Json
+    * @return the CDEvent's schema file name
     */
 
     @Override
-    public String eventSchema() {
-        return dev.cdevents.spec.schemas.SchemaLoader.loadSchema("pipelinerunqueued.json");
+    public String schemaFileName() {
+        return "pipelinerunqueued.json";
     }
 
 
@@ -109,6 +119,23 @@ public class PipelinerunQueuedCDEvent extends Pipelinerunqueued implements CDEve
         getContext().setSource(source.toString());
     }
 
+    /**
+     * @param chainId
+     * Sets the {@link Context} chainId value
+     */
+
+    public void setChainId(URI chainId) {
+        getContext().setChainId(chainId.toString());
+    }
+
+    /**
+     * @param schemaUri
+     * Sets the {@link Context} custom schemaUri value
+     */
+
+    public void setCustomSchemaUri(URI schemaUri) {
+        getContext().setSchemaUri(schemaUri);
+    }
 
     /**
     * @param subjectId

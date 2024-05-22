@@ -4,10 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import com.networknt.schema.JsonSchema;
-import com.networknt.schema.JsonSchemaFactory;
-import com.networknt.schema.SpecVersion;
-import com.networknt.schema.ValidationMessage;
+import com.networknt.schema.*;
 import dev.cdevents.config.CustomObjectMapper;
 import dev.cdevents.constants.CDEventConstants;
 import dev.cdevents.exception.CDEventsException;
@@ -21,9 +18,9 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
 import java.time.OffsetDateTime;
-import java.util.Arrays;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
+
+import static dev.cdevents.constants.CDEventConstants.SCHEMA_CLASSPATH;
 
 public final class CDEvents {
 
@@ -132,12 +129,19 @@ public final class CDEvents {
     }
 
     private static Set<ValidationMessage> getJsonSchemaValidationMessages(CDEvent cdEvent) {
-        JsonSchemaFactory factory = JsonSchemaFactory.getInstance(SpecVersion.VersionFlag.V202012);
-        JsonSchema jsonSchema = factory.getSchema(cdEvent.eventSchema());
+        Map<String, String> schemaMap = new HashMap<>();
+        schemaMap.put(cdEvent.schemaURL(), SCHEMA_CLASSPATH + cdEvent.schemaFileName());
+        schemaMap.put(cdEvent.baseURI() + "links/embeddedlinksarray", SCHEMA_CLASSPATH+ "links/embeddedlinksarray.json");
+        JsonSchemaFactory jsonSchemaFactory = JsonSchemaFactory.getInstance(SpecVersion.VersionFlag.V202012, builder ->
+            // This creates a mapping from $id which starts with https://cdevents.dev/0.4.0/schema to the retrieval URI classpath:schema/
+            builder.schemaMappers(schemaMappers -> schemaMappers.mappings(schemaMap))
+        );
+        SchemaValidatorsConfig config = new SchemaValidatorsConfig();
+        config.setPathType(PathType.JSON_POINTER);
+        JsonSchema schema = jsonSchemaFactory.getSchema(SchemaLocation.of(cdEvent.schemaURL()), config);
 
         JsonNode jsonNode = objectMapper.convertValue(cdEvent, ObjectNode.class);
-        Set<ValidationMessage> errors = jsonSchema.validate(jsonNode);
-        return errors;
+        return schema.validate(jsonNode);
     }
 
     private static CDEventConstants.CDEventTypes getCDEventTypeEnum(String eventType) {

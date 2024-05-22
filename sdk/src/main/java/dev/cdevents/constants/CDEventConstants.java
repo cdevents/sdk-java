@@ -15,14 +15,24 @@ public final class CDEventConstants {
     public static final String SPEC_REPO = ".." + File.separator + "spec";
 
     /**
-     * Event JsonSchema files location.
+     * Event JsonSchema file system location.
      */
     public static final String SCHEMA_FOLDER = SPEC_REPO + File.separator + "schemas";
 
     /**
+     * Event JsonSchema classpath location.
+     */
+    public static final String SCHEMA_CLASSPATH = "classpath:dev/cdevents/spec/schemas/";
+
+    /**
+     * Event link schemas location.
+     */
+    public static final String SCHEMA_LINKS_FOLDER = SCHEMA_FOLDER + File.separator + "links";
+
+    /**
      * CDEvents Version.
      */
-    public static final String CDEVENTS_SPEC_VERSION = "0.3.0";
+    public static final String CDEVENTS_SPEC_VERSION = "0.4.0";
 
     /**
      * CDEvent type prefix.
@@ -169,6 +179,10 @@ public final class CDEventConstants {
          */
         TestCaseRunQueuedEvent("dev.cdevents.testcaserun.queued.", TestcaserunQueuedCDEvent.class),
         /**
+         * TestCaseRun skipped event.
+         */
+        TestCaseRunSkippedEvent("dev.cdevents.testcaserun.skipped.", TestcaserunSkippedCDEvent.class),
+        /**
          * TestCaseRun finished event.
          */
         TestCaseRunFinishedEvent("dev.cdevents.testcaserun.finished.", TestcaserunFinishedCDEvent.class),
@@ -191,6 +205,16 @@ public final class CDEventConstants {
         TestOutputPublishedEvent("dev.cdevents.testoutput.published.", TestoutputPublishedCDEvent.class),
 
         /* Artifact Events */
+        /**
+         * Artifact deleted event.
+         */
+        ArtifactDeletedEvent("dev.cdevents.artifact.deleted.", ArtifactDeletedCDEvent.class),
+
+        /**
+         * Artifact downloaded event.
+         */
+        ArtifactDownloadedEvent("dev.cdevents.artifact.downloaded.", ArtifactDownloadedCDEvent.class),
+
         /**
          * Artifact packaged event.
          */
@@ -255,8 +279,21 @@ public final class CDEventConstants {
         /**
          * Service published event.
          */
-        ServicePublishedEvent("dev.cdevents.service.published.", ServicePublishedCDEvent.class);
+        ServicePublishedEvent("dev.cdevents.service.published.", ServicePublishedCDEvent.class),
 
+        /* Ticket Events */
+        /**
+         * Ticket closed event.
+         */
+        TicketClosedEvent("dev.cdevents.ticket.closed.", TicketClosedCDEvent.class),
+        /**
+         * Ticket created event.
+         */
+        TicketCreatedEvent("dev.cdevents.ticket.created.", TicketCreatedCDEvent.class),
+        /**
+         * Ticket updated event.
+         */
+        TicketUpdatedEvent("dev.cdevents.ticket.updated.", TicketUpdatedCDEvent.class);
 
         /**
          * Continuous delivery event type.

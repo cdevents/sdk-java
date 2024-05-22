@@ -28,6 +28,7 @@ import dev.cdevents.models.service.deployed.*;
 import java.net.URI;
 import java.util.Date;
 import java.util.UUID;
+import java.util.List;
 
 
 public class ServiceDeployedCDEvent extends Servicedeployed implements CDEvent {
@@ -87,17 +88,26 @@ public class ServiceDeployedCDEvent extends Servicedeployed implements CDEvent {
 
     @Override
     public String schemaURL() {
-        return "https://cdevents.dev/0.3.0/schema/service-deployed-event";
+        return "https://cdevents.dev/0.4.1/schema/service-deployed-event";
+    }
+
+    /**
+    * @return the base URI of the schema
+    */
+
+    @Override
+    public String baseURI() {
+        return "https://cdevents.dev/0.4.1/schema/";
     }
 
 
     /**
-    * @return the servicedeployed.json schema Json
+    * @return the CDEvent's schema file name
     */
 
     @Override
-    public String eventSchema() {
-        return dev.cdevents.spec.schemas.SchemaLoader.loadSchema("servicedeployed.json");
+    public String schemaFileName() {
+        return "servicedeployed.json";
     }
 
 
@@ -110,6 +120,23 @@ public class ServiceDeployedCDEvent extends Servicedeployed implements CDEvent {
         getContext().setSource(source.toString());
     }
 
+    /**
+     * @param chainId
+     * Sets the {@link Context} chainId value
+     */
+
+    public void setChainId(URI chainId) {
+        getContext().setChainId(chainId.toString());
+    }
+
+    /**
+     * @param schemaUri
+     * Sets the {@link Context} custom schemaUri value
+     */
+
+    public void setCustomSchemaUri(URI schemaUri) {
+        getContext().setSchemaUri(schemaUri);
+    }
 
     /**
     * @param subjectId
