@@ -1,8 +1,11 @@
 
 package dev.cdevents.models.build.queued;
 
+import java.net.URI;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import javax.annotation.Generated;
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -17,7 +20,10 @@ import com.fasterxml.jackson.annotation.JsonValue;
     "id",
     "source",
     "type",
-    "timestamp"
+    "timestamp",
+    "schemaUri",
+    "chainId",
+    "links"
 })
 @Generated("jsonschema2pojo")
 public class Context {
@@ -49,7 +55,7 @@ public class Context {
      * 
      */
     @JsonProperty("type")
-    private Context.Type type = Context.Type.fromValue("dev.cdevents.build.queued.0.1.1");
+    private Context.Type type = Context.Type.fromValue("dev.cdevents.build.queued.0.2.0");
     /**
      * 
      * (Required)
@@ -57,6 +63,12 @@ public class Context {
      */
     @JsonProperty("timestamp")
     private Date timestamp;
+    @JsonProperty("schemaUri")
+    private URI schemaUri;
+    @JsonProperty("chainId")
+    private String chainId;
+    @JsonProperty("links")
+    private List<Object> links = new ArrayList<Object>();
 
     /**
      * 
@@ -158,9 +170,42 @@ public class Context {
         this.timestamp = timestamp;
     }
 
+    @JsonProperty("schemaUri")
+    public URI getSchemaUri() {
+        return schemaUri;
+    }
+
+    @JsonProperty("schemaUri")
+    public void setSchemaUri(URI schemaUri) {
+        this.schemaUri = schemaUri;
+    }
+
+    @JsonProperty("chainId")
+    public String getChainId() {
+        return chainId;
+    }
+
+    @JsonProperty("chainId")
+    public void setChainId(String chainId) {
+        this.chainId = chainId;
+    }
+
+    @JsonProperty("links")
+    public List<Object> getLinks() {
+        return links;
+    }
+
+    @JsonProperty("links")
+    public void setLinks(List<Object> links) {
+        this.links = links;
+    }
+
     @Override
     public int hashCode() {
         int result = 1;
+        result = ((result* 31)+((this.chainId == null)? 0 :this.chainId.hashCode()));
+        result = ((result* 31)+((this.schemaUri == null)? 0 :this.schemaUri.hashCode()));
+        result = ((result* 31)+((this.links == null)? 0 :this.links.hashCode()));
         result = ((result* 31)+((this.id == null)? 0 :this.id.hashCode()));
         result = ((result* 31)+((this.source == null)? 0 :this.source.hashCode()));
         result = ((result* 31)+((this.type == null)? 0 :this.type.hashCode()));
@@ -178,13 +223,13 @@ public class Context {
             return false;
         }
         Context rhs = ((Context) other);
-        return ((((((this.id == rhs.id)||((this.id!= null)&&this.id.equals(rhs.id)))&&((this.source == rhs.source)||((this.source!= null)&&this.source.equals(rhs.source))))&&((this.type == rhs.type)||((this.type!= null)&&this.type.equals(rhs.type))))&&((this.version == rhs.version)||((this.version!= null)&&this.version.equals(rhs.version))))&&((this.timestamp == rhs.timestamp)||((this.timestamp!= null)&&this.timestamp.equals(rhs.timestamp))));
+        return (((((((((this.chainId == rhs.chainId)||((this.chainId!= null)&&this.chainId.equals(rhs.chainId)))&&((this.schemaUri == rhs.schemaUri)||((this.schemaUri!= null)&&this.schemaUri.equals(rhs.schemaUri))))&&((this.links == rhs.links)||((this.links!= null)&&this.links.equals(rhs.links))))&&((this.id == rhs.id)||((this.id!= null)&&this.id.equals(rhs.id))))&&((this.source == rhs.source)||((this.source!= null)&&this.source.equals(rhs.source))))&&((this.type == rhs.type)||((this.type!= null)&&this.type.equals(rhs.type))))&&((this.version == rhs.version)||((this.version!= null)&&this.version.equals(rhs.version))))&&((this.timestamp == rhs.timestamp)||((this.timestamp!= null)&&this.timestamp.equals(rhs.timestamp))));
     }
 
     @Generated("jsonschema2pojo")
     public enum Type {
 
-        DEV_CDEVENTS_BUILD_QUEUED_0_1_1("dev.cdevents.build.queued.0.1.1");
+        DEV_CDEVENTS_BUILD_QUEUED_0_2_0("dev.cdevents.build.queued.0.2.0");
         private final String value;
         private final static Map<String, Context.Type> CONSTANTS = new HashMap<String, Context.Type>();
 

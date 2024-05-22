@@ -66,6 +66,26 @@
     <build>
         <plugins>
             <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>3.1.0</version>
+                <executions>
+                    <execution>
+                        <id>run-PreprocessSchemas-main-class</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>java</goal>
+                        </goals>
+                        <configuration>
+                            <mainClass>dev.cdevents.generator.PreprocessSchemas</mainClass>
+                            <arguments>
+                                <argument>${parent.project.dir}</argument>
+                            </arguments>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
                 <groupId>org.jsonschema2pojo</groupId>
                 <artifactId>jsonschema2pojo-maven-plugin</artifactId>
                 <version>1.2.1</version>
@@ -77,7 +97,68 @@
                     <targetVersion>8</targetVersion>
                     <includeGeneratedAnnotation>true</includeGeneratedAnnotation>
                 </configuration>
-                <executions>
+            <executions>
+                <execution>
+                    <id>generate-embedded-links-from-schema</id>
+                    <phase>generate-sources</phase>
+                    <goals>
+                        <goal>generate</goal>
+                    </goals>
+                    <configuration>
+                        <sourcePaths>
+                            <sourcePath>${parent.project.dir}/spec/schemas/links/embeddedlinkend.json</sourcePath>
+                            <sourcePath>${parent.project.dir}/spec/schemas/links/embeddedlinkpath.json</sourcePath>
+                            <sourcePath>${parent.project.dir}/spec/schemas/links/embeddedlinkrelation.json</sourcePath>
+                            <sourcePath>${parent.project.dir}/spec/schemas/links/embeddedlinksarray.json</sourcePath>
+                        </sourcePaths>
+                        <!--<sourceDirectory>${parent.project.dir}/spec/schemas/links</sourceDirectory>
+                        <includes>embedded.*\.json</includes>-->
+                        <targetPackage>dev.cdevents.models.links.embedded</targetPackage>
+                    </configuration>
+                </execution>
+                <execution>
+                    <id>generate-external-links-from-schema</id>
+                    <phase>generate-sources</phase>
+                    <goals>
+                        <goal>generate</goal>
+                    </goals>
+                    <configuration>
+                        <sourcePaths>
+                            <sourcePath>${parent.project.dir}/spec/schemas/links/linkend.json</sourcePath>
+                            <sourcePath>${parent.project.dir}/spec/schemas/links/linkpath.json</sourcePath>
+                            <sourcePath>${parent.project.dir}/spec/schemas/links/linkrelation.json</sourcePath>
+                            <sourcePath>${parent.project.dir}/spec/schemas/links/linkstart.json</sourcePath>
+                        </sourcePaths>
+                        <targetPackage>dev.cdevents.models.links</targetPackage>
+                    </configuration>
+                </execution>
+                    <execution>
+                        <id>generate-artifact-deleted-from-schema</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <sourcePaths>
+                                <sourcePath>${parent.project.dir}/spec/schemas/artifactdeleted.json</sourcePath>
+                            </sourcePaths>
+                            <targetPackage>dev.cdevents.models.artifact.deleted</targetPackage>
+                        </configuration>
+                    </execution>
+
+                    <execution>
+                        <id>generate-artifact-downloaded-from-schema</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <sourcePaths>
+                                <sourcePath>${parent.project.dir}/spec/schemas/artifactdownloaded.json</sourcePath>
+                            </sourcePaths>
+                            <targetPackage>dev.cdevents.models.artifact.downloaded</targetPackage>
+                        </configuration>
+                    </execution>
                     <execution>
                         <id>generate-artifact-packaged-from-schema</id>
                         <phase>generate-sources</phase>
@@ -522,6 +603,19 @@
                         </configuration>
                     </execution>
                     <execution>
+                        <id>generate-testcaserun-skipped-from-schema</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <sourcePaths>
+                                <sourcePath>${parent.project.dir}/spec/schemas/testcaserunskipped.json</sourcePath>
+                            </sourcePaths>
+                            <targetPackage>dev.cdevents.models.testcaserun.skipped</targetPackage>
+                        </configuration>
+                    </execution>
+                    <execution>
                         <id>generate-testcaserun-started-from-schema</id>
                         <phase>generate-sources</phase>
                         <goals>
@@ -584,6 +678,45 @@
                                 <sourcePath>${parent.project.dir}/spec/schemas/testsuiterunstarted.json</sourcePath>
                             </sourcePaths>
                             <targetPackage>dev.cdevents.models.testsuiterun.started</targetPackage>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>generate-ticket-closed-from-schema</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <sourcePaths>
+                                <sourcePath>${parent.project.dir}/spec/schemas/ticketclosed.json</sourcePath>
+                            </sourcePaths>
+                            <targetPackage>dev.cdevents.models.ticket.closed</targetPackage>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>generate-ticket-created-from-schema</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <sourcePaths>
+                                <sourcePath>${parent.project.dir}/spec/schemas/ticketcreated.json</sourcePath>
+                            </sourcePaths>
+                            <targetPackage>dev.cdevents.models.ticket.created</targetPackage>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>generate-ticket-updated-from-schema</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <sourcePaths>
+                                <sourcePath>${parent.project.dir}/spec/schemas/ticketupdated.json</sourcePath>
+                            </sourcePaths>
+                            <targetPackage>dev.cdevents.models.ticket.updated</targetPackage>
                         </configuration>
                     </execution>
                 </executions>

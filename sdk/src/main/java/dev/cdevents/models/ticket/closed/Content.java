@@ -1,0 +1,220 @@
+
+package dev.cdevents.models.ticket.closed;
+
+import java.util.ArrayList;
+import java.util.List;
+import javax.annotation.Generated;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonPropertyOrder({
+    "summary",
+    "ticketType",
+    "group",
+    "creator",
+    "assignees",
+    "priority",
+    "labels",
+    "milestone",
+    "uri",
+    "resolution",
+    "updatedBy"
+})
+@Generated("jsonschema2pojo")
+public class Content {
+
+    @JsonProperty("summary")
+    private String summary;
+    @JsonProperty("ticketType")
+    private Object ticketType;
+    @JsonProperty("group")
+    private String group;
+    @JsonProperty("creator")
+    private String creator;
+    @JsonProperty("assignees")
+    private List<String> assignees = new ArrayList<String>();
+    @JsonProperty("priority")
+    private Object priority;
+    @JsonProperty("labels")
+    private List<String> labels = new ArrayList<String>();
+    @JsonProperty("milestone")
+    private String milestone;
+    /**
+     * 
+     * (Required)
+     * 
+     */
+    @JsonProperty("uri")
+    private String uri;
+    /**
+     * 
+     * (Required)
+     * 
+     */
+    @JsonProperty("resolution")
+    private Object resolution;
+    @JsonProperty("updatedBy")
+    private String updatedBy;
+
+    @JsonProperty("summary")
+    public String getSummary() {
+        return summary;
+    }
+
+    @JsonProperty("summary")
+    public void setSummary(String summary) {
+        this.summary = summary;
+    }
+
+    @JsonProperty("ticketType")
+    public Object getTicketType() {
+        return ticketType;
+    }
+
+    @JsonProperty("ticketType")
+    public void setTicketType(Object ticketType) {
+        this.ticketType = ticketType;
+    }
+
+    @JsonProperty("group")
+    public String getGroup() {
+        return group;
+    }
+
+    @JsonProperty("group")
+    public void setGroup(String group) {
+        this.group = group;
+    }
+
+    @JsonProperty("creator")
+    public String getCreator() {
+        return creator;
+    }
+
+    @JsonProperty("creator")
+    public void setCreator(String creator) {
+        this.creator = creator;
+    }
+
+    @JsonProperty("assignees")
+    public List<String> getAssignees() {
+        return assignees;
+    }
+
+    @JsonProperty("assignees")
+    public void setAssignees(List<String> assignees) {
+        this.assignees = assignees;
+    }
+
+    @JsonProperty("priority")
+    public Object getPriority() {
+        return priority;
+    }
+
+    @JsonProperty("priority")
+    public void setPriority(Object priority) {
+        this.priority = priority;
+    }
+
+    @JsonProperty("labels")
+    public List<String> getLabels() {
+        return labels;
+    }
+
+    @JsonProperty("labels")
+    public void setLabels(List<String> labels) {
+        this.labels = labels;
+    }
+
+    @JsonProperty("milestone")
+    public String getMilestone() {
+        return milestone;
+    }
+
+    @JsonProperty("milestone")
+    public void setMilestone(String milestone) {
+        this.milestone = milestone;
+    }
+
+    /**
+     * 
+     * (Required)
+     * 
+     */
+    @JsonProperty("uri")
+    public String getUri() {
+        return uri;
+    }
+
+    /**
+     * 
+     * (Required)
+     * 
+     */
+    @JsonProperty("uri")
+    public void setUri(String uri) {
+        this.uri = uri;
+    }
+
+    /**
+     * 
+     * (Required)
+     * 
+     */
+    @JsonProperty("resolution")
+    public Object getResolution() {
+        return resolution;
+    }
+
+    /**
+     * 
+     * (Required)
+     * 
+     */
+    @JsonProperty("resolution")
+    public void setResolution(Object resolution) {
+        this.resolution = resolution;
+    }
+
+    @JsonProperty("updatedBy")
+    public String getUpdatedBy() {
+        return updatedBy;
+    }
+
+    @JsonProperty("updatedBy")
+    public void setUpdatedBy(String updatedBy) {
+        this.updatedBy = updatedBy;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = 1;
+        result = ((result* 31)+((this.summary == null)? 0 :this.summary.hashCode()));
+        result = ((result* 31)+((this.creator == null)? 0 :this.creator.hashCode()));
+        result = ((result* 31)+((this.updatedBy == null)? 0 :this.updatedBy.hashCode()));
+        result = ((result* 31)+((this.milestone == null)? 0 :this.milestone.hashCode()));
+        result = ((result* 31)+((this.assignees == null)? 0 :this.assignees.hashCode()));
+        result = ((result* 31)+((this.ticketType == null)? 0 :this.ticketType.hashCode()));
+        result = ((result* 31)+((this.priority == null)? 0 :this.priority.hashCode()));
+        result = ((result* 31)+((this.uri == null)? 0 :this.uri.hashCode()));
+        result = ((result* 31)+((this.resolution == null)? 0 :this.resolution.hashCode()));
+        result = ((result* 31)+((this.group == null)? 0 :this.group.hashCode()));
+        result = ((result* 31)+((this.labels == null)? 0 :this.labels.hashCode()));
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+        if ((other instanceof Content) == false) {
+            return false;
+        }
+        Content rhs = ((Content) other);
+        return ((((((((((((this.summary == rhs.summary)||((this.summary!= null)&&this.summary.equals(rhs.summary)))&&((this.creator == rhs.creator)||((this.creator!= null)&&this.creator.equals(rhs.creator))))&&((this.updatedBy == rhs.updatedBy)||((this.updatedBy!= null)&&this.updatedBy.equals(rhs.updatedBy))))&&((this.milestone == rhs.milestone)||((this.milestone!= null)&&this.milestone.equals(rhs.milestone))))&&((this.assignees == rhs.assignees)||((this.assignees!= null)&&this.assignees.equals(rhs.assignees))))&&((this.ticketType == rhs.ticketType)||((this.ticketType!= null)&&this.ticketType.equals(rhs.ticketType))))&&((this.priority == rhs.priority)||((this.priority!= null)&&this.priority.equals(rhs.priority))))&&((this.uri == rhs.uri)||((this.uri!= null)&&this.uri.equals(rhs.uri))))&&((this.resolution == rhs.resolution)||((this.resolution!= null)&&this.resolution.equals(rhs.resolution))))&&((this.group == rhs.group)||((this.group!= null)&&this.group.equals(rhs.group))))&&((this.labels == rhs.labels)||((this.labels!= null)&&this.labels.equals(rhs.labels))));
+    }
+
+}

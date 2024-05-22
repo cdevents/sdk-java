@@ -28,6 +28,7 @@ import dev.cdevents.models.incident.reported.*;
 import java.net.URI;
 import java.util.Date;
 import java.util.UUID;
+import java.util.List;
 
 
 public class IncidentReportedCDEvent extends Incidentreported implements CDEvent {
@@ -88,17 +89,26 @@ public class IncidentReportedCDEvent extends Incidentreported implements CDEvent
 
     @Override
     public String schemaURL() {
-        return "https://cdevents.dev/0.3.0/schema/incident-reported-event";
+        return "https://cdevents.dev/0.4.1/schema/incident-reported-event";
+    }
+
+    /**
+    * @return the base URI of the schema
+    */
+
+    @Override
+    public String baseURI() {
+        return "https://cdevents.dev/0.4.1/schema/";
     }
 
 
     /**
-    * @return the incidentreported.json schema Json
+    * @return the CDEvent's schema file name
     */
 
     @Override
-    public String eventSchema() {
-        return dev.cdevents.spec.schemas.SchemaLoader.loadSchema("incidentreported.json");
+    public String schemaFileName() {
+        return "incidentreported.json";
     }
 
 
@@ -111,6 +121,23 @@ public class IncidentReportedCDEvent extends Incidentreported implements CDEvent
         getContext().setSource(source.toString());
     }
 
+    /**
+     * @param chainId
+     * Sets the {@link Context} chainId value
+     */
+
+    public void setChainId(URI chainId) {
+        getContext().setChainId(chainId.toString());
+    }
+
+    /**
+     * @param schemaUri
+     * Sets the {@link Context} custom schemaUri value
+     */
+
+    public void setCustomSchemaUri(URI schemaUri) {
+        getContext().setSchemaUri(schemaUri);
+    }
 
     /**
     * @param subjectId

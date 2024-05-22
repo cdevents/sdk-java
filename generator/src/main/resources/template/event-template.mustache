@@ -28,6 +28,7 @@ import dev.cdevents.models.{{subject}}.{{predicate}}.*;
 import java.net.URI;
 import java.util.Date;
 import java.util.UUID;
+import java.util.List;
 
 
 public class {{capitalizedSubject}}{{capitalizedPredicate}}CDEvent extends {{capitalizedSubject}}{{predicate}} implements CDEvent {
@@ -92,14 +93,23 @@ public class {{capitalizedSubject}}{{capitalizedPredicate}}CDEvent extends {{cap
         return "{{schemaURL}}";
     }
 
-
     /**
-    * @return the {{schemaFileName}} schema Json
+    * @return the base URI of the schema
     */
 
     @Override
-    public String eventSchema() {
-        return dev.cdevents.spec.schemas.SchemaLoader.loadSchema("{{schemaFileName}}");
+    public String baseURI() {
+        return "{{baseURI}}";
+    }
+
+
+    /**
+    * @return the CDEvent's schema file name
+    */
+
+    @Override
+    public String schemaFileName() {
+        return "{{schemaFileName}}";
     }
 
 
@@ -112,6 +122,23 @@ public class {{capitalizedSubject}}{{capitalizedPredicate}}CDEvent extends {{cap
         getContext().setSource(source.toString());
     }
 
+    /**
+     * @param chainId
+     * Sets the {@link Context} chainId value
+     */
+
+    public void setChainId(URI chainId) {
+        getContext().setChainId(chainId.toString());
+    }
+
+    /**
+     * @param schemaUri
+     * Sets the {@link Context} custom schemaUri value
+     */
+
+    public void setCustomSchemaUri(URI schemaUri) {
+        getContext().setSchemaUri(schemaUri);
+    }
 
     /**
     * @param subjectId
@@ -138,7 +165,7 @@ public class {{capitalizedSubject}}{{capitalizedPredicate}}CDEvent extends {{cap
     /**
     * @param {{fieldName}}
     */
-    public void setSubject{{capitalizedFieldName}}({{dataType}} {{fieldName}}) {
+    public void setSubject{{capitalizedFieldName}}({{{dataType}}} {{fieldName}}) {
         getSubject().getContent().set{{capitalizedFieldName}}({{fieldName}});
     }
 
@@ -150,7 +177,7 @@ public class {{capitalizedSubject}}{{capitalizedPredicate}}CDEvent extends {{cap
     /**
     * @param {{fieldName}}
     */
-    public void setSubject{{capitalizedObjectName}}{{capitalizedFieldName}}({{dataType}} {{fieldName}}) {
+    public void setSubject{{capitalizedObjectName}}{{capitalizedFieldName}}({{{dataType}}} {{fieldName}}) {
         getSubject().getContent().get{{capitalizedObjectName}}().set{{capitalizedFieldName}}({{fieldName}});
     }
     {{/getContentObjectFields}}
