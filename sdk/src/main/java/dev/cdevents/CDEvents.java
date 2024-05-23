@@ -131,7 +131,7 @@ public final class CDEvents {
     private static Set<ValidationMessage> getJsonSchemaValidationMessages(CDEvent cdEvent) {
         Map<String, String> schemaMap = new HashMap<>();
         schemaMap.put(cdEvent.schemaURL(), SCHEMA_CLASSPATH + cdEvent.schemaFileName());
-        schemaMap.put(cdEvent.baseURI() + "links/embeddedlinksarray", SCHEMA_CLASSPATH+ "links/embeddedlinksarray.json");
+        schemaMap.put(cdEvent.baseURI() + "links/embeddedlinksarray", SCHEMA_CLASSPATH + "links/embeddedlinksarray.json");
         JsonSchemaFactory jsonSchemaFactory = JsonSchemaFactory.getInstance(SpecVersion.VersionFlag.V202012, builder ->
             // This creates a mapping from $id which starts with https://cdevents.dev/0.4.0/schema to the retrieval URI classpath:schema/
             builder.schemaMappers(schemaMappers -> schemaMappers.mappings(schemaMap))

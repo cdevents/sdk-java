@@ -80,7 +80,7 @@ To run all targets, before creating a commit:
 ```
 
 ## Upgrade SDK to the Latest CDEvents Spec 
-The [Java SDK Generator](./generator) is utilized to create events from the [CDEvents Spec schemas](./spec/schemas), 
+The [Java SDK Generator](./generator) is utilized to create events from the CDEvents Spec schemas, 
 and the [CDEvents Spec repository](https://github.com/cdevents/spec/) is added as a Git Submodule to this repository which needs to be updated with latest Spec release.
 - Steps involved to generate latest SDK
 1. Update spec submodule to the latest release
@@ -93,8 +93,8 @@ and the [CDEvents Spec repository](https://github.com/cdevents/spec/) is added a
       cd ../
       ````
     - Verify the latest Spec is applied and Push the modified spec to your private working branch
-2. Generate model classes from [CDEvents Spec schemas](./spec/schemas) using maven plugin `jsonschema2pojo`
-    - Compare the existing `jsonschema2pojo` plugin configuration in the [generator's pom.xml file](./generator/pom.xml) with the available [CDEvents Spec schemas](./spec/schemas)
+2. Generate model classes from CDEvents Spec schemas using maven plugin `jsonschema2pojo`
+    - Compare the existing `jsonschema2pojo` plugin configuration in the [generator's pom.xml file](./generator/pom.xml) with the available CDEvents Spec schemas
     - Add/update executions for `jsonschema2pojo` plugin configuration in the [generator's pom.xml file](./generator/pom.xml) as below,
       ````pom
        <execution>
@@ -111,7 +111,7 @@ and the [CDEvents Spec repository](https://github.com/cdevents/spec/) is added a
             </configuration>
       </execution>
       ````
-    - Where, `id`, `sourcePath` needs to be updated with the actual file name and `targetPackage` directory structure needs to be created in [sdk models](./sdk/src/main/java/dev/cdevents/models) for each new schema file if you find in [CDEvents Spec schemas](./spec/schemas)
+    - Where, `id`, `sourcePath` needs to be updated with the actual file name and `targetPackage` directory structure needs to be created in [sdk models](./sdk/src/main/java/dev/cdevents/models) for each new schema file if you find in CDEvents Spec schemas
 
 2. Generate CDEvent classes using [mustache template](./generator/src/main/resources/template/event-template.mustache)
     - [event-template.mustache](./generator/src/main/resources/template/event-template.mustache) needs an update If there is any change in the `context` or `subject` of a CDEvent

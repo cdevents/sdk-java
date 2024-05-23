@@ -162,7 +162,7 @@ public final class CDEventsGenerator {
                 } else if (contentNode.get("type").asText().equals("array")) {
                     JsonNode itemsNode = contentNode.get("items");
                     dataType = itemsNode.get("type").asText();
-                    if(dataType.equals("string")){
+                    if (dataType.equals("string")) {
                         dataType = "List<String>";
                     }
                 } else {
