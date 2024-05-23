@@ -15,7 +15,7 @@ jobs:
       - name: Lint Code Base
         uses: github/super-linter/slim@v4
         env:
-          FILTER_REGEX_INCLUDE: .*sdk/src/main/.*|.*generator/src/main/.*
+          FILTER_REGEX_INCLUDE: .*sdk/src/main/.*|.*generator/src/main/.*|.*preprocessor/src/main/.*
           VALIDATE_ALL_CODEBASE: false
           DEFAULT_BRANCH: main
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
