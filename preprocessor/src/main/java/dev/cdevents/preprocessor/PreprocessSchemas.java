@@ -13,7 +13,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Iterator;
 
-public class PreprocessSchemas {
+public final class PreprocessSchemas {
 
     private PreprocessSchemas() {
     }
