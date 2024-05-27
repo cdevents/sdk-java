@@ -17,9 +17,6 @@ public final class PreprocessSchemas {
 
     private PreprocessSchemas() {
     }
-
-    private static ObjectMapper objectMapper = new ObjectMapper();
-
     private static Logger log = LoggerFactory.getLogger(PreprocessSchemas.class);
 
     /**
@@ -47,6 +44,7 @@ public final class PreprocessSchemas {
 
     private static void processFile(Path filePath) {
         log.info("processing schema file {} to update $ref path with json extension.", filePath.getFileName());
+        ObjectMapper objectMapper = new ObjectMapper();
         try {
             JsonNode rootNode = objectMapper.readTree(filePath.toFile());
             updateRefs(rootNode);

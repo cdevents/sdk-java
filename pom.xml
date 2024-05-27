@@ -45,6 +45,7 @@
 		<version.javadoc.plugin>3.5.0</version.javadoc.plugin>
 		<version.jar.plugin>3.3.0</version.jar.plugin>
 		<version.jreleaser.plugin>1.11.0</version.jreleaser.plugin>
+		<version.exec.plugin>3.1.0</version.exec.plugin>
 		<version.resources.plugin>3.3.1</version.resources.plugin>
 		<version.source.plugin>3.2.1</version.source.plugin>
 		<version.sourcefire.plugin>3.0.0</version.sourcefire.plugin>
@@ -166,6 +167,11 @@
 					<groupId>org.jreleaser</groupId>
 					<artifactId>jreleaser-maven-plugin</artifactId>
 					<version>${version.jreleaser.plugin}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>exec-maven-plugin</artifactId>
+					<version>${version.exec.plugin}</version>
 				</plugin>
 				<plugin>
 					<groupId>io.github.git-commit-id</groupId>

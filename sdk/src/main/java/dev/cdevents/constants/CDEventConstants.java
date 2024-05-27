@@ -32,7 +32,7 @@ public final class CDEventConstants {
     /**
      * CDEvents Version.
      */
-    public static final String CDEVENTS_SPEC_VERSION = "0.4.0";
+    public static final String CDEVENTS_SPEC_VERSION = "0.4.1";
 
     /**
      * CDEvent type prefix.
