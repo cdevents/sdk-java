@@ -4,7 +4,13 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import com.networknt.schema.*;
+import com.networknt.schema.JsonSchema;
+import com.networknt.schema.JsonSchemaFactory;
+import com.networknt.schema.PathType;
+import com.networknt.schema.SchemaLocation;
+import com.networknt.schema.SchemaValidatorsConfig;
+import com.networknt.schema.SpecVersion;
+import com.networknt.schema.ValidationMessage;
 import dev.cdevents.config.CustomObjectMapper;
 import dev.cdevents.constants.CDEventConstants;
 import dev.cdevents.exception.CDEventsException;
@@ -18,7 +24,11 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
 import java.time.OffsetDateTime;
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
+import java.util.UUID;
 
 import static dev.cdevents.constants.CDEventConstants.SCHEMA_CLASSPATH;
 
