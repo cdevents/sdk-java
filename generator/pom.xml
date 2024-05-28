@@ -91,8 +91,6 @@
                             <sourcePath>${parent.project.dir}/spec/schemas/links/embeddedlinkrelation.json</sourcePath>
                             <sourcePath>${parent.project.dir}/spec/schemas/links/embeddedlinksarray.json</sourcePath>
                         </sourcePaths>
-                        <!--<sourceDirectory>${parent.project.dir}/spec/schemas/links</sourceDirectory>
-                        <includes>embedded.*\.json</includes>-->
                         <targetPackage>dev.cdevents.models.links.embedded</targetPackage>
                     </configuration>
                 </execution>
