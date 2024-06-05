@@ -22,17 +22,16 @@ public final class PreprocessSchemas {
     /**
      *
      * Main method to update schema files.
-     * @param args [0] - parent directory for the cdevents-sdk-java
+     * @param args [0] - spec schemas directory for the cdevents-sdk-java
      */
     public static void main(String[] args) {
         if (args == null || args.length != 1) {
-            System.err.println("Usage: PreprocessSchemas <schema_directory_path>");
-            throw new IllegalArgumentException("Prent directory path argument not passed to PreprocessSchemas");
+            System.err.println("Usage: PreprocessSchemas <spec_schemas_directory_path>");
+            throw new IllegalArgumentException("spec schemas directory path argument not passed to PreprocessSchemas");
         }
-        String parentBaseDir = args[0];
-        String specSchemaDir = parentBaseDir + File.separator + "spec" + File.separator + "schemas";
+        String specSchemasDir = args[0];
         try {
-            Files.walk(Paths.get(specSchemaDir))
+            Files.walk(Paths.get(specSchemasDir))
                     .filter(Files::isRegularFile)
                     .filter(path -> path.toString().endsWith(".json"))
                     .forEach(PreprocessSchemas::processFile);

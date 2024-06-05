@@ -21,7 +21,7 @@
         <maven.deploy.skip>true</maven.deploy.skip>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
-        <sdk.project.dir>${project.basedir}/../sdk</sdk.project.dir>
+        <spec.schemas.dir>${project.basedir}/../spec/schemas</spec.schemas.dir>
         <parent.project.dir>${project.basedir}/../</parent.project.dir>
     </properties>
 
@@ -58,7 +58,7 @@
                         <configuration>
                             <mainClass>dev.cdevents.preprocessor.PreprocessSchemas</mainClass>
                             <arguments>
-                                <argument>${parent.project.dir}</argument>
+                                <argument>${spec.schemas.dir}</argument>
                             </arguments>
                         </configuration>
                     </execution>
