@@ -115,7 +115,7 @@ and the [CDEvents Spec repository](https://github.com/cdevents/spec/) is added a
     - Where, `id`, `sourcePath` needs to be updated with the actual file name and `targetPackage` directory structure needs to be created in [sdk models](./sdk/src/main/java/dev/cdevents/models) for each new schema file if you find in CDEvents Spec schemas
 
 3. The [Schema Preprocessor](./preprocessor) updates the CDEvents Spec schemas to comply with `jsonschema2pojo` for generating model classes.</br>
-Currently [PreprocessSchemas.java](./preprocessor/src/main/java/dev/cdevents/preprocessor/PreprocessSchemas.java) updates the schema's ref URL to include `.json` extension for all the spec schemas and will be executed as a Maven module from the parent [pom.xml](./pom.xml)</br>
+Currently [PreprocessSchemas.java](./preprocessor/src/main/java/dev/cdevents/PreprocessSchemas.java) updates the schema's ref URL to include `.json` extension for all the spec schemas and will be executed as a Maven module from the parent [pom.xml](./pom.xml)</br>
    Example:
    ````
    from
