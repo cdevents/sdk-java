@@ -14,4 +14,4 @@
  *
  */
 
-package dev.cdevents.preprocessor;
+package dev.cdevents;
