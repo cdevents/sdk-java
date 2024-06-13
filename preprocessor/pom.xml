@@ -56,7 +56,7 @@
                             <goal>java</goal>
                         </goals>
                         <configuration>
-                            <mainClass>dev.cdevents.preprocessor.PreprocessSchemas</mainClass>
+                            <mainClass>dev.cdevents.PreprocessSchemas</mainClass>
                             <arguments>
                                 <argument>${spec.schemas.dir}</argument>
                             </arguments>
