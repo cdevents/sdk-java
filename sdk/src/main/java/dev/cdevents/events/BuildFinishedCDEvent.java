@@ -133,8 +133,8 @@ public class BuildFinishedCDEvent extends Buildfinished implements CDEvent {
      * Sets the {@link Context} chainId value
      */
 
-    public void setChainId(URI chainId) {
-        getContext().setChainId(chainId.toString());
+    public void setChainId(String chainId) {
+        getContext().setChainId(chainId);
     }
 
     /**

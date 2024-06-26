@@ -134,8 +134,8 @@ public class ServiceRolledbackCDEvent extends Servicerolledback implements CDEve
      * Sets the {@link Context} chainId value
      */
 
-    public void setChainId(URI chainId) {
-        getContext().setChainId(chainId.toString());
+    public void setChainId(String chainId) {
+        getContext().setChainId(chainId);
     }
 
     /**
