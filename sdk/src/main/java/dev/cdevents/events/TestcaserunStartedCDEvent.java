@@ -113,6 +113,15 @@ public class TestcaserunStartedCDEvent extends Testcaserunstarted implements CDE
         return "testcaserunstarted.json";
     }
 
+    /**
+    *
+    * @return custom schema URI
+    */
+    @Override
+    public URI customSchemaUri(){
+        return getContext().getSchemaUri();
+    }
+
 
     /**
     * @param source

@@ -112,6 +112,15 @@ public class TestcaserunSkippedCDEvent extends Testcaserunskipped implements CDE
         return "testcaserunskipped.json";
     }
 
+    /**
+    *
+    * @return custom schema URI
+    */
+    @Override
+    public URI customSchemaUri(){
+        return getContext().getSchemaUri();
+    }
+
 
     /**
     * @param source

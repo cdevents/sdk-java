@@ -110,6 +110,15 @@ public class ChangeMergedCDEvent extends Changemerged implements CDEvent {
         return "changemerged.json";
     }
 
+    /**
+    *
+    * @return custom schema URI
+    */
+    @Override
+    public URI customSchemaUri(){
+        return getContext().getSchemaUri();
+    }
+
 
     /**
     * @param source

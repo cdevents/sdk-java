@@ -109,6 +109,15 @@ public class BuildFinishedCDEvent extends Buildfinished implements CDEvent {
         return "buildfinished.json";
     }
 
+    /**
+    *
+    * @return custom schema URI
+    */
+    @Override
+    public URI customSchemaUri(){
+        return getContext().getSchemaUri();
+    }
+
 
     /**
     * @param source

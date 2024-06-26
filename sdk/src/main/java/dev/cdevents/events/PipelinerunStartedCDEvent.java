@@ -109,6 +109,15 @@ public class PipelinerunStartedCDEvent extends Pipelinerunstarted implements CDE
         return "pipelinerunstarted.json";
     }
 
+    /**
+    *
+    * @return custom schema URI
+    */
+    @Override
+    public URI customSchemaUri(){
+        return getContext().getSchemaUri();
+    }
+
 
     /**
     * @param source

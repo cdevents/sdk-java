@@ -109,6 +109,15 @@ public class RepositoryCreatedCDEvent extends Repositorycreated implements CDEve
         return "repositorycreated.json";
     }
 
+    /**
+    *
+    * @return custom schema URI
+    */
+    @Override
+    public URI customSchemaUri(){
+        return getContext().getSchemaUri();
+    }
+
 
     /**
     * @param source

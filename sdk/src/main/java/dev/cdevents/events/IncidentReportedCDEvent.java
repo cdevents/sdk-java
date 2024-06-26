@@ -111,6 +111,15 @@ public class IncidentReportedCDEvent extends Incidentreported implements CDEvent
         return "incidentreported.json";
     }
 
+    /**
+    *
+    * @return custom schema URI
+    */
+    @Override
+    public URI customSchemaUri(){
+        return getContext().getSchemaUri();
+    }
+
 
     /**
     * @param source

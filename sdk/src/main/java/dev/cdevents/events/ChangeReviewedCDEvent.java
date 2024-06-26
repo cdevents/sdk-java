@@ -110,6 +110,15 @@ public class ChangeReviewedCDEvent extends Changereviewed implements CDEvent {
         return "changereviewed.json";
     }
 
+    /**
+    *
+    * @return custom schema URI
+    */
+    @Override
+    public URI customSchemaUri(){
+        return getContext().getSchemaUri();
+    }
+
 
     /**
     * @param source

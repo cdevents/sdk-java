@@ -109,6 +109,15 @@ public class BuildStartedCDEvent extends Buildstarted implements CDEvent {
         return "buildstarted.json";
     }
 
+    /**
+    *
+    * @return custom schema URI
+    */
+    @Override
+    public URI customSchemaUri(){
+        return getContext().getSchemaUri();
+    }
+
 
     /**
     * @param source

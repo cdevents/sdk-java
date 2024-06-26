@@ -112,6 +112,15 @@ public class TestcaserunFinishedCDEvent extends Testcaserunfinished implements C
         return "testcaserunfinished.json";
     }
 
+    /**
+    *
+    * @return custom schema URI
+    */
+    @Override
+    public URI customSchemaUri(){
+        return getContext().getSchemaUri();
+    }
+
 
     /**
     * @param source

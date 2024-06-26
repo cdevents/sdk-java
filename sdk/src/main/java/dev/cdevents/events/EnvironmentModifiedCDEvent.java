@@ -109,6 +109,15 @@ public class EnvironmentModifiedCDEvent extends Environmentmodified implements C
         return "environmentmodified.json";
     }
 
+    /**
+    *
+    * @return custom schema URI
+    */
+    @Override
+    public URI customSchemaUri(){
+        return getContext().getSchemaUri();
+    }
+
 
     /**
     * @param source

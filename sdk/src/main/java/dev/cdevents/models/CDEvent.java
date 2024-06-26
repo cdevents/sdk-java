@@ -1,5 +1,7 @@
 package dev.cdevents.models;
 
+import java.net.URI;
+
 public interface CDEvent {
 
     /**
@@ -31,5 +33,11 @@ public interface CDEvent {
      * @return source of the event
      */
     String eventSource();
+
+    /**
+     *
+     * @return custom schema URI
+     */
+    URI customSchemaUri();
 
 }

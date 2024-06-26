@@ -110,6 +110,15 @@ public class ServiceRemovedCDEvent extends Serviceremoved implements CDEvent {
         return "serviceremoved.json";
     }
 
+    /**
+    *
+    * @return custom schema URI
+    */
+    @Override
+    public URI customSchemaUri(){
+        return getContext().getSchemaUri();
+    }
+
 
     /**
     * @param source

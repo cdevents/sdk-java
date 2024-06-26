@@ -110,6 +110,15 @@ public class TaskrunFinishedCDEvent extends Taskrunfinished implements CDEvent {
         return "taskrunfinished.json";
     }
 
+    /**
+    *
+    * @return custom schema URI
+    */
+    @Override
+    public URI customSchemaUri(){
+        return getContext().getSchemaUri();
+    }
+
 
     /**
     * @param source

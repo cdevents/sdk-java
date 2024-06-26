@@ -111,6 +111,15 @@ public class TestsuiterunFinishedCDEvent extends Testsuiterunfinished implements
         return "testsuiterunfinished.json";
     }
 
+    /**
+    *
+    * @return custom schema URI
+    */
+    @Override
+    public URI customSchemaUri(){
+        return getContext().getSchemaUri();
+    }
+
 
     /**
     * @param source

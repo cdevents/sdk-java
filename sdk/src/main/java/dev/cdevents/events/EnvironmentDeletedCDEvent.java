@@ -109,6 +109,15 @@ public class EnvironmentDeletedCDEvent extends Environmentdeleted implements CDE
         return "environmentdeleted.json";
     }
 
+    /**
+    *
+    * @return custom schema URI
+    */
+    @Override
+    public URI customSchemaUri(){
+        return getContext().getSchemaUri();
+    }
+
 
     /**
     * @param source

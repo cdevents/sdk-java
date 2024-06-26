@@ -109,6 +109,15 @@ public class EnvironmentCreatedCDEvent extends Environmentcreated implements CDE
         return "environmentcreated.json";
     }
 
+    /**
+    *
+    * @return custom schema URI
+    */
+    @Override
+    public URI customSchemaUri(){
+        return getContext().getSchemaUri();
+    }
+
 
     /**
     * @param source

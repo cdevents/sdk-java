@@ -110,6 +110,15 @@ public class ServiceUpgradedCDEvent extends Serviceupgraded implements CDEvent {
         return "serviceupgraded.json";
     }
 
+    /**
+    *
+    * @return custom schema URI
+    */
+    @Override
+    public URI customSchemaUri(){
+        return getContext().getSchemaUri();
+    }
+
 
     /**
     * @param source

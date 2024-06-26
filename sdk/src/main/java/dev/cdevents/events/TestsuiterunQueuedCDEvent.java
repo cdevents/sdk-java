@@ -112,6 +112,15 @@ public class TestsuiterunQueuedCDEvent extends Testsuiterunqueued implements CDE
         return "testsuiterunqueued.json";
     }
 
+    /**
+    *
+    * @return custom schema URI
+    */
+    @Override
+    public URI customSchemaUri(){
+        return getContext().getSchemaUri();
+    }
+
 
     /**
     * @param source

@@ -110,6 +110,15 @@ public class ServicePublishedCDEvent extends Servicepublished implements CDEvent
         return "servicepublished.json";
     }
 
+    /**
+    *
+    * @return custom schema URI
+    */
+    @Override
+    public URI customSchemaUri(){
+        return getContext().getSchemaUri();
+    }
+
 
     /**
     * @param source

@@ -110,6 +110,15 @@ public class ArtifactPublishedCDEvent extends Artifactpublished implements CDEve
         return "artifactpublished.json";
     }
 
+    /**
+    *
+    * @return custom schema URI
+    */
+    @Override
+    public URI customSchemaUri(){
+        return getContext().getSchemaUri();
+    }
+
 
     /**
     * @param source

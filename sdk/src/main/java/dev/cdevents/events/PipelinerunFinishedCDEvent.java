@@ -109,6 +109,15 @@ public class PipelinerunFinishedCDEvent extends Pipelinerunfinished implements C
         return "pipelinerunfinished.json";
     }
 
+    /**
+    *
+    * @return custom schema URI
+    */
+    @Override
+    public URI customSchemaUri(){
+        return getContext().getSchemaUri();
+    }
+
 
     /**
     * @param source

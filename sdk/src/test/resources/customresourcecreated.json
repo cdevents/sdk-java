@@ -1,0 +1,112 @@
+{
+  "$schema" : "https://json-schema.org/draft/2020-12/schema",
+  "$id" : "https://myorg.com/schema/mytool/custom-resource-created",
+  "properties" : {
+    "context" : {
+      "properties" : {
+        "version" : {
+          "type" : "string",
+          "minLength" : 1
+        },
+        "id" : {
+          "type" : "string",
+          "minLength" : 1
+        },
+        "source" : {
+          "type" : "string",
+          "minLength" : 1,
+          "format" : "uri-reference"
+        },
+        "type" : {
+          "type" : "string",
+          "enum" : [ "dev.cdeventsx.mytool-resource.created.0.1.0" ],
+          "default" : "dev.cdeventsx.mytool-resource.created.0.1.0"
+        },
+        "timestamp" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "schemaUri" : {
+          "type" : "string",
+          "minLength" : 1,
+          "format" : "uri"
+        },
+        "chainId" : {
+          "type" : "string",
+          "minLength" : 1
+        }
+      },
+      "additionalProperties" : false,
+      "type" : "object",
+      "required" : [ "version", "id", "source", "type", "timestamp" ]
+    },
+    "subject" : {
+      "properties" : {
+        "id" : {
+          "type" : "string",
+          "minLength" : 1
+        },
+        "source" : {
+          "type" : "string",
+          "minLength" : 1,
+          "format" : "uri-reference"
+        },
+        "type" : {
+          "type" : "string",
+          "minLength" : 1,
+          "enum" : [ "mytool-resource" ],
+          "default" : "mytool-resource"
+        },
+        "content" : {
+          "properties" : {
+            "user" : {
+              "type" : "string",
+              "minLength" : 1
+            },
+            "description" : {
+              "type" : "string",
+              "minLength" : 1
+            },
+            "nested" : {
+              "properties": {
+                "key": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "list": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "minLength": 1
+                }
+              },
+              "additionalProperties" : false,
+              "type" : "object",
+              "required" : [ "key", "list" ]
+            }
+          },
+          "additionalProperties" : false,
+          "type" : "object"
+        }
+      },
+      "additionalProperties" : false,
+      "type" : "object",
+      "required" : [ "id", "type", "content" ]
+    },
+    "customData" : {
+      "oneOf" : [ {
+        "type" : "object"
+      }, {
+        "type" : "string",
+        "contentEncoding" : "base64"
+      } ]
+    },
+    "customDataContentType" : {
+      "type" : "string"
+    }
+  },
+  "additionalProperties" : false,
+  "type" : "object",
+  "required" : [ "context", "subject" ]
+}

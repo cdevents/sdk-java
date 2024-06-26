@@ -18,12 +18,11 @@ limitations under the License.
 SPDX-License-Identifier: Apache-2.0
 */
 
-package dev.cdevents.events;
+package dev.cdevents.custom.resource;
 
 
 import dev.cdevents.constants.CDEventConstants;
 import dev.cdevents.models.CDEvent;
-import dev.cdevents.models.build.queued.*;
 
 import java.net.URI;
 import java.util.Date;
@@ -31,14 +30,14 @@ import java.util.UUID;
 import java.util.List;
 
 
-public class BuildQueuedCDEvent extends Buildqueued implements CDEvent {
+public class CustomResourceCDEvent extends Customresourcecreated implements CDEvent {
 
 
     /**
-    * Constructor to init CDEvent and set the Subject for {@link BuildQueuedCDEvent}.
+    * Constructor to init CDEvent and set the Subject for {@link CustomResourceCDEvent}.
     */
 
-    public BuildQueuedCDEvent() {
+    public CustomResourceCDEvent() {
         initCDEvent();
     }
 
@@ -58,7 +57,8 @@ public class BuildQueuedCDEvent extends Buildqueued implements CDEvent {
         context.setTimestamp(new Date());
         context.setVersion(CDEventConstants.CDEVENTS_SPEC_VERSION);
         getSubject().setContent(new Content());
-        getSubject().setType(Subject.Type.BUILD);
+        getSubject().getContent().setNested(new Nested());
+        getSubject().setType(Subject.Type.ARTIFACT);
     }
 
     /**
@@ -82,12 +82,12 @@ public class BuildQueuedCDEvent extends Buildqueued implements CDEvent {
 
 
     /**
-    * @return the buildqueued.json schema URL
+    * @return the customresourcecreated.json schema URL
     */
 
     @Override
     public String schemaURL() {
-        return "https://cdevents.dev/0.4.1/schema/build-queued-event";
+        return "https://myorg.com/schema/mytool/custom-resource-created";
     }
 
     /**
@@ -96,7 +96,7 @@ public class BuildQueuedCDEvent extends Buildqueued implements CDEvent {
 
     @Override
     public String baseURI() {
-        return "https://cdevents.dev/0.4.1/schema/";
+        return "https://myorg.com/schema/mytool/";
     }
 
 
@@ -106,7 +106,7 @@ public class BuildQueuedCDEvent extends Buildqueued implements CDEvent {
 
     @Override
     public String schemaFileName() {
-        return "buildqueued.json";
+        return "customresourcecreated.json";
     }
 
     /**
@@ -133,8 +133,8 @@ public class BuildQueuedCDEvent extends Buildqueued implements CDEvent {
      * Sets the {@link Context} chainId value
      */
 
-    public void setChainId(URI chainId) {
-        getContext().setChainId(chainId.toString());
+    public void setChainId(String chainId) {
+        getContext().setChainId(chainId);
     }
 
     /**
@@ -167,8 +167,34 @@ public class BuildQueuedCDEvent extends Buildqueued implements CDEvent {
 
     //getContentFields starts
 
+    /**
+    * @param user
+    */
+    public void setSubjectUser(String user) {
+        getSubject().getContent().setUser(user);
+    }
+
+    /**
+    * @param description
+    */
+    public void setSubjectDescription(String description) {
+        getSubject().getContent().setDescription(description);
+    }
+
 
     //getContentObjectFields starts
 
+    /**
+    * @param key
+    */
+    public void setSubjectNestedKey(String key) {
+        getSubject().getContent().getNested().setKey(key);
+    }
+    /**
+    * @param list
+    */
+    public void setSubjectNestedList(List<String> list) {
+        getSubject().getContent().getNested().setList(list);
+    }
 
 }

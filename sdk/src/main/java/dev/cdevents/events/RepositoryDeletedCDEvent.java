@@ -109,6 +109,15 @@ public class RepositoryDeletedCDEvent extends Repositorydeleted implements CDEve
         return "repositorydeleted.json";
     }
 
+    /**
+    *
+    * @return custom schema URI
+    */
+    @Override
+    public URI customSchemaUri(){
+        return getContext().getSchemaUri();
+    }
+
 
     /**
     * @param source

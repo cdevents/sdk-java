@@ -110,6 +110,15 @@ public class BranchDeletedCDEvent extends Branchdeleted implements CDEvent {
         return "branchdeleted.json";
     }
 
+    /**
+    *
+    * @return custom schema URI
+    */
+    @Override
+    public URI customSchemaUri(){
+        return getContext().getSchemaUri();
+    }
+
 
     /**
     * @param source

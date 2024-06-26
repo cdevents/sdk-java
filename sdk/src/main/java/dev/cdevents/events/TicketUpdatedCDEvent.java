@@ -109,6 +109,15 @@ public class TicketUpdatedCDEvent extends Ticketupdated implements CDEvent {
         return "ticketupdated.json";
     }
 
+    /**
+    *
+    * @return custom schema URI
+    */
+    @Override
+    public URI customSchemaUri(){
+        return getContext().getSchemaUri();
+    }
+
 
     /**
     * @param source
