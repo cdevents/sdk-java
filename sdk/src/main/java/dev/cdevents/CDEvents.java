@@ -111,7 +111,8 @@ public final class CDEvents {
 
     /**
      * Creates a CloudEvent from the custom cdEvent.
-     * @param customCDEvent custom CDEvent class object
+     * @param <T> customCDEvent class
+     * @param customCDEvent custom CDEvent class object of type <T>
      * @param validateContextSchema true If validation needed against context.schemaUri
      * @return CloudEvent
      */
@@ -131,7 +132,8 @@ public final class CDEvents {
     /**
      * Creates customCDEvent from Json string and validates against context and official schemas.
      * @param customCDEventJson Json string of customCDEvent class type <T>
-     * @param eventClass customCDEvent class type <T>
+     * @param <T> customCDEvent class
+     * @param eventClass custom CDEvent class of type <T>
      * @param validateContextSchema true If validation needed against context.schemaUri
      * @return CDEvent
      */
