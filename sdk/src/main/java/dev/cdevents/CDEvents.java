@@ -91,8 +91,8 @@ public final class CDEvents {
 
     /**
      * Creates cdEvent from cdEventJson string and validates against schema.
-     * @param cdEventJson
-     * @return CDEvent, needs type casting to specific CDEvent class
+     * @param cdEventJson json string of any CDEvent type
+     * @return CDEvent needs type casting to specific CDEvent class
      */
     public static CDEvent cdEventFromJson(String cdEventJson) {
         String eventType = getUnVersionedEventTypeFromJson(cdEventJson);
@@ -110,8 +110,9 @@ public final class CDEvents {
     }
 
     /**
-     * Creates a CloudEvent from the custom cdEvent
-     * @param customCDEvent
+     * Creates a CloudEvent from the custom cdEvent.
+     * @param customCDEvent custom CDEvent class object
+     * @param validateContextSchema true If validation needed against context.schemaUri
      * @return CloudEvent
      */
     public static <T extends CDEvent> CloudEvent customCDEventAsCloudEvent(T customCDEvent, boolean validateContextSchema) {
@@ -127,6 +128,13 @@ public final class CDEvents {
         }
     }
 
+    /**
+     * Creates customCDEvent from Json string and validates against context and official schemas.
+     * @param customCDEventJson Json string of customCDEvent class type <T>
+     * @param eventClass customCDEvent class type <T>
+     * @param validateContextSchema true If validation needed against context.schemaUri
+     * @return CDEvent
+     */
     public static <T extends CDEvent> T customCDEventFromJson(String customCDEventJson, Class<T> eventClass, boolean validateContextSchema) {
         try {
             T cdEvent = new ObjectMapper().readValue(customCDEventJson, eventClass);
@@ -141,8 +149,8 @@ public final class CDEvents {
 
     /**
      * Validates the custom CDEvent against the official and context schemas.
-     * @param customCDEvent, custom CDEvent to validate
-     * @param validateContextSchema, true to validate custom CDEvent against context schema
+     * @param customCDEvent custom CDEvent to validate
+     * @param validateContextSchema true to validate custom CDEvent against context schema
      * @return valid cdEvent
      */
     public static boolean validateCustomCDEvent(CDEvent customCDEvent, boolean validateContextSchema) {
@@ -155,7 +163,7 @@ public final class CDEvents {
 
     /**
      * Validates the custom CDEvent against the provided context Schema URI.
-     * @param customCDEvent, custom CDEvent to validate
+     * @param customCDEvent custom CDEvent to validate
      * @return valid cdEvent
      */
     public static boolean validateWithContextSchemaUri(CDEvent customCDEvent) {

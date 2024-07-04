@@ -118,7 +118,7 @@ public class TestcaserunQueuedCDEvent extends Testcaserunqueued implements CDEve
     * @return custom schema URI
     */
     @Override
-    public URI customSchemaUri(){
+    public URI customSchemaUri() {
         return getContext().getSchemaUri();
     }
 

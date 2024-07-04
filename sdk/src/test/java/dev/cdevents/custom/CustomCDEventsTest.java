@@ -82,7 +82,7 @@ public class CustomCDEventsTest {
     @Test
     void testCustomResourceEventFromJsonConformance() throws IOException {
 
-        // Use conformance.json to test once Links are implemented for SDK
+        // Use spec/custom/conformance.json to test once Links are implemented for SDK
         //File customResourceCreatedExample = new File(CUSTOM_SPEC_FOLDER + "conformance.json");
         File customResourceCreatedExample = new File("src/test/resources/custom_resourcecreated_cdevent.json");
         JsonNode expectedNode = objectMapper.readTree(customResourceCreatedExample);

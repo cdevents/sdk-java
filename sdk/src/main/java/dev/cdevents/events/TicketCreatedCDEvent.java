@@ -114,7 +114,7 @@ public class TicketCreatedCDEvent extends Ticketcreated implements CDEvent {
     * @return custom schema URI
     */
     @Override
-    public URI customSchemaUri(){
+    public URI customSchemaUri() {
         return getContext().getSchemaUri();
     }
 
