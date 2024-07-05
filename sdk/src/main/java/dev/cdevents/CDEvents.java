@@ -28,7 +28,6 @@ import java.time.OffsetDateTime;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
 
@@ -117,11 +116,9 @@ public final class CDEvents {
      * @return CloudEvent
      */
     public static <T extends CDEvent> CloudEvent customCDEventAsCloudEvent(T customCDEvent, boolean validateContextSchema) {
-        Optional.of(customCDEvent)
-                .filter(event -> validateCustomCDEvent(event, validateContextSchema))
-                .orElseThrow(() -> {
-                    return new CDEventsException("Custom CDEvent validation failed.");
-                });
+        if (!validateCustomCDEvent(customCDEvent, validateContextSchema)) {
+            throw new CDEventsException("Custom CDEvent validation failed.");
+        }
         try {
             return buildCloudEvent(customCDEvent);
         } catch (URISyntaxException e) {
@@ -169,23 +166,20 @@ public final class CDEvents {
      * @return valid cdEvent
      */
     public static boolean validateWithContextSchemaUri(CDEvent customCDEvent) {
-        return Optional.ofNullable(customCDEvent.customSchemaUri())
-                .map(schemaUri -> {
-                    log.info("Validate custom CDEvent against context.schemaUri - {}", customCDEvent.customSchemaUri());
-                    JsonSchemaFactory factory = JsonSchemaFactory.getInstance(SpecVersion.VersionFlag.V202012);
-                    JsonSchema jsonSchema = factory.getSchema(schemaUri);
-                    JsonNode jsonNode = objectMapper.convertValue(customCDEvent, ObjectNode.class);
-                    Set<ValidationMessage> errors = jsonSchema.validate(jsonNode);
-                    if (!errors.isEmpty()) {
-                        log.error("Custom CDEvent validation failed against context.schemaUri - {}, with errors {}", customCDEvent.customSchemaUri(), errors);
-                        return false;
-                    }
-                    return true;
-                }).orElseThrow(() -> {
-                            log.error("Context schemaUri does not exist, required for custom schema validation.");
-                            return new CDEventsException("Context schemaUri does not exist.");
-                        }
-                );
+        if (customCDEvent.customSchemaUri() == null) {
+            log.error("Context schemaUri does not exist, required for custom schema validation.");
+            throw new CDEventsException("Context schemaUri does not exist.");
+        }
+        log.info("Validate custom CDEvent against context.schemaUri - {}", customCDEvent.customSchemaUri());
+        JsonSchemaFactory factory = JsonSchemaFactory.getInstance(SpecVersion.VersionFlag.V202012);
+        JsonSchema jsonSchema = factory.getSchema(customCDEvent.customSchemaUri());
+        JsonNode jsonNode = objectMapper.convertValue(customCDEvent, ObjectNode.class);
+        Set<ValidationMessage> errors = jsonSchema.validate(jsonNode);
+        if (!errors.isEmpty()) {
+            log.error("Custom CDEvent validation failed against context.schemaUri - {}, with errors {}", customCDEvent.customSchemaUri(), errors);
+            return false;
+        }
+        return true;
     }
 
     /**
@@ -247,23 +241,19 @@ public final class CDEvents {
     private static String getUnVersionedEventTypeFromJson(String cdEventJson) {
         try {
             JsonNode rootNode = objectMapper.readTree(cdEventJson);
-            return Optional.ofNullable(rootNode.get("context"))
-                    .flatMap(context -> Optional.ofNullable(context.get("type"))
-                            .map(cType -> {
-                                String vType = cType.asText();
-                                if (vType.startsWith(CDEventConstants.EVENT_PREFIX)) {
-                                    String[] type = vType.split("\\.");
-                                    String subject = type[CDEventConstants.EVENT_SUBJECT_INDEX];
-                                    String predicate = type[CDEventConstants.EVENT_PREDICATE_INDEX];
-                                    return CDEventConstants.EVENT_PREFIX + subject + "." + predicate + ".";
-                                } else {
-                                    throw new CDEventsException("Invalid CDEvent type found in CDEvent Json " + vType);
-                                }
-                            })).orElseThrow(() -> {
-                        log.error("Unable to find context and type in CDEvent Json");
-                        return new CDEventsException("Unable to find context and type in CDEvent Json");
-                    });
-
+            if (rootNode.get("context") != null && rootNode.get("context").get("type") != null) {
+                String versionedEventType = rootNode.get("context").get("type").asText();
+                if (versionedEventType.startsWith(CDEventConstants.EVENT_PREFIX)) {
+                    String[] type = versionedEventType.split("\\.");
+                    String subject = type[CDEventConstants.EVENT_SUBJECT_INDEX];
+                    String predicate = type[CDEventConstants.EVENT_PREDICATE_INDEX];
+                    return CDEventConstants.EVENT_PREFIX + subject + "." + predicate + ".";
+                } else {
+                    throw new CDEventsException("Invalid CDEvent type found in CDEvent Json " + versionedEventType);
+                }
+            } else {
+                throw new CDEventsException("Unable to find context and type in CDEvent Json");
+            }
         } catch (JsonProcessingException e) {
             throw new CDEventsException("Exception occurred while reading CDEvent Json for eventType ", e);
         }
