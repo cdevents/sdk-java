@@ -28,6 +28,9 @@ public class CDEventsGeneratorTest {
         File[] eventFiles = eventsFolder.listFiles((dir, name) -> !name.equals("package-info.java") && name.endsWith(".java"));
         List<String> schemaClassFileList = getSchemaClassFileList();
 
+        // adding custom event class explicitly to the list
+        schemaClassFileList.add("CustomTypeEvent.java");
+
         assertThat(eventFiles).extracting(File::getName).hasSameElementsAs(schemaClassFileList);
         assertThat(eventFiles.length).isEqualTo(schemaClassFileList.size());
     }
@@ -48,7 +51,7 @@ public class CDEventsGeneratorTest {
                     String predicate = type[PREDICATE_INDEX];
                     String capitalizedSubject = StringUtils.capitalize(subject);
                     String capitalizedPredicate = StringUtils.capitalize(predicate);
-                    String classFileName = StringUtils.join(new String[]{capitalizedSubject, capitalizedPredicate, "CDEvent", ".java"});
+                    String classFileName = StringUtils.join(capitalizedSubject, capitalizedPredicate, "CDEvent", ".java");
                     schemaClassFileList.add(classFileName);
                 }
             }

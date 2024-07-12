@@ -38,6 +38,6 @@ public interface CDEvent {
      *
      * @return custom schema URI
      */
-    URI customSchemaUri();
+    URI contextSchemaUri();
 
 }

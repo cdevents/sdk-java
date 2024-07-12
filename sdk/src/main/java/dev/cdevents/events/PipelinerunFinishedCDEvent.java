@@ -24,12 +24,10 @@ package dev.cdevents.events;
 import dev.cdevents.constants.CDEventConstants;
 import dev.cdevents.models.CDEvent;
 import dev.cdevents.models.pipelinerun.finished.*;
-
 import java.net.URI;
 import java.util.Date;
 import java.util.UUID;
 import java.util.List;
-
 
 public class PipelinerunFinishedCDEvent extends Pipelinerunfinished implements CDEvent {
 
@@ -111,10 +109,10 @@ public class PipelinerunFinishedCDEvent extends Pipelinerunfinished implements C
 
     /**
     *
-    * @return custom schema URI
+    * @return context schema URI
     */
     @Override
-    public URI customSchemaUri() {
+    public URI contextSchemaUri() {
         return getContext().getSchemaUri();
     }
 
@@ -142,7 +140,7 @@ public class PipelinerunFinishedCDEvent extends Pipelinerunfinished implements C
      * Sets the {@link Context} custom schemaUri value
      */
 
-    public void setCustomSchemaUri(URI schemaUri) {
+    public void setContextSchemaUri(URI schemaUri) {
         getContext().setSchemaUri(schemaUri);
     }
 

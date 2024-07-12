@@ -18,32 +18,32 @@ limitations under the License.
 SPDX-License-Identifier: Apache-2.0
 */
 
-package dev.cdevents.custom.resource;
+package dev.cdevents.events;
 
 
 import dev.cdevents.constants.CDEventConstants;
 import dev.cdevents.models.CDEvent;
-
+import dev.cdevents.models.custom.*;
+import java.util.Map;
 import java.net.URI;
 import java.util.Date;
 import java.util.UUID;
 import java.util.List;
 
-
-public class CustomResourceCDEvent extends Customresourcecreated implements CDEvent {
+public class CustomTypeEvent extends Schema implements CDEvent {
 
 
     /**
-    * Constructor to init CDEvent and set the Subject for {@link CustomResourceCDEvent}.
+    * Constructor to init CustomTypeEvent
     */
 
-    public CustomResourceCDEvent() {
+    public CustomTypeEvent() {
         initCDEvent();
     }
 
 
     /**
-    * Initialize the CDEvent with the context values.
+    * Initialize the Event with the context values.
     */
 
     @Override
@@ -57,8 +57,6 @@ public class CustomResourceCDEvent extends Customresourcecreated implements CDEv
         context.setTimestamp(new Date());
         context.setVersion(CDEventConstants.CDEVENTS_SPEC_VERSION);
         getSubject().setContent(new Content());
-        getSubject().getContent().setNested(new Nested());
-        getSubject().setType(Subject.Type.ARTIFACT);
     }
 
     /**
@@ -77,17 +75,17 @@ public class CustomResourceCDEvent extends Customresourcecreated implements CDEv
 
     @Override
     public String currentCDEventType() {
-        return getContext().getType().value();
+        return getContext().getType();
     }
 
 
     /**
-    * @return the customresourcecreated.json schema URL
+    * @return the schema.json schema URL
     */
 
     @Override
     public String schemaURL() {
-        return "https://myorg.com/schema/mytool/custom-resource-created";
+        return "https://cdevents.dev/0.4.1/schema/custom";
     }
 
     /**
@@ -96,7 +94,7 @@ public class CustomResourceCDEvent extends Customresourcecreated implements CDEv
 
     @Override
     public String baseURI() {
-        return "https://myorg.com/schema/mytool/";
+        return "https://cdevents.dev/0.4.1/schema/";
     }
 
 
@@ -106,15 +104,15 @@ public class CustomResourceCDEvent extends Customresourcecreated implements CDEv
 
     @Override
     public String schemaFileName() {
-        return "customresourcecreated.json";
+        return "schema.json";
     }
 
     /**
     *
-    * @return custom schema URI
+    * @return context schema URI
     */
     @Override
-    public URI customSchemaUri(){
+    public URI contextSchemaUri() {
         return getContext().getSchemaUri();
     }
 
@@ -142,7 +140,7 @@ public class CustomResourceCDEvent extends Customresourcecreated implements CDEv
      * Sets the {@link Context} custom schemaUri value
      */
 
-    public void setCustomSchemaUri(URI schemaUri) {
+    public void setContextSchemaUri(URI schemaUri) {
         getContext().setSchemaUri(schemaUri);
     }
 
@@ -165,36 +163,30 @@ public class CustomResourceCDEvent extends Customresourcecreated implements CDEv
         getSubject().setSource(subjectSource.toString());
     }
 
-    //getContentFields starts
-
     /**
-    * @param user
+    * @param type
+    * Sets the {@link Context} type value,
+    * must be in the format dev.cdeventsx.<tool-name>-<subject-name>.<predicate-name>.<major.minor.patch>
     */
-    public void setSubjectUser(String user) {
-        getSubject().getContent().setUser(user);
+
+    public void setType(String type) {
+        getContext().setType(type);
     }
 
     /**
-    * @param description
+    * @param subjectType
+    * sets the subject type, must be in the format <tool-name>-<subject-name>
     */
-    public void setSubjectDescription(String description) {
-        getSubject().getContent().setDescription(description);
+    public void setSubjectType(String subjectType) {
+        getSubject().setType(subjectType);
     }
 
-
-    //getContentObjectFields starts
-
     /**
-    * @param key
+    * @param contentProperty
+    * sets the subject content custom properties
     */
-    public void setSubjectNestedKey(String key) {
-        getSubject().getContent().getNested().setKey(key);
-    }
-    /**
-    * @param list
-    */
-    public void setSubjectNestedList(List<String> list) {
-        getSubject().getContent().getNested().setList(list);
+    public void setSubjectContentProperty(Map<String, Object> contentProperty) {
+        contentProperty.forEach((key, value) -> getSubject().getContent().setAdditionalProperty(key, value));
     }
 
 }

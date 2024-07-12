@@ -1,17 +1,14 @@
 
-package dev.cdevents.custom.resource;
+package dev.cdevents.models.custom;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
+import java.net.URI;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import javax.annotation.Generated;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.fasterxml.jackson.annotation.JsonValue;
-
-import javax.annotation.Generated;
-import java.net.URI;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
@@ -21,7 +18,8 @@ import java.util.Map;
     "type",
     "timestamp",
     "schemaUri",
-    "chainId"
+    "chainId",
+    "links"
 })
 @Generated("jsonschema2pojo")
 public class Context {
@@ -53,7 +51,7 @@ public class Context {
      * 
      */
     @JsonProperty("type")
-    private Type type = Type.fromValue("dev.cdeventsx.mytool-resource.created.0.1.0");
+    private String type;
     /**
      * 
      * (Required)
@@ -65,6 +63,8 @@ public class Context {
     private URI schemaUri;
     @JsonProperty("chainId")
     private String chainId;
+    @JsonProperty("links")
+    private List<Object> links = new ArrayList<Object>();
 
     /**
      * 
@@ -132,7 +132,7 @@ public class Context {
      * 
      */
     @JsonProperty("type")
-    public Type getType() {
+    public String getType() {
         return type;
     }
 
@@ -142,7 +142,7 @@ public class Context {
      * 
      */
     @JsonProperty("type")
-    public void setType(Type type) {
+    public void setType(String type) {
         this.type = type;
     }
 
@@ -186,11 +186,22 @@ public class Context {
         this.chainId = chainId;
     }
 
+    @JsonProperty("links")
+    public List<Object> getLinks() {
+        return links;
+    }
+
+    @JsonProperty("links")
+    public void setLinks(List<Object> links) {
+        this.links = links;
+    }
+
     @Override
     public int hashCode() {
         int result = 1;
         result = ((result* 31)+((this.chainId == null)? 0 :this.chainId.hashCode()));
         result = ((result* 31)+((this.schemaUri == null)? 0 :this.schemaUri.hashCode()));
+        result = ((result* 31)+((this.links == null)? 0 :this.links.hashCode()));
         result = ((result* 31)+((this.id == null)? 0 :this.id.hashCode()));
         result = ((result* 31)+((this.source == null)? 0 :this.source.hashCode()));
         result = ((result* 31)+((this.type == null)? 0 :this.type.hashCode()));
@@ -208,46 +219,7 @@ public class Context {
             return false;
         }
         Context rhs = ((Context) other);
-        return ((((((((this.chainId == rhs.chainId)||((this.chainId!= null)&&this.chainId.equals(rhs.chainId)))&&((this.schemaUri == rhs.schemaUri)||((this.schemaUri!= null)&&this.schemaUri.equals(rhs.schemaUri))))&&((this.id == rhs.id)||((this.id!= null)&&this.id.equals(rhs.id))))&&((this.source == rhs.source)||((this.source!= null)&&this.source.equals(rhs.source))))&&((this.type == rhs.type)||((this.type!= null)&&this.type.equals(rhs.type))))&&((this.version == rhs.version)||((this.version!= null)&&this.version.equals(rhs.version))))&&((this.timestamp == rhs.timestamp)||((this.timestamp!= null)&&this.timestamp.equals(rhs.timestamp))));
-    }
-
-    @Generated("jsonschema2pojo")
-    public enum Type {
-
-        DEV_CDEVENTSX_CUSTOM_RESOURCE_CREATED_0_1_0("dev.cdeventsx.mytool-resource.created.0.1.0");
-        private final String value;
-        private final static Map<String, Type> CONSTANTS = new HashMap<String, Type>();
-
-        static {
-            for (Type c: values()) {
-                CONSTANTS.put(c.value, c);
-            }
-        }
-
-        Type(String value) {
-            this.value = value;
-        }
-
-        @Override
-        public String toString() {
-            return this.value;
-        }
-
-        @JsonValue
-        public String value() {
-            return this.value;
-        }
-
-        @JsonCreator
-        public static Type fromValue(String value) {
-            Type constant = CONSTANTS.get(value);
-            if (constant == null) {
-                throw new IllegalArgumentException(value);
-            } else {
-                return constant;
-            }
-        }
-
+        return (((((((((this.chainId == rhs.chainId)||((this.chainId!= null)&&this.chainId.equals(rhs.chainId)))&&((this.schemaUri == rhs.schemaUri)||((this.schemaUri!= null)&&this.schemaUri.equals(rhs.schemaUri))))&&((this.links == rhs.links)||((this.links!= null)&&this.links.equals(rhs.links))))&&((this.id == rhs.id)||((this.id!= null)&&this.id.equals(rhs.id))))&&((this.source == rhs.source)||((this.source!= null)&&this.source.equals(rhs.source))))&&((this.type == rhs.type)||((this.type!= null)&&this.type.equals(rhs.type))))&&((this.version == rhs.version)||((this.version!= null)&&this.version.equals(rhs.version))))&&((this.timestamp == rhs.timestamp)||((this.timestamp!= null)&&this.timestamp.equals(rhs.timestamp))));
     }
 
 }

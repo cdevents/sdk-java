@@ -24,12 +24,10 @@ package dev.cdevents.events;
 import dev.cdevents.constants.CDEventConstants;
 import dev.cdevents.models.CDEvent;
 import dev.cdevents.models.taskrun.started.*;
-
 import java.net.URI;
 import java.util.Date;
 import java.util.UUID;
 import java.util.List;
-
 
 public class TaskrunStartedCDEvent extends Taskrunstarted implements CDEvent {
 
@@ -112,10 +110,10 @@ public class TaskrunStartedCDEvent extends Taskrunstarted implements CDEvent {
 
     /**
     *
-    * @return custom schema URI
+    * @return context schema URI
     */
     @Override
-    public URI customSchemaUri() {
+    public URI contextSchemaUri() {
         return getContext().getSchemaUri();
     }
 
@@ -143,7 +141,7 @@ public class TaskrunStartedCDEvent extends Taskrunstarted implements CDEvent {
      * Sets the {@link Context} custom schemaUri value
      */
 
-    public void setCustomSchemaUri(URI schemaUri) {
+    public void setContextSchemaUri(URI schemaUri) {
         getContext().setSchemaUri(schemaUri);
     }
 

@@ -1,11 +1,10 @@
 
-package dev.cdevents.custom.resource;
+package dev.cdevents.models.custom;
 
+import javax.annotation.Generated;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-
-import javax.annotation.Generated;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
@@ -15,7 +14,7 @@ import javax.annotation.Generated;
     "customDataContentType"
 })
 @Generated("jsonschema2pojo")
-public class Customresourcecreated {
+public class Schema {
 
     /**
      * 
@@ -111,10 +110,10 @@ public class Customresourcecreated {
         if (other == this) {
             return true;
         }
-        if ((other instanceof Customresourcecreated) == false) {
+        if ((other instanceof Schema) == false) {
             return false;
         }
-        Customresourcecreated rhs = ((Customresourcecreated) other);
+        Schema rhs = ((Schema) other);
         return (((((this.context == rhs.context)||((this.context!= null)&&this.context.equals(rhs.context)))&&((this.customData == rhs.customData)||((this.customData!= null)&&this.customData.equals(rhs.customData))))&&((this.customDataContentType == rhs.customDataContentType)||((this.customDataContentType!= null)&&this.customDataContentType.equals(rhs.customDataContentType))))&&((this.subject == rhs.subject)||((this.subject!= null)&&this.subject.equals(rhs.subject))));
     }
 

@@ -44,6 +44,11 @@ public final class CDEventConstants {
      * CDEvent type prefix.
      */
     public static final String EVENT_PREFIX = "dev.cdevents.";
+
+    /**
+     * Custom Event type prefix.
+     */
+    public static final String CUSTOM_EVENT_PREFIX = "dev.cdeventsx.";
     /**
      * CDEvent type subject index.
      */
@@ -299,7 +304,9 @@ public final class CDEventConstants {
         /**
          * Ticket updated event.
          */
-        TicketUpdatedEvent("dev.cdevents.ticket.updated.", TicketUpdatedCDEvent.class);
+        TicketUpdatedEvent("dev.cdevents.ticket.updated.", TicketUpdatedCDEvent.class),
+
+        CustomEvent(CUSTOM_EVENT_PREFIX, CustomTypeEvent.class);
 
         /**
          * Continuous delivery event type.

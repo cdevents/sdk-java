@@ -1,15 +1,10 @@
 
-package dev.cdevents.custom.resource;
+package dev.cdevents.models.custom;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
+import javax.annotation.Generated;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.fasterxml.jackson.annotation.JsonValue;
-
-import javax.annotation.Generated;
-import java.util.HashMap;
-import java.util.Map;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
@@ -36,7 +31,7 @@ public class Subject {
      * 
      */
     @JsonProperty("type")
-    private Type type = Type.fromValue("mytool-resource");
+    private String type;
     /**
      * 
      * (Required)
@@ -81,7 +76,7 @@ public class Subject {
      * 
      */
     @JsonProperty("type")
-    public Type getType() {
+    public String getType() {
         return type;
     }
 
@@ -91,7 +86,7 @@ public class Subject {
      * 
      */
     @JsonProperty("type")
-    public void setType(Type type) {
+    public void setType(String type) {
         this.type = type;
     }
 
@@ -135,45 +130,6 @@ public class Subject {
         }
         Subject rhs = ((Subject) other);
         return (((((this.id == rhs.id)||((this.id!= null)&&this.id.equals(rhs.id)))&&((this.source == rhs.source)||((this.source!= null)&&this.source.equals(rhs.source))))&&((this.type == rhs.type)||((this.type!= null)&&this.type.equals(rhs.type))))&&((this.content == rhs.content)||((this.content!= null)&&this.content.equals(rhs.content))));
-    }
-
-    @Generated("jsonschema2pojo")
-    public enum Type {
-
-        ARTIFACT("mytool-resource");
-        private final String value;
-        private final static Map<String, Type> CONSTANTS = new HashMap<String, Type>();
-
-        static {
-            for (Type c: values()) {
-                CONSTANTS.put(c.value, c);
-            }
-        }
-
-        Type(String value) {
-            this.value = value;
-        }
-
-        @Override
-        public String toString() {
-            return this.value;
-        }
-
-        @JsonValue
-        public String value() {
-            return this.value;
-        }
-
-        @JsonCreator
-        public static Type fromValue(String value) {
-            Type constant = CONSTANTS.get(value);
-            if (constant == null) {
-                throw new IllegalArgumentException(value);
-            } else {
-                return constant;
-            }
-        }
-
     }
 
 }
