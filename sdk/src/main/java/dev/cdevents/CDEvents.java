@@ -142,28 +142,6 @@ public final class CDEvents {
         return true;
     }
 
-    /**
-     * Validates the CDEvent against the provided context Schema URI.
-     * @param cdEvent
-     * @return true if valid cdEvent
-     */
-    private static boolean validateWithContextSchemaUri(CDEvent cdEvent) {
-        if (cdEvent.contextSchemaUri() == null) {
-            log.error("Context schemaUri does not exist, required for custom schema validation.");
-            throw new CDEventsException("Context schemaUri does not exist.");
-        }
-        log.info("Validate custom CDEvent against context.schemaUri - {}", cdEvent.contextSchemaUri());
-        JsonSchemaFactory factory = JsonSchemaFactory.getInstance(SpecVersion.VersionFlag.V202012);
-        JsonSchema jsonSchema = factory.getSchema(cdEvent.contextSchemaUri());
-        JsonNode jsonNode = objectMapper.convertValue(cdEvent, ObjectNode.class);
-        Set<ValidationMessage> errors = jsonSchema.validate(jsonNode);
-        if (!errors.isEmpty()) {
-            log.error("Custom CDEvent validation failed against context.schemaUri - {}, with errors {}", cdEvent.contextSchemaUri(), errors);
-            return false;
-        }
-        return true;
-    }
-
     private static CloudEvent buildCloudEvent(CDEvent cdEvent) throws URISyntaxException {
         String cdEventJson = cdEventAsJson(cdEvent);
         log.debug("CDEvent with type {} as json - {}", cdEvent.currentCDEventType(), cdEventJson);

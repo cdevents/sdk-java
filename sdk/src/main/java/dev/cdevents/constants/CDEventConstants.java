@@ -306,6 +306,9 @@ public final class CDEventConstants {
          */
         TicketUpdatedEvent("dev.cdevents.ticket.updated.", TicketUpdatedCDEvent.class),
 
+        /**
+         * Custom event prefix.
+         */
         CustomEvent(CUSTOM_EVENT_PREFIX, CustomTypeEvent.class);
 
         /**
