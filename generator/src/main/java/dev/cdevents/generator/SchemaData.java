@@ -209,7 +209,7 @@ public class SchemaData {
     }
 
     /**
-     * 
+     *
      * @param customEvent
      */
     public void setCustomEvent(boolean customEvent) {
