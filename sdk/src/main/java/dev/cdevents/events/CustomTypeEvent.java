@@ -34,7 +34,7 @@ public class CustomTypeEvent extends Schema implements CDEvent {
 
 
     /**
-    * Constructor to init CustomTypeEvent
+    * Constructor to init CustomTypeEvent.
     */
 
     public CustomTypeEvent() {
@@ -43,7 +43,7 @@ public class CustomTypeEvent extends Schema implements CDEvent {
 
 
     /**
-    * Initialize the Event with the context values.
+    * Initialize the CDEvent with the context values.
     */
 
     @Override

@@ -13,6 +13,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -53,16 +54,16 @@ public final class CDEventsGenerator {
         String sdkBaseDir = args[1];
         String parentBaseDir = args[2];
         String targetPackageDir = sdkBaseDir + File.separator + "src/main/java/dev/cdevents/events";
+
+        //Create Mustache factory and compile event-template.mustache template
+        MustacheFactory mf = new DefaultMustacheFactory();
+        Mustache mustache = mf.compile(generatorBaseDir + File.separator + EVENT_TEMPLATE_MUSTACHE);
+
         File folder = new File(parentBaseDir + File.separator + "spec" + File.separator + "schemas");
         if (folder.isDirectory()) {
             File[] files = folder.listFiles((dir, name) -> name.toLowerCase().endsWith(".json"));
             if (files != null) {
-                //Create Mustache factory and compile event-template.mustache template
-                MustacheFactory mf = new DefaultMustacheFactory();
-                Mustache mustache = mf.compile(generatorBaseDir + File.separator + EVENT_TEMPLATE_MUSTACHE);
-
                 //Generate a class file for each Json schema file using a mustache template
-
                 for (File file : files) {
                     SchemaData schemaData = buildCDEventDataFromJsonSchema(file);
                     generateClassFileFromSchemaData(mustache, schemaData, targetPackageDir);
@@ -73,10 +74,15 @@ public final class CDEventsGenerator {
         } else {
             log.error("No schema directory found in the specified directory {}", folder.getAbsolutePath());
         }
+        // Generate a class file for CustomTypeEvent using a mustache template
+        File customSchema = new File(parentBaseDir + File.separator + "spec" + File.separator + "custom" + File.separator + "schema.json");
+        SchemaData schemaData = buildCDEventDataFromJsonSchema(customSchema);
+        generateClassFileFromSchemaData(mustache, schemaData, targetPackageDir);
     }
 
     private static void generateClassFileFromSchemaData(Mustache mustache, SchemaData schemaData, String targetPackageDir) {
-        String classFileName = StringUtils.join(new String[]{schemaData.getCapitalizedSubject(), schemaData.getCapitalizedPredicate(), "CDEvent", ".java"});
+        String classFileName = schemaData.isCustomEvent() ? "CustomTypeEvent.java"
+                : StringUtils.join(schemaData.getCapitalizedSubject(), schemaData.getCapitalizedPredicate(), "CDEvent", ".java");
         File classFile = new File(targetPackageDir, classFileName);
         try {
             FileWriter fileWriter = new FileWriter(classFile);
@@ -92,38 +98,41 @@ public final class CDEventsGenerator {
 
     private static SchemaData buildCDEventDataFromJsonSchema(File file) {
         SchemaData schemaData = new SchemaData();
-
         log.info("Processing event JsonSchema file: {}", file.getAbsolutePath());
         try {
             JsonNode rootNode = objectMapper.readTree(file);
             JsonNode contextNode = rootNode.get("properties").get("context").get("properties");
             JsonNode subjectNode = rootNode.get("properties").get("subject").get("properties");
             String schemaURL = rootNode.get("$id").asText();
+            boolean isCustomEvent = schemaURL.endsWith("custom");
 
-            String subjectType = subjectNode.get("type").get("enum").get(0).asText();
-            String eventType = contextNode.get("type").get("enum").get(0).asText();
-            log.info("eventType: {} subjectType: {}", eventType, subjectType);
-            String[] type = eventType.split("\\.");
-            String subject = type[SUBJECT_INDEX];
-            String predicate = type[PREDICATE_INDEX];
-            String capitalizedSubject = StringUtils.capitalize(subject);
-            String capitalizedPredicate = StringUtils.capitalize(predicate);
-            String version = type[VERSION_INDEX];
-
-            String upperCaseSubject = getUpperCaseSubjectType(subjectType);
-            //set the Schema JsonNode required values to schemaData
             schemaData.setSchemaURL(schemaURL);
             schemaData.setBaseURI(schemaURL.substring(0, schemaURL.lastIndexOf("/") + 1));
-            schemaData.setSubject(subject);
-            schemaData.setPredicate(predicate);
-            schemaData.setCapitalizedSubject(capitalizedSubject);
-            schemaData.setCapitalizedPredicate(capitalizedPredicate);
             schemaData.setSchemaFileName(file.getName());
-            schemaData.setUpperCaseSubject(upperCaseSubject);
-            schemaData.setVersion(version);
+            schemaData.setCustomEvent(isCustomEvent);
 
-            JsonNode subjectContentNode = subjectNode.get("content").get("properties");
-            updateSubjectContentProperties(schemaData, subjectContentNode);
+            if (!isCustomEvent) {
+                String subjectType = subjectNode.get("type").get("enum").get(0).asText();
+                String eventType = contextNode.get("type").get("enum").get(0).asText();
+                log.info("eventType: {} subjectType: {}", eventType, subjectType);
+                String[] type = eventType.split("\\.");
+                String subject = type[SUBJECT_INDEX];
+                String predicate = type[PREDICATE_INDEX];
+                String capitalizedSubject = StringUtils.capitalize(subject);
+                String capitalizedPredicate = StringUtils.capitalize(predicate);
+                String version = type[VERSION_INDEX];
+                String upperCaseSubject = getUpperCaseSubjectType(subjectType);
+
+                schemaData.setSubject(subject);
+                schemaData.setPredicate(predicate);
+                schemaData.setCapitalizedSubject(capitalizedSubject);
+                schemaData.setCapitalizedPredicate(capitalizedPredicate);
+                schemaData.setUpperCaseSubject(upperCaseSubject);
+                schemaData.setVersion(version);
+
+                JsonNode subjectContentNode = subjectNode.get("content").get("properties");
+                updateSubjectContentProperties(schemaData, subjectContentNode);
+            }
         } catch (IOException e) {
             log.error("Exception occurred while building schema data from Json schema {}", e.getMessage());
             throw new IllegalStateException("Exception occurred while building schema data from Json schema ", e);
