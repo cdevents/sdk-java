@@ -200,10 +200,18 @@ public class SchemaData {
         this.contentObjects = contentObjects;
     }
 
+    /**
+     *
+     * @return true if Custom event
+     */
     public boolean isCustomEvent() {
         return isCustomEvent;
     }
 
+    /**
+     * 
+     * @param customEvent
+     */
     public void setCustomEvent(boolean customEvent) {
         isCustomEvent = customEvent;
     }
