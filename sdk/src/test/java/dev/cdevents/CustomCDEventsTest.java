@@ -37,7 +37,7 @@ public class CustomCDEventsTest {
         cdEvent.setSubjectSource(URI.create("/dev/artifact/source"));
         cdEvent.setSubjectType("mytool-resource");
 
-        //define a map with the context properties
+        //define a map with the content properties
         Map<String, Object> contentMap = new HashMap<>();
         contentMap.put("user", "mybot-myapp");
         contentMap.put("description", "a useful resource");
