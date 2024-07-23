@@ -110,29 +110,29 @@ public final class CDEventsGenerator {
             schemaData.setBaseURI(schemaURL.substring(0, schemaURL.lastIndexOf("/") + 1));
             schemaData.setSchemaFileName(file.getName());
             schemaData.setCustomEvent(isCustomEvent);
-
-            if (!isCustomEvent) {
-                String subjectType = subjectNode.get("type").get("enum").get(0).asText();
-                String eventType = contextNode.get("type").get("enum").get(0).asText();
-                log.info("eventType: {} subjectType: {}", eventType, subjectType);
-                String[] type = eventType.split("\\.");
-                String subject = type[SUBJECT_INDEX];
-                String predicate = type[PREDICATE_INDEX];
-                String capitalizedSubject = StringUtils.capitalize(subject);
-                String capitalizedPredicate = StringUtils.capitalize(predicate);
-                String version = type[VERSION_INDEX];
-                String upperCaseSubject = getUpperCaseSubjectType(subjectType);
-
-                schemaData.setSubject(subject);
-                schemaData.setPredicate(predicate);
-                schemaData.setCapitalizedSubject(capitalizedSubject);
-                schemaData.setCapitalizedPredicate(capitalizedPredicate);
-                schemaData.setUpperCaseSubject(upperCaseSubject);
-                schemaData.setVersion(version);
-
-                JsonNode subjectContentNode = subjectNode.get("content").get("properties");
-                updateSubjectContentProperties(schemaData, subjectContentNode);
+            if (isCustomEvent) {
+                return schemaData;
             }
+            String subjectType = subjectNode.get("type").get("enum").get(0).asText();
+            String eventType = contextNode.get("type").get("enum").get(0).asText();
+            log.info("eventType: {} subjectType: {}", eventType, subjectType);
+            String[] type = eventType.split("\\.");
+            String subject = type[SUBJECT_INDEX];
+            String predicate = type[PREDICATE_INDEX];
+            String capitalizedSubject = StringUtils.capitalize(subject);
+            String capitalizedPredicate = StringUtils.capitalize(predicate);
+            String version = type[VERSION_INDEX];
+            String upperCaseSubject = getUpperCaseSubjectType(subjectType);
+
+            schemaData.setSubject(subject);
+            schemaData.setPredicate(predicate);
+            schemaData.setCapitalizedSubject(capitalizedSubject);
+            schemaData.setCapitalizedPredicate(capitalizedPredicate);
+            schemaData.setUpperCaseSubject(upperCaseSubject);
+            schemaData.setVersion(version);
+
+            JsonNode subjectContentNode = subjectNode.get("content").get("properties");
+            updateSubjectContentProperties(schemaData, subjectContentNode);
         } catch (IOException e) {
             log.error("Exception occurred while building schema data from Json schema {}", e.getMessage());
             throw new IllegalStateException("Exception occurred while building schema data from Json schema ", e);

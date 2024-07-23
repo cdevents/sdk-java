@@ -21,7 +21,7 @@ happens, but CDEvents does not define any quota related subject.
 </dependency>
 ```
 ### Create a Custom CDEvent
-Custom CDEvent can be created using a class `CustomTypeEvent` packaged with in `cdevents-sdk-java`
+In this example, we will create a custom event for our tool utilizing the new `CustomTypeEvent`
 
 ```java
 public class QuotaExceededCustomEvent {
