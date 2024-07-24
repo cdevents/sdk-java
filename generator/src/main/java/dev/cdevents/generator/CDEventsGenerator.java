@@ -104,7 +104,7 @@ public final class CDEventsGenerator {
             JsonNode contextNode = rootNode.get("properties").get("context").get("properties");
             JsonNode subjectNode = rootNode.get("properties").get("subject").get("properties");
             String schemaURL = rootNode.get("$id").asText();
-            boolean isCustomEvent = schemaURL.endsWith("custom");
+            boolean isCustomEvent = schemaURL.endsWith("schema/custom");
 
             schemaData.setSchemaURL(schemaURL);
             schemaData.setBaseURI(schemaURL.substring(0, schemaURL.lastIndexOf("/") + 1));
