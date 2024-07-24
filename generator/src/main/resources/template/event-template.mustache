@@ -23,22 +23,40 @@ package dev.cdevents.events;
 
 import dev.cdevents.constants.CDEventConstants;
 import dev.cdevents.models.CDEvent;
+{{^isCustomEvent}}
 import dev.cdevents.models.{{subject}}.{{predicate}}.*;
-
+{{/isCustomEvent}}
+{{#isCustomEvent}}
+import dev.cdevents.models.custom.*;
+import java.util.Map;
+{{/isCustomEvent}}
 import java.net.URI;
 import java.util.Date;
 import java.util.UUID;
 import java.util.List;
 
-
+{{^isCustomEvent}}
 public class {{capitalizedSubject}}{{capitalizedPredicate}}CDEvent extends {{capitalizedSubject}}{{predicate}} implements CDEvent {
+{{/isCustomEvent}}
+{{#isCustomEvent}}
+public class CustomTypeEvent extends Schema implements CDEvent {
+{{/isCustomEvent}}
 
 
+{{^isCustomEvent}}
     /**
     * Constructor to init CDEvent and set the Subject for {@link {{capitalizedSubject}}{{capitalizedPredicate}}CDEvent}.
     */
 
     public {{capitalizedSubject}}{{capitalizedPredicate}}CDEvent() {
+{{/isCustomEvent}}
+{{#isCustomEvent}}
+    /**
+    * Constructor to init CustomTypeEvent.
+    */
+
+    public CustomTypeEvent() {
+{{/isCustomEvent}}
         initCDEvent();
     }
 
@@ -58,10 +76,12 @@ public class {{capitalizedSubject}}{{capitalizedPredicate}}CDEvent extends {{cap
         context.setTimestamp(new Date());
         context.setVersion(CDEventConstants.CDEVENTS_SPEC_VERSION);
         getSubject().setContent(new Content());
-        {{#getContentObjects}}
+{{^isCustomEvent}}
+    {{#getContentObjects}}
         getSubject().getContent().set{{capitalizedObjectName}}(new {{capitalizedObjectName}}());
-        {{/getContentObjects}}
+    {{/getContentObjects}}
         getSubject().setType(Subject.Type.{{upperCaseSubject}});
+{{/isCustomEvent}}
     }
 
     /**
@@ -80,7 +100,12 @@ public class {{capitalizedSubject}}{{capitalizedPredicate}}CDEvent extends {{cap
 
     @Override
     public String currentCDEventType() {
+    {{^isCustomEvent}}
         return getContext().getType().value();
+    {{/isCustomEvent}}
+    {{#isCustomEvent}}
+        return getContext().getType();
+    {{/isCustomEvent}}
     }
 
 
@@ -112,6 +137,15 @@ public class {{capitalizedSubject}}{{capitalizedPredicate}}CDEvent extends {{cap
         return "{{schemaFileName}}";
     }
 
+    /**
+    *
+    * @return context schema URI
+    */
+    @Override
+    public URI contextSchemaUri() {
+        return getContext().getSchemaUri();
+    }
+
 
     /**
     * @param source
@@ -127,8 +161,8 @@ public class {{capitalizedSubject}}{{capitalizedPredicate}}CDEvent extends {{cap
      * Sets the {@link Context} chainId value
      */
 
-    public void setChainId(URI chainId) {
-        getContext().setChainId(chainId.toString());
+    public void setChainId(String chainId) {
+        getContext().setChainId(chainId);
     }
 
     /**
@@ -136,7 +170,7 @@ public class {{capitalizedSubject}}{{capitalizedPredicate}}CDEvent extends {{cap
      * Sets the {@link Context} custom schemaUri value
      */
 
-    public void setCustomSchemaUri(URI schemaUri) {
+    public void setContextSchemaUri(URI schemaUri) {
         getContext().setSchemaUri(schemaUri);
     }
 
@@ -159,6 +193,34 @@ public class {{capitalizedSubject}}{{capitalizedPredicate}}CDEvent extends {{cap
         getSubject().setSource(subjectSource.toString());
     }
 
+{{#isCustomEvent}}
+    /**
+    * @param type
+    * Sets the {@link Context} type value,
+    * must be in the format dev.cdeventsx.<tool-name>-<subject-name>.<predicate-name>.<major.minor.patch>
+    */
+
+    public void setType(String type) {
+        getContext().setType(type);
+    }
+
+    /**
+    * @param subjectType
+    * sets the subject type, must be in the format <tool-name>-<subject-name>
+    */
+    public void setSubjectType(String subjectType) {
+        getSubject().setType(subjectType);
+    }
+
+    /**
+    * @param contentProperty
+    * sets the subject content custom properties
+    */
+    public void setSubjectContentProperty(Map<String, Object> contentProperty) {
+        contentProperty.forEach((key, value) -> getSubject().getContent().setAdditionalProperty(key, value));
+    }
+{{/isCustomEvent}}
+{{^isCustomEvent}}
     //getContentFields starts
 
     {{#getContentFields}}
@@ -181,5 +243,6 @@ public class {{capitalizedSubject}}{{capitalizedPredicate}}CDEvent extends {{cap
         getSubject().getContent().get{{capitalizedObjectName}}().set{{capitalizedFieldName}}({{fieldName}});
     }
     {{/getContentObjectFields}}
+{{/isCustomEvent}}
 
 }

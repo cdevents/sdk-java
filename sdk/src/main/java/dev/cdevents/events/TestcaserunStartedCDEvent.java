@@ -24,12 +24,10 @@ package dev.cdevents.events;
 import dev.cdevents.constants.CDEventConstants;
 import dev.cdevents.models.CDEvent;
 import dev.cdevents.models.testcaserun.started.*;
-
 import java.net.URI;
 import java.util.Date;
 import java.util.UUID;
 import java.util.List;
-
 
 public class TestcaserunStartedCDEvent extends Testcaserunstarted implements CDEvent {
 
@@ -113,6 +111,15 @@ public class TestcaserunStartedCDEvent extends Testcaserunstarted implements CDE
         return "testcaserunstarted.json";
     }
 
+    /**
+    *
+    * @return context schema URI
+    */
+    @Override
+    public URI contextSchemaUri() {
+        return getContext().getSchemaUri();
+    }
+
 
     /**
     * @param source
@@ -128,8 +135,8 @@ public class TestcaserunStartedCDEvent extends Testcaserunstarted implements CDE
      * Sets the {@link Context} chainId value
      */
 
-    public void setChainId(URI chainId) {
-        getContext().setChainId(chainId.toString());
+    public void setChainId(String chainId) {
+        getContext().setChainId(chainId);
     }
 
     /**
@@ -137,7 +144,7 @@ public class TestcaserunStartedCDEvent extends Testcaserunstarted implements CDE
      * Sets the {@link Context} custom schemaUri value
      */
 
-    public void setCustomSchemaUri(URI schemaUri) {
+    public void setContextSchemaUri(URI schemaUri) {
         getContext().setSchemaUri(schemaUri);
     }
 

@@ -24,12 +24,10 @@ package dev.cdevents.events;
 import dev.cdevents.constants.CDEventConstants;
 import dev.cdevents.models.CDEvent;
 import dev.cdevents.models.repository.modified.*;
-
 import java.net.URI;
 import java.util.Date;
 import java.util.UUID;
 import java.util.List;
-
 
 public class RepositoryModifiedCDEvent extends Repositorymodified implements CDEvent {
 
@@ -109,6 +107,15 @@ public class RepositoryModifiedCDEvent extends Repositorymodified implements CDE
         return "repositorymodified.json";
     }
 
+    /**
+    *
+    * @return context schema URI
+    */
+    @Override
+    public URI contextSchemaUri() {
+        return getContext().getSchemaUri();
+    }
+
 
     /**
     * @param source
@@ -124,8 +131,8 @@ public class RepositoryModifiedCDEvent extends Repositorymodified implements CDE
      * Sets the {@link Context} chainId value
      */
 
-    public void setChainId(URI chainId) {
-        getContext().setChainId(chainId.toString());
+    public void setChainId(String chainId) {
+        getContext().setChainId(chainId);
     }
 
     /**
@@ -133,7 +140,7 @@ public class RepositoryModifiedCDEvent extends Repositorymodified implements CDE
      * Sets the {@link Context} custom schemaUri value
      */
 
-    public void setCustomSchemaUri(URI schemaUri) {
+    public void setContextSchemaUri(URI schemaUri) {
         getContext().setSchemaUri(schemaUri);
     }
 

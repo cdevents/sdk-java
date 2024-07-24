@@ -24,12 +24,10 @@ package dev.cdevents.events;
 import dev.cdevents.constants.CDEventConstants;
 import dev.cdevents.models.CDEvent;
 import dev.cdevents.models.ticket.closed.*;
-
 import java.net.URI;
 import java.util.Date;
 import java.util.UUID;
 import java.util.List;
-
 
 public class TicketClosedCDEvent extends Ticketclosed implements CDEvent {
 
@@ -109,6 +107,15 @@ public class TicketClosedCDEvent extends Ticketclosed implements CDEvent {
         return "ticketclosed.json";
     }
 
+    /**
+    *
+    * @return context schema URI
+    */
+    @Override
+    public URI contextSchemaUri() {
+        return getContext().getSchemaUri();
+    }
+
 
     /**
     * @param source
@@ -124,8 +131,8 @@ public class TicketClosedCDEvent extends Ticketclosed implements CDEvent {
      * Sets the {@link Context} chainId value
      */
 
-    public void setChainId(URI chainId) {
-        getContext().setChainId(chainId.toString());
+    public void setChainId(String chainId) {
+        getContext().setChainId(chainId);
     }
 
     /**
@@ -133,7 +140,7 @@ public class TicketClosedCDEvent extends Ticketclosed implements CDEvent {
      * Sets the {@link Context} custom schemaUri value
      */
 
-    public void setCustomSchemaUri(URI schemaUri) {
+    public void setContextSchemaUri(URI schemaUri) {
         getContext().setSchemaUri(schemaUri);
     }
 

@@ -110,6 +110,19 @@
                         <targetPackage>dev.cdevents.models.links</targetPackage>
                     </configuration>
                 </execution>
+                <execution>
+                    <id>generate-custom-event-from-schema</id>
+                    <phase>generate-sources</phase>
+                    <goals>
+                        <goal>generate</goal>
+                    </goals>
+                    <configuration>
+                        <sourcePaths>
+                            <sourcePath>${parent.project.dir}/spec/custom/schema.json</sourcePath>
+                        </sourcePaths>
+                        <targetPackage>dev.cdevents.models.custom</targetPackage>
+                    </configuration>
+                </execution>
                     <execution>
                         <id>generate-artifact-deleted-from-schema</id>
                         <phase>generate-sources</phase>

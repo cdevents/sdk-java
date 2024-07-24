@@ -23,20 +23,21 @@ package dev.cdevents.events;
 
 import dev.cdevents.constants.CDEventConstants;
 import dev.cdevents.models.CDEvent;
-import dev.cdevents.models.artifact.signed.*;
+import dev.cdevents.models.custom.*;
+import java.util.Map;
 import java.net.URI;
 import java.util.Date;
 import java.util.UUID;
 import java.util.List;
 
-public class ArtifactSignedCDEvent extends Artifactsigned implements CDEvent {
+public class CustomTypeEvent extends Schema implements CDEvent {
 
 
     /**
-    * Constructor to init CDEvent and set the Subject for {@link ArtifactSignedCDEvent}.
+    * Constructor to init CustomTypeEvent.
     */
 
-    public ArtifactSignedCDEvent() {
+    public CustomTypeEvent() {
         initCDEvent();
     }
 
@@ -56,7 +57,6 @@ public class ArtifactSignedCDEvent extends Artifactsigned implements CDEvent {
         context.setTimestamp(new Date());
         context.setVersion(CDEventConstants.CDEVENTS_SPEC_VERSION);
         getSubject().setContent(new Content());
-        getSubject().setType(Subject.Type.ARTIFACT);
     }
 
     /**
@@ -75,17 +75,17 @@ public class ArtifactSignedCDEvent extends Artifactsigned implements CDEvent {
 
     @Override
     public String currentCDEventType() {
-        return getContext().getType().value();
+        return getContext().getType();
     }
 
 
     /**
-    * @return the artifactsigned.json schema URL
+    * @return the schema.json schema URL
     */
 
     @Override
     public String schemaURL() {
-        return "https://cdevents.dev/0.4.1/schema/artifact-signed-event";
+        return "https://cdevents.dev/0.4.1/schema/custom";
     }
 
     /**
@@ -104,7 +104,7 @@ public class ArtifactSignedCDEvent extends Artifactsigned implements CDEvent {
 
     @Override
     public String schemaFileName() {
-        return "artifactsigned.json";
+        return "schema.json";
     }
 
     /**
@@ -163,17 +163,30 @@ public class ArtifactSignedCDEvent extends Artifactsigned implements CDEvent {
         getSubject().setSource(subjectSource.toString());
     }
 
-    //getContentFields starts
-
     /**
-    * @param signature
+    * @param type
+    * Sets the {@link Context} type value,
+    * must be in the format dev.cdeventsx.<tool-name>-<subject-name>.<predicate-name>.<major.minor.patch>
     */
-    public void setSubjectSignature(String signature) {
-        getSubject().getContent().setSignature(signature);
+
+    public void setType(String type) {
+        getContext().setType(type);
     }
 
+    /**
+    * @param subjectType
+    * sets the subject type, must be in the format <tool-name>-<subject-name>
+    */
+    public void setSubjectType(String subjectType) {
+        getSubject().setType(subjectType);
+    }
 
-    //getContentObjectFields starts
-
+    /**
+    * @param contentProperty
+    * sets the subject content custom properties
+    */
+    public void setSubjectContentProperty(Map<String, Object> contentProperty) {
+        contentProperty.forEach((key, value) -> getSubject().getContent().setAdditionalProperty(key, value));
+    }
 
 }
