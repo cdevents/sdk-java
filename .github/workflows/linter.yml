@@ -3,6 +3,10 @@ name: Linter
 on:
   pull_request:
     branches: [main]
+permissions:
+  contents: read
+  # super-linter reports the outcome of each linter as a commit status
+  statuses: write
 jobs:
   build:
     name: Lint Code Base

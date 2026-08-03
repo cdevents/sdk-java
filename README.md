@@ -1,5 +1,7 @@
 # CDEvents Java SDK
 
+[![Plumber Score](https://score.getplumber.io/github.com/cdevents/sdk-java.svg)](https://score.getplumber.io/github.com/cdevents/sdk-java)
+
 Java SDK to produce [CDEvents](https://cdevents.dev).
 
 The SDK can be used to create CDEvents and render as CloudEvents to send them to a specific CloudEvents broker

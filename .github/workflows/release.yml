@@ -8,6 +8,10 @@ on:
         description: 'Release version'
         required: true
 
+# The job commits the version bump, pushes it and publishes the release.
+permissions:
+  contents: write
+
 env:
   JAVA_VERSION: '11'
   JAVA_DISTRO: 'zulu'
