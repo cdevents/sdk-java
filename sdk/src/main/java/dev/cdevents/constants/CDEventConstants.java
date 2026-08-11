@@ -1,6 +1,7 @@
 package dev.cdevents.constants;
 
 import dev.cdevents.events.*;
+import dev.cdevents.models.CDEvent;
 
 import java.io.File;
 
@@ -25,6 +26,11 @@ public final class CDEventConstants {
     public static final String SCHEMA_CLASSPATH = "classpath:dev/cdevents/spec/schemas/";
 
     /**
+     * Custom Schema classpath location.
+     */
+    public static final String CUSTOM_SCHEMA_CLASSPATH = "classpath:dev/cdevents/custom/";
+
+    /**
      * Event link schemas location.
      */
     public static final String SCHEMA_LINKS_FOLDER = SCHEMA_FOLDER + File.separator + "links";
@@ -38,6 +44,11 @@ public final class CDEventConstants {
      * CDEvent type prefix.
      */
     public static final String EVENT_PREFIX = "dev.cdevents.";
+
+    /**
+     * Custom Event type prefix.
+     */
+    public static final String CUSTOM_EVENT_PREFIX = "dev.cdeventsx.";
     /**
      * CDEvent type subject index.
      */
@@ -293,16 +304,21 @@ public final class CDEventConstants {
         /**
          * Ticket updated event.
          */
-        TicketUpdatedEvent("dev.cdevents.ticket.updated.", TicketUpdatedCDEvent.class);
+        TicketUpdatedEvent("dev.cdevents.ticket.updated.", TicketUpdatedCDEvent.class),
+
+        /**
+         * Custom event prefix.
+         */
+        CustomEvent(CUSTOM_EVENT_PREFIX, CustomTypeEvent.class);
 
         /**
          * Continuous delivery event type.
          */
         private String eventType;
 
-        private Class eventClass;
+        private Class<? extends CDEvent> eventClass;
 
-        CDEventTypes(final String event, final Class eventClass) {
+        CDEventTypes(final String event, final Class<? extends CDEvent>  eventClass) {
             this.eventType = event;
             this.eventClass = eventClass;
         }
@@ -324,14 +340,14 @@ public final class CDEventConstants {
         /**
          * @return class name of the event type
          */
-        public Class getEventClass() {
-            return eventClass;
+        public Class<? extends CDEvent> getEventClass() {
+            return this.eventClass;
         }
 
         /**
          * @param eventClass class name to set
          */
-        public void setEventClass(Class eventClass) {
+        public void setEventClass(Class<? extends CDEvent>  eventClass) {
             this.eventClass = eventClass;
         }
     }

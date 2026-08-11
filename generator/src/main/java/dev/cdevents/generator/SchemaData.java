@@ -22,6 +22,8 @@ public class SchemaData {
     private List<ContentObjectField> contentObjectFields;
     private List<ContentObject> contentObjects;
 
+    private boolean isCustomEvent;
+
     /**
      * Default constructor.
      */
@@ -196,6 +198,22 @@ public class SchemaData {
      */
     public void setContentObjects(List<ContentObject> contentObjects) {
         this.contentObjects = contentObjects;
+    }
+
+    /**
+     *
+     * @return true if Custom event
+     */
+    public boolean isCustomEvent() {
+        return isCustomEvent;
+    }
+
+    /**
+     *
+     * @param customEvent
+     */
+    public void setCustomEvent(boolean customEvent) {
+        isCustomEvent = customEvent;
     }
 
     public static class ContentField {

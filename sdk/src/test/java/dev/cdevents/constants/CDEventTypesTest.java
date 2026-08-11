@@ -36,6 +36,8 @@ public class CDEventTypesTest {
 				}
 			}
 		}
+		// adding custom event type explicitly to the list
+		eventTypeList.add(CDEventConstants.CUSTOM_EVENT_PREFIX);
 		assertThat(CDEventTypes.values()).extracting(CDEventTypes::getEventType).hasSameElementsAs(eventTypeList);
 	}
 }
